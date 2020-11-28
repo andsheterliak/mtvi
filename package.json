@@ -3,7 +3,7 @@
   "description": "Movie/TV Info app based on TMDB API",
   "author": "andsheterliak",
   "private": true,
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
