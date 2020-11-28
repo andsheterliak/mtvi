@@ -1,5 +1,5 @@
 const devServerConf = {
-  open: true,
+  open: false,
   hot: true,
 
   // To be able connect through wifi.
