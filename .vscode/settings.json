@@ -1,0 +1,22 @@
+{
+  // --- eslint
+  "[javascript]": {
+    // Disable format on save if enabled for tools like (default formatter, prettier ...).
+    "editor.formatOnSave": false,
+  },
+  // Disable default editor validation to enable eslint validation.
+  "javascript.validate.enable": false,
+  // --- stylelint
+  // Disable format on save if enabled for tools like (default formatter, prettier ...).
+  "[scss]": {
+    "editor.formatOnSave": false,
+  },
+  "[css]": {
+    "editor.formatOnSave": false,
+  },
+  // Disable default editor validation to enable stylelint validation.
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "stylelint.enable": true,
+}

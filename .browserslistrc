@@ -1,0 +1,6 @@
+> 0.2%
+not IE <= 11
+not Chrome 49
+not ios_saf 9.3
+not Samsung 4
+not QQAndroid 1.2

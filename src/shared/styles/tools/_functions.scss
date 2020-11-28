@@ -1,0 +1,7 @@
+@use 'sass:list';
+
+// --------------------------- Strip unit
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}

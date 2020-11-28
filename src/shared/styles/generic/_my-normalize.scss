@@ -1,0 +1,9 @@
+body {
+  -webkit-tap-highlight-color: transparent; // Disable blue highlight on chrome (mobile)
+}
+
+label,
+input {
+  // Remove background on touch in firefox mobile
+  background: none;
+}

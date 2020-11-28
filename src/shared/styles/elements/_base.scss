@@ -1,0 +1,44 @@
+@use '../settings/variables' as *;
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: $font-main;
+}
+
+button,
+label,
+input[type='checkbox'] {
+  cursor: pointer;
+}
+
+a,
+button,
+input,
+::placeholder,
+textarea,
+select {
+  color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+svg {
+  vertical-align: middle;
+}
+
+img,
+picture {
+  display: block;
+}
