@@ -8,11 +8,10 @@
     "netlify:dev": "netlify dev",
     "start": "cross-env NODE_ENV=development webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
-    "eslint": "eslint ./src",
-    "stylelint": "stylelint ./src"
+    "eslint": "eslint ./src"
   },
   "sideEffects": [
-    "**/*.(css|scss)"
+    "**/*.css"
   ],
   "devDependencies": {
     "@babel/core": "^7.12.7",
@@ -46,17 +45,7 @@
     "postcss-normalize": "^9.0.0",
     "postcss-sort-media-queries": "^2.1.11",
     "prettier": "^2.2.0",
-    "sass": "^1.29.0",
-    "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
-    "stylelint": "^13.8.0",
-    "stylelint-config-prettier": "^8.0.2",
-    "stylelint-config-rational-order": "^0.1.2",
-    "stylelint-config-standard": "^20.0.0",
-    "stylelint-order": "^4.1.0",
-    "stylelint-prettier": "^1.1.2",
-    "stylelint-scss": "^3.18.0",
-    "stylelint-webpack-plugin": "^2.1.1",
     "terser-webpack-plugin": "^4.2.3",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",

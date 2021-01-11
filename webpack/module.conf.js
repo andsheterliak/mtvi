@@ -33,7 +33,7 @@ const moduleConf = {
     // CSS
 
     {
-      test: /\.s?css$/,
+      test: /\.css$/,
       include: paths.src,
 
       use: [
@@ -55,14 +55,6 @@ const moduleConf = {
 
         {
           loader: 'postcss-loader',
-
-          options: {
-            sourceMap: true,
-          },
-        },
-
-        {
-          loader: 'sass-loader',
 
           options: {
             sourceMap: true,

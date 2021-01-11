@@ -3,7 +3,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
-// const StylelintPlugin = require('stylelint-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 const { isDev, paths, isProd } = require('./helpers.conf');
@@ -41,12 +40,6 @@ const pluginsConf = [
       plugins: [],
     },
   }),
-
-  // new StylelintPlugin({
-  //   fix: true,
-  //   emitWarning: true, // Emit warnings instead of errors.
-  //   files: paths.styles.stylelintFiles, // To correct paths, without it throws an error (incorrect path).
-  // }),
 
   new CopyPlugin({
     patterns: [paths.favicon],
