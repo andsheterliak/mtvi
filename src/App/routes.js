@@ -4,7 +4,7 @@ const routes = {
     to: 'movies',
   },
 
-  tvShows: {
+  tv: {
     name: 'TV Shows',
     to: 'tv',
   },
