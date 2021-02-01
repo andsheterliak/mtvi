@@ -1,17 +1,24 @@
+import Movies from '../features/Movies/Movies';
+import People from '../features/People/People';
+import TVShows from '../features/TVShows/TVShows';
+
 const routes = {
   movies: {
     name: 'Movies',
-    to: 'movies',
+    to: '/movies',
+    component: Movies,
   },
 
   tv: {
     name: 'TV Shows',
-    to: 'tv',
+    to: '/tv',
+    component: TVShows,
   },
 
   people: {
     name: 'People',
-    to: 'people',
+    to: '/people',
+    component: People,
   },
 };
 
