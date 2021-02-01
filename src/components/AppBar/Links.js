@@ -10,7 +10,7 @@ const Links = (props) => {
   const links = Object.values(routes).map(({ name, to }) => (
     <ListItem
       button
-      selected={location.pathname === `/${to}`}
+      selected={location.pathname === to}
       component={Link}
       to={to}
       key={name}
