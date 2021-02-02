@@ -7,25 +7,19 @@ import {
   IconButton,
   Link as MuiLink,
   Container,
-  InputBase,
-  InputAdornment,
 } from '@material-ui/core';
-import {
-  Menu as MenuIcon,
-  Search as SearchIcon,
-  Close as CloseIcon,
-} from '@material-ui/icons';
+import { Menu as MenuIcon, Search as SearchIcon } from '@material-ui/icons';
 
 import HideOnScroll from '../../common/components/HideOnScroll';
 import routes from '../../../App/routes';
-import Nav from './Nav';
-import Links from './Links';
 import useStyles from './AppBarStyles';
 
 const AppBar = ({
   isSearchOpened,
   toggleSearchHandler,
   toggleDrawerHandler,
+  nav,
+  search,
 }) => {
   const classes = useStyles();
 
@@ -36,7 +30,7 @@ const AppBar = ({
         className={classes.menuButton}
         color="inherit"
         aria-label="menu"
-        onClick={toggleDrawerHandler(true)}
+        onClick={toggleDrawerHandler}
       >
         <MenuIcon className={classes.icon} />
       </IconButton>
@@ -60,9 +54,7 @@ const AppBar = ({
         </SvgIcon>
       </MuiLink>
 
-      <Nav className={classes.nav}>
-        <Links dense className={classes.link} />
-      </Nav>
+      {nav}
 
       <IconButton
         edge="end"
@@ -72,32 +64,6 @@ const AppBar = ({
         onClick={toggleSearchHandler}
       >
         <SearchIcon className={classes.icon} />
-      </IconButton>
-    </>
-  );
-
-  const search = (
-    <>
-      <InputBase
-        placeholder="Search for a movie, tv show..."
-        fullWidth
-        // eslint-disable-next-line jsx-a11y/no-autofocus
-        autoFocus
-        startAdornment={
-          <InputAdornment position="start">
-            <SearchIcon />
-          </InputAdornment>
-        }
-      />
-
-      <IconButton
-        edge="end"
-        className={classes.searchButton}
-        color="inherit"
-        aria-label="close search"
-        onClick={toggleSearchHandler}
-      >
-        <CloseIcon className={classes.icon} />
       </IconButton>
     </>
   );

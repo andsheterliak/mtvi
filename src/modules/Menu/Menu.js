@@ -1,9 +1,18 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
+import routes from '../../App/routes';
 import AppBar from './components/AppBar';
 import Drawer from './components/Drawer';
+import Links from './components/Links';
+import Nav from './components/Nav';
+import useStyles from './components/AppBarStyles';
+import Search from './components/Search';
 
 const Menu = () => {
+  const location = useLocation();
+  const classes = useStyles();
+
   const [isDrawerOpened, setIsDrawerOpened] = useState(false);
   const [isSearchOpened, setIsSearchOpened] = useState(false);
 
@@ -27,12 +36,31 @@ const Menu = () => {
       <AppBar
         isSearchOpened={isSearchOpened}
         toggleSearchHandler={toggleSearchHandler}
-        toggleDrawerHandler={toggleDrawerHandler}
+        toggleDrawerHandler={toggleDrawerHandler(true)}
+        nav={
+          <Nav className={classes.nav}>
+            <Links
+              dense
+              className={classes.link}
+              location={location}
+              routes={routes}
+            />
+          </Nav>
+        }
+        search={<Search toggleSearchHandler={toggleSearchHandler} />}
       />
 
       <Drawer
         isDrawerOpened={isDrawerOpened}
-        toggleDrawerHandler={toggleDrawerHandler}
+        toggleDrawerHandler={toggleDrawerHandler(false)}
+        nav={
+          <Nav
+            onClick={toggleDrawerHandler(false)}
+            onKeyDown={toggleDrawerHandler(false)}
+          >
+            <Links location={location} routes={routes} />
+          </Nav>
+        }
       />
     </>
   );

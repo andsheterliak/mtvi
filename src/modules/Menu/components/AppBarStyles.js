@@ -61,7 +61,6 @@ const useStyles = makeStyles((theme) => {
     },
 
     link: {
-      textDecoration: 'none',
       color: theme.palette.text.secondary,
       display: 'inline-block',
       width: 'auto',
