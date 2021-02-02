@@ -1,5 +1,5 @@
 import { Container } from '@material-ui/core';
-import RouteHeader from '../components/RouteHeader';
+import RouteHeader from '../common/components/RouteHeader';
 
 const Movies = ({ name }) => {
   return (

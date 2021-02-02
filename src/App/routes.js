@@ -1,4 +1,4 @@
-import Movies from '../modules/common/Movies/Movies';
+import Movies from '../modules/Movies/Movies';
 import People from '../modules/People/People';
 import TVShows from '../modules/TVShows/TVShows';
 
