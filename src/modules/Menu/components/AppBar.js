@@ -16,8 +16,8 @@ import {
   Close as CloseIcon,
 } from '@material-ui/icons';
 
-import HideOnScroll from '../HideOnScroll';
-import routes from '../../App/routes';
+import HideOnScroll from '../../common/components/HideOnScroll';
+import routes from '../../../App/routes';
 import Nav from './Nav';
 import Links from './Links';
 import useStyles from './AppBarStyles';

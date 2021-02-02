@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { ListItem, ListItemText } from '@material-ui/core';
 
-import routes from '../../App/routes';
+import routes from '../../../App/routes';
 
 const Links = (props) => {
   const location = useLocation();

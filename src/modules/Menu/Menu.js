@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import AppBar from '../../components/AppBar/AppBar';
-import Drawer from '../../components/AppBar/Drawer';
+import AppBar from './components/AppBar';
+import Drawer from './components/Drawer';
 
 const Menu = () => {
   const [isDrawerOpened, setIsDrawerOpened] = useState(false);
