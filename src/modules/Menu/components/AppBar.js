@@ -36,7 +36,7 @@ const AppBar = ({
       </IconButton>
 
       <MuiLink
-        to={routes.movies.to}
+        to={routes.default.redirectTo}
         color="inherit"
         underline="none"
         className={classes.logoLink}
