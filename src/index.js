@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import App from './App/App';
+import App from './modules/App/App';
 
 const renderApp = () => {
   ReactDOM.render(
@@ -15,7 +15,7 @@ const renderApp = () => {
 
 // HMR
 if (process.env.NODE_ENV !== 'production' && module.hot) {
-  module.hot.accept('./App/App', renderApp);
+  module.hot.accept('./modules/App/App', renderApp);
 }
 
 renderApp();

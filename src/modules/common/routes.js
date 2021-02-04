@@ -1,6 +1,6 @@
-import Movies from '../modules/Movies/Movies';
-import People from '../modules/People/People';
-import TVShows from '../modules/TVShows/TVShows';
+import Movies from '../Movies/Movies';
+import People from '../People/People';
+import TVShows from '../TVShows/TVShows';
 
 const routes = {
   movies: {

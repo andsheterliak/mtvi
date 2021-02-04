@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import routes from '../../App/routes';
+import routes from '../common/routes';
 import AppBar from './components/AppBar';
 import Drawer from './components/Drawer';
 import Links from './components/Links';

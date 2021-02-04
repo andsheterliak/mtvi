@@ -3,8 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 
-import Menu from '../modules/Menu/Menu';
-import routes from './routes';
+import Menu from '../Menu/Menu';
+import routes from '../common/routes';
 import theme from './theme';
 
 const App = () => {
