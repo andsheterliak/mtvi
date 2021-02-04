@@ -20,7 +20,7 @@ const App = () => {
           redirectTo ? (
             <Redirect to={redirectTo} />
           ) : (
-            <Component {...props} name={name} />
+            <Component {...props} routeName={name} />
           )
         }
       />

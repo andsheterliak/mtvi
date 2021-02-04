@@ -1,12 +1,7 @@
-import { Container } from '@material-ui/core';
-import RouteHeader from '../common/components/RouteHeader';
+import PageContainer from '../common/components/PageContainer';
 
-const TVShows = ({ name }) => {
-  return (
-    <Container maxWidth="xl">
-      <RouteHeader routeName={name} />
-    </Container>
-  );
+const TVShows = ({ routeName }) => {
+  return <PageContainer routeName={routeName} />;
 };
 
 export default TVShows;
