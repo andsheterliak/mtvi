@@ -37,6 +37,7 @@ const Menu = () => {
         isSearchOpened={isSearchOpened}
         toggleSearchHandler={toggleSearchHandler}
         toggleDrawerHandler={toggleDrawerHandler(true)}
+        routes={routes}
         nav={
           <Nav className={classes.nav}>
             <Links

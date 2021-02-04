@@ -11,13 +11,13 @@ import {
 import { Menu as MenuIcon, Search as SearchIcon } from '@material-ui/icons';
 
 import HideOnScroll from '../../common/components/HideOnScroll';
-import routes from '../../common/routes';
 import useStyles from './AppBarStyles';
 
 const AppBar = ({
   isSearchOpened,
   toggleSearchHandler,
   toggleDrawerHandler,
+  routes,
   nav,
   search,
 }) => {
