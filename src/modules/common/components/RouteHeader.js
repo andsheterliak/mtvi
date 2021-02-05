@@ -8,10 +8,10 @@ const useStyles = makeStyles({
 });
 
 const RouteHeader = ({ routeName }) => {
-  const styles = useStyles();
+  const classes = useStyles();
 
   return (
-    <Typography variant="h4" component="h1" className={styles.header}>
+    <Typography variant="h4" component="h1" className={classes.header}>
       {routeName}
     </Typography>
   );
