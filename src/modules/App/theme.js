@@ -4,6 +4,7 @@ import { grey } from '@material-ui/core/colors';
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
+    primary: grey,
 
     background: {
       paper: '#333',
