@@ -1,18 +1,16 @@
 import { Dialog, DialogTitle } from '@material-ui/core';
 
-const Modal = ({ closeModalHandler, isOpened, title, children }) => {
-  const label = title.toLowerCase().split(' ').join('-'); // example: Some text --> some-text.
-
+const Modal = ({ closeModalHandler, isOpened, title, content }) => {
   return (
     <Dialog
       onClose={closeModalHandler}
       open={isOpened}
-      aria-labelledby={label}
+      aria-labelledby="alert-dialog-title"
       fullWidth
       maxWidth={'xs'}
     >
-      <DialogTitle id={label}>{title}</DialogTitle>
-      {children}
+      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+      {content}
     </Dialog>
   );
 };
