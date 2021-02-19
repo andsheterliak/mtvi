@@ -3,6 +3,7 @@ import ActionsButtons from '../common/components/Adjustment/ActionsButtons';
 
 import AdjustmentBar from '../common/components/Adjustment/AdjustmentBar';
 import AdjustmentButton from '../common/components/AdjustmentButton';
+import ContentGrid from '../common/components/ContentGrid';
 import Modal from '../common/components/Modal';
 import PageContainer from '../common/components/PageContainer';
 
@@ -81,6 +82,7 @@ const Movies = ({ routeName }) => {
           />
         }
       />
+      <ContentGrid secondField={'second'} />
     </PageContainer>
   );
 };
