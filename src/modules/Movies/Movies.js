@@ -25,7 +25,7 @@ const changeGenres = (genresList, genreName) => {
 };
 
 const Movies = ({ routeName }) => {
-  const [isModalOpened, setIsModalOpened] = useState(true);
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
   const [genres, setGenres] = useState(() => {
     return movieGenres.map((item) => {
