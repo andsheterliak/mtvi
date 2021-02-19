@@ -108,11 +108,13 @@ const AdjustmentBar = ({
           <DatePicker
             id="date-picker-from"
             ariaLabel="change date realise dates from"
+            label="From"
           />
 
           <DatePicker
             id="date-picker-to"
             ariaLabel="change date realise dates to"
+            label="To"
           />
         </DatePickerContainer>
       </div>

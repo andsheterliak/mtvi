@@ -1,6 +1,6 @@
 import { KeyboardDatePicker } from '@material-ui/pickers';
 
-const DatePicker = ({ ariaLabel, id, value, changeDateHandler }) => {
+const DatePicker = ({ ariaLabel, id, value, label, changeDateHandler }) => {
   return (
     <KeyboardDatePicker
       value={value}
@@ -10,7 +10,7 @@ const DatePicker = ({ ariaLabel, id, value, changeDateHandler }) => {
       format="MM/dd/yyyy"
       margin="dense"
       id={id}
-      label="From"
+      label={label}
       KeyboardButtonProps={{
         'aria-label': ariaLabel,
       }}
