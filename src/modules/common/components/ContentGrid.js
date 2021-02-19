@@ -1,22 +1,15 @@
 import { Grid } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(() => ({
-  firstItem: {
-    display: 'none',
-  },
-}));
 
 const ContentGrid = ({ firstField, secondField }) => {
-  const classes = useStyles();
-
   return (
     <Grid container spacing={6}>
-      <Grid item xs={12} md={3} className={!firstField && classes.firstItem}>
-        {firstField}
-      </Grid>
+      {firstField && (
+        <Grid container item xs={12} md={3}>
+          {firstField}
+        </Grid>
+      )}
 
-      <Grid item xs={12} md={9}>
+      <Grid container item xs={12} md={!firstField ? 12 : 9}>
         {secondField}
       </Grid>
     </Grid>
