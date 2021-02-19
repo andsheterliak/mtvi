@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import ActionsButtons from '../common/components/Adjustment/ActionsButtons';
 
+import ActionsButtons from '../common/components/ActionsButtons';
 import AdjustmentBar from '../common/components/Adjustment/AdjustmentBar';
 import AdjustmentButton from '../common/components/AdjustmentButton';
 import ContentGrid from '../common/components/ContentGrid';
