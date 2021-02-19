@@ -42,7 +42,7 @@ const Movies = ({ routeName }) => {
     setIsModalOpened(false);
   };
 
-  const toggleGenre = (e) => {
+  const toggleGenreHandler = (e) => {
     let dataGenre = e.target.dataset.genre;
 
     if (dataGenre) {
@@ -75,7 +75,7 @@ const Movies = ({ routeName }) => {
                 sortByOptions={sortByOptions}
                 defaultOptions={defaultOptions}
                 genres={genres}
-                toggleGenre={toggleGenre}
+                toggleGenreHandler={toggleGenreHandler}
               />
             }
             actions={<ActionsButtons />}

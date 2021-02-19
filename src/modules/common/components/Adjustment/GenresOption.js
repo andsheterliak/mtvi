@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GenresOption = ({ genres, toggleGenre }) => {
+const GenresOption = ({ genres, toggleGenreHandler }) => {
   const classes = useStyles();
 
   const genreItems = genres.map(({ name, isSelected }) => {
@@ -40,7 +40,7 @@ const GenresOption = ({ genres, toggleGenre }) => {
           variant={isSelected ? 'default' : 'outlined'}
           label={name}
           data-genre={name}
-          onClick={toggleGenre}
+          onClick={toggleGenreHandler}
           component="button"
         />
       </li>
