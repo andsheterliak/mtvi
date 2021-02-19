@@ -1,15 +1,22 @@
-import { Container, Grid } from '@material-ui/core';
+import { Container } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import RouteHeader from './RouteHeader';
 
+const useStyles = makeStyles({
+  container: {
+    overflow: 'hidden', // To fix grid margins.
+  },
+});
+
 const PageContainer = ({ routeName, children }) => {
+  const classes = useStyles();
+
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" className={classes.container}>
       <RouteHeader routeName={routeName} />
 
-      <Grid container spacing={4}>
-        {children}
-      </Grid>
+      {children}
     </Container>
   );
 };
