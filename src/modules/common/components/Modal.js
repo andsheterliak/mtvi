@@ -1,6 +1,11 @@
-import { Dialog, DialogTitle } from '@material-ui/core';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from '@material-ui/core';
 
-const Modal = ({ closeModalHandler, isOpened, title, content }) => {
+const Modal = ({ closeModalHandler, isOpened, title, content, actions }) => {
   return (
     <Dialog
       onClose={closeModalHandler}
@@ -10,7 +15,8 @@ const Modal = ({ closeModalHandler, isOpened, title, content }) => {
       maxWidth={'xs'}
     >
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-      {content}
+      <DialogContent dividers={true}>{content}</DialogContent>
+      <DialogActions>{actions}</DialogActions>
     </Dialog>
   );
 };
