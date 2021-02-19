@@ -7,12 +7,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ContentGrid = ({ firstField, secondField, isFirstField }) => {
+const ContentGrid = ({ firstField, secondField }) => {
   const classes = useStyles();
 
   return (
     <Grid container spacing={6}>
-      <Grid item xs={12} md={3} className={!isFirstField && classes.firstItem}>
+      <Grid item xs={12} md={3} className={!firstField && classes.firstItem}>
         {firstField}
       </Grid>
 
