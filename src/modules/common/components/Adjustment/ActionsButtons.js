@@ -7,7 +7,7 @@ const ActionsButtons = () => {
         Cancel
       </Button>
       <Button size="large" color="primary">
-        Search
+        Apply
       </Button>
     </>
   );
