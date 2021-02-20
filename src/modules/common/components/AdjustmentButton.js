@@ -21,7 +21,7 @@ const AdjustmentButton = ({ ariaLabel, openModalHandler, modal }) => {
 
   return (
     <>
-      <HideOnScroll>
+      <HideOnScroll direction={'up'}>
         <IconButton
           onClick={openModalHandler}
           className={classes.iconButton}
