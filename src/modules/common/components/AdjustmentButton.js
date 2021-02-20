@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => {
       position: 'fixed',
       bottom: '20px',
       right: '20px',
+      zIndex: theme.zIndex.speedDial,
     },
   };
 });
