@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ActionsButtons from '../common/components/ActionsButtons';
 import AdjustmentBar from '../common/components/Adjustment/AdjustmentBar';
 import AdjustmentButton from '../common/components/AdjustmentButton';
-import CardGrid from '../common/components/Cards/CardGrid';
+import Cards from '../common/components/Cards/Cards';
 import ContentGrid from '../common/components/ContentGrid';
 import Modal from '../common/components/Modal';
 import PageContainer from '../common/components/PageContainer';
@@ -12,6 +12,7 @@ import {
   sortByOptions,
   defaultOptions,
   movieGenres,
+  cardsData,
 } from '../common/fake-data';
 
 // ! Try useReducer for complex state.
@@ -83,7 +84,7 @@ const Movies = ({ routeName }) => {
           />
         }
       />
-      <ContentGrid secondField={<CardGrid></CardGrid>} />
+      <ContentGrid secondField={<Cards cardsData={cardsData.results} />} />
     </PageContainer>
   );
 };
