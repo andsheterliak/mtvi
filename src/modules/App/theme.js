@@ -10,6 +10,10 @@ const theme = createMuiTheme({
       paper: '#333',
       default: grey[900],
     },
+
+    text: {
+      secondary: grey[500],
+    },
   },
 
   breakpoints: {
