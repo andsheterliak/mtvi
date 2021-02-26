@@ -15,7 +15,10 @@ const Links = ({ location, routes, ...props }) => {
         key={name}
         {...props}
       >
-        <ListItemText primary={name} />
+        <ListItemText
+          primaryTypographyProps={{ color: 'textPrimary' }}
+          primary={name}
+        />
       </ListItem>
     );
   });
