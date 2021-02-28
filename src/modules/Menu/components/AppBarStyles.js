@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => {
       strokeWidth: '2',
       strokeLinecap: 'round',
       strokeLinejoin: 'round',
+      marginRight: '5px',
 
       [theme.breakpoints.up('md')]: {
         width: '40px',
@@ -49,6 +50,10 @@ const useStyles = makeStyles((theme) => {
       [theme.breakpoints.up('md')]: {
         fontSize: '2rem',
       },
+    },
+
+    logoLinkText: {
+      verticalAlign: 'middle',
     },
 
     nav: {

@@ -7,6 +7,7 @@ import {
   IconButton,
   Link as MuiLink,
   Container,
+  Typography,
 } from '@material-ui/core';
 import { Menu as MenuIcon, Search as SearchIcon } from '@material-ui/icons';
 
@@ -52,6 +53,10 @@ const AppBar = ({
           <path d="M17 17h5" />
           <path d="M17 7h5" />
         </SvgIcon>
+
+        <Typography component="span" className={classes.logoLinkText}>
+          MTvI.
+        </Typography>
       </MuiLink>
 
       {nav}
