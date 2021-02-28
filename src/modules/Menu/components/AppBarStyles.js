@@ -26,34 +26,12 @@ const useStyles = makeStyles((theme) => {
       margin: '10px 0',
     },
 
-    // viewBox="0 0 24 24", // SvgIcon default
-    logoIcon: {
-      verticalAlign: 'middle',
-      width: '35px',
-      height: '35px',
-      fill: 'none',
-      stroke: 'currentColor',
-      strokeWidth: '2',
-      strokeLinecap: 'round',
-      strokeLinejoin: 'round',
-      marginRight: '5px',
-
-      [theme.breakpoints.up('md')]: {
-        width: '40px',
-        height: '40px',
-      },
-    },
-
     icon: {
       fontSize: '1.6rem',
 
       [theme.breakpoints.up('md')]: {
         fontSize: '2rem',
       },
-    },
-
-    logoLinkText: {
-      verticalAlign: 'middle',
     },
 
     nav: {

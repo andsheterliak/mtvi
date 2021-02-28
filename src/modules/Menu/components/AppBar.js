@@ -3,16 +3,15 @@ import { Link } from 'react-router-dom';
 import {
   AppBar as MuiAppBar,
   Toolbar,
-  SvgIcon,
   IconButton,
   Link as MuiLink,
   Container,
-  Typography,
 } from '@material-ui/core';
 import { Menu as MenuIcon, Search as SearchIcon } from '@material-ui/icons';
 
 import HideOnScroll from '../../common/components/HideOnScroll';
 import useStyles from './AppBarStyles';
+import Logo from './Logo';
 
 const AppBar = ({
   isSearchOpened,
@@ -43,20 +42,7 @@ const AppBar = ({
         className={classes.logoLink}
         component={Link}
       >
-        <SvgIcon className={`${classes.logoIcon}`}>
-          <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" />
-          <path d="M7 2v20" />
-          <path d="M17 2v20" />
-          <path d="M2 12h20" />
-          <path d="M2 7h5" />
-          <path d="M2 17h5" />
-          <path d="M17 17h5" />
-          <path d="M17 7h5" />
-        </SvgIcon>
-
-        <Typography component="span" className={classes.logoLinkText}>
-          MTvI.
-        </Typography>
+        <Logo />
       </MuiLink>
 
       {nav}
