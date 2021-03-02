@@ -78,6 +78,7 @@ const Movies = ({ routeName }) => {
                 sortByOptions={sortByOptions}
                 defaultOptions={defaultOptions}
                 genres={genres}
+                dateTitle="Release Dates"
                 toggleGenreHandler={toggleGenreHandler}
               />
             }

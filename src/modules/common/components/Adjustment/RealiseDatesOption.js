@@ -3,10 +3,10 @@ import DatePicker from './DatePicker';
 import OptionTitle from './OptionTitle';
 import OptionContainer from './OptionContainer';
 
-const RealiseDatesOption = () => {
+const RealiseDatesOption = ({ dateTitle }) => {
   return (
     <OptionContainer>
-      <OptionTitle>Release Dates</OptionTitle>
+      <OptionTitle>{dateTitle}</OptionTitle>
 
       <DatePickerContainer>
         <DatePicker

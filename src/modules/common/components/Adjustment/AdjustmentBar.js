@@ -9,6 +9,7 @@ const AdjustmentBar = ({
   genres,
   toggleGenreHandler,
   changeUserScoreRangeHandler,
+  dateTitle,
 }) => {
   return (
     <>
@@ -17,7 +18,7 @@ const AdjustmentBar = ({
         defaultOptions={defaultOptions}
       />
 
-      <RealiseDatesOption />
+      <RealiseDatesOption dateTitle={dateTitle} />
 
       <GenresOption genres={genres} toggleGenreHandler={toggleGenreHandler} />
 
