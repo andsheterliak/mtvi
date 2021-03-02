@@ -69,7 +69,7 @@ const TVShows = ({ routeName }) => {
           <Modal
             isOpened={isModalOpened}
             closeModalHandler={closeModalHandler}
-            title="Adjust Tv Shows"
+            title="Adjust TV Shows"
             content={
               <AdjustmentBar
                 sortByOptions={sortByOptions}
