@@ -13,7 +13,7 @@ import {
   sortByOptions,
   defaultOptions,
   moviesGenres,
-  cardsData,
+  moviesData,
 } from '../common/fake-data';
 
 // ! Try useReducer for complex state.
@@ -85,7 +85,7 @@ const Movies = ({ routeName }) => {
           />
         }
       />
-      <ContentGrid secondField={<Cards cardsData={cardsData.results} />} />
+      <ContentGrid secondField={<Cards cardsData={moviesData.results} />} />
       <LoadMoreBtn />
     </PageContainer>
   );
