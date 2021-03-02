@@ -91,7 +91,7 @@ export const moviesGenres = [
   },
 ];
 
-export const cardsData = {
+export const moviesData = {
   page: 1,
   results: [
     {
