@@ -12,7 +12,7 @@ import PageContainer from '../common/components/PageContainer';
 import {
   sortByOptions,
   defaultOptions,
-  movieGenres,
+  moviesGenres,
   cardsData,
 } from '../common/fake-data';
 
@@ -32,8 +32,8 @@ const Movies = ({ routeName }) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const [genres, setGenres] = useState(() => {
-    return movieGenres.map((item) => {
-      return { name: item, isSelected: false };
+    return moviesGenres.map((item) => {
+      return { name: item.name, isSelected: false };
     });
   });
 
