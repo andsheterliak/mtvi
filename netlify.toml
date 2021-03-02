@@ -13,7 +13,7 @@
   autoLaunch = false # a Boolean value that determines if Netlify Dev launches the local server address in your browser.
   framework = "#custom" # When you're specifying "command" and "targetPort", you must specify framework = "#custom".
 
-# Fix "Page Not Found" PWA error on Netlify.
+# Fix "Page Not Found" SPA error on Netlify.
 [[redirects]]
   from = "/*"
   to = "/index.html"
