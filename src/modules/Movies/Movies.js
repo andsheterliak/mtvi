@@ -4,7 +4,6 @@ import ActionsButtons from '../common/components/ActionsButtons';
 import AdjustmentBar from '../common/components/Adjustment/AdjustmentBar';
 import AdjustmentButton from '../common/components/AdjustmentButton';
 import Cards from '../common/components/Cards/Cards';
-import ContentGrid from '../common/components/ContentGrid';
 import LoadMoreBtn from '../common/components/LoadMoreBtn';
 import Modal from '../common/components/Modal';
 import PageContainer from '../common/components/PageContainer';
@@ -86,7 +85,7 @@ const Movies = ({ routeName }) => {
           />
         }
       />
-      <ContentGrid secondField={<Cards cardsData={moviesData.results} />} />
+      <Cards cardsData={moviesData.results} />
       <LoadMoreBtn />
     </PageContainer>
   );
