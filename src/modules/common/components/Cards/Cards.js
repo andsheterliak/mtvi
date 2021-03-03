@@ -1,5 +1,7 @@
 import { Grid } from '@material-ui/core';
+
 import Card from './Card';
+import CardsGrid from './CardsGrid';
 
 const Cards = ({ cardsData }) => {
   const cards = cardsData.map((item) => {
@@ -15,11 +17,7 @@ const Cards = ({ cardsData }) => {
     );
   });
 
-  return (
-    <Grid container spacing={2}>
-      {cards}
-    </Grid>
-  );
+  return <CardsGrid>{cards}</CardsGrid>;
 };
 
 export default Cards;
