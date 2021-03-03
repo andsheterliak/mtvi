@@ -86,9 +86,11 @@ const TVShows = ({ routeName }) => {
           />
         }
       />
+
       <CardsGrid>
         <Cards cardsData={tvData.results} />{' '}
       </CardsGrid>
+
       <LoadMoreBtn />
     </PageContainer>
   );

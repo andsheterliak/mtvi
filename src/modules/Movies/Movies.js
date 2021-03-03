@@ -88,9 +88,11 @@ const Movies = ({ routeName }) => {
           />
         }
       />
+
       <CardsGrid>
         <Cards cardsData={moviesData.results} />
       </CardsGrid>
+
       <LoadMoreBtn />
     </PageContainer>
   );
