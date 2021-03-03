@@ -4,8 +4,11 @@ import PersonCards from './components/PersonCards';
 
 import { peopleData } from '../common/fake-data';
 import LoadMoreBtn from '../common/components/LoadMoreBtn';
+import useScrollToTop from '../common/hooks/useScrollToTop';
 
 const People = ({ routeName }) => {
+  useScrollToTop();
+
   return (
     <PageContainer routeName={routeName}>
       <CardsGrid>

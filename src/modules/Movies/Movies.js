@@ -8,6 +8,7 @@ import LoadMoreBtn from '../common/components/LoadMoreBtn';
 import Modal from '../common/components/Modal';
 import PageContainer from '../common/components/PageContainer';
 import CardsGrid from '../common/components/Cards/CardsGrid';
+import useScrollToTop from '../common/hooks/useScrollToTop';
 
 import {
   sortByOptions,
@@ -29,6 +30,7 @@ const changeGenres = (genresList, genreName) => {
 };
 
 const Movies = ({ routeName }) => {
+  useScrollToTop();
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const [genres, setGenres] = useState(() => {
