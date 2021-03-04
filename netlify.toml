@@ -4,7 +4,7 @@
   command = "npm run build" # Build command.
 
   # Directory with the serverless functions, including background functions, to deploy to AWS. This is relative to the base directory if one has been set, or the root directory if a base has not been set.
-  # functions = "functions"
+  functions = "functions"
 
 [dev]
   command = "npm run start" # Command to start your dev server.
