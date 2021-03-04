@@ -4,7 +4,7 @@ import PersonCard from './PersonCard';
 const PersonCards = ({ cardsData }) => {
   const cards = cardsData.map((item) => {
     return (
-      <CardsGridItem key={item.name}>
+      <CardsGridItem key={item.id}>
         <PersonCard
           profilePath={item.profile_path}
           name={item.name}

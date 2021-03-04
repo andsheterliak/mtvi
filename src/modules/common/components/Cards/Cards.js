@@ -4,7 +4,7 @@ import CardsGridItem from './CardsGridItem';
 const Cards = ({ cardsData }) => {
   const cards = cardsData.map((item) => {
     return (
-      <CardsGridItem key={item.title || item.name}>
+      <CardsGridItem key={item.id}>
         <Card
           posterPath={item.poster_path}
           title={item.title || item.name}
