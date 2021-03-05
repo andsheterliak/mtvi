@@ -3,7 +3,7 @@ import DatePicker from './DatePicker';
 import OptionTitle from './OptionTitle';
 import OptionContainer from './OptionContainer';
 
-const RealiseDatesOption = ({ dateTitle }) => {
+const ReleaseDatesOption = ({ dateTitle }) => {
   return (
     <OptionContainer>
       <OptionTitle>{dateTitle}</OptionTitle>
@@ -11,13 +11,13 @@ const RealiseDatesOption = ({ dateTitle }) => {
       <DatePickerContainer>
         <DatePicker
           id="date-picker-from"
-          ariaLabel="change date realise dates from"
+          ariaLabel="change release dates from"
           label="From"
         />
 
         <DatePicker
           id="date-picker-to"
-          ariaLabel="change date realise dates to"
+          ariaLabel="change release dates to"
           label="To"
         />
       </DatePickerContainer>
@@ -25,4 +25,4 @@ const RealiseDatesOption = ({ dateTitle }) => {
   );
 };
 
-export default RealiseDatesOption;
+export default ReleaseDatesOption;

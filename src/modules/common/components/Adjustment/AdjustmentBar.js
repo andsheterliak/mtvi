@@ -1,5 +1,5 @@
 import SortResultsByOption from './SortResultsByOption';
-import RealiseDatesOption from './RealiseDatesOption';
+import ReleaseDatesOption from './ReleaseDatesOption';
 import GenresOption from './GenresOption';
 import UserScore from './UserScore';
 
@@ -18,7 +18,7 @@ const AdjustmentBar = ({
         defaultOptions={defaultOptions}
       />
 
-      <RealiseDatesOption dateTitle={dateTitle} />
+      <ReleaseDatesOption dateTitle={dateTitle} />
 
       <GenresOption genres={genres} toggleGenreHandler={toggleGenreHandler} />
 
