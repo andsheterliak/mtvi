@@ -30,17 +30,16 @@ const useStyles = makeStyles((theme) => ({
 const GenresOption = ({ genres, toggleGenreHandler }) => {
   const classes = useStyles();
 
-  const genreItems = genres.map(({ name, isSelected }) => {
+  const genreItems = genres.map(({ name, id, isSelected }) => {
     return (
-      <li key={name} className={classes.chipItem}>
+      <li key={id} className={classes.chipItem}>
         <Chip
           className={`${classes.chip} ${
             isSelected ? classes.chipChosen : null
           }`}
           variant={isSelected ? 'default' : 'outlined'}
           label={name}
-          data-genre={name}
-          onClick={toggleGenreHandler}
+          onClick={() => toggleGenreHandler(id)}
           component="button"
         />
       </li>

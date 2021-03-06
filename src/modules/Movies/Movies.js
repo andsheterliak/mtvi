@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
 import ActionsButtons from '../common/components/ActionsButtons';
 import AdjustmentBar from '../common/components/Adjustment/AdjustmentBar';
 import AdjustmentButton from '../common/components/AdjustmentButton';
@@ -10,19 +11,17 @@ import PageContainer from '../common/components/PageContainer';
 import CardsGrid from '../common/components/Cards/CardsGrid';
 import useScrollToTop from '../common/hooks/useScrollToTop';
 
-import {
-  sortByOptions,
-  defaultOptions,
-  moviesGenres,
-  moviesData,
-} from '../common/fake-data';
+import { sortByOptions, defaultOptions } from '../common/fake-data';
+import { MOVIES_DEFAULT_OPTIONS } from '../common/tmdb-config';
+import { getLS } from '../common/utils/storage';
+import { moviesActions } from './slices/moviesSlice';
 
 // ! Try useReducer for complex state.
 
-const changeGenres = (genresList, genreName) => {
+const changeGenres = (genresList, id) => {
   return genresList.map((item) => {
-    if (item.name === genreName) {
-      return { name: item.name, isSelected: !item.isSelected };
+    if (item.id === id) {
+      return { ...item, isSelected: !item.isSelected };
     }
 
     return item;
@@ -32,12 +31,17 @@ const changeGenres = (genresList, genreName) => {
 const Movies = ({ routeName }) => {
   useScrollToTop();
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const dispatch = useDispatch();
 
   const [genres, setGenres] = useState(() => {
-    return moviesGenres.map((item) => {
-      return { name: item.name, isSelected: false };
-    });
+    const movieGenres = getLS('moviesUserOptions')?.genres;
+
+    if (movieGenres) return movieGenres;
+
+    return MOVIES_DEFAULT_OPTIONS.genres;
   });
+
+  const movies = useSelector((state) => state.movies.data);
 
   const openModalHandler = () => {
     setIsModalOpened(true);
@@ -47,23 +51,19 @@ const Movies = ({ routeName }) => {
     setIsModalOpened(false);
   };
 
-  const toggleGenreHandler = (e) => {
-    let dataGenre = e.target.dataset.genre;
-
-    if (dataGenre) {
-      setGenres((prevGenres) => {
-        return changeGenres(prevGenres, dataGenre);
-      });
-
-      return;
-    }
-
-    dataGenre = e.target.closest('[data-genre]').dataset.genre;
-
+  const toggleGenreHandler = (id) => {
     setGenres((prevGenres) => {
-      return changeGenres(prevGenres, dataGenre);
+      return changeGenres(prevGenres, id);
     });
   };
+
+  useEffect(() => {
+    let options = getLS('moviesUserOptions');
+
+    if (!options) options = MOVIES_DEFAULT_OPTIONS;
+
+    dispatch(moviesActions.fetchMoviesData(options));
+  }, [dispatch]);
 
   return (
     <PageContainer routeName={routeName}>
@@ -90,7 +90,7 @@ const Movies = ({ routeName }) => {
       />
 
       <CardsGrid>
-        <Cards cardsData={moviesData.results} />
+        {movies.length ? <Cards cardsData={movies} /> : 'Loading...'}
       </CardsGrid>
 
       <LoadMoreBtn />
