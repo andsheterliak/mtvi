@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+
+import axiosTMDB from '../../common/axios-tmdb';
 
 const moviesSlice = createSlice({
   name: 'movies',
@@ -23,7 +24,7 @@ const fetchMoviesData = (options) => async (dispatch) => {
     }, [])
     .join(',');
 
-  const response = await axios.get('/.netlify/functions/tmdb', {
+  const response = await axiosTMDB.get('', {
     params: {
       path: 'discover/movie',
       sort_by: options.sortBy,
