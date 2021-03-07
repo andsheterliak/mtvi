@@ -4,9 +4,7 @@ import axiosTMDB from '../../common/axios-tmdb';
 
 const moviesSlice = createSlice({
   name: 'movies',
-  initialState: {
-    data: [],
-  },
+  initialState: { data: [] },
 
   reducers: {
     fetchMovies(state, action) {
