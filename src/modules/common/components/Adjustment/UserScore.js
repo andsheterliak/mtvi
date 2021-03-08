@@ -1,23 +1,30 @@
 import { Slider } from '@material-ui/core';
+import { useMemo } from 'react';
 import OptionContainer from './OptionContainer';
 import OptionTitle from './OptionTitle';
 
-const marks = Array(11)
-  .fill('')
-  .map((item, index) => ({ value: index, label: index }));
+const UserScore = ({
+  USER_SCORE_RANGE: { min, max },
+  changeUserScoreHandler,
+  userScore,
+}) => {
+  const marks = useMemo(() => {
+    return Array(max + 1)
+      .fill('')
+      .map((item, index) => ({ value: index, label: index }));
+  }, [max]);
 
-const UserScore = ({ defaultOptions, changeUserScoreRangeHandler }) => {
   return (
     <OptionContainer>
       <OptionTitle id="user-score-range-slider">User Score</OptionTitle>
 
       <Slider
-        value={defaultOptions.userScoreRange}
-        onChange={changeUserScoreRangeHandler}
+        value={userScore}
+        onChange={changeUserScoreHandler}
         valueLabelDisplay="auto"
         aria-labelledby="user-score-range-slider"
-        min={0}
-        max={10}
+        min={min}
+        max={max}
         marks={marks}
       />
     </OptionContainer>

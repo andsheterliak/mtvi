@@ -1,31 +1,15 @@
 import SortResultsByOption from './SortResultsByOption';
-import ReleaseDatesOption from './ReleaseDatesOption';
+import ReleaseDatesOption from './ReleaseDates/ReleaseDatesOption';
 import GenresOption from './GenresOption';
 import UserScore from './UserScore';
 
-const AdjustmentBar = ({
-  defaultOptions,
-  sortByOptions,
-  genres,
-  toggleGenreHandler,
-  changeUserScoreRangeHandler,
-  dateTitle,
-}) => {
+const AdjustmentBar = ({ sortBy, genres, userScore, dates }) => {
   return (
     <>
-      <SortResultsByOption
-        sortByOptions={sortByOptions}
-        defaultOptions={defaultOptions}
-      />
-
-      <ReleaseDatesOption dateTitle={dateTitle} />
-
-      <GenresOption genres={genres} toggleGenreHandler={toggleGenreHandler} />
-
-      <UserScore
-        defaultOptions={defaultOptions}
-        changeUserScoreRangeHandler={changeUserScoreRangeHandler}
-      />
+      <SortResultsByOption {...sortBy} />
+      <ReleaseDatesOption {...dates} />
+      <GenresOption {...genres} />
+      <UserScore {...userScore} />
     </>
   );
 };

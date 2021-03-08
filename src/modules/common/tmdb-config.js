@@ -197,8 +197,8 @@ export const MOVIES_DEFAULT_OPTIONS = {
   }),
 
   releaseDates: {
-    from: '',
-    to: '',
+    from: null,
+    to: null,
   },
 };
 
@@ -211,7 +211,7 @@ export const TV_DEFAULT_OPTIONS = {
   }),
 
   releaseDates: {
-    from: '',
-    to: '',
+    from: null,
+    to: null,
   },
 };

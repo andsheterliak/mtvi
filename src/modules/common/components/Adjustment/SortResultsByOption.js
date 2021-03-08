@@ -3,11 +3,11 @@ import { Input, InputLabel, MenuItem, Select } from '@material-ui/core';
 import OptionContainer from './OptionContainer';
 import OptionTitle from './OptionTitle';
 
-const SortResultsByOption = ({ defaultOptions, sortByOptions }) => {
-  const menuItems = sortByOptions.map((item) => {
+const SortResultsByOption = ({ SORT_BY_OPTIONS, sortBy, sortByHandler }) => {
+  const menuItems = Object.values(SORT_BY_OPTIONS).map((item) => {
     return (
-      <MenuItem key={item} value={item}>
-        {item}
+      <MenuItem key={item.apiName} value={item.apiName}>
+        {item.name}
       </MenuItem>
     );
   });
@@ -25,8 +25,9 @@ const SortResultsByOption = ({ defaultOptions, sortByOptions }) => {
         fullWidth
         labelId="sort-results-by-label"
         id="sort-results-by"
-        value={defaultOptions.sortByOptions}
+        value={sortBy}
         input={<Input />}
+        onChange={sortByHandler}
       >
         {menuItems}
       </Select>

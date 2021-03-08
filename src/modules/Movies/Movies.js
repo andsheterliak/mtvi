@@ -11,10 +11,14 @@ import PageContainer from '../common/components/PageContainer';
 import CardsGrid from '../common/components/Cards/CardsGrid';
 import useScrollToTop from '../common/hooks/useScrollToTop';
 
-import { sortByOptions, defaultOptions } from '../common/fake-data';
-import { MOVIES_DEFAULT_OPTIONS } from '../common/tmdb-config';
+import {
+  MOVIES_DEFAULT_OPTIONS,
+  SORT_BY_OPTIONS,
+  USER_SCORE_RANGE,
+} from '../common/tmdb-config';
 import { getLS } from '../common/utils/storage';
 import { moviesActions } from './slices/moviesSlice';
+import { formatDateToAPI } from '../common/utils/date';
 
 // ! Try useReducer for complex state.
 
@@ -41,6 +45,38 @@ const Movies = ({ routeName }) => {
     return MOVIES_DEFAULT_OPTIONS.genres;
   });
 
+  const [sortBy, setSortBy] = useState(() => {
+    const sortByOption = getLS('moviesUserOptions')?.sortBy;
+
+    if (sortByOption) return sortByOption;
+
+    return MOVIES_DEFAULT_OPTIONS.sortBy;
+  });
+
+  const [dateFrom, setDateFrom] = useState(() => {
+    const releaseDateFrom = getLS('moviesUserOptions')?.releaseDates.from;
+
+    if (releaseDateFrom) return releaseDateFrom;
+
+    return MOVIES_DEFAULT_OPTIONS.releaseDates.from;
+  });
+
+  const [dateTo, setDateTo] = useState(() => {
+    const releaseDateTo = getLS('moviesUserOptions')?.releaseDates.to;
+
+    if (releaseDateTo) return releaseDateTo;
+
+    return MOVIES_DEFAULT_OPTIONS.releaseDates.to;
+  });
+
+  const [userScore, setUserScore] = useState(() => {
+    const userScoreRange = getLS('moviesUserOptions')?.userScoreRange;
+
+    if (userScoreRange) return userScoreRange;
+
+    return MOVIES_DEFAULT_OPTIONS.userScoreRange;
+  });
+
   const movies = useSelector((state) => state.movies.data);
 
   const openModalHandler = () => {
@@ -51,10 +87,26 @@ const Movies = ({ routeName }) => {
     setIsModalOpened(false);
   };
 
+  const dateFromHandler = (date) => {
+    setDateFrom(formatDateToAPI(date));
+  };
+
+  const dateToHandler = (date) => {
+    setDateTo(formatDateToAPI(date));
+  };
+
+  const sortByHandler = (e) => {
+    setSortBy(e.target.value);
+  };
+
   const toggleGenreHandler = (id) => {
     setGenres((prevGenres) => {
       return changeGenres(prevGenres, id);
     });
+  };
+
+  const changeUserScoreHandler = (event, newValue) => {
+    setUserScore(newValue);
   };
 
   useEffect(() => {
@@ -77,11 +129,20 @@ const Movies = ({ routeName }) => {
             title="Adjust Movies"
             content={
               <AdjustmentBar
-                sortByOptions={sortByOptions}
-                defaultOptions={defaultOptions}
-                genres={genres}
-                dateTitle="Release Dates"
-                toggleGenreHandler={toggleGenreHandler}
+                sortBy={{ SORT_BY_OPTIONS, sortBy, sortByHandler }}
+                userScore={{
+                  USER_SCORE_RANGE,
+                  changeUserScoreHandler,
+                  userScore,
+                }}
+                genres={{ genres, toggleGenreHandler }}
+                dates={{
+                  dateFrom,
+                  dateTo,
+                  dateFromHandler,
+                  dateToHandler,
+                  dateTitle: 'Release Dates',
+                }}
               />
             }
             actions={<ActionsButtons />}
