@@ -9,7 +9,7 @@ import { orange } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 
-import parseDate from '../../utils/parse-date';
+import { formatReleaseDate } from '../../utils/date';
 import useCardStyles from './CardStyles';
 
 const useStyles = makeStyles(() => ({
@@ -60,7 +60,7 @@ const Card = ({ posterPath, title, releaseDate, voteAverage }) => {
             component="p"
             className={`${classes.subInfo} ${cardClasses.subText}`}
           >
-            {parseDate(releaseDate)}
+            {formatReleaseDate(releaseDate)}
 
             <span className={classes.vote}>
               <StarBorderIcon className={classes.starIcon} fontSize="small" />
