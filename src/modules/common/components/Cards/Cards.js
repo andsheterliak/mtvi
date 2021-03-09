@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { IMG_BASE_URL, IMG_SIZES } from '../../tmdb-config';
 import Card from './Card';
 import CardsGridItem from './CardsGridItem';
@@ -19,4 +20,4 @@ const Cards = ({ cardsData }) => {
   return cards;
 };
 
-export default Cards;
+export default memo(Cards);
