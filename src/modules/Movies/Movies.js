@@ -38,39 +38,33 @@ const Movies = ({ routeName }) => {
   const dispatch = useDispatch();
 
   const [genres, setGenres] = useState(() => {
-    const movieGenres = getLS('moviesUserOptions')?.genres;
-
-    if (movieGenres) return movieGenres;
-
-    return MOVIES_DEFAULT_OPTIONS.genres;
+    return getLS('moviesUserOptions')?.genres || MOVIES_DEFAULT_OPTIONS.genres;
   });
 
   const [sortBy, setSortBy] = useState(() => {
-    const sortByOption = getLS('moviesUserOptions')?.sortBy;
-
-    if (sortByOption) return sortByOption;
-
-    return MOVIES_DEFAULT_OPTIONS.sortBy;
+    return getLS('moviesUserOptions')?.sortBy || MOVIES_DEFAULT_OPTIONS.sortBy;
   });
 
   const [dateFrom, setDateFrom] = useState(() => {
-    const releaseDateFrom = getLS('moviesUserOptions')?.releaseDates.from;
-
-    if (releaseDateFrom) return releaseDateFrom;
-
-    return MOVIES_DEFAULT_OPTIONS.releaseDates.from;
+    return (
+      getLS('moviesUserOptions')?.releaseDates.from ||
+      MOVIES_DEFAULT_OPTIONS.releaseDates.from
+    );
   });
 
   const [dateTo, setDateTo] = useState(() => {
-    const releaseDateTo = getLS('moviesUserOptions')?.releaseDates.to;
-
-    if (releaseDateTo) return releaseDateTo;
-
-    return MOVIES_DEFAULT_OPTIONS.releaseDates.to;
+    return (
+      getLS('moviesUserOptions')?.releaseDates.to ||
+      MOVIES_DEFAULT_OPTIONS.releaseDates.to
+    );
   });
 
   const [userScore, setUserScore] = useState(() => {
-    const userScoreRange = getLS('moviesUserOptions')?.userScoreRange;
+    return (
+      getLS('moviesUserOptions')?.userScoreRange ||
+      MOVIES_DEFAULT_OPTIONS.userScoreRange
+    );
+  });
 
     if (userScoreRange) return userScoreRange;
 
@@ -110,9 +104,7 @@ const Movies = ({ routeName }) => {
   };
 
   useEffect(() => {
-    let options = getLS('moviesUserOptions');
-
-    if (!options) options = MOVIES_DEFAULT_OPTIONS;
+    const options = getLS('moviesUserOptions') || MOVIES_DEFAULT_OPTIONS;
 
     dispatch(moviesActions.fetchMoviesData(options));
   }, [dispatch]);
