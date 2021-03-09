@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import ActionsButtons from '../common/components/ActionsButtons';
-import AdjustmentBar from '../common/components/Adjustment/AdjustmentBar';
+import AdjustmentContent from '../common/components/Adjustment/AdjustmentContent';
 import AdjustmentButton from '../common/components/AdjustmentButton';
 import Cards from '../common/components/Cards/Cards';
 import LoadMoreBtn from '../common/components/LoadMoreBtn';
@@ -129,7 +129,7 @@ const Movies = ({ routeName }) => {
         closeModalHandler={closeModalHandler}
         title="Adjust Movies"
         content={
-          <AdjustmentBar
+          <AdjustmentContent
             sortBy={{ SORT_BY_OPTIONS, sortBy, sortByHandler }}
             userScore={{
               USER_SCORE_RANGE,

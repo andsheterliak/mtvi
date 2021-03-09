@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import ActionsButtons from '../common/components/ActionsButtons';
-import AdjustmentBar from '../common/components/Adjustment/AdjustmentBar';
+import AdjustmentContent from '../common/components/Adjustment/AdjustmentContent';
 import AdjustmentButton from '../common/components/AdjustmentButton';
 import Cards from '../common/components/Cards/Cards';
 import CardsGrid from '../common/components/Cards/CardsGrid';
@@ -75,7 +75,7 @@ const TVShows = ({ routeName }) => {
         closeModalHandler={closeModalHandler}
         title="Adjust TV Shows"
         content={
-          <AdjustmentBar
+          <AdjustmentContent
             sortByOptions={sortByOptions}
             defaultOptions={defaultOptions}
             genres={genres}

@@ -3,7 +3,7 @@ import ReleaseDatesOption from './ReleaseDates/ReleaseDatesOption';
 import GenresOption from './GenresOption';
 import UserScore from './UserScore';
 
-const AdjustmentBar = ({ sortBy, genres, userScore, dates }) => {
+const AdjustmentContent = ({ sortBy, genres, userScore, dates }) => {
   return (
     <>
       <SortResultsByOption {...sortBy} />
@@ -14,4 +14,4 @@ const AdjustmentBar = ({ sortBy, genres, userScore, dates }) => {
   );
 };
 
-export default AdjustmentBar;
+export default AdjustmentContent;
