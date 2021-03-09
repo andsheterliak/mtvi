@@ -122,32 +122,31 @@ const Movies = ({ routeName }) => {
       <AdjustmentButton
         ariaLAbel="adjust movies"
         openModalHandler={openModalHandler}
-        modal={
-          <Modal
-            isOpened={isModalOpened}
-            closeModalHandler={closeModalHandler}
-            title="Adjust Movies"
-            content={
-              <AdjustmentBar
-                sortBy={{ SORT_BY_OPTIONS, sortBy, sortByHandler }}
-                userScore={{
-                  USER_SCORE_RANGE,
-                  changeUserScoreHandler,
-                  userScore,
-                }}
-                genres={{ genres, toggleGenreHandler }}
-                dates={{
-                  dateFrom,
-                  dateTo,
-                  dateFromHandler,
-                  dateToHandler,
-                  dateTitle: 'Release Dates',
-                }}
-              />
-            }
-            actions={<ActionsButtons />}
+      />
+
+      <Modal
+        isOpened={isModalOpened}
+        closeModalHandler={closeModalHandler}
+        title="Adjust Movies"
+        content={
+          <AdjustmentBar
+            sortBy={{ SORT_BY_OPTIONS, sortBy, sortByHandler }}
+            userScore={{
+              USER_SCORE_RANGE,
+              changeUserScoreHandler,
+              userScore,
+            }}
+            genres={{ genres, toggleGenreHandler }}
+            dates={{
+              dateFrom,
+              dateTo,
+              dateFromHandler,
+              dateToHandler,
+              dateTitle: 'Release Dates',
+            }}
           />
         }
+        actions={<ActionsButtons />}
       />
 
       <CardsGrid>

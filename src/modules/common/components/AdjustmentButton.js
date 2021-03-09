@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-const AdjustmentButton = ({ ariaLabel, openModalHandler, modal }) => {
+const AdjustmentButton = ({ ariaLabel, openModalHandler }) => {
   const classes = useStyles();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -47,8 +47,6 @@ const AdjustmentButton = ({ ariaLabel, openModalHandler, modal }) => {
           <FilterIcon fontSize="large" />
         </IconButton>
       </HideOnScroll>
-
-      {modal}
     </>
   );
 };

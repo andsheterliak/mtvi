@@ -68,23 +68,22 @@ const TVShows = ({ routeName }) => {
       <AdjustmentButton
         ariaLAbel="adjust tv shows"
         openModalHandler={openModalHandler}
-        modal={
-          <Modal
-            isOpened={isModalOpened}
-            closeModalHandler={closeModalHandler}
-            title="Adjust TV Shows"
-            content={
-              <AdjustmentBar
-                sortByOptions={sortByOptions}
-                defaultOptions={defaultOptions}
-                genres={genres}
-                dateTitle="Air Dates"
-                toggleGenreHandler={toggleGenreHandler}
-              />
-            }
-            actions={<ActionsButtons />}
+      />
+
+      <Modal
+        isOpened={isModalOpened}
+        closeModalHandler={closeModalHandler}
+        title="Adjust TV Shows"
+        content={
+          <AdjustmentBar
+            sortByOptions={sortByOptions}
+            defaultOptions={defaultOptions}
+            genres={genres}
+            dateTitle="Air Dates"
+            toggleGenreHandler={toggleGenreHandler}
           />
         }
+        actions={<ActionsButtons />}
       />
 
       <CardsGrid>
