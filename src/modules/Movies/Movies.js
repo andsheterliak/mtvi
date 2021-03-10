@@ -16,7 +16,7 @@ import {
   SORT_BY_OPTIONS,
   USER_SCORE_RANGE,
 } from '../common/tmdb-config';
-import { getLS } from '../common/utils/storage';
+import { getLS, setLS } from '../common/utils/storage';
 import { moviesActions } from './slices/moviesSlice';
 import { formatDateToAPI } from '../common/utils/date';
 
@@ -35,6 +35,8 @@ const changeGenres = (genresList, id) => {
 const Movies = ({ routeName }) => {
   useScrollToTop();
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const [isReadyToAccept, setIsReadyToAccept] = useState(false);
+  const [isOptionsValid, setIsOptionsValid] = useState(true);
   const dispatch = useDispatch();
 
   const [genres, setGenres] = useState(() => {
@@ -66,12 +68,28 @@ const Movies = ({ routeName }) => {
     );
   });
 
-    if (userScoreRange) return userScoreRange;
-
-    return MOVIES_DEFAULT_OPTIONS.userScoreRange;
-  });
-
   const movies = useSelector((state) => state.movies.data);
+
+  const cancelOptions = () => {
+    const options = getLS('moviesUserOptions') || MOVIES_DEFAULT_OPTIONS;
+
+    setGenres(options.genres);
+    setSortBy(options.sortBy);
+    setDateFrom(options.releaseDates.from);
+    setDateTo(options.releaseDates.to);
+    setUserScore(options.userScoreRange);
+    setIsReadyToAccept(false);
+  };
+
+  const validateIfDateIsInValid = (date) => {
+    if (date?.toString() === 'Invalid Date') {
+      setIsOptionsValid(false);
+      setIsReadyToAccept(false);
+    } else {
+      setIsOptionsValid(true);
+      setIsReadyToAccept(true);
+    }
+  };
 
   const openModalHandler = () => {
     setIsModalOpened(true);
@@ -79,28 +97,54 @@ const Movies = ({ routeName }) => {
 
   const closeModalHandler = () => {
     setIsModalOpened(false);
+    cancelOptions();
+    setIsOptionsValid(true);
   };
 
   const dateFromHandler = (date) => {
+    validateIfDateIsInValid(date);
     setDateFrom(formatDateToAPI(date));
   };
 
   const dateToHandler = (date) => {
+    validateIfDateIsInValid(date);
     setDateTo(formatDateToAPI(date));
   };
 
   const sortByHandler = (e) => {
     setSortBy(e.target.value);
+    if (isOptionsValid) setIsReadyToAccept(true);
   };
 
   const toggleGenreHandler = (id) => {
     setGenres((prevGenres) => {
       return changeGenres(prevGenres, id);
     });
+
+    if (isOptionsValid) setIsReadyToAccept(true);
   };
 
   const changeUserScoreHandler = (event, newValue) => {
     setUserScore(newValue);
+    if (isOptionsValid) setIsReadyToAccept(true);
+  };
+
+  const acceptHandler = () => {
+    const options = {
+      sortBy,
+      userScoreRange: userScore,
+      genres,
+
+      releaseDates: {
+        from: dateFrom,
+        to: dateTo,
+      },
+    };
+
+    setLS('moviesUserOptions', options);
+    dispatch(moviesActions.fetchMoviesData(options));
+    setIsModalOpened(false);
+    setIsReadyToAccept(false);
   };
 
   useEffect(() => {
@@ -138,7 +182,13 @@ const Movies = ({ routeName }) => {
             }}
           />
         }
-        actions={<ActionsButtons />}
+        actions={
+          <ActionsButtons
+            isReadyToAccept={isReadyToAccept}
+            cancelHandler={closeModalHandler}
+            acceptHandler={acceptHandler}
+          />
+        }
       />
 
       <CardsGrid>

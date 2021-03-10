@@ -1,12 +1,18 @@
 import { Button } from '@material-ui/core';
 
-const ActionsButtons = () => {
+const ActionsButtons = ({ cancelHandler, acceptHandler, isReadyToAccept }) => {
   return (
     <>
-      <Button size="large" color="primary">
+      <Button onClick={cancelHandler} size="large" color="default">
         Cancel
       </Button>
-      <Button size="large" color="primary">
+
+      <Button
+        onClick={acceptHandler}
+        disabled={!isReadyToAccept}
+        size="large"
+        color="default"
+      >
         Apply
       </Button>
     </>
