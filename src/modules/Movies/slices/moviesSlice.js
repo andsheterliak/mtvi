@@ -31,6 +31,7 @@ const fetchMoviesData = (options) => async (dispatch) => {
       with_genres: genres,
       'vote_average.gte': options.userScoreRange[0],
       'vote_average.lte': options.userScoreRange[1],
+      include_adult: false,
     },
   });
 
