@@ -43,10 +43,11 @@ const Card = ({ posterPath, title, releaseDate, voteAverage }) => {
     <MUiCard raised className={cardClasses.card}>
       <CardActionArea className={cardClasses.action}>
         <CardMedia
-          component="img"
+          component="div"
           alt="Contemplative Reptile"
           image={posterPath}
           title="Contemplative Reptile"
+          className={cardClasses.media}
         />
 
         <CardContent className={cardClasses.content}>
