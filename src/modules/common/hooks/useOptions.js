@@ -5,6 +5,7 @@ import { getLS, setLS } from '../utils/storage';
 import { MOVIES_DEFAULT_OPTIONS } from '../tmdb-config';
 import { formatDateToAPI } from '../utils/date';
 import { moviesActions } from '../../Movies/slices/moviesSlice';
+import { MOVIES_OPTIONS_LS_NAME } from '../../Movies/constants';
 
 const changeGenres = (genresList, id) => {
   return genresList.map((item) => {
@@ -24,36 +25,40 @@ const useOptions = () => {
   const [isOptionsValid, setIsOptionsValid] = useState(true);
 
   const [genres, setGenres] = useState(() => {
-    return getLS('moviesUserOptions')?.genres || MOVIES_DEFAULT_OPTIONS.genres;
+    return (
+      getLS(MOVIES_OPTIONS_LS_NAME)?.genres || MOVIES_DEFAULT_OPTIONS.genres
+    );
   });
 
   const [sortBy, setSortBy] = useState(() => {
-    return getLS('moviesUserOptions')?.sortBy || MOVIES_DEFAULT_OPTIONS.sortBy;
+    return (
+      getLS(MOVIES_OPTIONS_LS_NAME)?.sortBy || MOVIES_DEFAULT_OPTIONS.sortBy
+    );
   });
 
   const [dateFrom, setDateFrom] = useState(() => {
     return (
-      getLS('moviesUserOptions')?.releaseDates.from ||
+      getLS(MOVIES_OPTIONS_LS_NAME)?.releaseDates.from ||
       MOVIES_DEFAULT_OPTIONS.releaseDates.from
     );
   });
 
   const [dateTo, setDateTo] = useState(() => {
     return (
-      getLS('moviesUserOptions')?.releaseDates.to ||
+      getLS(MOVIES_OPTIONS_LS_NAME)?.releaseDates.to ||
       MOVIES_DEFAULT_OPTIONS.releaseDates.to
     );
   });
 
   const [userScore, setUserScore] = useState(() => {
     return (
-      getLS('moviesUserOptions')?.userScoreRange ||
+      getLS(MOVIES_OPTIONS_LS_NAME)?.userScoreRange ||
       MOVIES_DEFAULT_OPTIONS.userScoreRange
     );
   });
 
   const cancelOptions = () => {
-    const options = getLS('moviesUserOptions') || MOVIES_DEFAULT_OPTIONS;
+    const options = getLS(MOVIES_OPTIONS_LS_NAME) || MOVIES_DEFAULT_OPTIONS;
 
     setGenres(options.genres);
     setSortBy(options.sortBy);
@@ -123,7 +128,7 @@ const useOptions = () => {
       },
     };
 
-    setLS('moviesUserOptions', options);
+    setLS(MOVIES_OPTIONS_LS_NAME, options);
     dispatch(moviesActions.fetchMoviesData(options));
     setIsModalOpened(false);
     setIsReadyToAccept(false);

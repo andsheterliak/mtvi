@@ -19,6 +19,7 @@ import {
 import { getLS } from '../common/utils/storage';
 import { moviesActions } from './slices/moviesSlice';
 import useOptions from '../common/hooks/useOptions';
+import { MOVIES_OPTIONS_LS_NAME } from './constants';
 
 const Movies = ({ routeName }) => {
   useScrollToTop();
@@ -45,7 +46,7 @@ const Movies = ({ routeName }) => {
   const movies = useSelector((state) => state.movies.data);
 
   useEffect(() => {
-    const options = getLS('moviesUserOptions') || MOVIES_DEFAULT_OPTIONS;
+    const options = getLS(MOVIES_OPTIONS_LS_NAME) || MOVIES_DEFAULT_OPTIONS;
 
     dispatch(moviesActions.fetchMoviesData(options));
   }, [dispatch]);
