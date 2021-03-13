@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { getLS, setLS } from '../utils/storage';
-import { MOVIES_DEFAULT_OPTIONS } from '../tmdb-config';
+import { setLS } from '../utils/storage';
 import { formatDateToAPI } from '../utils/date';
-import { moviesActions } from '../../Movies/slices/moviesSlice';
-import { MOVIES_OPTIONS_LS_NAME } from '../../Movies/constants';
 
 const changeGenres = (genresList, id) => {
   return genresList.map((item) => {
@@ -17,54 +14,30 @@ const changeGenres = (genresList, id) => {
   });
 };
 
-const useOptions = () => {
+const useOptions = (
+  userOptionsName,
+  defaultOptionsName,
+  options,
+  fetchAction
+) => {
   const dispatch = useDispatch();
 
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [isReadyToAccept, setIsReadyToAccept] = useState(false);
   const [isOptionsValid, setIsOptionsValid] = useState(true);
 
-  const [genres, setGenres] = useState(() => {
-    return (
-      getLS(MOVIES_OPTIONS_LS_NAME)?.genres || MOVIES_DEFAULT_OPTIONS.genres
-    );
-  });
-
-  const [sortBy, setSortBy] = useState(() => {
-    return (
-      getLS(MOVIES_OPTIONS_LS_NAME)?.sortBy || MOVIES_DEFAULT_OPTIONS.sortBy
-    );
-  });
-
-  const [dateFrom, setDateFrom] = useState(() => {
-    return (
-      getLS(MOVIES_OPTIONS_LS_NAME)?.releaseDates.from ||
-      MOVIES_DEFAULT_OPTIONS.releaseDates.from
-    );
-  });
-
-  const [dateTo, setDateTo] = useState(() => {
-    return (
-      getLS(MOVIES_OPTIONS_LS_NAME)?.releaseDates.to ||
-      MOVIES_DEFAULT_OPTIONS.releaseDates.to
-    );
-  });
-
-  const [userScore, setUserScore] = useState(() => {
-    return (
-      getLS(MOVIES_OPTIONS_LS_NAME)?.userScoreRange ||
-      MOVIES_DEFAULT_OPTIONS.userScoreRange
-    );
-  });
+  const [genres, setGenres] = useState(options.current.genres);
+  const [sortBy, setSortBy] = useState(options.current.sortBy);
+  const [dateFrom, setDateFrom] = useState(options.current.releaseDates.from);
+  const [dateTo, setDateTo] = useState(options.current.releaseDates.to);
+  const [userScore, setUserScore] = useState(options.current.userScoreRange);
 
   const cancelOptions = () => {
-    const options = getLS(MOVIES_OPTIONS_LS_NAME) || MOVIES_DEFAULT_OPTIONS;
-
-    setGenres(options.genres);
-    setSortBy(options.sortBy);
-    setDateFrom(options.releaseDates.from);
-    setDateTo(options.releaseDates.to);
-    setUserScore(options.userScoreRange);
+    setGenres(options.current.genres);
+    setSortBy(options.current.sortBy);
+    setDateFrom(options.current.releaseDates.from);
+    setDateTo(options.current.releaseDates.to);
+    setUserScore(options.current.userScoreRange);
     setIsReadyToAccept(false);
   };
 
@@ -117,7 +90,7 @@ const useOptions = () => {
   };
 
   const acceptHandler = () => {
-    const options = {
+    const newUserOptions = {
       sortBy,
       userScoreRange: userScore,
       genres,
@@ -128,8 +101,9 @@ const useOptions = () => {
       },
     };
 
-    setLS(MOVIES_OPTIONS_LS_NAME, options);
-    dispatch(moviesActions.fetchMoviesData(options));
+    options.current = newUserOptions;
+    setLS(userOptionsName, newUserOptions);
+    dispatch(fetchAction(newUserOptions));
     setIsModalOpened(false);
     setIsReadyToAccept(false);
   };

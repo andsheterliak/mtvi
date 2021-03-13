@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import ActionsButtons from '../common/components/ActionsButtons';
@@ -25,6 +25,10 @@ const Movies = ({ routeName }) => {
   useScrollToTop();
   const dispatch = useDispatch();
 
+  const options = useRef(
+    getLS(MOVIES_OPTIONS_LS_NAME) || MOVIES_DEFAULT_OPTIONS
+  );
+
   const {
     sortBy,
     userScore,
@@ -41,14 +45,17 @@ const Movies = ({ routeName }) => {
     toggleGenreHandler,
     changeUserScoreHandler,
     acceptHandler,
-  } = useOptions();
+  } = useOptions(
+    MOVIES_OPTIONS_LS_NAME,
+    MOVIES_DEFAULT_OPTIONS,
+    options,
+    moviesActions.fetchMoviesData
+  );
 
   const movies = useSelector((state) => state.movies.data);
 
   useEffect(() => {
-    const options = getLS(MOVIES_OPTIONS_LS_NAME) || MOVIES_DEFAULT_OPTIONS;
-
-    dispatch(moviesActions.fetchMoviesData(options));
+    dispatch(moviesActions.fetchMoviesData(options.current));
   }, [dispatch]);
 
   return (
