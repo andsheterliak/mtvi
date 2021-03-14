@@ -33,6 +33,12 @@ const useStyles = makeStyles(() => ({
   starIcon: {
     color: orange[300],
   },
+
+  media: {
+    // Standard 500 width images which are used here have 2:3 aspect ratio but some images have a bit different ratio, so to display those properly there is need to standardize all the images to 2:3 aspect ratio using the trick.
+    height: 0,
+    paddingTop: '150%',
+  },
 }));
 
 const Card = ({ posterPath, title, releaseDate, voteAverage }) => {
@@ -47,7 +53,7 @@ const Card = ({ posterPath, title, releaseDate, voteAverage }) => {
           alt="Contemplative Reptile"
           image={posterPath}
           title="Contemplative Reptile"
-          className={cardClasses.media}
+          className={classes.media}
         />
 
         <CardContent className={cardClasses.content}>
