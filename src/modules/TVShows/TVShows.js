@@ -1,67 +1,60 @@
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
 import ActionsButtons from '../common/components/ActionsButtons';
 import AdjustmentContent from '../common/components/Adjustment/AdjustmentContent';
 import AdjustmentButton from '../common/components/AdjustmentButton';
 import Cards from '../common/components/Cards/Cards';
-import CardsGrid from '../common/components/Cards/CardsGrid';
 import LoadMoreBtn from '../common/components/LoadMoreBtn';
 import Modal from '../common/components/Modal';
 import PageContainer from '../common/components/PageContainer';
+import CardsGrid from '../common/components/Cards/CardsGrid';
 import useScrollToTop from '../common/hooks/useScrollToTop';
 
 import {
-  sortByOptions,
-  defaultOptions,
-  tvGenres,
-  tvData,
-} from '../common/fake-data';
+  TV_DEFAULT_OPTIONS,
+  SORT_TV_BY_OPTIONS,
+  USER_SCORE_RANGE,
+} from '../common/tmdb-config';
+import { getLS } from '../common/utils/storage';
+import { tvShowsActions } from './slices/tvShowsSlice';
+import useOptions from '../common/hooks/useOptions';
+import { TV_OPTIONS_LS_NAME } from './constants';
 
-const changeGenres = (genresList, genreName) => {
-  return genresList.map((item) => {
-    if (item.name === genreName) {
-      return { name: item.name, isSelected: !item.isSelected };
-    }
-
-    return item;
-  });
-};
-
-const TVShows = ({ routeName }) => {
+const Movies = ({ routeName }) => {
   useScrollToTop();
-  const [isModalOpened, setIsModalOpened] = useState(false);
+  const dispatch = useDispatch();
 
-  const [genres, setGenres] = useState(() => {
-    return tvGenres.map((item) => {
-      return { name: item.name, isSelected: false };
-    });
-  });
+  const options = useRef(getLS(TV_OPTIONS_LS_NAME) || TV_DEFAULT_OPTIONS);
 
-  const openModalHandler = () => {
-    setIsModalOpened(true);
-  };
+  const {
+    sortBy,
+    userScore,
+    genres,
+    dateFrom,
+    dateTo,
+    isModalOpened,
+    isReadyToAccept,
+    openModalHandler,
+    closeModalHandler,
+    dateFromHandler,
+    dateToHandler,
+    sortByHandler,
+    toggleGenreHandler,
+    changeUserScoreHandler,
+    acceptHandler,
+  } = useOptions(
+    TV_OPTIONS_LS_NAME,
+    TV_DEFAULT_OPTIONS,
+    options,
+    tvShowsActions.fetchTVShowsData
+  );
 
-  const closeModalHandler = () => {
-    setIsModalOpened(false);
-  };
+  const tvShows = useSelector((state) => state.tvShows.data);
 
-  const toggleGenreHandler = (e) => {
-    let dataGenre = e.target.dataset.genre;
-
-    if (dataGenre) {
-      setGenres((prevGenres) => {
-        return changeGenres(prevGenres, dataGenre);
-      });
-
-      return;
-    }
-
-    dataGenre = e.target.closest('[data-genre]').dataset.genre;
-
-    setGenres((prevGenres) => {
-      return changeGenres(prevGenres, dataGenre);
-    });
-  };
+  useEffect(() => {
+    dispatch(tvShowsActions.fetchTVShowsData(options.current));
+  }, [dispatch]);
 
   return (
     <PageContainer routeName={routeName}>
@@ -76,18 +69,37 @@ const TVShows = ({ routeName }) => {
         title="Adjust TV Shows"
         content={
           <AdjustmentContent
-            sortByOptions={sortByOptions}
-            defaultOptions={defaultOptions}
-            genres={genres}
-            dateTitle="Air Dates"
-            toggleGenreHandler={toggleGenreHandler}
+            sortBy={{
+              SORT_BY_OPTIONS: SORT_TV_BY_OPTIONS,
+              sortBy,
+              sortByHandler,
+            }}
+            userScore={{
+              USER_SCORE_RANGE,
+              changeUserScoreHandler,
+              userScore,
+            }}
+            genres={{ genres, toggleGenreHandler }}
+            dates={{
+              dateFrom,
+              dateTo,
+              dateFromHandler,
+              dateToHandler,
+              dateTitle: 'Air Dates',
+            }}
           />
         }
-        actions={<ActionsButtons />}
+        actions={
+          <ActionsButtons
+            isReadyToAccept={isReadyToAccept}
+            cancelHandler={closeModalHandler}
+            acceptHandler={acceptHandler}
+          />
+        }
       />
 
       <CardsGrid>
-        <Cards cardsData={tvData.results} />{' '}
+        {tvShows.length ? <Cards cardsData={tvShows} /> : 'Loading...'}
       </CardsGrid>
 
       <LoadMoreBtn />
@@ -95,4 +107,4 @@ const TVShows = ({ routeName }) => {
   );
 };
 
-export default TVShows;
+export default Movies;
