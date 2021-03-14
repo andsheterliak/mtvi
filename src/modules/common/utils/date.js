@@ -16,6 +16,7 @@ export const formatDateToAPI = (date) => {
   const day = date.getDate();
 
   const formattedDate = [year, month, day]
+    // [2021, 1, 10] => 2021-01-10
     .map((item) => {
       let itemStr = item.toString();
 
