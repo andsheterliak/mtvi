@@ -8,7 +8,7 @@ export const IMG_SIZES = {
   still: 'w300', // TV Show Episode img
 };
 
-export const SORT_BY_OPTIONS = {
+export const SORT_MOVIES_BY_OPTIONS = {
   popularityDesc: {
     name: 'Popularity Descending',
     apiName: 'popularity.desc',
@@ -27,6 +27,38 @@ export const SORT_BY_OPTIONS = {
   releaseDateAsc: {
     name: 'Release Data Ascending',
     apiName: 'primary_release_date.asc',
+  },
+
+  ratingDesc: {
+    name: 'Rating Descending',
+    apiName: 'vote_average.desc',
+  },
+
+  ratingAsc: {
+    name: 'Rating Ascending',
+    apiName: 'vote_average.asc',
+  },
+};
+
+export const SORT_TV_BY_OPTIONS = {
+  popularityDesc: {
+    name: 'Popularity Descending',
+    apiName: 'popularity.desc',
+  },
+
+  popularityAsc: {
+    name: 'Popularity Ascending',
+    apiName: 'popularity.asc',
+  },
+
+  firstAirDateDesc: {
+    name: 'First Air Date Descending',
+    apiName: 'first_air_date.gte',
+  },
+
+  firstAirDateAsc: {
+    name: 'First Air Date Ascending',
+    apiName: 'first_air_date.lte',
   },
 
   ratingDesc: {
@@ -189,7 +221,7 @@ export const TV_GENRES = [
 ];
 
 export const MOVIES_DEFAULT_OPTIONS = {
-  sortBy: SORT_BY_OPTIONS.popularityDesc.apiName,
+  sortBy: SORT_MOVIES_BY_OPTIONS.popularityDesc.apiName,
   userScoreRange: [0, 10],
 
   genres: MOVIE_GENRES.map((item) => {
@@ -203,7 +235,7 @@ export const MOVIES_DEFAULT_OPTIONS = {
 };
 
 export const TV_DEFAULT_OPTIONS = {
-  sortBy: SORT_BY_OPTIONS.popularityDesc.apiName,
+  sortBy: SORT_TV_BY_OPTIONS.popularityDesc.apiName,
   userScoreRange: [0, 10],
 
   genres: TV_GENRES.map((item) => {

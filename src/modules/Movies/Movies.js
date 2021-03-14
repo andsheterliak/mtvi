@@ -13,7 +13,7 @@ import useScrollToTop from '../common/hooks/useScrollToTop';
 
 import {
   MOVIES_DEFAULT_OPTIONS,
-  SORT_BY_OPTIONS,
+  SORT_MOVIES_BY_OPTIONS,
   USER_SCORE_RANGE,
 } from '../common/tmdb-config';
 import { getLS } from '../common/utils/storage';
@@ -71,7 +71,11 @@ const Movies = ({ routeName }) => {
         title="Adjust Movies"
         content={
           <AdjustmentContent
-            sortBy={{ SORT_BY_OPTIONS, sortBy, sortByHandler }}
+            sortBy={{
+              SORT_BY_OPTIONS: SORT_MOVIES_BY_OPTIONS,
+              sortBy,
+              sortByHandler,
+            }}
             userScore={{
               USER_SCORE_RANGE,
               changeUserScoreHandler,
