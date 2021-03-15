@@ -11,6 +11,8 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 import { formatReleaseDate } from '../../utils/date';
 import useCardStyles from './CardStyles';
+import { IMG_BASE_URL, IMG_SIZES } from '../../tmdb-config';
+import noImageImg from '../../../../assets/img/no-image.svg';
 
 const useStyles = makeStyles(() => ({
   subInfo: {
@@ -45,13 +47,17 @@ const Card = ({ posterPath, title, releaseDate, voteAverage }) => {
   const classes = useStyles();
   const cardClasses = useCardStyles();
 
+  const posterImg = posterPath
+    ? `${IMG_BASE_URL}${IMG_SIZES.poster}${posterPath}`
+    : noImageImg;
+
   return (
     <MUiCard raised className={cardClasses.card}>
       <CardActionArea className={cardClasses.action}>
         <CardMedia
           component="div"
           alt="Contemplative Reptile"
-          image={posterPath}
+          image={posterImg}
           title="Contemplative Reptile"
           className={classes.media}
         />
