@@ -17,9 +17,4 @@ const renderApp = () => {
   );
 };
 
-// HMR
-if (process.env.NODE_ENV !== 'production' && module.hot) {
-  module.hot.accept('./modules/App/App', renderApp);
-}
-
 renderApp();
