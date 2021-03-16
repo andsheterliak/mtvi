@@ -54,6 +54,7 @@ const Movies = ({ routeName }) => {
 
   const nextPage = useSelector((state) => state.movies.page + 1);
   const isMoreData = useSelector((state) => state.movies.isMoreData);
+  const isLoading = useSelector((state) => state.movies.isLoading);
   const movies = useSelector((state) => state.movies.data);
 
   const loadMoreHandler = () => {
@@ -112,7 +113,11 @@ const Movies = ({ routeName }) => {
         {movies.length ? <CardsPage data={movies} /> : 'Loading...'}
       </CardsGrid>
 
-      <LoadMoreBtn loadMoreHandler={loadMoreHandler} isMoreData={isMoreData} />
+      <LoadMoreBtn
+        loadMoreHandler={loadMoreHandler}
+        isMoreData={isMoreData}
+        isLoading={isLoading}
+      />
     </PageContainer>
   );
 };

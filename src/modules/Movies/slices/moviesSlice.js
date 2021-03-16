@@ -10,12 +10,18 @@ const moviesSlice = createSlice({
     data: [],
     page: null,
     isMoreData: false,
+    isLoading: false,
   },
 
   reducers: {
+    fetchMoviesStart(state) {
+      state.isLoading = true;
+    },
+
     fetchMovies(state, { payload }) {
       const isMoreData = payload.page + 1 <= payload.total_pages;
 
+      state.isLoading = false;
       state.data.push({ pageData: payload.results, pageNum: payload.page });
       state.isMoreData = isMoreData;
       state.page = payload.page;
@@ -24,6 +30,8 @@ const moviesSlice = createSlice({
 });
 
 const fetchMoviesData = (options) => async (dispatch) => {
+  dispatch(moviesSlice.actions.fetchMoviesStart());
+
   const response = await axiosTMDB.get('', {
     params: {
       path: 'discover/movie',
