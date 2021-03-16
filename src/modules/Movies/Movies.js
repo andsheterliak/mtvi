@@ -1,15 +1,15 @@
 import { useEffect, useRef } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
+
 import ActionsButtons from '../common/components/ActionsButtons';
 import AdjustmentContent from '../common/components/Adjustment/AdjustmentContent';
 import AdjustmentButton from '../common/components/AdjustmentButton';
-import Cards from '../common/components/Cards/Cards';
 import LoadMoreBtn from '../common/components/LoadMoreBtn';
 import Modal from '../common/components/Modal';
 import PageContainer from '../common/components/PageContainer';
 import CardsGrid from '../common/components/Cards/CardsGrid';
 import useScrollToTop from '../common/hooks/useScrollToTop';
+import CardsPage from '../common/components/Cards/CardsPage';
 
 import {
   MOVIES_DEFAULT_OPTIONS,
@@ -52,7 +52,15 @@ const Movies = ({ routeName }) => {
     moviesActions.fetchMoviesData
   );
 
+  const nextPage = useSelector((state) => state.movies.page + 1);
+  const isMoreData = useSelector((state) => state.movies.isMoreData);
   const movies = useSelector((state) => state.movies.data);
+
+  const loadMoreHandler = () => {
+    dispatch(
+      moviesActions.fetchMoviesData({ ...options.current, page: nextPage })
+    );
+  };
 
   useEffect(() => {
     dispatch(moviesActions.fetchMoviesData(options.current));
@@ -101,10 +109,10 @@ const Movies = ({ routeName }) => {
       />
 
       <CardsGrid>
-        {movies.length ? <Cards cardsData={movies} /> : 'Loading...'}
+        {movies.length ? <CardsPage data={movies} /> : 'Loading...'}
       </CardsGrid>
 
-      <LoadMoreBtn />
+      <LoadMoreBtn loadMoreHandler={loadMoreHandler} isMoreData={isMoreData} />
     </PageContainer>
   );
 };

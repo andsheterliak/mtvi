@@ -7,11 +7,17 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const LoadMoreBtn = () => {
+const LoadMoreBtn = ({ loadMoreHandler, isMoreData }) => {
   const classes = useStyles();
 
   return (
-    <Button size="large" fullWidth className={classes.btn}>
+    <Button
+      size="large"
+      fullWidth
+      disabled={!isMoreData}
+      className={classes.btn}
+      onClick={loadMoreHandler}
+    >
       Load More
     </Button>
   );
