@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ActionsButtons from '../common/components/ActionsButtons';
@@ -20,6 +20,7 @@ import { getLS } from '../common/utils/storage';
 import { moviesActions } from './slices/moviesSlice';
 import useOptions from '../common/hooks/useOptions';
 import { MOVIES_OPTIONS_LS_NAME } from './constants';
+import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
 
 const Movies = ({ routeName }) => {
   useScrollToTop();
@@ -55,13 +56,23 @@ const Movies = ({ routeName }) => {
   const nextPage = useSelector((state) => state.movies.page + 1);
   const isMoreData = useSelector((state) => state.movies.isMoreData);
   const isLoading = useSelector((state) => state.movies.isLoading);
+  const isLoadMore = useSelector((state) => state.movies.isLoadMore);
   const movies = useSelector((state) => state.movies.data);
 
-  const loadMoreHandler = () => {
+  const loadMoreHandler = useCallback(() => {
+    dispatch(moviesActions.loadMoreMovies());
+
     dispatch(
       moviesActions.fetchMoviesData({ ...options.current, page: nextPage })
     );
-  };
+  }, [dispatch, nextPage]);
+
+  const infiniteScrollRef = useInfiniteScroll(
+    loadMoreHandler,
+    isLoadMore,
+    isLoading,
+    isMoreData
+  );
 
   useEffect(() => {
     dispatch(moviesActions.fetchMoviesData(options.current));
@@ -114,6 +125,7 @@ const Movies = ({ routeName }) => {
       </CardsGrid>
 
       <LoadMoreBtn
+        infiniteScrollRef={infiniteScrollRef}
         loadMoreHandler={loadMoreHandler}
         isMoreData={isMoreData}
         isLoading={isLoading}

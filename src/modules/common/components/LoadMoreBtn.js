@@ -7,11 +7,17 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const LoadMoreBtn = ({ loadMoreHandler, isMoreData, isLoading }) => {
+const LoadMoreBtn = ({
+  loadMoreHandler,
+  isMoreData,
+  isLoading,
+  infiniteScrollRef,
+}) => {
   const classes = useStyles();
 
   return (
     <Button
+      ref={infiniteScrollRef}
       size="large"
       fullWidth
       disabled={!isMoreData || isLoading}

@@ -8,12 +8,17 @@ const moviesSlice = createSlice({
 
   initialState: {
     data: [],
-    page: null,
+    page: 1,
     isMoreData: false,
-    isLoading: false,
+    isLoading: true,
+    isLoadMore: false,
   },
 
   reducers: {
+    loadMoreMovies(state) {
+      state.isLoadMore = true;
+    },
+
     fetchMoviesStart(state) {
       state.isLoading = true;
     },
