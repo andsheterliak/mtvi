@@ -50,7 +50,7 @@ const Movies = ({ routeName }) => {
     MOVIES_OPTIONS_LS_NAME,
     MOVIES_DEFAULT_OPTIONS,
     options,
-    moviesActions.fetchMoviesData
+    moviesActions.fetchMovies
   );
 
   const nextPage = useSelector((state) => state.movies.page + 1);
@@ -62,9 +62,7 @@ const Movies = ({ routeName }) => {
   const loadMoreHandler = useCallback(() => {
     dispatch(moviesActions.loadMoreMovies());
 
-    dispatch(
-      moviesActions.fetchMoviesData({ ...options.current, page: nextPage })
-    );
+    dispatch(moviesActions.fetchMovies({ ...options.current, page: nextPage }));
   }, [dispatch, nextPage]);
 
   const infiniteScrollRef = useInfiniteScroll(
@@ -75,7 +73,7 @@ const Movies = ({ routeName }) => {
   );
 
   useEffect(() => {
-    dispatch(moviesActions.fetchMoviesData(options.current));
+    dispatch(moviesActions.fetchMovies(options.current));
   }, [dispatch]);
 
   return (

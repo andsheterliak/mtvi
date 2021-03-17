@@ -23,7 +23,7 @@ const moviesSlice = createSlice({
       state.isLoading = true;
     },
 
-    fetchMovies(state, { payload }) {
+    fetchMoviesSuccess(state, { payload }) {
       const isMoreData = payload.page + 1 <= payload.total_pages;
 
       state.isLoading = false;
@@ -34,7 +34,7 @@ const moviesSlice = createSlice({
   },
 });
 
-const fetchMoviesData = (options) => async (dispatch) => {
+const fetchMovies = (options) => async (dispatch) => {
   dispatch(moviesSlice.actions.fetchMoviesStart());
 
   const response = await axiosTMDB.get('', {
@@ -51,8 +51,8 @@ const fetchMoviesData = (options) => async (dispatch) => {
     },
   });
 
-  dispatch(moviesSlice.actions.fetchMovies(response.data));
+  dispatch(moviesSlice.actions.fetchMoviesSuccess(response.data));
 };
 
-export const moviesActions = { ...moviesSlice.actions, fetchMoviesData };
+export const moviesActions = { ...moviesSlice.actions, fetchMovies };
 export default moviesSlice.reducer;
