@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ActionsButtons from '../common/components/ActionsButtons';
@@ -17,7 +17,6 @@ import {
   USER_SCORE_RANGE,
 } from '../common/tmdb-config';
 import { TV_OPTIONS_LS_NAME } from './constants';
-import { getLS } from '../common/utils/storage';
 import { tvShowsActions } from './slices/tvShowsSlice';
 import useOptions from '../common/hooks/useOptions';
 import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
@@ -27,14 +26,8 @@ const Movies = ({ routeName }) => {
   useScrollToTop();
   const dispatch = useDispatch();
 
-  const options = useRef(getLS(TV_OPTIONS_LS_NAME) || TV_DEFAULT_OPTIONS);
-
   const {
-    sortBy,
-    userScore,
-    genres,
-    dateFrom,
-    dateTo,
+    options,
     isModalOpened,
     isReadyToAccept,
     openModalHandler,
@@ -48,7 +41,6 @@ const Movies = ({ routeName }) => {
   } = useOptions(
     TV_OPTIONS_LS_NAME,
     TV_DEFAULT_OPTIONS,
-    options,
     tvShowsActions.fetchTVShows
   );
 
@@ -61,10 +53,8 @@ const Movies = ({ routeName }) => {
   const loadMoreHandler = useCallback(() => {
     dispatch(tvShowsActions.loadMoreTVShows());
 
-    dispatch(
-      tvShowsActions.fetchTVShows({ ...options.current, page: nextPage })
-    );
-  }, [dispatch, nextPage]);
+    dispatch(tvShowsActions.fetchTVShows({ ...options, page: nextPage }));
+  }, [dispatch, nextPage, options]);
 
   const infiniteScrollRef = useInfiniteScroll(
     loadMoreHandler,
@@ -74,7 +64,8 @@ const Movies = ({ routeName }) => {
   );
 
   useEffect(() => {
-    dispatch(tvShowsActions.fetchTVShows(options.current));
+    dispatch(tvShowsActions.fetchTVShows(options));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   const cards = tvShows.length ? (
@@ -97,19 +88,21 @@ const Movies = ({ routeName }) => {
         content={
           <AdjustmentContent
             sortBy={{
-              SORT_BY_OPTIONS: SORT_TV_BY_OPTIONS,
-              sortBy,
+              sortByOptions: SORT_TV_BY_OPTIONS,
+              sortBy: options.sortBy,
               sortByHandler,
             }}
             userScore={{
               USER_SCORE_RANGE,
               changeUserScoreHandler,
-              userScore,
+              userScore: options.userScore,
             }}
-            genres={{ genres, toggleGenreHandler }}
+            genres={{
+              genres: options.genres,
+              toggleGenreHandler,
+            }}
             dates={{
-              dateFrom,
-              dateTo,
+              dates: options.dates,
               dateFromHandler,
               dateToHandler,
               dateTitle: 'Air Dates',

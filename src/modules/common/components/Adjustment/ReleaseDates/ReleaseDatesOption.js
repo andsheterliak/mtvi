@@ -5,8 +5,7 @@ import OptionContainer from '../OptionContainer';
 
 const ReleaseDatesOption = ({
   dateTitle,
-  dateFrom,
-  dateTo,
+  dates,
   dateFromHandler,
   dateToHandler,
 }) => {
@@ -16,7 +15,7 @@ const ReleaseDatesOption = ({
 
       <DatePickerContainer>
         <DatePicker
-          value={dateFrom}
+          value={dates.from}
           changeDateHandler={dateFromHandler}
           id="date-picker-from"
           ariaLabel="change release dates from"
@@ -24,7 +23,7 @@ const ReleaseDatesOption = ({
         />
 
         <DatePicker
-          value={dateTo}
+          value={dates.to}
           changeDateHandler={dateToHandler}
           id="date-picker-to"
           ariaLabel="change release dates to"

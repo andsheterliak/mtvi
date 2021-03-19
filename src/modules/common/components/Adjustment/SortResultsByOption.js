@@ -3,8 +3,8 @@ import { Input, InputLabel, MenuItem, Select } from '@material-ui/core';
 import OptionContainer from './OptionContainer';
 import OptionTitle from './OptionTitle';
 
-const SortResultsByOption = ({ SORT_BY_OPTIONS, sortBy, sortByHandler }) => {
-  const menuItems = Object.values(SORT_BY_OPTIONS).map((item) => {
+const SortResultsByOption = ({ sortByOptions, sortBy, sortByHandler }) => {
+  const menuItems = Object.values(sortByOptions).map((item) => {
     return (
       <MenuItem key={item.apiName} value={item.apiName}>
         {item.name}

@@ -40,11 +40,11 @@ const fetchTVShows = (options) => async (dispatch) => {
     params: {
       path: 'discover/tv',
       sort_by: options.sortBy,
-      'first_air_date.gte': options.releaseDates.from,
-      'first_air_date.lte': options.releaseDates.to,
+      'first_air_date.gte': options.dates.from,
+      'first_air_date.lte': options.dates.to,
       with_genres: getSelectedGenres(options.genres),
-      'vote_average.gte': options.userScoreRange[0],
-      'vote_average.lte': options.userScoreRange[1],
+      'vote_average.gte': options.userScore[0],
+      'vote_average.lte': options.userScore[1],
       page: options.page || 1,
     },
   });

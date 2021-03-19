@@ -222,13 +222,13 @@ export const TV_GENRES = [
 
 export const MOVIES_DEFAULT_OPTIONS = {
   sortBy: SORT_MOVIES_BY_OPTIONS.popularityDesc.apiName,
-  userScoreRange: [0, 10],
+  userScore: [USER_SCORE_RANGE.min, USER_SCORE_RANGE.max],
 
   genres: MOVIE_GENRES.map((item) => {
     return { ...item, isSelected: false };
   }),
 
-  releaseDates: {
+  dates: {
     from: null,
     to: null,
   },
@@ -236,13 +236,13 @@ export const MOVIES_DEFAULT_OPTIONS = {
 
 export const TV_DEFAULT_OPTIONS = {
   sortBy: SORT_TV_BY_OPTIONS.popularityDesc.apiName,
-  userScoreRange: [0, 10],
+  userScore: [USER_SCORE_RANGE.min, USER_SCORE_RANGE.max],
 
   genres: TV_GENRES.map((item) => {
     return { ...item, isSelected: false };
   }),
 
-  releaseDates: {
+  dates: {
     from: null,
     to: null,
   },

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ActionsButtons from '../common/components/ActionsButtons';
@@ -18,7 +18,6 @@ import {
 } from '../common/tmdb-config';
 import { moviesActions } from './slices/moviesSlice';
 import { MOVIES_OPTIONS_LS_NAME } from './constants';
-import { getLS } from '../common/utils/storage';
 import useOptions from '../common/hooks/useOptions';
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
@@ -27,16 +26,8 @@ const Movies = ({ routeName }) => {
   useScrollToTop();
   const dispatch = useDispatch();
 
-  const options = useRef(
-    getLS(MOVIES_OPTIONS_LS_NAME) || MOVIES_DEFAULT_OPTIONS
-  );
-
   const {
-    sortBy,
-    userScore,
-    genres,
-    dateFrom,
-    dateTo,
+    options,
     isModalOpened,
     isReadyToAccept,
     openModalHandler,
@@ -50,7 +41,6 @@ const Movies = ({ routeName }) => {
   } = useOptions(
     MOVIES_OPTIONS_LS_NAME,
     MOVIES_DEFAULT_OPTIONS,
-    options,
     moviesActions.fetchMovies
   );
 
@@ -63,8 +53,8 @@ const Movies = ({ routeName }) => {
   const loadMoreHandler = useCallback(() => {
     dispatch(moviesActions.loadMoreMovies());
 
-    dispatch(moviesActions.fetchMovies({ ...options.current, page: nextPage }));
-  }, [dispatch, nextPage]);
+    dispatch(moviesActions.fetchMovies({ ...options, page: nextPage }));
+  }, [dispatch, nextPage, options]);
 
   const infiniteScrollRef = useInfiniteScroll(
     loadMoreHandler,
@@ -74,7 +64,8 @@ const Movies = ({ routeName }) => {
   );
 
   useEffect(() => {
-    dispatch(moviesActions.fetchMovies(options.current));
+    dispatch(moviesActions.fetchMovies(options));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   const cards = movies.length ? (
@@ -97,19 +88,21 @@ const Movies = ({ routeName }) => {
         content={
           <AdjustmentContent
             sortBy={{
-              SORT_BY_OPTIONS: SORT_MOVIES_BY_OPTIONS,
-              sortBy,
+              sortByOptions: SORT_MOVIES_BY_OPTIONS,
+              sortBy: options.sortBy,
               sortByHandler,
             }}
             userScore={{
-              USER_SCORE_RANGE,
+              userScoreRange: USER_SCORE_RANGE,
               changeUserScoreHandler,
-              userScore,
+              userScore: options.userScore,
             }}
-            genres={{ genres, toggleGenreHandler }}
+            genres={{
+              genres: options.genres,
+              toggleGenreHandler,
+            }}
             dates={{
-              dateFrom,
-              dateTo,
+              dates: options.dates,
               dateFromHandler,
               dateToHandler,
               dateTitle: 'Release Dates',

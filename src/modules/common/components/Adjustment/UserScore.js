@@ -4,7 +4,7 @@ import OptionContainer from './OptionContainer';
 import OptionTitle from './OptionTitle';
 
 const UserScore = ({
-  USER_SCORE_RANGE: { min, max },
+  userScoreRange: { min, max },
   changeUserScoreHandler,
   userScore,
 }) => {

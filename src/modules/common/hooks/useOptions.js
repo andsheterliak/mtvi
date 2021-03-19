@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setLS } from '../utils/storage';
+import { getLS, setLS } from '../utils/storage';
 import { formatDateToAPI } from '../utils/date';
 
 const changeGenres = (genresList, id) => {
@@ -14,30 +14,32 @@ const changeGenres = (genresList, id) => {
   });
 };
 
-const useOptions = (
-  userOptionsName,
-  defaultOptionsName,
-  options,
-  fetchAction
-) => {
+const useOptions = (userOptionsName, defaultOptionsName, fetchAction) => {
   const dispatch = useDispatch();
+
+  const options = useMemo(() => getLS(userOptionsName) || defaultOptionsName, [
+    userOptionsName,
+    defaultOptionsName,
+  ]); // It is not very expensive, but these options are needed only on mount.
 
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [isReadyToAccept, setIsReadyToAccept] = useState(false);
   const [isOptionsValid, setIsOptionsValid] = useState(true);
 
-  const [genres, setGenres] = useState(options.current.genres);
-  const [sortBy, setSortBy] = useState(options.current.sortBy);
-  const [dateFrom, setDateFrom] = useState(options.current.releaseDates.from);
-  const [dateTo, setDateTo] = useState(options.current.releaseDates.to);
-  const [userScore, setUserScore] = useState(options.current.userScoreRange);
+  const [genres, setGenres] = useState(options.genres);
+  const [sortBy, setSortBy] = useState(options.sortBy);
+  const [dateFrom, setDateFrom] = useState(options.dates.from);
+  const [dateTo, setDateTo] = useState(options.dates.to);
+  const [userScore, setUserScore] = useState(options.userScore);
 
   const cancelOptions = () => {
-    setGenres(options.current.genres);
-    setSortBy(options.current.sortBy);
-    setDateFrom(options.current.releaseDates.from);
-    setDateTo(options.current.releaseDates.to);
-    setUserScore(options.current.userScoreRange);
+    const prevOptions = getLS(userOptionsName) || defaultOptionsName;
+
+    setGenres(prevOptions.genres);
+    setSortBy(prevOptions.sortBy);
+    setDateFrom(prevOptions.dates.from);
+    setDateTo(prevOptions.dates.to);
+    setUserScore(prevOptions.userScore);
     setIsReadyToAccept(false);
   };
 
@@ -92,16 +94,15 @@ const useOptions = (
   const acceptHandler = () => {
     const newUserOptions = {
       sortBy,
-      userScoreRange: userScore,
+      userScore,
       genres,
 
-      releaseDates: {
+      dates: {
         from: dateFrom,
         to: dateTo,
       },
     };
 
-    options.current = newUserOptions;
     setLS(userOptionsName, newUserOptions);
     dispatch(fetchAction(newUserOptions));
     setIsModalOpened(false);
@@ -109,11 +110,13 @@ const useOptions = (
   };
 
   return {
-    sortBy,
-    userScore,
-    genres,
-    dateFrom,
-    dateTo,
+    options: {
+      sortBy,
+      userScore,
+      genres,
+      dates: { dateFrom, dateTo },
+    },
+
     isModalOpened,
     isReadyToAccept,
     openModalHandler,
