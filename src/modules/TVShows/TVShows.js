@@ -49,7 +49,7 @@ const Movies = ({ routeName }) => {
     TV_OPTIONS_LS_NAME,
     TV_DEFAULT_OPTIONS,
     options,
-    tvShowsActions.fetchTVShowsData
+    tvShowsActions.fetchTVShows
   );
 
   const nextPage = useSelector((state) => state.tvShows.page + 1);
@@ -62,7 +62,7 @@ const Movies = ({ routeName }) => {
     dispatch(tvShowsActions.loadMoreTVShows());
 
     dispatch(
-      tvShowsActions.fetchTVShowsData({ ...options.current, page: nextPage })
+      tvShowsActions.fetchTVShows({ ...options.current, page: nextPage })
     );
   }, [dispatch, nextPage]);
 
@@ -74,7 +74,7 @@ const Movies = ({ routeName }) => {
   );
 
   useEffect(() => {
-    dispatch(tvShowsActions.fetchTVShowsData(options.current));
+    dispatch(tvShowsActions.fetchTVShows(options.current));
   }, [dispatch]);
 
   return (

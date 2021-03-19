@@ -22,7 +22,7 @@ const tvShowsSlice = createSlice({
       state.isLoading = true;
     },
 
-    fetchTVShows(state, { payload }) {
+    fetchTVShowsSuccess(state, { payload }) {
       const isMoreData = payload.page + 1 <= payload.total_pages;
 
       state.isLoading = false;
@@ -33,7 +33,7 @@ const tvShowsSlice = createSlice({
   },
 });
 
-const fetchTVShowsData = (options) => async (dispatch) => {
+const fetchTVShows = (options) => async (dispatch) => {
   dispatch(tvShowsActions.fetchTVShowsStart());
 
   const response = await axiosTMDB.get('', {
@@ -49,8 +49,8 @@ const fetchTVShowsData = (options) => async (dispatch) => {
     },
   });
 
-  dispatch(tvShowsSlice.actions.fetchTVShows(response.data));
+  dispatch(tvShowsSlice.actions.fetchTVShowsSuccess(response.data));
 };
 
-export const tvShowsActions = { ...tvShowsSlice.actions, fetchTVShowsData };
+export const tvShowsActions = { ...tvShowsSlice.actions, fetchTVShows };
 export default tvShowsSlice.reducer;
