@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import CardsGridItem from '../../common/components/Cards/CardsGridItem';
 import PersonCard from './PersonCard';
 
@@ -17,4 +19,4 @@ const PersonCards = ({ cardsData }) => {
   return cards;
 };
 
-export default PersonCards;
+export default memo(PersonCards);

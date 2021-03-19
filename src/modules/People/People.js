@@ -1,30 +1,59 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import CardsGrid from '../common/components/Cards/CardsGrid';
 import PageContainer from '../common/components/PageContainer';
 import PersonCards from './components/PersonCards';
 import LoadMoreBtn from '../common/components/LoadMoreBtn';
+import CardsPage from '../common/components/Cards/CardsPage';
+
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { peopleActions } from './slices/peopleSlice';
+import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
 
 const People = ({ routeName }) => {
   useScrollToTop();
   const dispatch = useDispatch();
 
+  const nextPage = useSelector((state) => state.people.page + 1);
+  const isMoreData = useSelector((state) => state.people.isMoreData);
+  const isLoading = useSelector((state) => state.people.isLoading);
+  const isLoadMore = useSelector((state) => state.people.isLoadMore);
   const people = useSelector((state) => state.people.data);
 
+  const loadMoreHandler = useCallback(() => {
+    dispatch(peopleActions.loadMorePeople());
+
+    dispatch(peopleActions.fetchPeople({ page: nextPage }));
+  }, [dispatch, nextPage]);
+
+  const infiniteScrollRef = useInfiniteScroll(
+    loadMoreHandler,
+    isLoadMore,
+    isLoading,
+    isMoreData
+  );
+
   useEffect(() => {
-    dispatch(peopleActions.fetchPeopleData());
+    dispatch(peopleActions.fetchPeople());
   }, [dispatch]);
 
   return (
     <PageContainer routeName={routeName}>
       <CardsGrid>
-        {people.length ? <PersonCards cardsData={people} /> : 'Loading...'}
+        {people.length ? (
+          <CardsPage data={people} CardsComponent={PersonCards} />
+        ) : (
+          'Loading...'
+        )}
       </CardsGrid>
 
-      <LoadMoreBtn />
+      <LoadMoreBtn
+        infiniteScrollRef={infiniteScrollRef}
+        loadMoreHandler={loadMoreHandler}
+        isMoreData={isMoreData}
+        isLoading={isLoading}
+      />
     </PageContainer>
   );
 };
