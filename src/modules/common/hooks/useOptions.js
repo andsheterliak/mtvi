@@ -114,7 +114,7 @@ const useOptions = (userOptionsName, defaultOptionsName, fetchAction) => {
       sortBy,
       userScore,
       genres,
-      dates: { dateFrom, dateTo },
+      dates: { from: dateFrom, to: dateTo },
     },
 
     isModalOpened,
