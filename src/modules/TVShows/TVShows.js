@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import ActionsButtons from '../common/components/ActionsButtons';
@@ -10,6 +10,7 @@ import Modal from '../common/components/Modal';
 import PageContainer from '../common/components/PageContainer';
 import CardsGrid from '../common/components/Cards/CardsGrid';
 import useScrollToTop from '../common/hooks/useScrollToTop';
+import CardsPage from '../common/components/Cards/CardsPage';
 
 import {
   TV_DEFAULT_OPTIONS,
@@ -20,6 +21,7 @@ import { getLS } from '../common/utils/storage';
 import { tvShowsActions } from './slices/tvShowsSlice';
 import useOptions from '../common/hooks/useOptions';
 import { TV_OPTIONS_LS_NAME } from './constants';
+import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
 
 const Movies = ({ routeName }) => {
   useScrollToTop();
@@ -50,7 +52,26 @@ const Movies = ({ routeName }) => {
     tvShowsActions.fetchTVShowsData
   );
 
+  const nextPage = useSelector((state) => state.tvShows.page + 1);
+  const isMoreData = useSelector((state) => state.tvShows.isMoreData);
+  const isLoading = useSelector((state) => state.tvShows.isLoading);
+  const isLoadMore = useSelector((state) => state.tvShows.isLoadMore);
   const tvShows = useSelector((state) => state.tvShows.data);
+
+  const loadMoreHandler = useCallback(() => {
+    dispatch(tvShowsActions.loadMoreTVShows());
+
+    dispatch(
+      tvShowsActions.fetchTVShowsData({ ...options.current, page: nextPage })
+    );
+  }, [dispatch, nextPage]);
+
+  const infiniteScrollRef = useInfiniteScroll(
+    loadMoreHandler,
+    isLoadMore,
+    isLoading,
+    isMoreData
+  );
 
   useEffect(() => {
     dispatch(tvShowsActions.fetchTVShowsData(options.current));
@@ -99,10 +120,19 @@ const Movies = ({ routeName }) => {
       />
 
       <CardsGrid>
-        {tvShows.length ? <Cards cardsData={tvShows} /> : 'Loading...'}
+        {tvShows.length ? (
+          <CardsPage data={tvShows} CardsComponent={Cards} />
+        ) : (
+          'Loading...'
+        )}
       </CardsGrid>
 
-      <LoadMoreBtn />
+      <LoadMoreBtn
+        infiniteScrollRef={infiniteScrollRef}
+        loadMoreHandler={loadMoreHandler}
+        isMoreData={isMoreData}
+        isLoading={isLoading}
+      />
     </PageContainer>
   );
 };
