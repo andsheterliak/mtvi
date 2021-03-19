@@ -9,6 +9,7 @@ import Modal from '../common/components/Modal';
 import PageContainer from '../common/components/PageContainer';
 import CardsGrid from '../common/components/Cards/CardsGrid';
 import useScrollToTop from '../common/hooks/useScrollToTop';
+import Cards from '../common/components/Cards/Cards';
 import CardsPage from '../common/components/Cards/CardsPage';
 
 import {
@@ -119,7 +120,11 @@ const Movies = ({ routeName }) => {
       />
 
       <CardsGrid>
-        {movies.length ? <CardsPage data={movies} /> : 'Loading...'}
+        {movies.length ? (
+          <CardsPage data={movies} CardsComponent={Cards} />
+        ) : (
+          'Loading...'
+        )}
       </CardsGrid>
 
       <LoadMoreBtn

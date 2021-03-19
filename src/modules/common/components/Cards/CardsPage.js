@@ -1,10 +1,9 @@
 import { memo } from 'react';
-import Cards from './Cards';
 
-// This component is only for optimization. Each 'Cards' component only runs if 'pageData' changes because of each 'Cards' is wrapped in memo.
-const CardsPage = ({ data }) => {
+// This component is only for optimization. Each 'CardsComponent' component only runs if 'pageData' changes because of each 'CardsComponent' is wrapped in memo.
+const CardsPage = ({ data, CardsComponent }) => {
   return data.map(({ pageData, pageNum }) => {
-    return <Cards key={pageNum} cardsData={pageData} />;
+    return <CardsComponent key={pageNum} cardsData={pageData} />;
   });
 };
 
