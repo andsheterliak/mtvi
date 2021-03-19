@@ -77,6 +77,12 @@ const Movies = ({ routeName }) => {
     dispatch(moviesActions.fetchMovies(options.current));
   }, [dispatch]);
 
+  const cards = movies.length ? (
+    <CardsPage data={movies} CardsComponent={Cards} />
+  ) : (
+    'Loading...'
+  );
+
   return (
     <PageContainer routeName={routeName}>
       <AdjustmentButton
@@ -119,13 +125,7 @@ const Movies = ({ routeName }) => {
         }
       />
 
-      <CardsGrid>
-        {movies.length ? (
-          <CardsPage data={movies} CardsComponent={Cards} />
-        ) : (
-          'Loading...'
-        )}
-      </CardsGrid>
+      <CardsGrid>{cards}</CardsGrid>
 
       <LoadMoreBtn
         infiniteScrollRef={infiniteScrollRef}

@@ -38,15 +38,15 @@ const People = ({ routeName }) => {
     dispatch(peopleActions.fetchPeopleData());
   }, [dispatch]);
 
+  const cards = people.length ? (
+    <CardsPage data={people} CardsComponent={PersonCards} />
+  ) : (
+    'Loading...'
+  );
+
   return (
     <PageContainer routeName={routeName}>
-      <CardsGrid>
-        {people.length ? (
-          <CardsPage data={people} CardsComponent={PersonCards} />
-        ) : (
-          'Loading...'
-        )}
-      </CardsGrid>
+      <CardsGrid>{cards}</CardsGrid>
 
       <LoadMoreBtn
         infiniteScrollRef={infiniteScrollRef}
