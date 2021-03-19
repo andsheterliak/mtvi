@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import axiosTMDB from '../../common/axios-tmdb';
+import checkIfIsNextPage from '../../common/utils/checkIfIsNextPage';
 import getSelectedGenres from '../../common/utils/getSelectedGenres';
 
 const tvShowsSlice = createSlice({
@@ -23,7 +24,7 @@ const tvShowsSlice = createSlice({
     },
 
     fetchTVShowsSuccess(state, { payload }) {
-      const isMoreData = payload.page + 1 <= payload.total_pages;
+      const isMoreData = checkIfIsNextPage(payload.page, payload.total_pages);
 
       state.isLoading = false;
       state.data.push({ pageData: payload.results, pageNum: payload.page });
@@ -32,7 +33,7 @@ const tvShowsSlice = createSlice({
     },
 
     fetchTVShowsWithNewOptionsSuccess(state, { payload }) {
-      const isMoreData = payload.page + 1 <= payload.total_pages;
+      const isMoreData = checkIfIsNextPage(payload.page, payload.total_pages);
 
       state.isLoading = false;
       state.data = [{ pageData: payload.results, pageNum: payload.page }];
