@@ -24,7 +24,7 @@ const People = ({ routeName }) => {
   const loadMoreHandler = useCallback(() => {
     dispatch(peopleActions.loadMorePeople());
 
-    dispatch(peopleActions.fetchPeople({ page: nextPage }));
+    dispatch(peopleActions.fetchPeopleData({ page: nextPage }));
   }, [dispatch, nextPage]);
 
   const infiniteScrollRef = useInfiniteScroll(
@@ -35,7 +35,7 @@ const People = ({ routeName }) => {
   );
 
   useEffect(() => {
-    dispatch(peopleActions.fetchPeople());
+    dispatch(peopleActions.fetchPeopleData());
   }, [dispatch]);
 
   return (

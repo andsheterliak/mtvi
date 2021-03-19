@@ -22,7 +22,7 @@ const peopleSlice = createSlice({
       state.isLoading = true;
     },
 
-    fetchPeopleSuccess(state, { payload }) {
+    fetchPeople(state, { payload }) {
       const isMoreData = payload.page + 1 <= payload.total_pages;
 
       state.isLoading = false;
@@ -33,7 +33,7 @@ const peopleSlice = createSlice({
   },
 });
 
-const fetchPeople = (options) => async (dispatch) => {
+const fetchPeopleData = (options) => async (dispatch) => {
   dispatch(peopleSlice.actions.fetchPeopleStart());
 
   const response = await axiosTMDB.get('', {
@@ -43,8 +43,8 @@ const fetchPeople = (options) => async (dispatch) => {
     },
   });
 
-  dispatch(peopleSlice.actions.fetchPeopleSuccess(response.data));
+  dispatch(peopleSlice.actions.fetchPeople(response.data));
 };
 
-export const peopleActions = { ...peopleSlice.actions, fetchPeople };
+export const peopleActions = { ...peopleSlice.actions, fetchPeopleData };
 export default peopleSlice.reducer;
