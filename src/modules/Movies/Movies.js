@@ -41,7 +41,7 @@ const Movies = ({ routeName }) => {
   } = useOptions(
     MOVIES_OPTIONS_LS_NAME,
     MOVIES_DEFAULT_OPTIONS,
-    moviesActions.fetchMovies
+    moviesActions.fetchMoviesWithNewOptions
   );
 
   const nextPage = useSelector((state) => state.movies.page + 1);

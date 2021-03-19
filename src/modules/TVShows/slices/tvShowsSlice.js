@@ -30,12 +30,20 @@ const tvShowsSlice = createSlice({
       state.isMoreData = isMoreData;
       state.page = payload.page;
     },
+
+    fetchTVShowsWithNewOptionsSuccess(state, { payload }) {
+      const isMoreData = payload.page + 1 <= payload.total_pages;
+
+      state.isLoading = false;
+      state.data = [{ pageData: payload.results, pageNum: payload.page }];
+      state.isMoreData = isMoreData;
+      state.page = payload.page;
+      state.isLoadMore = false;
+    },
   },
 });
 
-const fetchTVShows = (options) => async (dispatch) => {
-  dispatch(tvShowsActions.fetchTVShowsStart());
-
+const getTVShows = async (options) => {
   const response = await axiosTMDB.get('', {
     params: {
       path: 'discover/tv',
@@ -49,8 +57,31 @@ const fetchTVShows = (options) => async (dispatch) => {
     },
   });
 
+  return response;
+};
+
+const fetchTVShows = (options) => async (dispatch) => {
+  dispatch(tvShowsActions.fetchTVShowsStart());
+
+  const response = await getTVShows(options);
+
   dispatch(tvShowsSlice.actions.fetchTVShowsSuccess(response.data));
 };
 
-export const tvShowsActions = { ...tvShowsSlice.actions, fetchTVShows };
+const fetchTVShowsWithNewOptions = (options) => async (dispatch) => {
+  dispatch(tvShowsActions.fetchTVShowsStart());
+
+  const response = await getTVShows(options);
+
+  dispatch(
+    tvShowsSlice.actions.fetchTVShowsWithNewOptionsSuccess(response.data)
+  );
+};
+
+export const tvShowsActions = {
+  ...tvShowsSlice.actions,
+  fetchTVShows,
+  fetchTVShowsWithNewOptions,
+};
+
 export default tvShowsSlice.reducer;

@@ -41,7 +41,7 @@ const Movies = ({ routeName }) => {
   } = useOptions(
     TV_OPTIONS_LS_NAME,
     TV_DEFAULT_OPTIONS,
-    tvShowsActions.fetchTVShows
+    tvShowsActions.fetchTVShowsWithNewOptions
   );
 
   const nextPage = useSelector((state) => state.tvShows.page + 1);
@@ -93,7 +93,7 @@ const Movies = ({ routeName }) => {
               sortByHandler,
             }}
             userScore={{
-              USER_SCORE_RANGE,
+              userScoreRange: USER_SCORE_RANGE,
               changeUserScoreHandler,
               userScore: options.userScore,
             }}

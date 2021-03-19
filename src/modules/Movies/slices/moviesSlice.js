@@ -31,12 +31,20 @@ const moviesSlice = createSlice({
       state.isMoreData = isMoreData;
       state.page = payload.page;
     },
+
+    fetchMoviesWithNewOptionsSuccess(state, { payload }) {
+      const isMoreData = payload.page + 1 <= payload.total_pages;
+
+      state.isLoading = false;
+      state.data = [{ pageData: payload.results, pageNum: payload.page }];
+      state.isMoreData = isMoreData;
+      state.page = payload.page;
+      state.isLoadMore = false;
+    },
   },
 });
 
-const fetchMovies = (options) => async (dispatch) => {
-  dispatch(moviesSlice.actions.fetchMoviesStart());
-
+const getMovies = async (options) => {
   const response = await axiosTMDB.get('', {
     params: {
       path: 'discover/movie',
@@ -51,8 +59,29 @@ const fetchMovies = (options) => async (dispatch) => {
     },
   });
 
+  return response;
+};
+
+const fetchMovies = (options) => async (dispatch) => {
+  dispatch(moviesSlice.actions.fetchMoviesStart());
+
+  const response = await getMovies(options);
+
   dispatch(moviesSlice.actions.fetchMoviesSuccess(response.data));
 };
 
-export const moviesActions = { ...moviesSlice.actions, fetchMovies };
+const fetchMoviesWithNewOptions = (options) => async (dispatch) => {
+  dispatch(moviesSlice.actions.fetchMoviesStart());
+
+  const response = await getMovies(options);
+
+  dispatch(moviesSlice.actions.fetchMoviesWithNewOptionsSuccess(response.data));
+};
+
+export const moviesActions = {
+  ...moviesSlice.actions,
+  fetchMovies,
+  fetchMoviesWithNewOptions,
+};
+
 export default moviesSlice.reducer;
