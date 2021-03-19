@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
+
 import ActionsButtons from '../common/components/ActionsButtons';
 import AdjustmentContent from '../common/components/Adjustment/AdjustmentContent';
 import AdjustmentButton from '../common/components/AdjustmentButton';
@@ -9,7 +9,6 @@ import LoadMoreBtn from '../common/components/LoadMoreBtn';
 import Modal from '../common/components/Modal';
 import PageContainer from '../common/components/PageContainer';
 import CardsGrid from '../common/components/Cards/CardsGrid';
-import useScrollToTop from '../common/hooks/useScrollToTop';
 import CardsPage from '../common/components/Cards/CardsPage';
 
 import {
@@ -17,11 +16,12 @@ import {
   SORT_TV_BY_OPTIONS,
   USER_SCORE_RANGE,
 } from '../common/tmdb-config';
+import { TV_OPTIONS_LS_NAME } from './constants';
 import { getLS } from '../common/utils/storage';
 import { tvShowsActions } from './slices/tvShowsSlice';
 import useOptions from '../common/hooks/useOptions';
-import { TV_OPTIONS_LS_NAME } from './constants';
 import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
+import useScrollToTop from '../common/hooks/useScrollToTop';
 
 const Movies = ({ routeName }) => {
   useScrollToTop();

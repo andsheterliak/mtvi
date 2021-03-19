@@ -7,8 +7,8 @@ import PersonCards from './components/PersonCards';
 import LoadMoreBtn from '../common/components/LoadMoreBtn';
 import CardsPage from '../common/components/Cards/CardsPage';
 
-import useScrollToTop from '../common/hooks/useScrollToTop';
 import { peopleActions } from './slices/peopleSlice';
+import useScrollToTop from '../common/hooks/useScrollToTop';
 import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
 
 const People = ({ routeName }) => {

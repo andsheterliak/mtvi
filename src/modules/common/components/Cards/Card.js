@@ -9,9 +9,9 @@ import { orange } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 
+import { IMG_BASE_URL, IMG_SIZES } from '../../tmdb-config';
 import { formatReleaseDate } from '../../utils/date';
 import useCardStyles from './CardStyles';
-import { IMG_BASE_URL, IMG_SIZES } from '../../tmdb-config';
 import noImageImg from '../../../../assets/img/no-image.svg';
 
 const useStyles = makeStyles(() => ({

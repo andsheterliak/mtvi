@@ -8,7 +8,6 @@ import LoadMoreBtn from '../common/components/LoadMoreBtn';
 import Modal from '../common/components/Modal';
 import PageContainer from '../common/components/PageContainer';
 import CardsGrid from '../common/components/Cards/CardsGrid';
-import useScrollToTop from '../common/hooks/useScrollToTop';
 import Cards from '../common/components/Cards/Cards';
 import CardsPage from '../common/components/Cards/CardsPage';
 
@@ -17,10 +16,11 @@ import {
   SORT_MOVIES_BY_OPTIONS,
   USER_SCORE_RANGE,
 } from '../common/tmdb-config';
-import { getLS } from '../common/utils/storage';
 import { moviesActions } from './slices/moviesSlice';
-import useOptions from '../common/hooks/useOptions';
 import { MOVIES_OPTIONS_LS_NAME } from './constants';
+import { getLS } from '../common/utils/storage';
+import useOptions from '../common/hooks/useOptions';
+import useScrollToTop from '../common/hooks/useScrollToTop';
 import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
 
 const Movies = ({ routeName }) => {
