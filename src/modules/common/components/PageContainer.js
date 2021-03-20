@@ -9,12 +9,12 @@ const useStyles = makeStyles({
   },
 });
 
-const PageContainer = ({ routeName, children }) => {
+const PageContainer = ({ titleName, children }) => {
   const classes = useStyles();
 
   return (
     <Container maxWidth="xl" className={classes.container}>
-      <RouteHeader routeName={routeName} />
+      <RouteHeader titleName={titleName} />
 
       {children}
     </Container>

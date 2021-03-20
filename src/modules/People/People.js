@@ -11,7 +11,7 @@ import { peopleActions } from './slices/peopleSlice';
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
 
-const People = ({ routeName }) => {
+const People = ({ titleName }) => {
   useScrollToTop();
   const dispatch = useDispatch();
 
@@ -45,7 +45,7 @@ const People = ({ routeName }) => {
   );
 
   return (
-    <PageContainer routeName={routeName}>
+    <PageContainer titleName={titleName}>
       <CardsGrid>{cards}</CardsGrid>
 
       <LoadMoreBtn

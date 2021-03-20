@@ -11,12 +11,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RouteHeader = ({ routeName }) => {
+const RouteHeader = ({ titleName }) => {
   const classes = useStyles();
 
   return (
     <Typography variant="h4" component="h1" className={classes.header}>
-      {routeName}
+      {titleName}
     </Typography>
   );
 };

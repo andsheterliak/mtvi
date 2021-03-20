@@ -22,7 +22,7 @@ import useOptions from '../common/hooks/useOptions';
 import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
 import useScrollToTop from '../common/hooks/useScrollToTop';
 
-const Movies = ({ routeName }) => {
+const Movies = ({ titleName }) => {
   useScrollToTop();
   const dispatch = useDispatch();
 
@@ -75,7 +75,7 @@ const Movies = ({ routeName }) => {
   );
 
   return (
-    <PageContainer routeName={routeName}>
+    <PageContainer titleName={titleName}>
       <AdjustmentButton
         ariaLAbel="adjust tv shows"
         openModalHandler={openModalHandler}
