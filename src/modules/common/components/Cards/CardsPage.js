@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-// This component is only for optimization. Each 'CardsComponent' component only runs if 'pageData' changes because of each 'CardsComponent' is wrapped in memo.
+// This component is only for optimization. Each 'CardsComponent' only runs if 'pageData' - (object with new data on load more action) changes because of each 'CardsComponent' is wrapped in memo.
 const CardsPage = ({ data, CardsComponent, fetchItemHandler }) => {
   return data.map(({ pageData, pageNum }) => {
     return (
