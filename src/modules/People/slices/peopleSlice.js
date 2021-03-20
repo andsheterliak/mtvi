@@ -2,18 +2,23 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import axiosTMDB from '../../common/axios-tmdb';
 
+const initialState = {
+  people: [],
+  page: 1,
+  isMoreData: false,
+  isLoading: false,
+  isLoadMore: false,
+};
+
 const peopleSlice = createSlice({
   name: 'people',
-
-  initialState: {
-    data: [],
-    page: 1,
-    isMoreData: false,
-    isLoading: true,
-    isLoadMore: false,
-  },
+  initialState,
 
   reducers: {
+    resetState() {
+      return initialState;
+    },
+
     loadMorePeople(state) {
       state.isLoadMore = true;
     },
@@ -26,7 +31,7 @@ const peopleSlice = createSlice({
       const isMoreData = payload.page + 1 <= payload.total_pages;
 
       state.isLoading = false;
-      state.data.push({ pageData: payload.results, pageNum: payload.page });
+      state.people.push({ pageData: payload.results, pageNum: payload.page });
       state.isMoreData = isMoreData;
       state.page = payload.page;
     },

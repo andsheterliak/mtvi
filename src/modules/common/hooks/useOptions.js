@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { getLS, setLS } from '../utils/storage';
 import { formatDateToAPI } from '../utils/date';
@@ -15,8 +14,6 @@ const changeGenres = (genresList, id) => {
 };
 
 const useOptions = (userOptionsName, defaultOptionsName, fetchAction) => {
-  const dispatch = useDispatch();
-
   const options = useMemo(() => getLS(userOptionsName) || defaultOptionsName, [
     userOptionsName,
     defaultOptionsName,
@@ -104,7 +101,7 @@ const useOptions = (userOptionsName, defaultOptionsName, fetchAction) => {
     };
 
     setLS(userOptionsName, newUserOptions);
-    dispatch(fetchAction(newUserOptions));
+    fetchAction(newUserOptions);
     setIsModalOpened(false);
     setIsReadyToAccept(false);
   };

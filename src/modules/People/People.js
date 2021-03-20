@@ -19,7 +19,7 @@ const People = ({ titleName }) => {
   const isMoreData = useSelector((state) => state.people.isMoreData);
   const isLoading = useSelector((state) => state.people.isLoading);
   const isLoadMore = useSelector((state) => state.people.isLoadMore);
-  const people = useSelector((state) => state.people.data);
+  const { people } = useSelector((state) => state.people);
 
   const loadMoreHandler = useCallback(() => {
     dispatch(peopleActions.loadMorePeople());
@@ -35,6 +35,7 @@ const People = ({ titleName }) => {
   );
 
   useEffect(() => {
+    dispatch(peopleActions.resetState());
     dispatch(peopleActions.fetchPeopleData());
   }, [dispatch]);
 

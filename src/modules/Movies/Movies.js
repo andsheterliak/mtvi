@@ -28,6 +28,14 @@ const Movies = ({ titleName }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const fetchMovies = useCallback(
+    (options) => {
+      dispatch(moviesActions.resetState());
+      dispatch(moviesActions.fetchMovies(options));
+    },
+    [dispatch]
+  );
+
   const {
     options,
     isModalOpened,
@@ -40,17 +48,13 @@ const Movies = ({ titleName }) => {
     toggleGenreHandler,
     changeUserScoreHandler,
     acceptHandler,
-  } = useOptions(
-    MOVIES_OPTIONS_LS_NAME,
-    MOVIES_DEFAULT_OPTIONS,
-    moviesActions.fetchMoviesWithNewOptions
-  );
+  } = useOptions(MOVIES_OPTIONS_LS_NAME, MOVIES_DEFAULT_OPTIONS, fetchMovies);
 
   const nextPage = useSelector((state) => state.movies.page + 1);
   const isMoreData = useSelector((state) => state.movies.isMoreData);
   const isLoading = useSelector((state) => state.movies.isLoading);
   const isLoadMore = useSelector((state) => state.movies.isLoadMore);
-  const movies = useSelector((state) => state.movies.data);
+  const { movies } = useSelector((state) => state.movies);
 
   const loadMoreHandler = useCallback(() => {
     dispatch(moviesActions.loadMoreMovies());
@@ -71,9 +75,9 @@ const Movies = ({ titleName }) => {
   );
 
   useEffect(() => {
-    dispatch(moviesActions.fetchMovies(options));
+    fetchMovies(options);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [fetchMovies]);
 
   const cards = movies.length ? (
     <CardsPage

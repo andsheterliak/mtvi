@@ -4,17 +4,23 @@ import axiosTMDB from '../../common/axios-tmdb';
 import checkIfIsNextPage from '../../common/utils/checkIfIsNextPage';
 import getSelectedGenres from '../../common/utils/getSelectedGenres';
 
+const initialState = {
+  tvShows: [],
+  page: 1,
+  isMoreData: false,
+  isLoading: false,
+  isLoadMore: false,
+};
+
 const tvShowsSlice = createSlice({
   name: 'tvShows',
-  initialState: {
-    data: [],
-    page: 1,
-    isMoreData: false,
-    isLoading: true,
-    isLoadMore: false,
-  },
+  initialState,
 
   reducers: {
+    resetState() {
+      return initialState;
+    },
+
     loadMoreTVShows(state) {
       state.isLoadMore = true;
     },
@@ -27,24 +33,16 @@ const tvShowsSlice = createSlice({
       const isMoreData = checkIfIsNextPage(payload.page, payload.total_pages);
 
       state.isLoading = false;
-      state.data.push({ pageData: payload.results, pageNum: payload.page });
+      state.tvShows.push({ pageData: payload.results, pageNum: payload.page });
       state.isMoreData = isMoreData;
       state.page = payload.page;
-    },
-
-    fetchTVShowsWithNewOptionsSuccess(state, { payload }) {
-      const isMoreData = checkIfIsNextPage(payload.page, payload.total_pages);
-
-      state.isLoading = false;
-      state.data = [{ pageData: payload.results, pageNum: payload.page }];
-      state.isMoreData = isMoreData;
-      state.page = payload.page;
-      state.isLoadMore = false;
     },
   },
 });
 
-const getTVShows = async (options) => {
+const fetchTVShows = (options) => async (dispatch) => {
+  dispatch(tvShowsActions.fetchTVShowsStart());
+
   const response = await axiosTMDB.get('', {
     params: {
       path: 'discover/tv',
@@ -58,31 +56,12 @@ const getTVShows = async (options) => {
     },
   });
 
-  return response;
-};
-
-const fetchTVShows = (options) => async (dispatch) => {
-  dispatch(tvShowsActions.fetchTVShowsStart());
-
-  const response = await getTVShows(options);
-
   dispatch(tvShowsSlice.actions.fetchTVShowsSuccess(response.data));
-};
-
-const fetchTVShowsWithNewOptions = (options) => async (dispatch) => {
-  dispatch(tvShowsActions.fetchTVShowsStart());
-
-  const response = await getTVShows(options);
-
-  dispatch(
-    tvShowsSlice.actions.fetchTVShowsWithNewOptionsSuccess(response.data)
-  );
 };
 
 export const tvShowsActions = {
   ...tvShowsSlice.actions,
   fetchTVShows,
-  fetchTVShowsWithNewOptions,
 };
 
 export default tvShowsSlice.reducer;

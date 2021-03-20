@@ -26,6 +26,14 @@ const Movies = ({ titleName }) => {
   useScrollToTop();
   const dispatch = useDispatch();
 
+  const fetchTVShows = useCallback(
+    (options) => {
+      dispatch(tvShowsActions.resetState());
+      dispatch(tvShowsActions.fetchTVShows(options));
+    },
+    [dispatch]
+  );
+
   const {
     options,
     isModalOpened,
@@ -38,17 +46,13 @@ const Movies = ({ titleName }) => {
     toggleGenreHandler,
     changeUserScoreHandler,
     acceptHandler,
-  } = useOptions(
-    TV_OPTIONS_LS_NAME,
-    TV_DEFAULT_OPTIONS,
-    tvShowsActions.fetchTVShowsWithNewOptions
-  );
+  } = useOptions(TV_OPTIONS_LS_NAME, TV_DEFAULT_OPTIONS, fetchTVShows);
 
   const nextPage = useSelector((state) => state.tvShows.page + 1);
   const isMoreData = useSelector((state) => state.tvShows.isMoreData);
   const isLoading = useSelector((state) => state.tvShows.isLoading);
   const isLoadMore = useSelector((state) => state.tvShows.isLoadMore);
-  const tvShows = useSelector((state) => state.tvShows.data);
+  const { tvShows } = useSelector((state) => state.tvShows);
 
   const loadMoreHandler = useCallback(() => {
     dispatch(tvShowsActions.loadMoreTVShows());
@@ -64,9 +68,9 @@ const Movies = ({ titleName }) => {
   );
 
   useEffect(() => {
-    dispatch(tvShowsActions.fetchTVShows(options));
+    fetchTVShows(options);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [fetchTVShows]);
 
   const cards = tvShows.length ? (
     <CardsPage data={tvShows} CardsComponent={Cards} />
