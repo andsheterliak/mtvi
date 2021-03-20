@@ -7,24 +7,28 @@ const routes = {
     name: 'Movies',
     to: '/',
     redirectTo: '/movies',
+    exact: true,
     component: Movies,
   },
 
   movies: {
     name: 'Movies',
     to: '/movies',
+    exact: true,
     component: Movies,
   },
 
   tv: {
     name: 'TV Shows',
     to: '/tv',
+    exact: true,
     component: TVShows,
   },
 
   people: {
     name: 'People',
     to: '/people',
+    exact: true,
     component: People,
   },
 };

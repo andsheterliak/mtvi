@@ -10,11 +10,11 @@ import Footer from '../common/components/Footer';
 
 const App = () => {
   const pages = Object.entries(routes).map(([key, data]) => {
-    const { name = null, to, component: Component, redirectTo } = data;
+    const { name = null, to, component: Component, redirectTo, exact } = data;
 
     return (
       <Route
-        exact
+        exact={exact}
         key={key}
         path={to}
         render={(props) => {
