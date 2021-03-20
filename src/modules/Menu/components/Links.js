@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { ListItem, ListItemText } from '@material-ui/core';
 
-const Links = ({ location, routes, ...props }) => {
+const Links = ({ location, routes, ...linkProps }) => {
   const links = [routes.movies, routes.tv, routes.people].map(
     ({ name, to }) => {
       return (
@@ -12,7 +12,7 @@ const Links = ({ location, routes, ...props }) => {
           component={Link}
           to={to}
           key={name}
-          {...props}
+          {...linkProps}
         >
           <ListItemText
             primaryTypographyProps={{ color: 'textPrimary' }}
