@@ -13,6 +13,7 @@ const moviesSlice = createSlice({
     isMoreData: false,
     isLoading: true,
     isLoadMore: false,
+    movieData: null,
   },
 
   reducers: {
@@ -41,6 +42,15 @@ const moviesSlice = createSlice({
       state.isMoreData = isMoreData;
       state.page = payload.page;
       state.isLoadMore = false;
+    },
+
+    fetchMovieStart(state) {
+      state.isLoading = true;
+    },
+
+    fetchMovieSuccess(state, { payload }) {
+      state.isLoading = false;
+      state.movieData = payload;
     },
   },
 });
@@ -79,10 +89,24 @@ const fetchMoviesWithNewOptions = (options) => async (dispatch) => {
   dispatch(moviesSlice.actions.fetchMoviesWithNewOptionsSuccess(response.data));
 };
 
+const fetchMovie = (id) => async (dispatch) => {
+  dispatch(moviesSlice.actions.fetchMovieStart());
+
+  const response = await axiosTMDB.get('', {
+    params: {
+      path: `movie/${id}`,
+      append_to_response: 'videos,credits',
+    },
+  });
+
+  dispatch(moviesSlice.actions.fetchMovieSuccess(response.data));
+};
+
 export const moviesActions = {
   ...moviesSlice.actions,
   fetchMovies,
   fetchMoviesWithNewOptions,
+  fetchMovie,
 };
 
 export default moviesSlice.reducer;

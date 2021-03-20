@@ -43,7 +43,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Card = ({ posterPath, title, releaseDate, voteAverage }) => {
+const Card = ({
+  posterPath,
+  title,
+  releaseDate,
+  voteAverage,
+  fetchItemHandler,
+  id,
+}) => {
   const classes = useStyles();
   const cardClasses = useCardStyles();
 
@@ -52,7 +59,11 @@ const Card = ({ posterPath, title, releaseDate, voteAverage }) => {
     : noImageImg;
 
   return (
-    <MUiCard raised className={cardClasses.card}>
+    <MUiCard
+      raised
+      className={cardClasses.card}
+      onClick={(e) => fetchItemHandler(e, id)}
+    >
       <CardActionArea className={cardClasses.action}>
         <CardMedia
           component="div"

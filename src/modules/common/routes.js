@@ -1,3 +1,4 @@
+import Movie from '../Movie/Movie';
 import Movies from '../Movies/Movies';
 import People from '../People/People';
 import TVShows from '../TVShows/TVShows';
@@ -16,6 +17,11 @@ const routes = {
     to: '/movies',
     exact: true,
     component: Movies,
+  },
+
+  movie: {
+    to: '/movies/:id',
+    component: Movie,
   },
 
   tv: {
