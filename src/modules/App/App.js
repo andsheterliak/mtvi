@@ -10,20 +10,20 @@ import Footer from '../common/components/Footer';
 
 const App = () => {
   const pages = Object.entries(routes).map(([key, data]) => {
-    const { name, to, component: Component, redirectTo } = data;
+    const { name = null, to, component: Component, redirectTo } = data;
 
     return (
       <Route
         exact
         key={key}
         path={to}
-        render={(props) =>
-          redirectTo ? (
+        render={(props) => {
+          return redirectTo ? (
             <Redirect to={redirectTo} />
           ) : (
             <Component {...props} titleName={name} />
-          )
-        }
+          );
+        }}
       />
     );
   });
