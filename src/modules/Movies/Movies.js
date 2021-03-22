@@ -64,7 +64,6 @@ const Movies = ({ titleName }) => {
 
   const fetchMovieHandler = (e, id) => {
     history.push(`/movies/${id}`);
-    dispatch(moviesActions.fetchMovie(id));
   };
 
   const infiniteScrollRef = useInfiniteScroll(
