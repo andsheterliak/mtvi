@@ -62,7 +62,7 @@ const Movies = ({ titleName }) => {
     dispatch(moviesActions.fetchMovies({ ...options, page: nextPage }));
   }, [dispatch, nextPage, options]);
 
-  const fetchMovieHandler = (e, id) => {
+  const openMovieHandler = (e, id) => {
     history.push(`/movies/${id}`);
   };
 
@@ -80,7 +80,7 @@ const Movies = ({ titleName }) => {
 
   const cards = movies.length ? (
     <CardsPage
-      fetchItemHandler={fetchMovieHandler}
+      fetchItemHandler={openMovieHandler}
       data={movies}
       CardsComponent={Cards}
     />
