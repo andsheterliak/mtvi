@@ -2,7 +2,12 @@ export const IMG_BASE_URL = 'http://image.tmdb.org/t/p/'; // or https
 
 export const IMG_SIZES = {
   poster: 'w500',
-  backdrop: 'w1280',
+
+  backdrop: {
+    md: 'w780',
+    lg: 'w1280',
+  },
+
   profile: 'h632',
   logo: 'w154', // Company logos (Netflix...)
   still: 'w300', // TV Show Episode img
