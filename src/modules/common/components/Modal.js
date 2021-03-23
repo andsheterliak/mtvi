@@ -17,7 +17,9 @@ const Modal = ({ closeModalHandler, isOpened, title, content, actions }) => {
       maxWidth={'xs'}
     >
       <DialogTitle id={label}>{title}</DialogTitle>
+
       <DialogContent dividers={true}>{content}</DialogContent>
+
       <DialogActions>{actions}</DialogActions>
     </Dialog>
   );

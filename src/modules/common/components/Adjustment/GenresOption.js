@@ -49,6 +49,7 @@ const GenresOption = ({ genres, toggleGenreHandler }) => {
   return (
     <OptionContainer>
       <OptionTitle>Genres</OptionTitle>
+
       <ul className={classes.chipItems}>{genreItems}</ul>
     </OptionContainer>
   );

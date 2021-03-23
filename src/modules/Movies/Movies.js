@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { useHistory } from 'react-router';
+
 import ActionsButtons from '../common/components/ActionsButtons';
 import AdjustmentContent from '../common/components/Adjustment/AdjustmentContent';
 import AdjustmentButton from '../common/components/AdjustmentButton';
@@ -26,6 +26,7 @@ import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
 
 const Movies = ({ titleName }) => {
   useScrollToTop();
+
   const dispatch = useDispatch();
   const history = useHistory();
 

@@ -14,6 +14,7 @@ import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
 
 const People = ({ titleName }) => {
   useScrollToTop();
+
   const dispatch = useDispatch();
 
   const nextPage = useSelector((state) => state.people.page + 1);
@@ -49,6 +50,7 @@ const People = ({ titleName }) => {
   return (
     <PageContainer>
       <RouteHeader titleName={titleName} />
+
       <CardsGrid>{cards}</CardsGrid>
 
       <LoadMoreBtn

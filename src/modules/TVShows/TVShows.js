@@ -25,6 +25,7 @@ import useScrollToTop from '../common/hooks/useScrollToTop';
 
 const Movies = ({ titleName }) => {
   useScrollToTop();
+
   const dispatch = useDispatch();
 
   const fetchTVShows = useCallback(

@@ -32,8 +32,11 @@ const App = () => {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+
         <Menu />
+
         <Switch>{pages}</Switch>
+
         <Footer />
       </ThemeProvider>
     </>

@@ -7,8 +7,11 @@ const AdjustmentContent = ({ sortBy, genres, userScore, dates }) => {
   return (
     <>
       <SortResultsByOption {...sortBy} />
+
       <ReleaseDatesOption {...dates} />
+
       <GenresOption {...genres} />
+
       <UserScore {...userScore} />
     </>
   );
