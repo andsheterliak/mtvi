@@ -126,7 +126,9 @@ const Movies = ({ titleName }) => {
         }
       />
 
-      <CardsGrid>{cards}</CardsGrid>
+      <main>
+        <CardsGrid>{cards}</CardsGrid>
+      </main>
 
       <LoadMoreBtn
         infiniteScrollRef={infiniteScrollRef}

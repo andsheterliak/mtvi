@@ -51,7 +51,9 @@ const People = ({ titleName }) => {
     <PageContainer>
       <RouteHeader titleName={titleName} />
 
-      <CardsGrid>{cards}</CardsGrid>
+      <main>
+        <CardsGrid>{cards}</CardsGrid>
+      </main>
 
       <LoadMoreBtn
         infiniteScrollRef={infiniteScrollRef}
