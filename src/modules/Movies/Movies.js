@@ -11,6 +11,7 @@ import PageContainer from '../common/components/PageContainer';
 import CardsGrid from '../common/components/Cards/CardsGrid';
 import Cards from '../common/components/Cards/Cards';
 import CardsPage from '../common/components/Cards/CardsPage';
+import RouteHeader from '../common/components/RouteHeader';
 
 import {
   MOVIES_DEFAULT_OPTIONS,
@@ -89,7 +90,9 @@ const Movies = ({ titleName }) => {
   );
 
   return (
-    <PageContainer titleName={titleName}>
+    <PageContainer>
+      <RouteHeader titleName={titleName} />
+
       <AdjustmentButton
         ariaLAbel="adjust movies"
         openModalHandler={openModalHandler}

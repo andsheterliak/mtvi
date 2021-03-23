@@ -10,6 +10,7 @@ import Modal from '../common/components/Modal';
 import PageContainer from '../common/components/PageContainer';
 import CardsGrid from '../common/components/Cards/CardsGrid';
 import CardsPage from '../common/components/Cards/CardsPage';
+import RouteHeader from '../common/components/RouteHeader';
 
 import {
   TV_DEFAULT_OPTIONS,
@@ -79,7 +80,9 @@ const Movies = ({ titleName }) => {
   );
 
   return (
-    <PageContainer titleName={titleName}>
+    <PageContainer>
+      <RouteHeader titleName={titleName} />
+
       <AdjustmentButton
         ariaLAbel="adjust tv shows"
         openModalHandler={openModalHandler}

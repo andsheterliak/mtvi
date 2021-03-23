@@ -6,6 +6,7 @@ import PageContainer from '../common/components/PageContainer';
 import PersonCards from './components/PersonCards';
 import LoadMoreBtn from '../common/components/LoadMoreBtn';
 import CardsPage from '../common/components/Cards/CardsPage';
+import RouteHeader from '../common/components/RouteHeader';
 
 import { peopleActions } from './slices/peopleSlice';
 import useScrollToTop from '../common/hooks/useScrollToTop';
@@ -46,7 +47,8 @@ const People = ({ titleName }) => {
   );
 
   return (
-    <PageContainer titleName={titleName}>
+    <PageContainer>
+      <RouteHeader titleName={titleName} />
       <CardsGrid>{cards}</CardsGrid>
 
       <LoadMoreBtn
