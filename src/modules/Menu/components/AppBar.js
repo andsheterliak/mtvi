@@ -23,7 +23,7 @@ const AppBar = ({
 }) => {
   const classes = useStyles();
 
-  const toolBarInner = (
+  const toolbarInner = (
     <>
       <IconButton
         edge="start"
@@ -65,7 +65,7 @@ const AppBar = ({
         <MuiAppBar position="sticky" color="inherit">
           <Container maxWidth="xl">
             <Toolbar variant="regular" className={classes.toolBar}>
-              {isSearchOpened ? search : toolBarInner}
+              {isSearchOpened ? search : toolbarInner}
             </Toolbar>
           </Container>
         </MuiAppBar>
