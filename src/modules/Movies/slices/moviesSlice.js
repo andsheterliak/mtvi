@@ -76,7 +76,7 @@ const fetchMovie = (id) => async (dispatch) => {
   const response = await axiosTMDB.get('', {
     params: {
       path: `movie/${id}`,
-      append_to_response: 'videos,credits',
+      append_to_response: 'videos,credits,release_dates',
     },
   });
 
