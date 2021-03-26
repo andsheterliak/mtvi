@@ -7,6 +7,13 @@ export const formatReleaseDate = (date) => {
   return new Intl.DateTimeFormat([], { dateStyle: 'medium' }).format(dateObj);
 };
 
+export const formatMinutes = (num) => {
+  const hours = Math.floor(num / 60);
+  const minutes = num % 60;
+
+  return `${hours}h ${minutes}m`;
+};
+
 export const formatDateToAPI = (date) => {
   // If no date return null to disable validation in DatePicker and to remove 'primary_release_date' from axios search props.
   if (!date) return null;
