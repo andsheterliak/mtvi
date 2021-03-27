@@ -24,7 +24,7 @@ const routes = {
     component: Movie,
   },
 
-  tv: {
+  tvShows: {
     name: 'TV Shows',
     to: '/tv',
     exact: true,
