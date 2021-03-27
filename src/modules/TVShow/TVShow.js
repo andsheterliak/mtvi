@@ -39,8 +39,8 @@ const TVShow = () => {
       { name: 'Rating', value: data.vote_average },
       { name: 'Genres', value: getGenres(data.genres) },
       { name: 'First air date', value: formatReleaseDate(data.first_air_date) },
-      { name: 'Time', value: formatMinutes(data.episode_run_time[0]) },
       { name: 'Status', value: data.status },
+      { name: 'Time', value: formatMinutes(data.episode_run_time[0]) },
       { name: 'Creators', value: getCreatedBy(data.created_by) },
       { name: 'Networks', value: getNetworks(data.networks) },
     ];
