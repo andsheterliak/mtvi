@@ -42,7 +42,7 @@ const People = ({ titleName }) => {
   }, [dispatch]);
 
   const cards = people.length ? (
-    <CardsPage data={people} CardsComponent={PersonCards} />
+    <CardsPage data={people} path="/people/" CardsComponent={PersonCards} />
   ) : (
     'Loading...'
   );

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
   Card,
   CardActionArea,
@@ -10,7 +11,7 @@ import useStyles from '../../common/components/Cards/CardStyles';
 import { IMG_BASE_URL, IMG_SIZES } from '../../common/tmdb-config';
 import noUserPhotoImg from '../../../assets/img/no-user-photo.svg';
 
-const PersonCard = ({ profilePath, name, knownFor }) => {
+const PersonCard = ({ profilePath, name, knownFor, path }) => {
   const classes = useStyles();
 
   const profileImg = profilePath
@@ -23,7 +24,7 @@ const PersonCard = ({ profilePath, name, knownFor }) => {
 
   return (
     <Card raised className={classes.card}>
-      <CardActionArea className={classes.action}>
+      <CardActionArea component={Link} to={path} className={classes.action}>
         <CardMedia component="img" alt={name} image={profileImg} title={name} />
 
         <CardContent className={classes.content}>

@@ -3,7 +3,7 @@ import { memo } from 'react';
 import CardsGridItem from '../../common/components/Cards/CardsGridItem';
 import PersonCard from './PersonCard';
 
-const PersonCards = ({ cardsData }) => {
+const PersonCards = ({ cardsData, path }) => {
   const cards = cardsData.map((item) => {
     return (
       <CardsGridItem key={item.id}>
@@ -11,6 +11,7 @@ const PersonCards = ({ cardsData }) => {
           profilePath={item.profile_path}
           name={item.name}
           knownFor={item.known_for}
+          path={path}
         />
       </CardsGridItem>
     );

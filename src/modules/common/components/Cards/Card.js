@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
   Card as MUiCard,
   CardActionArea,
@@ -43,14 +44,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Card = ({
-  posterPath,
-  title,
-  releaseDate,
-  voteAverage,
-  fetchItemHandler,
-  id,
-}) => {
+const Card = ({ posterPath, title, releaseDate, voteAverage, id, path }) => {
   const classes = useStyles();
   const cardClasses = useCardStyles();
 
@@ -59,12 +53,12 @@ const Card = ({
     : noImageImg;
 
   return (
-    <MUiCard
-      raised
-      className={cardClasses.card}
-      onClick={(e) => fetchItemHandler(e, id)}
-    >
-      <CardActionArea className={cardClasses.action}>
+    <MUiCard raised className={cardClasses.card}>
+      <CardActionArea
+        component={Link}
+        to={`${path}${id}`}
+        className={cardClasses.action}
+      >
         <CardMedia
           component="div"
           alt="Contemplative Reptile"

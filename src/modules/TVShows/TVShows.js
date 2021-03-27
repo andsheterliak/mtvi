@@ -1,6 +1,5 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
 
 import ActionsButtons from '../common/components/ActionsButtons';
 import AdjustmentContent from '../common/components/Adjustment/AdjustmentContent';
@@ -28,7 +27,6 @@ const Movies = ({ titleName }) => {
   useScrollToTop();
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const fetchTVShows = useCallback(
     (options) => {
@@ -64,10 +62,6 @@ const Movies = ({ titleName }) => {
     dispatch(tvShowsActions.fetchTVShows({ ...options, page: nextPage }));
   }, [dispatch, nextPage, options]);
 
-  const openTVShowHandler = (e, id) => {
-    history.push(`/tv/${id}`);
-  };
-
   const infiniteScrollRef = useInfiniteScroll(
     loadMoreHandler,
     isLoadMore,
@@ -81,11 +75,7 @@ const Movies = ({ titleName }) => {
   }, [fetchTVShows]);
 
   const cards = tvShows.length ? (
-    <CardsPage
-      fetchItemHandler={openTVShowHandler}
-      data={tvShows}
-      CardsComponent={Cards}
-    />
+    <CardsPage path="/tv/" data={tvShows} CardsComponent={Cards} />
   ) : (
     'Loading...'
   );
