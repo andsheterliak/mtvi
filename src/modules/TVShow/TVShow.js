@@ -12,6 +12,7 @@ import { getCertification, getGenres } from '../common/utils/gerData';
 import { tvShowsActions } from '../TVShows/slices/tvShowsSlice';
 
 const getCreatedBy = (data) => data.map((item) => item.name).join(', ');
+const getNetworks = (data) => data.map((item) => item.name).join(', ');
 
 const TVShow = () => {
   useScrollToTop();
@@ -41,6 +42,7 @@ const TVShow = () => {
       { name: 'Time', value: formatMinutes(data.episode_run_time[0]) },
       { name: 'Status', value: data.status },
       { name: 'Creators', value: getCreatedBy(data.created_by) },
+      { name: 'Networks', value: getNetworks(data.networks) },
     ];
 
     return dataList;
