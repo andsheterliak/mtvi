@@ -43,6 +43,7 @@ const Movie = () => {
       { name: 'Genres', value: getGenres(data.genres) },
       { name: 'Release date', value: formatReleaseDate(data.release_date) },
       { name: 'Time', value: formatMinutes(data.runtime) },
+      { name: 'Status', value: data.status },
       { name: 'Directors', value: directors },
       { name: 'Writers', value: writers },
     ];
