@@ -6,7 +6,7 @@ export const gerCertification = (data) => {
     isUSCertification = item.iso_3166_1 === 'US';
 
     if (isUSCertification) {
-      certification = item.release_dates[0].certification;
+      certification = item.release_dates?.[0].certification || item.rating;
     }
 
     return isUSCertification;
