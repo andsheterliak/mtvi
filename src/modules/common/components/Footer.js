@@ -1,15 +1,7 @@
 import { Container, Paper, SvgIcon, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: '30px',
-
-    [theme.breakpoints.up('md')]: {
-      marginTop: '50px',
-    },
-  },
-
+const useStyles = makeStyles(() => ({
   container: {
     textAlign: 'center',
     paddingTop: '15px',
@@ -27,7 +19,7 @@ const Footer = () => {
   const classes = useStyles();
 
   return (
-    <Paper square className={classes.paper}>
+    <Paper square>
       <Container className={classes.container} maxWidth="xl">
         <SvgIcon
           viewBox="0 0 273.42 35.52"

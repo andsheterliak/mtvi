@@ -3,10 +3,12 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 
+import RootWrapper from '../common/components/RootWrapper';
 import Menu from '../Menu/Menu';
 import routes from '../common/routes';
 import theme from './theme';
 import Footer from '../common/components/Footer';
+import Spacing from '../common/components/Spacing';
 
 const App = () => {
   const pages = Object.entries(routes).map(([key, data]) => {
@@ -29,17 +31,19 @@ const App = () => {
   });
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
 
+      <RootWrapper>
         <Menu />
 
         <Switch>{pages}</Switch>
 
+        <Spacing />
+
         <Footer />
-      </ThemeProvider>
-    </>
+      </RootWrapper>
+    </ThemeProvider>
   );
 };
 
