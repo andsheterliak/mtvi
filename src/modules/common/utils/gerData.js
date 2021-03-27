@@ -1,4 +1,4 @@
-export const gerCertification = (data) => {
+export const getCertification = (data) => {
   let certification;
   let isUSCertification;
 

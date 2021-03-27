@@ -9,7 +9,7 @@ import Certification from '../common/components/PageHeader/Certification';
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { moviesActions } from '../Movies/slices/moviesSlice';
 import {
-  gerCertification,
+  getCertification,
   getDirectorAndWriters,
   getGenres,
 } from '../common/utils/gerData';
@@ -29,7 +29,7 @@ const Movie = () => {
   }, [dispatch, id]);
 
   const generateDataList = (data) => {
-    let certification = gerCertification(data.release_dates.results);
+    let certification = getCertification(data.release_dates.results);
 
     certification = certification ? (
       <Certification certification={certification} />
