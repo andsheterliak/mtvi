@@ -6,6 +6,7 @@ import getSelectedGenres from '../../common/utils/getSelectedGenres';
 
 const initialState = {
   tvShows: [],
+  tvShow: null,
   page: 1,
   isMoreData: false,
   isLoading: false,
@@ -37,6 +38,15 @@ const tvShowsSlice = createSlice({
       state.isMoreData = isMoreData;
       state.page = payload.page;
     },
+
+    fetchTVShowStart(state) {
+      state.isLoading = true;
+    },
+
+    fetchTVShowSuccess(state, { payload }) {
+      state.isLoading = false;
+      state.tvShow = payload;
+    },
   },
 });
 
@@ -59,9 +69,23 @@ const fetchTVShows = (options) => async (dispatch) => {
   dispatch(tvShowsSlice.actions.fetchTVShowsSuccess(response.data));
 };
 
+const fetchTVShow = (id) => async (dispatch) => {
+  dispatch(tvShowsSlice.actions.fetchTVShowStart());
+
+  const response = await axiosTMDB.get('', {
+    params: {
+      path: `tv/${id}`,
+      append_to_response: 'videos,credits,content_ratings',
+    },
+  });
+
+  dispatch(tvShowsSlice.actions.fetchTVShowSuccess(response.data));
+};
+
 export const tvShowsActions = {
   ...tvShowsSlice.actions,
   fetchTVShows,
+  fetchTVShow,
 };
 
 export default tvShowsSlice.reducer;

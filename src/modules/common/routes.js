@@ -2,6 +2,7 @@ import Movie from '../Movie/Movie';
 import Movies from '../Movies/Movies';
 import People from '../People/People';
 import TVShows from '../TVShows/TVShows';
+import TVShow from '../TVShow/TVShow';
 
 const routes = {
   default: {
@@ -29,6 +30,11 @@ const routes = {
     to: '/tv',
     exact: true,
     component: TVShows,
+  },
+
+  tvShow: {
+    to: '/tv/:id',
+    component: TVShow,
   },
 
   people: {
