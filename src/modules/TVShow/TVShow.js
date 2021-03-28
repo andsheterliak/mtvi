@@ -9,7 +9,7 @@ import Certification from '../common/components/PageHeader/Certification';
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { formatMinutes, formatReleaseDate } from '../common/utils/date';
 import { getCertification, getGenres } from '../common/utils/gerData';
-import { tvShowsActions } from '../TVShows/slices/tvShowsSlice';
+import { tvShowActions } from './tvShowSlice';
 
 const getCreatedBy = (data) => data.map((item) => item.name).join(', ');
 const getNetworks = (data) => data.map((item) => item.name).join(', ');
@@ -20,11 +20,10 @@ const TVShow = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { tvShow } = useSelector((state) => state.tvShows);
+  const { tvShow } = useSelector((state) => state.tvShow);
 
   useEffect(() => {
-    dispatch(tvShowsActions.resetState());
-    dispatch(tvShowsActions.fetchTVShow(id));
+    dispatch(tvShowActions.fetchTVShow(id));
   }, [dispatch, id]);
 
   const generateDataList = (data) => {

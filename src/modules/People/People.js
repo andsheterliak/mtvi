@@ -8,7 +8,7 @@ import LoadMoreBtn from '../common/components/LoadMoreBtn';
 import CardsPage from '../common/components/Cards/CardsPage';
 import RouteHeader from '../common/components/RouteHeader';
 
-import { peopleActions } from './slices/peopleSlice';
+import { peopleActions } from './peopleSlice';
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
 

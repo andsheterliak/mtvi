@@ -18,7 +18,7 @@ import {
   USER_SCORE_RANGE,
 } from '../common/tmdb-config';
 import { TV_OPTIONS_LS_NAME } from './constants';
-import { tvShowsActions } from './slices/tvShowsSlice';
+import { tvShowsActions } from './tvShowsSlice';
 import useOptions from '../common/hooks/useOptions';
 import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
 import useScrollToTop from '../common/hooks/useScrollToTop';

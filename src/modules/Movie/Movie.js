@@ -7,7 +7,7 @@ import Spacing from '../common/components/Spacing';
 import Certification from '../common/components/PageHeader/Certification';
 
 import useScrollToTop from '../common/hooks/useScrollToTop';
-import { moviesActions } from '../Movies/slices/moviesSlice';
+import { movieActions } from './movieSlice';
 import {
   getCertification,
   getDirectorAndWriters,
@@ -21,11 +21,10 @@ const Movie = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { movie } = useSelector((state) => state.movies);
+  const { movie } = useSelector((state) => state.movie);
 
   useEffect(() => {
-    dispatch(moviesActions.resetState());
-    dispatch(moviesActions.fetchMovie(id));
+    dispatch(movieActions.fetchMovie(id));
   }, [dispatch, id]);
 
   const generateDataList = (data) => {

@@ -17,7 +17,7 @@ import {
   SORT_MOVIES_BY_OPTIONS,
   USER_SCORE_RANGE,
 } from '../common/tmdb-config';
-import { moviesActions } from './slices/moviesSlice';
+import { moviesActions } from './moviesSlice';
 import { MOVIES_OPTIONS_LS_NAME } from './constants';
 import useOptions from '../common/hooks/useOptions';
 import useScrollToTop from '../common/hooks/useScrollToTop';

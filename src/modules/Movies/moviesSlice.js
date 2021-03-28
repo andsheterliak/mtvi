@@ -1,12 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import axiosTMDB from '../../common/axios-tmdb';
-import checkIfIsNextPage from '../../common/utils/checkIfIsNextPage';
-import getSelectedGenres from '../../common/utils/getSelectedGenres';
+import axiosTMDB from '../common/axios-tmdb';
+import checkIfIsNextPage from '../common/utils/checkIfIsNextPage';
+import getSelectedGenres from '../common/utils/getSelectedGenres';
 
 const initialState = {
   movies: [],
-  movie: null,
   page: 1,
   isMoreData: false,
   isLoading: false,
@@ -38,15 +37,6 @@ const moviesSlice = createSlice({
       state.isMoreData = isMoreData;
       state.page = payload.page;
     },
-
-    fetchMovieStart(state) {
-      state.isLoading = true;
-    },
-
-    fetchMovieSuccess(state, { payload }) {
-      state.isLoading = false;
-      state.movie = payload;
-    },
   },
 });
 
@@ -70,23 +60,9 @@ const fetchMovies = (options) => async (dispatch) => {
   dispatch(moviesSlice.actions.fetchMoviesSuccess(response.data));
 };
 
-const fetchMovie = (id) => async (dispatch) => {
-  dispatch(moviesSlice.actions.fetchMovieStart());
-
-  const response = await axiosTMDB.get('', {
-    params: {
-      path: `movie/${id}`,
-      append_to_response: 'videos,credits,release_dates',
-    },
-  });
-
-  dispatch(moviesSlice.actions.fetchMovieSuccess(response.data));
-};
-
 export const moviesActions = {
   ...moviesSlice.actions,
   fetchMovies,
-  fetchMovie,
 };
 
 export default moviesSlice.reducer;
