@@ -12,6 +12,10 @@ const tvShowSlice = createSlice({
   initialState,
 
   reducers: {
+    resetState() {
+      return initialState;
+    },
+
     fetchTVShowStart(state) {
       state.isLoading = true;
     },

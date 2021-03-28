@@ -24,6 +24,10 @@ const TVShow = () => {
 
   useEffect(() => {
     dispatch(tvShowActions.fetchTVShow(id));
+
+    return () => {
+      dispatch(tvShowActions.resetState());
+    };
   }, [dispatch, id]);
 
   const generateDataList = (data) => {

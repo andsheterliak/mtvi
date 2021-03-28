@@ -70,9 +70,13 @@ const Movies = ({ titleName }) => {
   );
 
   useEffect(() => {
-    fetchMovies(options);
+    dispatch(moviesActions.fetchMovies(options));
+
+    return () => {
+      dispatch(moviesActions.resetState());
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchMovies]);
+  }, [dispatch]);
 
   const cards = movies.length ? (
     <CardsPage

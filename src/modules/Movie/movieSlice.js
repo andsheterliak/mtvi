@@ -12,6 +12,10 @@ const movieSlice = createSlice({
   initialState,
 
   reducers: {
+    resetState() {
+      return initialState;
+    },
+
     fetchMovieStart(state) {
       state.isLoading = true;
     },

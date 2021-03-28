@@ -25,6 +25,10 @@ const Movie = () => {
 
   useEffect(() => {
     dispatch(movieActions.fetchMovie(id));
+
+    return () => {
+      dispatch(movieActions.resetState());
+    };
   }, [dispatch, id]);
 
   const generateDataList = (data) => {

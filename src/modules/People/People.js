@@ -37,8 +37,11 @@ const People = ({ titleName }) => {
   );
 
   useEffect(() => {
-    dispatch(peopleActions.resetState());
     dispatch(peopleActions.fetchPeopleData());
+
+    return () => {
+      dispatch(peopleActions.resetState());
+    };
   }, [dispatch]);
 
   const cards = people.length ? (

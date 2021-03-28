@@ -70,9 +70,13 @@ const Movies = ({ titleName }) => {
   );
 
   useEffect(() => {
-    fetchTVShows(options);
+    dispatch(tvShowsActions.fetchTVShows(options));
+
+    return () => {
+      dispatch(tvShowsActions.resetState());
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [fetchTVShows]);
+  }, [dispatch]);
 
   const cards = tvShows.length ? (
     <CardsPage path="/tv/" data={tvShows} CardsComponent={Cards} />
