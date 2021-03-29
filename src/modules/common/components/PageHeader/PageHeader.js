@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 
 import PageContainer from '../PageContainer';
-import List from './List';
+import InfoList from './InfoList';
 
 import { IMG_BASE_URL, IMG_SIZES } from '../../tmdb-config';
 import useStyles from './PageHeaderStyles';
@@ -42,7 +42,7 @@ const PageHeader = ({ backdrop, title, overview, dataList }) => {
               {overview}
             </Typography>
 
-            <List dataList={dataList} />
+            <InfoList dataList={dataList} />
           </div>
         </div>
       </PageContainer>

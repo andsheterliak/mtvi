@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-import ListItem from './ListItem';
+import InfoItem from './InfoItem';
 
 const useStyles = makeStyles(() => {
   return {
@@ -12,14 +12,14 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const List = ({ dataList }) => {
+const InfoList = ({ dataList }) => {
   const classes = useStyles();
 
   const items = dataList.map(({ name, value }) => {
-    return <ListItem key={name} name={name} value={value} />;
+    return <InfoItem key={name} name={name} value={value} />;
   });
 
   return <ul className={classes.list}>{items}</ul>;
 };
 
-export default List;
+export default InfoList;
