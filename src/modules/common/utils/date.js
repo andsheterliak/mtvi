@@ -1,4 +1,4 @@
-export const formatReleaseDate = (date) => {
+export const formatDataStr = (date) => {
   if (!date) return '- - -';
 
   const [year, month, day] = date.split('-');

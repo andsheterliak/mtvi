@@ -11,7 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 import { IMG_BASE_URL, IMG_SIZES } from '../../tmdb-config';
-import { formatReleaseDate } from '../../utils/date';
+import { formatDataStr } from '../../utils/date';
 import useCardStyles from './CardStyles';
 import noImageImg from '../../../../assets/img/no-image.svg';
 
@@ -77,7 +77,7 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, id, path }) => {
             component="p"
             className={`${classes.subInfo} ${cardClasses.subText}`}
           >
-            {formatReleaseDate(releaseDate)}
+            {formatDataStr(releaseDate)}
 
             <span className={classes.vote}>
               <StarBorderIcon className={classes.starIcon} fontSize="small" />

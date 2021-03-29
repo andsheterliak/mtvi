@@ -7,7 +7,7 @@ import Spacing from '../common/components/Spacing';
 import Certification from '../common/components/PageHeader/Certification';
 
 import useScrollToTop from '../common/hooks/useScrollToTop';
-import { formatMinutes, formatReleaseDate } from '../common/utils/date';
+import { formatMinutes, formatDataStr } from '../common/utils/date';
 import { getCertification, getGenres } from '../common/utils/gerData';
 import { tvShowActions } from './tvShowSlice';
 
@@ -25,7 +25,7 @@ const generateDataList = (data) => {
     { name: 'Certification', value: certification },
     { name: 'Rating', value: data.vote_average },
     { name: 'Genres', value: getGenres(data.genres) },
-    { name: 'First air date', value: formatReleaseDate(data.first_air_date) },
+    { name: 'First air date', value: formatDataStr(data.first_air_date) },
     { name: 'Status', value: data.status },
     { name: 'Time', value: formatMinutes(data.episode_run_time[0]) },
     { name: 'Creators', value: getCreatedBy(data.created_by) },
