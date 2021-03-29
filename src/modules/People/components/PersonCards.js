@@ -11,7 +11,7 @@ const PersonCards = ({ cardsData, path }) => {
           profilePath={item.profile_path}
           name={item.name}
           knownFor={item.known_for}
-          path={path}
+          path={`${path}${item.id}`}
         />
       </CardsGridItem>
     );
