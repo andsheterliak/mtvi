@@ -61,7 +61,7 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, id, path }) => {
       >
         <CardMedia
           component="div"
-          alt="Contemplative Reptile"
+          alt={title}
           image={posterImg}
           className={classes.media}
         />
