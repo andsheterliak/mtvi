@@ -1,7 +1,7 @@
-import { Typography } from '@material-ui/core';
-
 import PageContainer from '../PageContainer';
 import InfoList from './InfoList';
+import HeaderTitle from './HeaderTitle';
+import HeaderDescription from './HeaderDescription';
 
 import { IMG_BASE_URL, IMG_SIZES } from '../../tmdb-config';
 import useStyles from './PageHeaderStyles';
@@ -30,17 +30,9 @@ const PageHeader = ({ backdrop, title, overview, dataList }) => {
           {imgBackground}
 
           <div className={classes.infoBlockInner}>
-            <Typography component="h1" className={classes.title}>
-              {title}
-            </Typography>
+            <HeaderTitle title={title} />
 
-            <Typography
-              component="p"
-              variant="body1"
-              className={classes.overview}
-            >
-              {overview}
-            </Typography>
+            <HeaderDescription description={overview} />
 
             <InfoList dataList={dataList} />
           </div>

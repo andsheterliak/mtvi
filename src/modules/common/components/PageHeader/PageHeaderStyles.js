@@ -28,21 +28,6 @@ const useStyles = makeStyles((theme) => {
       },
     },
 
-    title: {
-      textAlign: 'center',
-      margin: `${theme.spacing(2)}px 0`,
-      fontSize: theme.typography.pxToRem(20),
-
-      [theme.breakpoints.up('sm')]: {
-        fontSize: theme.typography.pxToRem(25),
-      },
-
-      [theme.breakpoints.up('md')]: {
-        textAlign: 'left',
-        fontSize: theme.typography.pxToRem(35),
-      },
-    },
-
     infoBlock: {
       position: 'relative',
       display: 'grid',
@@ -68,10 +53,6 @@ const useStyles = makeStyles((theme) => {
       // Create a stacking context to be able to display the element after the imgBackground element.
       position: 'relative',
       zIndex: 0,
-    },
-
-    overview: {
-      marginBottom: '20px',
     },
   };
 });
