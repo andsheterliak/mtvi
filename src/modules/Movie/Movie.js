@@ -28,7 +28,7 @@ const generateDataList = (data) => {
     { name: 'Certification', value: certification },
     { name: 'Rating', value: data.vote_average },
     { name: 'Genres', value: getGenres(data.genres) },
-    { name: 'Release date', value: formatDataStr(data.release_date) },
+    { name: 'Release date', value: formatDataStr(data.release_date).dateStr },
     { name: 'Status', value: data.status },
     { name: 'Time', value: formatMinutes(data.runtime) },
     { name: 'Directors', value: directors },

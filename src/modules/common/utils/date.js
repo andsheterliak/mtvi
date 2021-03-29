@@ -3,8 +3,19 @@ export const formatDataStr = (date) => {
 
   const [year, month, day] = date.split('-');
   const dateObj = new Date(year, month - 1, day);
+  const dateStr = new Intl.DateTimeFormat([], { dateStyle: 'medium' }).format(
+    dateObj
+  );
 
-  return new Intl.DateTimeFormat([], { dateStyle: 'medium' }).format(dateObj);
+  return {
+    dateStr,
+
+    dateParts: {
+      year: parseInt(year, 10),
+      month: parseInt(month, 10),
+      day: parseInt(day, 10),
+    },
+  };
 };
 
 export const formatMinutes = (num) => {

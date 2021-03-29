@@ -77,7 +77,7 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, id, path }) => {
             component="p"
             className={`${classes.subInfo} ${cardClasses.subText}`}
           >
-            {formatDataStr(releaseDate)}
+            {formatDataStr(releaseDate).dateStr}
 
             <span className={classes.vote}>
               <StarBorderIcon className={classes.starIcon} fontSize="small" />
