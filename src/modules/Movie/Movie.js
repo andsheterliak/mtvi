@@ -15,6 +15,29 @@ import {
 } from '../common/utils/gerData';
 import { formatMinutes, formatReleaseDate } from '../common/utils/date';
 
+const generateDataList = (data) => {
+  let certification = getCertification(data.release_dates.results);
+
+  certification = certification ? (
+    <Certification certification={certification} />
+  ) : null;
+
+  const { directors, writers } = getDirectorAndWriters(data.credits.crew);
+
+  const dataList = [
+    { name: 'Certification', value: certification },
+    { name: 'Rating', value: data.vote_average },
+    { name: 'Genres', value: getGenres(data.genres) },
+    { name: 'Release date', value: formatReleaseDate(data.release_date) },
+    { name: 'Status', value: data.status },
+    { name: 'Time', value: formatMinutes(data.runtime) },
+    { name: 'Directors', value: directors },
+    { name: 'Writers', value: writers },
+  ];
+
+  return dataList;
+};
+
 const Movie = () => {
   useScrollToTop();
 
@@ -30,29 +53,6 @@ const Movie = () => {
       dispatch(movieActions.resetState());
     };
   }, [dispatch, id]);
-
-  const generateDataList = (data) => {
-    let certification = getCertification(data.release_dates.results);
-
-    certification = certification ? (
-      <Certification certification={certification} />
-    ) : null;
-
-    const { directors, writers } = getDirectorAndWriters(data.credits.crew);
-
-    const dataList = [
-      { name: 'Certification', value: certification },
-      { name: 'Rating', value: data.vote_average },
-      { name: 'Genres', value: getGenres(data.genres) },
-      { name: 'Release date', value: formatReleaseDate(data.release_date) },
-      { name: 'Status', value: data.status },
-      { name: 'Time', value: formatMinutes(data.runtime) },
-      { name: 'Directors', value: directors },
-      { name: 'Writers', value: writers },
-    ];
-
-    return dataList;
-  };
 
   return (
     <>
