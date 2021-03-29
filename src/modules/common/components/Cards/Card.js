@@ -63,7 +63,6 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, id, path }) => {
           component="div"
           alt="Contemplative Reptile"
           image={posterImg}
-          title="Contemplative Reptile"
           className={classes.media}
         />
 

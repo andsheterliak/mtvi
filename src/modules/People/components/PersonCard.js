@@ -25,7 +25,7 @@ const PersonCard = ({ profilePath, name, knownFor, path }) => {
   return (
     <Card raised className={classes.card}>
       <CardActionArea component={Link} to={path} className={classes.action}>
-        <CardMedia component="img" alt={name} image={profileImg} title={name} />
+        <CardMedia component="img" alt={name} image={profileImg} />
 
         <CardContent className={classes.content}>
           <Typography gutterBottom variant="body1" component="h2">
