@@ -48,3 +48,16 @@ export const formatDateToAPI = (date) => {
 
   return formattedDate;
 };
+
+export const getAge = ({ year, month, day }) => {
+  const today = new Date();
+  const birthDate = new Date(year, month - 1, day);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  month = today.getMonth() - birthDate.getMonth();
+
+  if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  return age;
+};
