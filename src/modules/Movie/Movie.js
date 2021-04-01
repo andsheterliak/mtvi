@@ -11,7 +11,7 @@ import useScrollToTop from '../common/hooks/useScrollToTop';
 import { movieActions } from './movieSlice';
 import {
   getCertification,
-  getDirectorAndWriters,
+  getDirectors,
   getGenres,
   getHyphenOrData,
 } from '../common/utils/getData';
@@ -26,7 +26,7 @@ const generateDataList = (data) => {
     getHyphenOrData()
   );
 
-  let directors = getDirectorAndWriters(data.credits.crew);
+  let directors = getDirectors(data.credits.crew);
 
   directors = directors ? <Creators creators={directors} /> : getHyphenOrData();
 

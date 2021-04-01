@@ -15,7 +15,7 @@ export const getCertification = (data) => {
   return certification;
 };
 
-export const getDirectorAndWriters = (crew) => {
+export const getDirectors = (crew) => {
   const directors = [];
 
   crew.forEach(({ job, name, id }) => {
