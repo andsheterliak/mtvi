@@ -14,6 +14,7 @@ import { IMG_BASE_URL, IMG_SIZES } from '../../tmdb-config';
 import { formatDataStr } from '../../utils/date';
 import useCardStyles from './CardStyles';
 import noImageImg from '../../../../assets/img/no-image.svg';
+import { getHyphenOrData } from '../../utils/gerData';
 
 const useStyles = makeStyles(() => ({
   subInfo: {
@@ -68,7 +69,7 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, id, path }) => {
 
         <CardContent className={cardClasses.content}>
           <Typography gutterBottom variant="body2" component="h2">
-            {title}
+            {getHyphenOrData(title)}
           </Typography>
 
           <Typography
@@ -77,11 +78,11 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, id, path }) => {
             component="p"
             className={`${classes.subInfo} ${cardClasses.subText}`}
           >
-            {formatDataStr(releaseDate).dateStr}
+            {getHyphenOrData(formatDataStr(releaseDate)?.dateStr)}
 
             <span className={classes.vote}>
               <StarBorderIcon className={classes.starIcon} fontSize="small" />
-              {voteAverage}
+              {getHyphenOrData(voteAverage)}
             </span>
           </Typography>
         </CardContent>

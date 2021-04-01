@@ -10,6 +10,7 @@ import {
 import useStyles from '../../common/components/Cards/CardStyles';
 import { IMG_BASE_URL, IMG_SIZES } from '../../common/tmdb-config';
 import noUserPhotoImg from '../../../assets/img/no-user-photo.svg';
+import { getHyphenOrData } from '../../common/utils/gerData';
 
 const PersonCard = ({ profilePath, name, knownFor, path }) => {
   const classes = useStyles();
@@ -29,7 +30,7 @@ const PersonCard = ({ profilePath, name, knownFor, path }) => {
 
         <CardContent className={classes.content}>
           <Typography gutterBottom variant="body1" component="h2">
-            {name}
+            {getHyphenOrData(name)}
           </Typography>
 
           <Typography

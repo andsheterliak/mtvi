@@ -1,4 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import TwitterIcon from '@material-ui/icons/Twitter';
 
 import PageContainer from '../../common/components/PageContainer';
 import HeaderDescription from '../../common/components/PageHeader/HeaderDescription';
@@ -41,10 +44,7 @@ const useStyles = makeStyles((theme) => {
     },
 
     socialLinks: {
-      // Avoid shifting when there aren't the social links
-      '& > :first-child': {
-        marginTop: '20px',
-      },
+      marginTop: '20px',
     },
   };
 });
@@ -62,21 +62,52 @@ const PersonHeader = ({
     ? `${IMG_BASE_URL}${IMG_SIZES.profile}${profilePath}`
     : noUserPhotoImg;
 
+  const isExternalIds = [
+    externalIds.facebook_id,
+    externalIds.instagram_id,
+    externalIds.twitter_id,
+  ].some((item) => item);
+
+  const socialLinksMap = isExternalIds && [
+    {
+      key: 'facebook_id',
+      id: externalIds.facebook_id,
+      href: 'https://www.facebook.com/',
+      icon: FacebookIcon,
+    },
+
+    {
+      key: 'instagram_id',
+      id: externalIds.instagram_id,
+      href: 'https://www.instagram.com/',
+      icon: InstagramIcon,
+    },
+
+    {
+      key: 'twitter_id',
+      id: externalIds.twitter_id,
+      href: 'https://twitter.com/',
+      icon: TwitterIcon,
+    },
+  ];
+
   return (
     <PageContainer>
       <section className={classes.infoBlock}>
         <img className={classes.img} alt={name} src={profileImg} />
 
         <div>
-          <HeaderTitle title={name} />
+          {name && <HeaderTitle title={name} />}
 
-          <HeaderDescription description={biography} />
+          {biography && <HeaderDescription description={biography} />}
 
           <InfoList dataList={dataList} />
 
-          <div className={classes.socialLinks}>
-            <SocialLinks externalIds={externalIds} />
-          </div>
+          {isExternalIds && (
+            <div className={classes.socialLinks}>
+              <SocialLinks socialLinksMap={socialLinksMap} />
+            </div>
+          )}
         </div>
       </section>
     </PageContainer>

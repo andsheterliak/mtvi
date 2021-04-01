@@ -9,28 +9,61 @@ import useScrollToTop from '../common/hooks/useScrollToTop';
 import { personActions } from './personSlice';
 import { getAge, formatDataStr } from '../common/utils/date';
 
+import { getHyphenOrData } from '../common/utils/gerData';
+
+const getGender = (gender) => {
+  if (!gender) return getHyphenOrData();
+
+  return gender === 1 ? 'Female' : 'Male';
+};
+
 const generateDataList = (data) => {
   const isDeathday = !!data.deathday;
   let deathday;
 
   if (isDeathday) {
     const { dateStr, dateParts } = formatDataStr(data.deathday);
+
     deathday = `${dateStr} (${getAge(dateParts)} years old)`;
   }
 
-  const { dateStr, dateParts } = formatDataStr(data.birthday);
-  const birthday = !isDeathday
-    ? `${dateStr} (${getAge(dateParts)} years old)`
-    : dateStr;
+  let birthday;
 
-  const dataList = [
-    { name: 'Birthday', value: birthday },
-    { name: 'Place of birth', value: data.place_of_birth },
-    { name: 'Gender', value: data.gender === 1 ? 'Female' : 'Male' },
-    { name: 'Known for', value: data.known_for_department },
-  ];
+  if (data.birthday) {
+    const { dateStr, dateParts } = formatDataStr(data.birthday);
 
-  if (isDeathday) dataList.push({ name: 'Day of death', value: deathday });
+    birthday = isDeathday
+      ? dateStr
+      : `${dateStr} (${getAge(dateParts)} years old)`;
+  }
+
+  const dataList = [];
+
+  dataList.push({
+    name: 'Birthday',
+    value: getHyphenOrData(birthday),
+  });
+
+  if (isDeathday)
+    dataList.push({
+      name: 'Day of death',
+      value: deathday,
+    });
+
+  dataList.push({
+    name: 'Place of birth',
+    value: getHyphenOrData(data.place_of_birth),
+  });
+
+  dataList.push({
+    name: 'Gender',
+    value: getGender(data.gender),
+  });
+
+  dataList.push({
+    name: 'Known for',
+    value: getHyphenOrData(data.known_for_department),
+  });
 
   return dataList;
 };

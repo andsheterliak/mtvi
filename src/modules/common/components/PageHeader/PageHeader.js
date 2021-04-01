@@ -30,9 +30,9 @@ const PageHeader = ({ backdrop, title, overview, dataList }) => {
           {imgBackground}
 
           <div className={classes.infoBlockInner}>
-            <HeaderTitle title={title} />
+            {title && <HeaderTitle title={title} />}
 
-            <HeaderDescription description={overview} />
+            {overview && <HeaderDescription description={overview} />}
 
             <InfoList dataList={dataList} />
           </div>

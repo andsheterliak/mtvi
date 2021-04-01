@@ -12,6 +12,7 @@ import {
   getCertification,
   getDirectorAndWriters,
   getGenres,
+  getHyphenOrData,
 } from '../common/utils/gerData';
 import { formatMinutes, formatDataStr } from '../common/utils/date';
 
@@ -20,19 +21,24 @@ const generateDataList = (data) => {
 
   certification = certification ? (
     <Certification certification={certification} />
-  ) : null;
+  ) : (
+    getHyphenOrData()
+  );
 
   const { directors, writers } = getDirectorAndWriters(data.credits.crew);
+  const releaseDate = formatDataStr(data.release_date)?.dateStr;
+  const genres = getGenres(data.genres);
+  const time = formatMinutes(data.runtime);
 
   const dataList = [
     { name: 'Certification', value: certification },
-    { name: 'Rating', value: data.vote_average },
-    { name: 'Genres', value: getGenres(data.genres) },
-    { name: 'Release date', value: formatDataStr(data.release_date).dateStr },
-    { name: 'Status', value: data.status },
-    { name: 'Time', value: formatMinutes(data.runtime) },
-    { name: 'Directors', value: directors },
-    { name: 'Writers', value: writers },
+    { name: 'Rating', value: getHyphenOrData(data.vote_average) },
+    { name: 'Genres', value: getHyphenOrData(genres) },
+    { name: 'Release date', value: getHyphenOrData(releaseDate) },
+    { name: 'Status', value: getHyphenOrData(data.status) },
+    { name: 'Time', value: getHyphenOrData(time) },
+    { name: 'Directors', value: getHyphenOrData(directors) },
+    { name: 'Writers', value: getHyphenOrData(writers) },
   ];
 
   return dataList;

@@ -8,7 +8,11 @@ import Certification from '../common/components/PageHeader/Certification';
 
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { formatMinutes, formatDataStr } from '../common/utils/date';
-import { getCertification, getGenres } from '../common/utils/gerData';
+import {
+  getCertification,
+  getGenres,
+  getHyphenOrData,
+} from '../common/utils/gerData';
 import { tvShowActions } from './tvShowSlice';
 
 const getCreatedBy = (data) => data.map((item) => item.name).join(', ');
@@ -19,22 +23,25 @@ const generateDataList = (data) => {
 
   certification = certification ? (
     <Certification certification={certification} />
-  ) : null;
+  ) : (
+    getHyphenOrData()
+  );
+
+  const genres = getGenres(data.genres);
+  const firstAirDate = formatDataStr(data.first_air_date)?.dateStr;
+  const time = formatMinutes(data.episode_run_time[0]);
+  const createdBy = getCreatedBy(data.created_by);
+  const networks = getNetworks(data.networks);
 
   const dataList = [
     { name: 'Certification', value: certification },
-    { name: 'Rating', value: data.vote_average },
-    { name: 'Genres', value: getGenres(data.genres) },
-
-    {
-      name: 'First air date',
-      value: formatDataStr(data.first_air_date).dateStr,
-    },
-
-    { name: 'Status', value: data.status },
-    { name: 'Time', value: formatMinutes(data.episode_run_time[0]) },
-    { name: 'Creators', value: getCreatedBy(data.created_by) },
-    { name: 'Networks', value: getNetworks(data.networks) },
+    { name: 'Rating', value: getHyphenOrData(data.vote_average) },
+    { name: 'Genres', value: getHyphenOrData(genres) },
+    { name: 'First air date', value: getHyphenOrData(firstAirDate) },
+    { name: 'Status', value: getHyphenOrData(data.status) },
+    { name: 'Time', value: getHyphenOrData(time) },
+    { name: 'Creators', value: getHyphenOrData(createdBy) },
+    { name: 'Networks', value: getHyphenOrData(networks) },
   ];
 
   return dataList;
