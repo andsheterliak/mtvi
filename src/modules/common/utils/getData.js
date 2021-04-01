@@ -17,14 +17,12 @@ export const getCertification = (data) => {
 
 export const getDirectorAndWriters = (crew) => {
   const directors = [];
-  const writers = [];
 
-  crew.forEach((item) => {
-    if (item.job === 'Director') directors.push(item.name);
-    if (item.department === 'Writing') writers.push(item.name);
+  crew.forEach(({ job, name, id }) => {
+    if (job === 'Director') directors.push({ name, id });
   });
 
-  return { directors: directors.join(', '), writers: writers.join(', ') };
+  return directors.length ? directors : null;
 };
 
 export const getGenres = (genres) => {

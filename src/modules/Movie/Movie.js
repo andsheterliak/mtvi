@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import PageHeader from '../common/components/PageHeader/PageHeader';
 import Spacing from '../common/components/Spacing';
 import Certification from '../common/components/PageHeader/Certification';
+import Creators from '../common/components/PageHeader/Creators';
 
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { movieActions } from './movieSlice';
@@ -25,7 +26,10 @@ const generateDataList = (data) => {
     getHyphenOrData()
   );
 
-  const { directors, writers } = getDirectorAndWriters(data.credits.crew);
+  let directors = getDirectorAndWriters(data.credits.crew);
+
+  directors = directors ? <Creators creators={directors} /> : getHyphenOrData();
+
   const releaseDate = formatDataStr(data.release_date)?.dateStr;
   const genres = getGenres(data.genres);
   const time = formatMinutes(data.runtime);
@@ -37,8 +41,7 @@ const generateDataList = (data) => {
     { name: 'Release date', value: getHyphenOrData(releaseDate) },
     { name: 'Status', value: getHyphenOrData(data.status) },
     { name: 'Time', value: getHyphenOrData(time) },
-    { name: 'Directors', value: getHyphenOrData(directors) },
-    { name: 'Writers', value: getHyphenOrData(writers) },
+    { name: 'Directors', value: directors },
   ];
 
   return dataList;
