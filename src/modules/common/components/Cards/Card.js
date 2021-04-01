@@ -14,7 +14,7 @@ import { IMG_BASE_URL, IMG_SIZES } from '../../tmdb-config';
 import { formatDataStr } from '../../utils/date';
 import useCardStyles from './CardStyles';
 import noImageImg from '../../../../assets/img/no-image.svg';
-import { getHyphenOrData } from '../../utils/gerData';
+import { getHyphenOrData } from '../../utils/getData';
 
 const useStyles = makeStyles(() => ({
   subInfo: {

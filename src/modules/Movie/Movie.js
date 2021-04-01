@@ -13,7 +13,7 @@ import {
   getDirectorAndWriters,
   getGenres,
   getHyphenOrData,
-} from '../common/utils/gerData';
+} from '../common/utils/getData';
 import { formatMinutes, formatDataStr } from '../common/utils/date';
 
 const generateDataList = (data) => {

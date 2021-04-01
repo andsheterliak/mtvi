@@ -9,7 +9,7 @@ import useScrollToTop from '../common/hooks/useScrollToTop';
 import { personActions } from './personSlice';
 import { getAge, formatDataStr } from '../common/utils/date';
 
-import { getHyphenOrData } from '../common/utils/gerData';
+import { getHyphenOrData } from '../common/utils/getData';
 
 const getGender = (gender) => {
   if (!gender) return getHyphenOrData();

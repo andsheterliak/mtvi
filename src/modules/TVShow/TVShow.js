@@ -12,7 +12,7 @@ import {
   getCertification,
   getGenres,
   getHyphenOrData,
-} from '../common/utils/gerData';
+} from '../common/utils/getData';
 import { tvShowActions } from './tvShowSlice';
 
 const getCreatedBy = (data) => data.map((item) => item.name).join(', ');

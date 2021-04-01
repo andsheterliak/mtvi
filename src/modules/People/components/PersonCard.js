@@ -10,7 +10,7 @@ import {
 import useStyles from '../../common/components/Cards/CardStyles';
 import { IMG_BASE_URL, IMG_SIZES } from '../../common/tmdb-config';
 import noUserPhotoImg from '../../../assets/img/no-user-photo.svg';
-import { getHyphenOrData } from '../../common/utils/gerData';
+import { getHyphenOrData } from '../../common/utils/getData';
 
 const PersonCard = ({ profilePath, name, knownFor, path }) => {
   const classes = useStyles();
