@@ -11,11 +11,20 @@ import useScrollToTop from '../common/hooks/useScrollToTop';
 import { movieActions } from './movieSlice';
 import {
   getCertification,
-  getDirectors,
   getGenres,
   getHyphenOrData,
 } from '../common/utils/getData';
 import { formatMinutes, formatDataStr } from '../common/utils/date';
+
+const getDirectors = (crew) => {
+  const directors = [];
+
+  crew.forEach(({ job, name, id }) => {
+    if (job === 'Director') directors.push({ name, id });
+  });
+
+  return directors.length ? directors : null;
+};
 
 const generateDataList = (data) => {
   let certification = getCertification(data.release_dates.results);

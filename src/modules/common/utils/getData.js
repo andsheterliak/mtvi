@@ -15,16 +15,6 @@ export const getCertification = (data) => {
   return certification;
 };
 
-export const getDirectors = (crew) => {
-  const directors = [];
-
-  crew.forEach(({ job, name, id }) => {
-    if (job === 'Director') directors.push({ name, id });
-  });
-
-  return directors.length ? directors : null;
-};
-
 export const getGenres = (genres) => {
   return genres.map((item) => item.name).join(', ');
 };
