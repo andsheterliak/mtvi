@@ -4,18 +4,17 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => {
   return {
     title: {
-      fontWeight: '600',
       textAlign: 'center',
       margin: `${theme.spacing(2)}px 0`,
-      fontSize: theme.typography.pxToRem(20),
+      ...theme.typography.h5,
 
       [theme.breakpoints.up('sm')]: {
-        fontSize: theme.typography.pxToRem(25),
+        ...theme.typography.h4,
       },
 
       [theme.breakpoints.up('md')]: {
         textAlign: 'left',
-        fontSize: theme.typography.pxToRem(35),
+        ...theme.typography.h3,
       },
     },
   };
