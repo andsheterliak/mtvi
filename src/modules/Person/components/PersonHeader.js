@@ -3,7 +3,6 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 
-import PageContainer from '../../common/components/PageContainer';
 import HeaderDescription from '../../common/components/PageHeader/HeaderDescription';
 import HeaderTitle from '../../common/components/PageHeader/HeaderTitle';
 import InfoList from '../../common/components/PageHeader/InfoList';
@@ -92,25 +91,23 @@ const PersonHeader = ({
   ];
 
   return (
-    <PageContainer>
-      <section className={classes.infoBlock}>
-        <img className={classes.img} alt={name} src={profileImg} />
+    <section className={classes.infoBlock}>
+      <img className={classes.img} alt={name} src={profileImg} />
 
-        <div>
-          {name && <HeaderTitle title={name} />}
+      <div>
+        {name && <HeaderTitle title={name} />}
 
-          {biography && <HeaderDescription description={biography} />}
+        {biography && <HeaderDescription description={biography} />}
 
-          <InfoList dataList={dataList} />
+        <InfoList dataList={dataList} />
 
-          {isExternalIds && (
-            <div className={classes.socialLinks}>
-              <SocialLinks socialLinksMap={socialLinksMap} />
-            </div>
-          )}
-        </div>
-      </section>
-    </PageContainer>
+        {isExternalIds && (
+          <div className={classes.socialLinks}>
+            <SocialLinks socialLinksMap={socialLinksMap} />
+          </div>
+        )}
+      </div>
+    </section>
   );
 };
 

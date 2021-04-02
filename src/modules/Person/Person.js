@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
+import PageContainer from '../common/components/PageContainer';
 import PersonHeader from './components/PersonHeader';
 import Spacing from '../common/components/Spacing';
 
@@ -90,13 +91,15 @@ const Person = () => {
 
       {person ? (
         <main>
-          <PersonHeader
-            dataList={generateDataList(person)}
-            name={person.name}
-            biography={person.biography}
-            profilePath={person.profile_path}
-            externalIds={person.external_ids}
-          />
+          <PageContainer>
+            <PersonHeader
+              dataList={generateDataList(person)}
+              name={person.name}
+              biography={person.biography}
+              profilePath={person.profile_path}
+              externalIds={person.external_ids}
+            />
+          </PageContainer>
         </main>
       ) : (
         'Loading'
