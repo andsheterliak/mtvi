@@ -1,4 +1,6 @@
 export const getCertification = (data) => {
+  if (!data) return null;
+
   let certification;
   let isUSCertification;
 

@@ -17,6 +17,8 @@ import {
 import { formatMinutes, formatDataStr } from '../common/utils/date';
 
 const getDirectors = (crew) => {
+  if (!crew) return null;
+
   const directors = [];
 
   crew.forEach(({ job, name, id }) => {
@@ -27,7 +29,7 @@ const getDirectors = (crew) => {
 };
 
 const generateDataList = (data) => {
-  let certification = getCertification(data.release_dates.results);
+  let certification = getCertification(data.release_dates?.results);
 
   certification = certification ? (
     <Certification certification={certification} />
@@ -35,7 +37,7 @@ const generateDataList = (data) => {
     getHyphenOrData()
   );
 
-  let directors = getDirectors(data.credits.crew);
+  let directors = getDirectors(data.credits?.crew);
 
   directors = directors ? <Creators creators={directors} /> : getHyphenOrData();
 

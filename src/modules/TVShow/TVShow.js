@@ -27,7 +27,7 @@ const getCreatedBy = (data) => {
 const getNetworks = (data) => data.map((item) => item.name).join(', ');
 
 const generateDataList = (data) => {
-  let certification = getCertification(data.content_ratings.results);
+  let certification = getCertification(data.content_ratings?.results);
 
   certification = certification ? (
     <Certification certification={certification} />
