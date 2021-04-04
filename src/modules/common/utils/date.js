@@ -1,14 +1,17 @@
+const dateFormatInstance = new Intl.DateTimeFormat([], {
+  dateStyle: 'medium',
+});
+
 export const formatDataStr = (date) => {
   if (!date) return null;
 
   const [year, month, day] = date.split('-');
   const dateObj = new Date(year, month - 1, day);
-  const dateStr = new Intl.DateTimeFormat([], { dateStyle: 'medium' }).format(
-    dateObj
-  );
+  const dateStr = dateFormatInstance.format(dateObj);
 
   return {
     dateStr,
+    dateObj,
 
     dateParts: {
       year: parseInt(year, 10),
