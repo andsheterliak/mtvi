@@ -8,10 +8,6 @@ const useStyles = makeStyles(() => {
         margin: '0 0 8px 0',
       },
     },
-
-    infoName: {
-      marginRight: '3px',
-    },
   };
 });
 
@@ -20,13 +16,8 @@ const ListItem = ({ name, value }) => {
 
   return (
     <li className={classes.listItem}>
-      <Typography
-        component="span"
-        variant="body2"
-        color="textSecondary"
-        className={classes.infoName}
-      >
-        {name}:
+      <Typography component="span" variant="body2" color="textSecondary">
+        {name}:{' '}
       </Typography>
 
       <Typography component="span" variant="body2">
