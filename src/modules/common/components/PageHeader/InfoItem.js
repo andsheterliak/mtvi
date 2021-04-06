@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => {
   return {
-    listItem: {
+    infoItem: {
       '&:not(:last-child)': {
         margin: '0 0 8px 0',
       },
@@ -11,11 +11,11 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const ListItem = ({ name, value }) => {
+const InfoItem = ({ name, value }) => {
   const classes = useStyles();
 
   return (
-    <li className={classes.listItem}>
+    <li className={classes.infoItem}>
       <Typography component="span" variant="body2" color="textSecondary">
         {name}:{' '}
       </Typography>
@@ -27,4 +27,4 @@ const ListItem = ({ name, value }) => {
   );
 };
 
-export default ListItem;
+export default InfoItem;
