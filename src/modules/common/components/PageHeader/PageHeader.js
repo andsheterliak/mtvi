@@ -1,5 +1,5 @@
 import PageContainer from '../PageContainer';
-import InfoList from './InfoList';
+import InfoList from '../InfoList';
 import HeaderTitle from './HeaderTitle';
 import HeaderDescription from './HeaderDescription';
 
