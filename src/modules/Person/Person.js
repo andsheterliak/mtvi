@@ -1,16 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
 import PageContainer from '../common/components/PageContainer';
 import PersonHeader from './components/PersonHeader';
 import Spacing from '../common/components/Spacing';
+import CreditsList from './components/CreditsList/CreditsList';
 
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { personActions } from './personSlice';
 import { getAge, formatDataStr } from '../common/utils/date';
 
 import { getHyphenOrData } from '../common/utils/getData';
+import filterConfig from './filterConfig';
 
 const getGender = (gender) => {
   if (!gender) return getHyphenOrData();
@@ -75,7 +77,13 @@ const Person = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
+  const [filterBy, setFilterBy] = useState(filterConfig.all.value);
+
   const { person } = useSelector((state) => state.person);
+
+  const filterByHandler = (e) => {
+    setFilterBy(e.target.value);
+  };
 
   useEffect(() => {
     dispatch(personActions.fetchPerson(id));
@@ -98,6 +106,17 @@ const Person = () => {
               biography={person.biography}
               profilePath={person.profile_path}
               externalIds={person.external_ids}
+            />
+
+            <Spacing />
+
+            <CreditsList
+              data={{
+                movieCredits: person.movie_credits,
+                tvCredits: person.tv_credits,
+              }}
+              filterBy={filterBy}
+              filterByHandler={filterByHandler}
             />
           </PageContainer>
         </main>
