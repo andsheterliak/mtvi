@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => {
       padding: 0,
     },
 
-    infoItem: {
+    item: {
       '&:not(:last-child)': {
         margin: '0 0 8px 0',
       },
@@ -22,7 +22,7 @@ const InfoList = ({ dataList }) => {
 
   const items = dataList.map(({ name, value }) => {
     return (
-      <li key={name} className={classes.infoItem}>
+      <li key={name} className={classes.item}>
         <Typography component="span" variant="body2" color="textSecondary">
           {name}:{' '}
         </Typography>
