@@ -9,11 +9,7 @@ import Creators from '../common/components/PageHeader/Creators';
 
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { movieActions } from './movieSlice';
-import {
-  getCertification,
-  getGenres,
-  getHyphenOrData,
-} from '../common/utils/getData';
+import { getCertification, getGenres } from '../common/utils/getData';
 import { formatMinutes, formatDataStr } from '../common/utils/date';
 
 const getDirectors = (crew) => {
@@ -31,15 +27,13 @@ const getDirectors = (crew) => {
 const generateDataList = (data) => {
   let certification = getCertification(data.release_dates?.results);
 
-  certification = certification ? (
+  certification = certification && (
     <Certification certification={certification} />
-  ) : (
-    getHyphenOrData()
   );
 
   let directors = getDirectors(data.credits?.crew);
 
-  directors = directors ? <Creators creators={directors} /> : getHyphenOrData();
+  directors = directors && <Creators creators={directors} />;
 
   const releaseDate = formatDataStr(data.release_date)?.dateStr;
   const genres = getGenres(data.genres);
@@ -47,11 +41,11 @@ const generateDataList = (data) => {
 
   const dataList = [
     { name: 'Certification', value: certification },
-    { name: 'Rating', value: getHyphenOrData(data.vote_average) },
-    { name: 'Genres', value: getHyphenOrData(genres) },
-    { name: 'Release date', value: getHyphenOrData(releaseDate) },
-    { name: 'Status', value: getHyphenOrData(data.status) },
-    { name: 'Time', value: getHyphenOrData(time) },
+    { name: 'Rating', value: data.vote_average },
+    { name: 'Genres', value: genres },
+    { name: 'Release date', value: releaseDate },
+    { name: 'Status', value: data.status },
+    { name: 'Time', value: time },
     { name: 'Directors', value: directors },
   ];
 

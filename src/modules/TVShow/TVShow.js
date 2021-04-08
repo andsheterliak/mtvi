@@ -9,11 +9,7 @@ import Creators from '../common/components/PageHeader/Creators';
 
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { formatMinutes, formatDataStr } from '../common/utils/date';
-import {
-  getCertification,
-  getGenres,
-  getHyphenOrData,
-} from '../common/utils/getData';
+import { getCertification, getGenres } from '../common/utils/getData';
 import { tvShowActions } from './tvShowSlice';
 
 const getCreatedBy = (data) => {
@@ -29,15 +25,13 @@ const getNetworks = (data) => data.map((item) => item.name).join(', ');
 const generateDataList = (data) => {
   let certification = getCertification(data.content_ratings?.results);
 
-  certification = certification ? (
+  certification = certification && (
     <Certification certification={certification} />
-  ) : (
-    getHyphenOrData()
   );
 
   let createdBy = getCreatedBy(data.created_by);
 
-  createdBy = createdBy ? <Creators creators={createdBy} /> : getHyphenOrData();
+  createdBy = createdBy && <Creators creators={createdBy} />;
 
   const genres = getGenres(data.genres);
   const firstAirDate = formatDataStr(data.first_air_date)?.dateStr;
@@ -46,13 +40,13 @@ const generateDataList = (data) => {
 
   const dataList = [
     { name: 'Certification', value: certification },
-    { name: 'Rating', value: getHyphenOrData(data.vote_average) },
-    { name: 'Genres', value: getHyphenOrData(genres) },
-    { name: 'First air date', value: getHyphenOrData(firstAirDate) },
-    { name: 'Status', value: getHyphenOrData(data.status) },
-    { name: 'Time', value: getHyphenOrData(time) },
+    { name: 'Rating', value: data.vote_average },
+    { name: 'Genres', value: genres },
+    { name: 'First air date', value: firstAirDate },
+    { name: 'Status', value: data.status },
+    { name: 'Time', value: time },
     { name: 'Creators', value: createdBy },
-    { name: 'Networks', value: getHyphenOrData(networks) },
+    { name: 'Networks', value: networks },
   ];
 
   return dataList;

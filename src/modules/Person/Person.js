@@ -10,12 +10,10 @@ import CreditsList from './components/CreditsList/CreditsList';
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { personActions } from './personSlice';
 import { getAge, formatDataStr } from '../common/utils/date';
-
-import { getHyphenOrData } from '../common/utils/getData';
 import filterConfig from './filterConfig';
 
 const getGender = (gender) => {
-  if (!gender) return getHyphenOrData();
+  if (!gender) return null;
 
   return gender === 1 ? 'Female' : 'Male';
 };
@@ -44,7 +42,7 @@ const generateDataList = (data) => {
 
   dataList.push({
     name: 'Birthday',
-    value: getHyphenOrData(birthday),
+    value: birthday,
   });
 
   if (isDeathday)
@@ -55,7 +53,7 @@ const generateDataList = (data) => {
 
   dataList.push({
     name: 'Place of birth',
-    value: getHyphenOrData(data.place_of_birth),
+    value: data.place_of_birth,
   });
 
   dataList.push({
@@ -65,7 +63,7 @@ const generateDataList = (data) => {
 
   dataList.push({
     name: 'Known for',
-    value: getHyphenOrData(data.known_for_department),
+    value: data.known_for_department,
   });
 
   return dataList;

@@ -1,6 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 
+import { getHyphenOrData } from '../utils/getData';
+
 const useStyles = makeStyles(() => {
   return {
     list: {
@@ -28,7 +30,7 @@ const InfoList = ({ dataList }) => {
         </Typography>
 
         <Typography component="span" variant="body2">
-          {value}
+          {getHyphenOrData(value)}
         </Typography>
       </li>
     );
