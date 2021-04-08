@@ -4,7 +4,7 @@ import { Link } from '@material-ui/core';
 const useStyles = makeStyles((theme) => {
   return {
     socialLink: {
-      color: theme.palette.grey[400],
+      color: theme.palette.text.primary,
       display: 'inline-block',
 
       '&:not(:last-child)': {
