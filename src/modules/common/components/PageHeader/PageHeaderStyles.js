@@ -10,22 +10,29 @@ const useStyles = makeStyles((theme) => {
       },
     },
 
-    imgBackground: {
+    imgBackgroundWrapper: {
       zIndex: 0,
       position: 'absolute',
       width: '100%',
       height: '100%',
       top: 0,
       left: 0,
-      objectFit: 'cover',
-      objectPosition: 'top',
       borderRadius: '4px',
-      opacity: 0.1,
+      backgroundColor: theme.palette.grey[900],
       display: 'none',
 
       [theme.breakpoints.up('md')]: {
         display: 'block',
       },
+    },
+
+    imgBackground: {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      objectPosition: 'top',
+      borderRadius: '4px',
+      opacity: 0.2,
     },
 
     infoBlock: {

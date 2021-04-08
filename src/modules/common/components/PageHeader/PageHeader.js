@@ -18,7 +18,9 @@ const PageHeader = ({ backdrop, title, overview, dataList }) => {
   ) : null;
 
   const imgBackground = backdropPath ? (
-    <img src={backdropPath} alt="" className={classes.imgBackground} />
+    <div className={classes.imgBackgroundWrapper}>
+      <img src={backdropPath} alt="" className={classes.imgBackground} />
+    </div>
   ) : null;
 
   return (
