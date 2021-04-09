@@ -8,10 +8,12 @@ import debounce from '../utils/debounce';
 
 const useStyles = makeStyles((theme) => {
   return {
-    iconButton: {
+    btnWrapper: {
       backgroundColor: theme.palette.background.paper,
+      boxShadow: theme.shadows[2],
       position: 'fixed',
       bottom: '20px',
+      borderRadius: '50%',
       zIndex: theme.zIndex.speedDial,
     },
   };
@@ -36,16 +38,16 @@ const AdjustmentButton = ({ ariaLabel, openModalHandler }) => {
   return (
     <>
       <HideOnScroll direction={'up'}>
-        <IconButton
-          onClick={openModalHandler}
-          className={classes.iconButton}
-          aria-label={ariaLabel}
+        <div
+          className={classes.btnWrapper}
           style={{
             left: `${windowWidth - 100}px`, // To avoid shifting when scrollbar is hidden.
           }}
         >
-          <FilterIcon fontSize="large" />
-        </IconButton>
+          <IconButton onClick={openModalHandler} aria-label={ariaLabel}>
+            <FilterIcon fontSize="large" />
+          </IconButton>
+        </div>
       </HideOnScroll>
     </>
   );
