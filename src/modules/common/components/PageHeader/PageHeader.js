@@ -1,3 +1,5 @@
+import { ThemeProvider } from '@material-ui/core/styles';
+
 import PageContainer from '../PageContainer';
 import InfoList from '../InfoList';
 import HeaderTitle from './HeaderTitle';
@@ -5,6 +7,7 @@ import HeaderDescription from './HeaderDescription';
 
 import { IMG_BASE_URL, IMG_SIZES } from '../../tmdb-config';
 import useStyles from './PageHeaderStyles';
+import { innerDarkTheme } from '../../../App/theme';
 
 const PageHeader = ({ backdrop, title, overview, dataList }) => {
   const classes = useStyles();
@@ -18,29 +21,29 @@ const PageHeader = ({ backdrop, title, overview, dataList }) => {
   ) : null;
 
   const imgBackground = backdropPath ? (
-    <div className={classes.imgBackgroundWrapper}>
-      <img src={backdropPath} alt="" className={classes.imgBackground} />
-    </div>
+    <img src={backdropPath} alt="" className={classes.imgBackground} />
   ) : null;
 
   return (
-    <section>
-      {img}
+    <ThemeProvider theme={innerDarkTheme}>
+      <section className={classes.section}>
+        {img}
 
-      <PageContainer>
-        <div className={classes.infoBlock}>
-          {imgBackground}
+        <PageContainer>
+          <div className={classes.infoBlock}>
+            <div className={classes.imgBackgroundWrapper}>{imgBackground}</div>
 
-          <div className={classes.infoBlockInner}>
-            {title && <HeaderTitle title={title} />}
+            <div className={classes.infoBlockInner}>
+              {title && <HeaderTitle title={title} />}
 
-            {overview && <HeaderDescription description={overview} />}
+              {overview && <HeaderDescription description={overview} />}
 
-            <InfoList dataList={dataList} />
+              <InfoList dataList={dataList} />
+            </div>
           </div>
-        </div>
-      </PageContainer>
-    </section>
+        </PageContainer>
+      </section>
+    </ThemeProvider>
   );
 };
 

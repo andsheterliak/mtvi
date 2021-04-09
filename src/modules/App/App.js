@@ -6,7 +6,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import RootWrapper from '../common/components/RootWrapper';
 import Menu from '../Menu/Menu';
 import routes from '../common/routes';
-import theme from './theme';
+import { globalTheme } from './theme';
 import Footer from '../common/components/Footer';
 import Spacing from '../common/components/Spacing';
 
@@ -31,7 +31,7 @@ const App = () => {
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={globalTheme}>
       <CssBaseline />
 
       <RootWrapper>
