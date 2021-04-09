@@ -24,7 +24,7 @@ const HeaderTitle = ({ title }) => {
   const classes = useStyles();
 
   return (
-    <Typography component="h1" className={classes.title}>
+    <Typography color="textPrimary" component="h1" className={classes.title}>
       {title}
     </Typography>
   );

@@ -29,7 +29,12 @@ const PersonCard = ({ profilePath, name, knownFor, path }) => {
         <CardMedia component="img" alt={name} image={profileImg} />
 
         <CardContent className={classes.content}>
-          <Typography gutterBottom variant="body1" component="h2">
+          <Typography
+            color="textPrimary"
+            gutterBottom
+            variant="body1"
+            component="h2"
+          >
             {getHyphenOrData(name)}
           </Typography>
 

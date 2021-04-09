@@ -28,7 +28,6 @@ const AppBar = ({
       <IconButton
         edge="start"
         className={classes.menuButton}
-        color="inherit"
         aria-label="menu"
         onClick={toggleDrawerHandler}
       >
@@ -37,7 +36,7 @@ const AppBar = ({
 
       <MuiLink
         to={routes.default.redirectTo}
-        color="inherit"
+        color="textPrimary"
         underline="none"
         className={classes.logoLink}
         component={Link}
@@ -50,7 +49,6 @@ const AppBar = ({
       <IconButton
         edge="end"
         className={classes.searchButton}
-        color="inherit"
         aria-label="search"
         onClick={toggleSearchHandler}
       >

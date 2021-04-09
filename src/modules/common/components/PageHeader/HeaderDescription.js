@@ -13,7 +13,12 @@ const HeaderDescription = ({ description }) => {
   const classes = useStyles();
 
   return (
-    <Typography component="p" variant="body1" className={classes.description}>
+    <Typography
+      color="textPrimary"
+      component="p"
+      variant="body1"
+      className={classes.description}
+    >
       {description}
     </Typography>
   );

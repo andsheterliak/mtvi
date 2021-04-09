@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => {
       width: '35px',
       height: '35px',
       fill: 'none',
-      stroke: 'currentColor',
+      stroke: theme.palette.text.primary,
       strokeWidth: '2',
       strokeLinecap: 'round',
       strokeLinejoin: 'round',
@@ -42,7 +42,11 @@ const Logo = () => {
         <path d="M17 7h5" />
       </SvgIcon>
 
-      <Typography component="span" className={classes.logoText}>
+      <Typography
+        color="textPrimary"
+        component="span"
+        className={classes.logoText}
+      >
         MTvI.
       </Typography>
     </div>

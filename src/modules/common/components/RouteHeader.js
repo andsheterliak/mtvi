@@ -15,7 +15,12 @@ const RouteHeader = ({ titleName }) => {
   const classes = useStyles();
 
   return (
-    <Typography variant="h4" component="h1" className={classes.header}>
+    <Typography
+      color="textPrimary"
+      variant="h4"
+      component="h1"
+      className={classes.header}
+    >
       {titleName}
     </Typography>
   );

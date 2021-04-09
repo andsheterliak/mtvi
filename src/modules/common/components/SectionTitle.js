@@ -11,7 +11,12 @@ const SectionTitle = ({ title }) => {
   const classes = useStyles();
 
   return (
-    <Typography className={classes.title} variant="h5" component="h2">
+    <Typography
+      color="textPrimary"
+      className={classes.title}
+      variant="h5"
+      component="h2"
+    >
       {title}
     </Typography>
   );

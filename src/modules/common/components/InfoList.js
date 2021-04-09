@@ -29,7 +29,7 @@ const InfoList = ({ dataList }) => {
           {name}:{' '}
         </Typography>
 
-        <Typography component="span" variant="body2">
+        <Typography color="textPrimary" component="span" variant="body2">
           {getHyphenOrData(value)}
         </Typography>
       </li>

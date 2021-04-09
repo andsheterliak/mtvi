@@ -50,7 +50,9 @@ const ProjectsTimeline = ({ data }) => {
     return (
       <TimelineItem key={item.id}>
         <TimelineOppositeContent className={classes.oppositeContent}>
-          <Typography variant="body2">{getHyphenOrData(item.year)}</Typography>
+          <Typography color="textPrimary" variant="body2">
+            {getHyphenOrData(item.year)}
+          </Typography>
         </TimelineOppositeContent>
 
         <TimelineSeparator>

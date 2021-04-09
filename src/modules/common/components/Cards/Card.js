@@ -68,7 +68,12 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, id, path }) => {
         />
 
         <CardContent className={cardClasses.content}>
-          <Typography gutterBottom variant="body2" component="h2">
+          <Typography
+            color="textPrimary"
+            gutterBottom
+            variant="body2"
+            component="h2"
+          >
             {getHyphenOrData(title)}
           </Typography>
 

@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => {
     },
 
     icon: {
+      color: theme.palette.text.primary,
       fontSize: '1.6rem',
 
       [theme.breakpoints.up('md')]: {
