@@ -1,7 +1,7 @@
 import SortResultsByOption from './SortResultsByOption';
 import ReleaseDatesOption from './ReleaseDates/ReleaseDatesOption';
 import GenresOption from './GenresOption';
-import UserScore from './UserScore';
+import UserScoreOption from './UserScoreOption';
 
 const AdjustmentContent = ({ sortBy, genres, userScore, dates }) => {
   return (
@@ -12,7 +12,7 @@ const AdjustmentContent = ({ sortBy, genres, userScore, dates }) => {
 
       <GenresOption {...genres} />
 
-      <UserScore {...userScore} />
+      <UserScoreOption {...userScore} />
     </>
   );
 };

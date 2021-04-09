@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import OptionContainer from './OptionContainer';
 import OptionTitle from './OptionTitle';
 
-const UserScore = ({
+const UserScoreOption = ({
   userScoreRange: { min, max },
   changeUserScoreHandler,
   userScore,
@@ -31,4 +31,4 @@ const UserScore = ({
   );
 };
 
-export default UserScore;
+export default UserScoreOption;
