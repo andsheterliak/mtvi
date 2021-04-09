@@ -19,7 +19,7 @@ const Footer = () => {
   const classes = useStyles();
 
   return (
-    <Paper square>
+    <Paper elevation={12} square>
       <Container className={classes.container} maxWidth="xl">
         <SvgIcon
           viewBox="0 0 273.42 35.52"
