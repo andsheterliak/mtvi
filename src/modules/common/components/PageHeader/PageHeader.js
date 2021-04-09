@@ -7,7 +7,7 @@ import HeaderDescription from './HeaderDescription';
 
 import { IMG_BASE_URL, IMG_SIZES } from '../../tmdb-config';
 import useStyles from './PageHeaderStyles';
-import { innerDarkTheme } from '../../../App/theme';
+import { innerDarkTheme } from '../../theme';
 
 const PageHeader = ({ backdrop, title, overview, dataList }) => {
   const classes = useStyles();
