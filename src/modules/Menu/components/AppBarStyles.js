@@ -49,10 +49,6 @@ const useStyles = makeStyles((theme) => {
       display: 'inline-block',
       width: 'auto',
     },
-
-    form: {
-      width: '100%',
-    },
   };
 });
 

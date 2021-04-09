@@ -4,11 +4,21 @@ import {
   InputBase,
   InputLabel,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { Search as SearchIcon, Close as CloseIcon } from '@material-ui/icons';
 
-import useStyles from './AppBarStyles';
+import useAppBarStyles from './AppBarStyles';
+
+const useStyles = makeStyles(() => {
+  return {
+    form: {
+      width: '100%',
+    },
+  };
+});
 
 const Search = ({ toggleSearchHandler }) => {
+  const appBarClasses = useAppBarStyles();
   const classes = useStyles();
 
   return (
@@ -43,7 +53,7 @@ const Search = ({ toggleSearchHandler }) => {
         aria-label="close search"
         onClick={toggleSearchHandler}
       >
-        <CloseIcon className={classes.icon} />
+        <CloseIcon className={appBarClasses.icon} />
       </IconButton>
     </>
   );
