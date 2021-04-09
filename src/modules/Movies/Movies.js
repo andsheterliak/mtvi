@@ -1,9 +1,9 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ActionsButtons from '../common/components/ActionsButtons';
+import ActionsButtons from '../common/components/Adjustment/ActionsButtons';
 import AdjustmentContent from '../common/components/Adjustment/AdjustmentContent';
-import AdjustmentButton from '../common/components/AdjustmentButton';
+import AdjustmentButton from '../common/components/Adjustment/AdjustmentButton';
 import LoadMoreBtn from '../common/components/LoadMoreBtn';
 import Modal from '../common/components/Modal';
 import PageContainer from '../common/components/PageContainer';
