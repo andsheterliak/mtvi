@@ -41,8 +41,7 @@ const Menu = () => {
         nav={
           <Nav className={classes.nav}>
             <Links
-              dense
-              className={classes.link}
+              linkProps={{ dense: true, classes: classes.link }}
               location={location}
               routes={routes}
             />
