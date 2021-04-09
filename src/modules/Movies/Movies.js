@@ -79,12 +79,7 @@ const Movies = ({ titleName }) => {
   }, [dispatch]);
 
   const cards = movies.length ? (
-    <CardsPage
-      // fetchItemHandler={openMovieHandler}
-      path="/movies/"
-      data={movies}
-      CardsComponent={Cards}
-    />
+    <CardsPage path="/movies/" data={movies} CardsComponent={Cards} />
   ) : (
     'Loading...'
   );
