@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 
-import RootWrapper from '../common/components/RootWrapper';
+import RootWrapper from './components/RootWrapper';
 import Menu from '../Menu/Menu';
 import routes from '../common/routes';
 import { globalTheme } from '../common/theme';
