@@ -1,8 +1,11 @@
-import AdjustmentContent from './components/AdjustmentContent';
 import AdjustmentButton from './components/AdjustmentButton';
 import ActionsButtons from './components/ActionsButtons';
 import useOptions from './hooks/useOptions';
 import Modal from '../common/components/Modal';
+import SortResultsByOption from './components/SortResultsByOption';
+import ReleaseDatesOption from './components/ReleaseDates/ReleaseDatesOption';
+import GenresOption from './components/GenresOption';
+import UserScoreOption from './components/UserScoreOption';
 
 const Adjustment = ({
   optionsLSName,
@@ -39,28 +42,40 @@ const Adjustment = ({
         closeModalHandler={closeModalHandler}
         title={modalTitle}
         content={
-          <AdjustmentContent
-            sortBy={{
-              sortByOptions,
-              sortBy: options.sortBy,
-              sortByHandler,
-            }}
-            userScore={{
-              userScoreRange,
-              changeUserScoreHandler,
-              userScore: options.userScore,
-            }}
-            genres={{
-              genres: options.genres,
-              toggleGenreHandler,
-            }}
-            dates={{
-              dates: options.dates,
-              dateFromHandler,
-              dateToHandler,
-              dateTitle,
-            }}
-          />
+          <>
+            <SortResultsByOption
+              {...{
+                sortByOptions,
+                sortBy: options.sortBy,
+                sortByHandler,
+              }}
+            />
+
+            <ReleaseDatesOption
+              {...{
+                dateFrom: options.dates.from,
+                dateTo: options.dates.to,
+                dateFromHandler,
+                dateToHandler,
+                dateTitle,
+              }}
+            />
+
+            <GenresOption
+              {...{
+                genres: options.genres,
+                toggleGenreHandler,
+              }}
+            />
+
+            <UserScoreOption
+              {...{
+                userScoreRange,
+                changeUserScoreHandler,
+                userScore: options.userScore,
+              }}
+            />
+          </>
         }
         actions={
           <ActionsButtons

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { setLS } from '../../common/utils/storage';
 import { formatDateToAPI } from '../../common/utils/date';
@@ -53,28 +53,34 @@ const useOptions = (userOptionsName, fetchAction, options) => {
     setIsOptionsValid(true);
   };
 
-  const dateFromHandler = (date) => {
+  const dateFromHandler = useCallback((date) => {
     validateIfDateIsInValid(date);
     setDateFrom(formatDateToAPI(date));
-  };
+  }, []);
 
-  const dateToHandler = (date) => {
+  const dateToHandler = useCallback((date) => {
     validateIfDateIsInValid(date);
     setDateTo(formatDateToAPI(date));
-  };
+  }, []);
 
-  const sortByHandler = (e) => {
-    setSortBy(e.target.value);
-    if (isOptionsValid) setIsReadyToAccept(true);
-  };
+  const sortByHandler = useCallback(
+    (e) => {
+      setSortBy(e.target.value);
+      if (isOptionsValid) setIsReadyToAccept(true);
+    },
+    [isOptionsValid]
+  );
 
-  const toggleGenreHandler = (id) => {
-    setGenres((prevGenres) => {
-      return changeGenres(prevGenres, id);
-    });
+  const toggleGenreHandler = useCallback(
+    (id) => {
+      setGenres((prevGenres) => {
+        return changeGenres(prevGenres, id);
+      });
 
-    if (isOptionsValid) setIsReadyToAccept(true);
-  };
+      if (isOptionsValid) setIsReadyToAccept(true);
+    },
+    [isOptionsValid]
+  );
 
   const changeUserScoreHandler = (event, newValue) => {
     setUserScore(newValue);

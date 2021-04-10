@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Input, InputLabel, MenuItem, Select } from '@material-ui/core';
 
 import OptionContainer from './OptionContainer';
@@ -35,4 +36,4 @@ const SortResultsByOption = ({ sortByOptions, sortBy, sortByHandler }) => {
   );
 };
 
-export default SortResultsByOption;
+export default memo(SortResultsByOption);

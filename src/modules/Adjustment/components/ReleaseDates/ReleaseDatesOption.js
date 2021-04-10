@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import DatePickerContainer from './DatePickerContainer';
 import DatePicker from './DatePicker';
 import OptionTitle from '../OptionTitle';
@@ -5,7 +7,8 @@ import OptionContainer from '../OptionContainer';
 
 const ReleaseDatesOption = ({
   dateTitle,
-  dates,
+  dateFrom,
+  dateTo,
   dateFromHandler,
   dateToHandler,
 }) => {
@@ -15,7 +18,7 @@ const ReleaseDatesOption = ({
 
       <DatePickerContainer>
         <DatePicker
-          value={dates.from}
+          value={dateFrom}
           changeDateHandler={dateFromHandler}
           id="date-picker-from"
           ariaLabel="change release dates from"
@@ -23,7 +26,7 @@ const ReleaseDatesOption = ({
         />
 
         <DatePicker
-          value={dates.to}
+          value={dateTo}
           changeDateHandler={dateToHandler}
           id="date-picker-to"
           ariaLabel="change release dates to"
@@ -34,4 +37,4 @@ const ReleaseDatesOption = ({
   );
 };
 
-export default ReleaseDatesOption;
+export default memo(ReleaseDatesOption);

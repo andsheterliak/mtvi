@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Chip } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -55,4 +56,4 @@ const GenresOption = ({ genres, toggleGenreHandler }) => {
   );
 };
 
-export default GenresOption;
+export default memo(GenresOption);
