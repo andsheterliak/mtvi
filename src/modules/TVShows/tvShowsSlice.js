@@ -11,6 +11,7 @@ const initialState = {
   isMoreData: false,
   isLoading: false,
   isLoadMore: false,
+  options: null,
 };
 
 const tvShowsSlice = createSlice({
@@ -20,6 +21,10 @@ const tvShowsSlice = createSlice({
   reducers: {
     resetState() {
       return initialState;
+    },
+
+    saveOptions(state, { payload }) {
+      state.options = payload;
     },
 
     loadMoreTVShows(state) {

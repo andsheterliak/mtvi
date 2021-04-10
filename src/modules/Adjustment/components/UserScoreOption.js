@@ -19,7 +19,7 @@ const UserScoreOption = ({
       <OptionTitle id="user-score-range-slider">User Score</OptionTitle>
 
       <Slider
-        value={userScore}
+        value={[...userScore]} // ! If set 'userScore' without spreading it shows TypeError: Cannot assign to read only property '0' of object '[object Array]'[object Array]', I don't understand why. Default 'userScore' is [0, 10].
         onChange={changeUserScoreHandler}
         valueLabelDisplay="auto"
         aria-labelledby="user-score-range-slider"

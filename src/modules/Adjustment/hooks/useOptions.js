@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
-import { getLS, setLS } from '../utils/storage';
-import { formatDateToAPI } from '../utils/date';
+import { setLS } from '../../common/utils/storage';
+import { formatDateToAPI } from '../../common/utils/date';
 
 const changeGenres = (genresList, id) => {
   return genresList.map((item) => {
@@ -13,12 +13,7 @@ const changeGenres = (genresList, id) => {
   });
 };
 
-const useOptions = (userOptionsName, defaultOptionsName, fetchAction) => {
-  const options = useMemo(() => getLS(userOptionsName) || defaultOptionsName, [
-    userOptionsName,
-    defaultOptionsName,
-  ]); // It is not very expensive, but these options are needed only on mount.
-
+const useOptions = (userOptionsName, fetchAction, options) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [isReadyToAccept, setIsReadyToAccept] = useState(false);
   const [isOptionsValid, setIsOptionsValid] = useState(true);
@@ -30,13 +25,11 @@ const useOptions = (userOptionsName, defaultOptionsName, fetchAction) => {
   const [userScore, setUserScore] = useState(options.userScore);
 
   const cancelOptions = () => {
-    const prevOptions = getLS(userOptionsName) || defaultOptionsName;
-
-    setGenres(prevOptions.genres);
-    setSortBy(prevOptions.sortBy);
-    setDateFrom(prevOptions.dates.from);
-    setDateTo(prevOptions.dates.to);
-    setUserScore(prevOptions.userScore);
+    setGenres(options.genres);
+    setSortBy(options.sortBy);
+    setDateFrom(options.dates.from);
+    setDateTo(options.dates.to);
+    setUserScore(options.userScore);
     setIsReadyToAccept(false);
   };
 

@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { MovieFilter as FilterIcon } from '@material-ui/icons/';
 import { useEffect, useState } from 'react';
 
-import HideOnScroll from '../HideOnScroll';
-import debounce from '../../utils/debounce';
+import HideOnScroll from '../../common/components/HideOnScroll';
+import debounce from '../../common/utils/debounce';
 
 const useStyles = makeStyles((theme) => {
   return {
