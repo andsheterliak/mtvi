@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 /**
  * This component is only for adding new cards in optimized way.
  * Each 'CardsComponent' won't re-render (to virtual dom) because each 'CardsComponent' is wrapped in 'memo'.
@@ -12,4 +10,4 @@ const CardsPage = ({ data, CardsComponent, path }) => {
   });
 };
 
-export default memo(CardsPage);
+export default CardsPage;
