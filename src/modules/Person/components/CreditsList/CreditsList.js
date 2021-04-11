@@ -91,19 +91,21 @@ const createTimelineData = (data) => {
       return;
     }
 
-    if (timelineData[item.id].employment[departmentKey]) {
-      const department = timelineData[item.id].employment[departmentKey];
-      let value;
+    const itemEmployment = timelineData[item.id].employment;
 
-      value = department.value.split(', ');
-      value.push(job);
-      value = value.join(', ');
-      department.value = value;
+    if (itemEmployment[departmentKey]) {
+      const itemDepartment = itemEmployment[departmentKey];
+
+      if (itemDepartment.value) {
+        itemDepartment.value += `, ${job}`;
+      } else {
+        itemDepartment.value = job;
+      }
 
       return;
     }
 
-    timelineData[item.id].employment[departmentKey] = {
+    itemEmployment[departmentKey] = {
       name: departmentName,
       value: job,
     };
