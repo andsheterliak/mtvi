@@ -36,7 +36,6 @@ const styleLoaders = {
     loader: 'css-loader',
 
     options: {
-      // ! CSS modules
       modules: {
         localIdentName: '[name]__[local]--[hash:base64:5]',
       },
