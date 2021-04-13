@@ -52,9 +52,6 @@ const paths = {
     outputFilename: isDev
       ? '[name].css'
       : `${dirNames.styles}/[name].[contenthash].css`,
-
-    // Base dir depends on 'context' property.
-    stylelintFiles: './**/*.(css|scss)'
   },
 
   scripts: {
