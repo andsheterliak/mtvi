@@ -44,11 +44,12 @@ const People = ({ titleName }) => {
     };
   }, [dispatch]);
 
-  const cards = people.length ? (
-    <CardsPage data={people} path="/people/" CardsComponent={PersonCards} />
-  ) : (
-    'Loading...'
-  );
+  const cards =
+    people.length !== 0 ? (
+      <CardsPage data={people} path="/people/" CardsComponent={PersonCards} />
+    ) : (
+      'Loading...'
+    );
 
   return (
     <PageContainer>

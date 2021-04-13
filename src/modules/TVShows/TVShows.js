@@ -65,11 +65,12 @@ const Movies = ({ titleName }) => {
     };
   }, [dispatch]);
 
-  const cards = tvShows.length ? (
-    <CardsPage path="/tv/" data={tvShows} CardsComponent={Cards} />
-  ) : (
-    'Loading...'
-  );
+  const cards =
+    tvShows.length !== 0 ? (
+      <CardsPage path="/tv/" data={tvShows} CardsComponent={Cards} />
+    ) : (
+      'Loading...'
+    );
 
   return (
     <PageContainer>

@@ -21,7 +21,7 @@ const getDirectors = (crew) => {
     if (job === 'Director') directors.push({ name, id });
   });
 
-  return directors.length ? directors : null;
+  return directors.length !== 0 ? directors : null;
 };
 
 const generateDataList = (data) => {

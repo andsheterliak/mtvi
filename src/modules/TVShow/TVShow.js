@@ -17,7 +17,7 @@ const getCreatedBy = (data) => {
     return { name, id };
   });
 
-  return creators.length ? creators : null;
+  return creators.length !== 0 ? creators : null;
 };
 
 const getNetworks = (data) => data.map((item) => item.name).join(', ');
