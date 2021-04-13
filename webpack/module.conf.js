@@ -19,6 +19,41 @@ const setJSLoaders = () => {
   return loaders;
 };
 
+const styleLoaders = {
+  styleLoader: {
+    loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+  },
+
+  cssLoader: {
+    loader: 'css-loader',
+
+    options: {
+      sourceMap: true,
+    },
+  },
+
+  cssLoaderModules: {
+    loader: 'css-loader',
+
+    options: {
+      // ! CSS modules
+      modules: {
+        localIdentName: '[name]__[local]--[hash:base64:5]',
+      },
+
+      sourceMap: true,
+    },
+  },
+
+  postCSSLoader: {
+    loader: 'postcss-loader',
+
+    options: {
+      sourceMap: true,
+    },
+  },
+};
+
 const moduleConf = {
   rules: [
     // JS
@@ -34,32 +69,23 @@ const moduleConf = {
 
     {
       test: /\.css$/,
+      exclude: /\.module\.css$/,
+
+      use: [
+        styleLoaders.styleLoader,
+        styleLoaders.cssLoader,
+        styleLoaders.postCSSLoader,
+      ],
+    },
+
+    {
+      test: /\.module\.css$/,
       include: paths.src,
 
       use: [
-        {
-          loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-        },
-
-        {
-          loader: 'css-loader',
-
-          options: {
-            sourceMap: true,
-
-            modules: {
-              localIdentName: '[name]__[local]--[hash:base64:5]',
-            },
-          },
-        },
-
-        {
-          loader: 'postcss-loader',
-
-          options: {
-            sourceMap: true,
-          },
-        },
+        styleLoaders.styleLoader,
+        styleLoaders.cssLoaderModules,
+        styleLoaders.postCSSLoader,
       ],
     },
 
