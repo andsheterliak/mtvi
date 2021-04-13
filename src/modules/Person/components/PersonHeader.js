@@ -15,9 +15,13 @@ const useStyles = makeStyles((theme) => {
   return {
     img: {
       width: '100%',
-      maxWidth: '350px',
+      maxWidth: '250px',
       display: 'inline-block',
       borderRadius: '5px',
+
+      [theme.breakpoints.up('sm')]: {
+        maxWidth: '350px',
+      },
     },
 
     infoBlock: {
