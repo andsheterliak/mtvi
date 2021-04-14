@@ -6,6 +6,7 @@ const useStyles = makeStyles(() => {
       minHeight: '100vh',
       display: 'flex',
       flexDirection: 'column',
+      '-webkit-tap-highlight-color': 'transparent', // Disable blue highlight on chrome (mobile)
 
       '& > :last-child': {
         marginTop: 'auto',
