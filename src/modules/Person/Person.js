@@ -6,6 +6,7 @@ import PageContainer from '../common/components/PageContainer';
 import PersonHeader from './components/PersonHeader';
 import Spacing from '../common/components/Spacing';
 import CreditsList from './components/CreditsList/CreditsList';
+import KnownFor from './components/KnownFor';
 
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { personActions } from './personSlice';
@@ -104,6 +105,15 @@ const Person = () => {
               biography={person.biography}
               profilePath={person.profile_path}
               externalIds={person.external_ids}
+            />
+
+            <Spacing />
+
+            <KnownFor
+              data={{
+                movieCredits: person.movie_credits,
+                tvCredits: person.tv_credits,
+              }}
             />
 
             <Spacing />
