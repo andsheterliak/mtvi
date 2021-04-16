@@ -1,4 +1,4 @@
-import Card from '../../common/components/Cards/Card';
+import Cards from '../../common/components/Cards/Cards';
 import SectionTitle from '../../common/components/SectionTitle';
 import Slider from '../../common/components/Slider/Slider';
 
@@ -59,23 +59,7 @@ const KnownFor = ({ data }) => {
     newData = removeDuplicatesById(newData);
     newData = getFirstMostVoted(newData);
 
-    items = newData.map((item) => {
-      const path = item.name ? `/tv/` : `/movies/`;
-
-      return (
-        <Card
-          key={item.id}
-          id={item.id}
-          path={path}
-          posterPath={item.poster_path}
-          releaseDate={item.release_date || item.first_air_date}
-          title={item.title || item.name}
-          voteAverage={item.vote_average}
-        />
-      );
-    });
-
-    if (items.length === 0) items = null;
+    items = newData.length === 0 ? null : <Cards cardsData={newData} />;
   }
 
   return (
