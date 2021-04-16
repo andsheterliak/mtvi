@@ -24,7 +24,7 @@ const PersonCard = ({ profilePath, name, knownFor, path }) => {
     .join(', ');
 
   return (
-    <Card raised className={classes.card}>
+    <Card raised>
       <CardActionArea component={Link} to={path} className={classes.action}>
         <CardMedia component="img" alt={name} image={profileImg} />
 

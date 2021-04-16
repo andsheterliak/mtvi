@@ -54,7 +54,7 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, id, path }) => {
     : noImageImg;
 
   return (
-    <MUiCard raised className={cardClasses.card}>
+    <MUiCard raised>
       <CardActionArea
         component={Link}
         to={`${path}${id}`}

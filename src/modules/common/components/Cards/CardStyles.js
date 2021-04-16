@@ -1,10 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  card: {
-    height: '100%',
-  },
-
   action: {
     display: 'flex',
     flexDirection: 'column',
