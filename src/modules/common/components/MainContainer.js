@@ -7,7 +7,7 @@ const useStyles = makeStyles({
   },
 });
 
-const PageContainer = ({ children }) => {
+const MainContainer = ({ children }) => {
   const classes = useStyles();
 
   return (
@@ -17,4 +17,4 @@ const PageContainer = ({ children }) => {
   );
 };
 
-export default PageContainer;
+export default MainContainer;

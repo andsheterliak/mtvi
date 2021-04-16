@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Cards from '../common/components/Cards/Cards';
 import LoadMoreBtn from '../common/components/LoadMoreBtn';
-import PageContainer from '../common/components/PageContainer';
+import MainContainer from '../common/components/MainContainer';
 import CardsGrid from '../common/components/Cards/CardsGrid';
 import CardsPage from '../common/components/Cards/CardsPage';
 import RouteHeader from '../common/components/RouteHeader';
@@ -74,7 +74,7 @@ const Movies = ({ titleName }) => {
     );
 
   return (
-    <PageContainer>
+    <MainContainer>
       <RouteHeader titleName={titleName} />
 
       {options && (
@@ -99,7 +99,7 @@ const Movies = ({ titleName }) => {
         isMoreData={isMoreData}
         isLoading={isLoading}
       />
-    </PageContainer>
+    </MainContainer>
   );
 };
 

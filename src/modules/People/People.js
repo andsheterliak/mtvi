@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect } from 'react';
 
 import CardsGrid from '../common/components/Cards/CardsGrid';
-import PageContainer from '../common/components/PageContainer';
+import MainContainer from '../common/components/MainContainer';
 import PersonCards from './components/PersonCards';
 import LoadMoreBtn from '../common/components/LoadMoreBtn';
 import CardsPage from '../common/components/Cards/CardsPage';
@@ -53,7 +53,7 @@ const People = ({ titleName }) => {
     );
 
   return (
-    <PageContainer>
+    <MainContainer>
       <RouteHeader titleName={titleName} />
 
       <MainContent>
@@ -66,7 +66,7 @@ const People = ({ titleName }) => {
         isMoreData={isMoreData}
         isLoading={isLoading}
       />
-    </PageContainer>
+    </MainContainer>
   );
 };
 

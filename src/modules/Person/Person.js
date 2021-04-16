@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
-import PageContainer from '../common/components/PageContainer';
+import MainContainer from '../common/components/MainContainer';
 import PersonHeader from './components/PersonHeader';
 import Spacing from '../common/components/Spacing';
 import CreditsList from './components/CreditsList/CreditsList';
@@ -99,7 +99,7 @@ const Person = () => {
 
       {person ? (
         <MainContent>
-          <PageContainer>
+          <MainContainer>
             <PersonHeader
               dataList={generateDataList(person)}
               name={person.name}
@@ -127,7 +127,7 @@ const Person = () => {
               filterBy={filterBy}
               filterByHandler={filterByHandler}
             />
-          </PageContainer>
+          </MainContainer>
         </MainContent>
       ) : (
         'Loading'

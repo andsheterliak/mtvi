@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@material-ui/core/styles';
 
-import PageContainer from '../PageContainer';
+import MainContainer from '../MainContainer';
 import InfoList from '../InfoList';
 import HeaderTitle from './HeaderTitle';
 import HeaderDescription from './HeaderDescription';
@@ -29,7 +29,7 @@ const PageHeader = ({ backdrop, title, overview, dataList }) => {
       <section className={classes.section}>
         {img}
 
-        <PageContainer>
+        <MainContainer>
           <div className={classes.infoBlock}>
             <div className={classes.imgBackgroundWrapper}>{imgBackground}</div>
 
@@ -41,7 +41,7 @@ const PageHeader = ({ backdrop, title, overview, dataList }) => {
               <InfoList dataList={dataList} />
             </div>
           </div>
-        </PageContainer>
+        </MainContainer>
       </section>
     </ThemeProvider>
   );

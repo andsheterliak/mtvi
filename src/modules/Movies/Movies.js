@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import LoadMoreBtn from '../common/components/LoadMoreBtn';
-import PageContainer from '../common/components/PageContainer';
+import MainContainer from '../common/components/MainContainer';
 import CardsGrid from '../common/components/Cards/CardsGrid';
 import Cards from '../common/components/Cards/Cards';
 import CardsPage from '../common/components/Cards/CardsPage';
@@ -75,7 +75,7 @@ const Movies = ({ titleName }) => {
     );
 
   return (
-    <PageContainer>
+    <MainContainer>
       <RouteHeader titleName={titleName} />
 
       {options && (
@@ -100,7 +100,7 @@ const Movies = ({ titleName }) => {
         isMoreData={isMoreData}
         isLoading={isLoading}
       />
-    </PageContainer>
+    </MainContainer>
   );
 };
 
