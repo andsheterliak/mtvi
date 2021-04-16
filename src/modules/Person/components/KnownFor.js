@@ -32,7 +32,7 @@ const removeDuplicatesById = (data) => {
   return filteredArr;
 };
 
-const getFirstMostVoted = (data) => {
+const getFirstVoted = (data) => {
   data = data.slice(0, 9);
 
   return data.filter((item) => item.vote_count);
@@ -57,7 +57,7 @@ const KnownFor = ({ data }) => {
   if (newData.length !== 0) {
     newData = sortByVoteCountDescending(newData);
     newData = removeDuplicatesById(newData);
-    newData = getFirstMostVoted(newData);
+    newData = getFirstVoted(newData);
 
     items = newData.length === 0 ? null : <Cards cardsData={newData} />;
   }
