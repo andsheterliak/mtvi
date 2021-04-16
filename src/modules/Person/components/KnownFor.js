@@ -2,7 +2,7 @@ import Cards from '../../common/components/Cards/Cards';
 import Section from '../../common/components/Section/Section';
 import Slider from '../../common/components/Slider/Slider';
 
-const sortByVoteCountDescending = (data) => {
+const sortByVoteDescending = (data) => {
   const newData = [...data];
 
   newData.sort((a, b) => {
@@ -55,7 +55,7 @@ const KnownFor = ({ data }) => {
   let items;
 
   if (newData.length !== 0) {
-    newData = sortByVoteCountDescending(newData);
+    newData = sortByVoteDescending(newData);
     newData = removeDuplicates(newData);
     newData = getFirstVoted(newData);
 
