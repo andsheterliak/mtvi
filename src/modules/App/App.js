@@ -1,3 +1,5 @@
+import { hot } from 'react-hot-loader/root';
+
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -47,4 +49,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default hot(App);

@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "netlify:dev": "netlify dev",
-    "start": "cross-env NODE_ENV=development webpack-dev-server",
-    "build": "cross-env NODE_ENV=production webpack",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
     "eslint": "eslint ./src"
   },
   "sideEffects": [
@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
+    "@hot-loader/react-dom": "^17.0.1",
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
@@ -64,7 +65,7 @@
     "date-fns": "^2.17.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react-hot-loader": "^4.13.0",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.7"
