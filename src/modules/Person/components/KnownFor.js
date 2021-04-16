@@ -18,7 +18,7 @@ const sortByVoteCountDescending = (data) => {
   return newData;
 };
 
-const removeDuplicatesById = (data) => {
+const removeDuplicates = (data) => {
   const set = new Set();
 
   const filteredArr = data.filter((item) => {
@@ -56,7 +56,7 @@ const KnownFor = ({ data }) => {
 
   if (newData.length !== 0) {
     newData = sortByVoteCountDescending(newData);
-    newData = removeDuplicatesById(newData);
+    newData = removeDuplicates(newData);
     newData = getFirstVoted(newData);
 
     items = newData.length === 0 ? null : <Cards cardsData={newData} />;
