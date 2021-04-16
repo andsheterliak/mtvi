@@ -6,6 +6,7 @@ import PageHeader from '../common/components/PageHeader/PageHeader';
 import Spacing from '../common/components/Spacing';
 import Certification from '../common/components/PageHeader/Certification';
 import Creators from '../common/components/PageHeader/Creators';
+import MainContent from '../common/components/MainContent';
 
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { formatMinutes, formatDataStr } from '../common/utils/date';
@@ -73,14 +74,14 @@ const TVShow = () => {
       <Spacing />
 
       {tvShow ? (
-        <main>
+        <MainContent>
           <PageHeader
             backdrop={tvShow.backdrop_path}
             overview={tvShow.overview}
             title={tvShow.name}
             dataList={generateDataList(tvShow)}
           ></PageHeader>
-        </main>
+        </MainContent>
       ) : (
         'Loading'
       )}

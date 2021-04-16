@@ -7,6 +7,7 @@ import PersonCards from './components/PersonCards';
 import LoadMoreBtn from '../common/components/LoadMoreBtn';
 import CardsPage from '../common/components/Cards/CardsPage';
 import RouteHeader from '../common/components/RouteHeader';
+import MainContent from '../common/components/MainContent';
 
 import { peopleActions } from './peopleSlice';
 import useScrollToTop from '../common/hooks/useScrollToTop';
@@ -55,9 +56,9 @@ const People = ({ titleName }) => {
     <PageContainer>
       <RouteHeader titleName={titleName} />
 
-      <main>
+      <MainContent>
         <CardsGrid>{cards}</CardsGrid>
-      </main>
+      </MainContent>
 
       <LoadMoreBtn
         infiniteScrollRef={infiniteScrollRef}

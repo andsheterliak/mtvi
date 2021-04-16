@@ -7,6 +7,7 @@ import PersonHeader from './components/PersonHeader';
 import Spacing from '../common/components/Spacing';
 import CreditsList from './components/CreditsList/CreditsList';
 import KnownFor from './components/KnownFor';
+import MainContent from '../common/components/MainContent';
 
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { personActions } from './personSlice';
@@ -97,7 +98,7 @@ const Person = () => {
       <Spacing />
 
       {person ? (
-        <main>
+        <MainContent>
           <PageContainer>
             <PersonHeader
               dataList={generateDataList(person)}
@@ -127,7 +128,7 @@ const Person = () => {
               filterByHandler={filterByHandler}
             />
           </PageContainer>
-        </main>
+        </MainContent>
       ) : (
         'Loading'
       )}

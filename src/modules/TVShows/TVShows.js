@@ -8,6 +8,7 @@ import CardsGrid from '../common/components/Cards/CardsGrid';
 import CardsPage from '../common/components/Cards/CardsPage';
 import RouteHeader from '../common/components/RouteHeader';
 import Adjustment from '../Adjustment/Adjustment';
+import MainContent from '../common/components/MainContent';
 
 import {
   TV_DEFAULT_OPTIONS,
@@ -88,9 +89,9 @@ const Movies = ({ titleName }) => {
         />
       )}
 
-      <main>
+      <MainContent>
         <CardsGrid>{cards}</CardsGrid>
-      </main>
+      </MainContent>
 
       <LoadMoreBtn
         infiniteScrollRef={infiniteScrollRef}

@@ -6,6 +6,7 @@ import PageHeader from '../common/components/PageHeader/PageHeader';
 import Spacing from '../common/components/Spacing';
 import Certification from '../common/components/PageHeader/Certification';
 import Creators from '../common/components/PageHeader/Creators';
+import MainContent from '../common/components/MainContent';
 
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { movieActions } from './movieSlice';
@@ -73,14 +74,14 @@ const Movie = () => {
       <Spacing />
 
       {movie ? (
-        <main>
+        <MainContent>
           <PageHeader
             backdrop={movie.backdrop_path}
             overview={movie.overview}
             title={movie.title}
             dataList={generateDataList(movie)}
           ></PageHeader>
-        </main>
+        </MainContent>
       ) : (
         'Loading'
       )}
