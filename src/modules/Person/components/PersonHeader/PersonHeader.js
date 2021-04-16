@@ -3,13 +3,13 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 
-import HeaderDescription from '../../common/components/PageHeader/HeaderDescription';
-import HeaderTitle from '../../common/components/PageHeader/HeaderTitle';
-import InfoList from '../../common/components/InfoList';
+import HeaderDescription from '../../../common/components/PageHeader/HeaderDescription';
+import HeaderTitle from '../../../common/components/PageHeader/HeaderTitle';
+import InfoList from '../../../common/components/InfoList';
 import SocialLinks from './SocialLinks';
 
-import { IMG_BASE_URL, IMG_SIZES } from '../../common/tmdb-config';
-import noUserPhotoImg from '../../../assets/img/no-user-photo.svg';
+import { IMG_BASE_URL, IMG_SIZES } from '../../../common/tmdb-config';
+import noUserPhotoImg from '../../../../assets/img/no-user-photo.svg';
 
 const useStyles = makeStyles((theme) => {
   return {

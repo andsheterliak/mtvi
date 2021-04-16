@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
 import MainContainer from '../common/components/MainContainer';
-import PersonHeader from './components/PersonHeader';
+import PersonHeader from './components/PersonHeader/PersonHeader';
 import Spacing from '../common/components/Spacing';
 import CreditsList from './components/CreditsList/CreditsList';
 import KnownFor from './components/KnownFor';
