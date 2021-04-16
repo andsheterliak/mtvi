@@ -46,7 +46,7 @@ const People = ({ titleName }) => {
 
   const cards =
     people.length !== 0 ? (
-      <CardsPage data={people} path="/people/" CardsComponent={PersonCards} />
+      <CardsPage data={people} CardsComponent={PersonCards} />
     ) : (
       'Loading...'
     );

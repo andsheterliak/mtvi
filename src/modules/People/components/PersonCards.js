@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import PersonCard from './PersonCard';
 
-const PersonCards = ({ cardsData, path }) => {
+const PersonCards = ({ cardsData }) => {
   const cards = cardsData.map((item) => {
     return (
       <PersonCard
@@ -10,7 +10,7 @@ const PersonCards = ({ cardsData, path }) => {
         profilePath={item.profile_path}
         name={item.name}
         knownFor={item.known_for}
-        path={`${path}${item.id}`}
+        path={`/people/${item.id}`}
       />
     );
   });

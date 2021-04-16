@@ -4,9 +4,9 @@
  * 'cardsData' reference remains the same as each page of cards data is appended to the previous one, so 'memo' works properly because it compares object references.
  */
 
-const CardsPage = ({ data, CardsComponent, path }) => {
+const CardsPage = ({ data, CardsComponent }) => {
   return data.map(({ pageData, pageNum }) => {
-    return <CardsComponent key={pageNum} cardsData={pageData} path={path} />;
+    return <CardsComponent key={pageNum} cardsData={pageData} />;
   });
 };
 

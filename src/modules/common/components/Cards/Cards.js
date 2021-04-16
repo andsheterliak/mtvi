@@ -2,8 +2,13 @@ import { memo } from 'react';
 
 import Card from './Card';
 
-const Cards = ({ cardsData, path }) => {
+const Cards = ({ cardsData }) => {
   const cards = cardsData.map((item) => {
+    const path =
+      item.name || item.first_air_date || item.episode_count
+        ? `/tv/`
+        : `/movies/`;
+
     return (
       <Card
         key={item.id}

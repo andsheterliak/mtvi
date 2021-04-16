@@ -68,7 +68,7 @@ const Movies = ({ titleName }) => {
 
   const cards =
     movies.length !== 0 ? (
-      <CardsPage path="/movies/" data={movies} CardsComponent={Cards} />
+      <CardsPage data={movies} CardsComponent={Cards} />
     ) : (
       'Loading...'
     );
