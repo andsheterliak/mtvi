@@ -1,10 +1,10 @@
 import Filter from '../../../common/components/Filter/Filter';
 import FilterContainer from '../../../common/components/Filter/FilterContainer';
-import SectionTitle from '../../../common/components/SectionTitle';
 import ProjectsTimeline from './ProjectsTimeline';
 
 import { formatDataStr } from '../../../common/utils/date';
 import filterConfig from '../../filterConfig';
+import Section from '../../../common/components/Section/Section';
 
 const filterData = (data, filterBy) => {
   const filteredData = [];
@@ -136,11 +136,9 @@ const CreditsList = ({ data, filterBy, filterByHandler }) => {
     timelineData = sortByDateDescending(timelineData);
 
     projects = (
-      <section>
-        <SectionTitle title="Projects" />
-
+      <Section title="Projects">
         <ProjectsTimeline data={timelineData} />
-      </section>
+      </Section>
     );
   }
 

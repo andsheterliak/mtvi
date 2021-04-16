@@ -1,5 +1,5 @@
 import Cards from '../../common/components/Cards/Cards';
-import SectionTitle from '../../common/components/SectionTitle';
+import Section from '../../common/components/Section/Section';
 import Slider from '../../common/components/Slider/Slider';
 
 const sortByVoteCountDescending = (data) => {
@@ -65,11 +65,9 @@ const KnownFor = ({ data }) => {
   return (
     <>
       {items && (
-        <section>
-          <SectionTitle title="Known For" />
-
+        <Section title="Known For">
           <Slider isLinks>{items}</Slider>
-        </section>
+        </Section>
       )}
     </>
   );
