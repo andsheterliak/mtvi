@@ -5,7 +5,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 
 import HeaderDescription from '../../../common/components/PageHeader/HeaderDescription';
 import HeaderTitle from '../../../common/components/PageHeader/HeaderTitle';
-import InfoList from '../../../common/components/InfoList';
+import InfoList from '../../../common/components/InfoList/InfoList';
 import SocialLinks from './SocialLinks/SocialLinks';
 
 import { IMG_BASE_URL, IMG_SIZES } from '../../../common/tmdb-config';

@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@material-ui/core/styles';
 
 import MainContainer from '../MainContainer';
-import InfoList from '../InfoList';
+import InfoList from '../InfoList/InfoList';
 import HeaderTitle from './HeaderTitle';
 import HeaderDescription from './HeaderDescription';
 

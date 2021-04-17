@@ -10,7 +10,7 @@ import {
 } from '@material-ui/lab';
 import { Typography, Link as MUILink } from '@material-ui/core';
 
-import InfoList from '../../../../common/components/InfoList';
+import InfoList from '../../../../common/components/InfoList/InfoList';
 
 import { getHyphenOrData } from '../../../../common/utils/getData';
 
