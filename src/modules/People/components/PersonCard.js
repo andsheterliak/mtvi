@@ -19,10 +19,6 @@ const PersonCard = ({ profilePath, name, knownFor, path }) => {
     ? `${IMG_BASE_URL}${IMG_SIZES.profile}${profilePath}`
     : noUserPhotoImg;
 
-  const knownForTitles = knownFor
-    .map((item) => item.original_name || item.title)
-    .join(', ');
-
   return (
     <Card raised>
       <CardActionArea component={Link} to={path} className={classes.action}>
@@ -44,7 +40,7 @@ const PersonCard = ({ profilePath, name, knownFor, path }) => {
             component="p"
             className={classes.subText}
           >
-            {knownForTitles}
+            {knownFor}
           </Typography>
         </CardContent>
       </CardActionArea>
