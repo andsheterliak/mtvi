@@ -38,3 +38,7 @@ export const getHyphenOrData = (value) => {
 
   return value;
 };
+
+export const getPath = ({ name, firstAirDate, episodeCount }) => {
+  return name || firstAirDate || episodeCount ? `/tv/` : `/movies/`;
+};

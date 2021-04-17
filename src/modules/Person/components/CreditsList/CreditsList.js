@@ -1,10 +1,11 @@
 import Filter from '../../../common/components/Filter/Filter';
 import FilterContainer from '../../../common/components/Filter/FilterContainer';
-import ProjectsTimeline from './ProjectsTimeline';
+import ProjectsTimeline from './ProjectsTimeline/ProjectsTimeline';
 
 import { formatDataStr } from '../../../common/utils/date';
 import filterConfig from '../../filterConfig';
 import Section from '../../../common/components/Section/Section';
+import { getPath } from '../../../common/utils/getData';
 
 const filterData = (data, filterBy) => {
   const filteredData = [];
@@ -72,12 +73,19 @@ const createTimelineData = (data) => {
     const dateStr = item.release_date || item.first_air_date;
     const year = dateStr && formatDataStr(dateStr).dateParts.year;
 
+    const path = getPath({
+      name: item.name,
+      episodeCount: item.first_air_date,
+      firstAirDate: item.episode_count,
+    });
+
     if (!timelineData[item.id]) {
       timelineData[item.id] = {
         id: item.id,
         name,
         year,
         dateStr,
+        path,
 
         // Doesn't need fallback
         employment: {
