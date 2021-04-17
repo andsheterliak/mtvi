@@ -1,10 +1,10 @@
 import Filter from '../../../common/components/Filter/Filter';
 import FilterContainer from '../../../common/components/Filter/FilterContainer';
 import ProjectsTimeline from './ProjectsTimeline/ProjectsTimeline';
+import Section from '../../../common/components/Section/Section';
 
 import { formatDataStr } from '../../../common/utils/date';
 import filterConfig from '../../filterConfig';
-import Section from '../../../common/components/Section/Section';
 import { getPath } from '../../../common/utils/getData';
 
 const filterData = (data, filterBy) => {
