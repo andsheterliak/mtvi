@@ -42,3 +42,15 @@ export const getHyphenOrData = (value) => {
 export const getPath = ({ name, firstAirDate, episodeCount }) => {
   return name || firstAirDate || episodeCount ? `/tv/` : `/movies/`;
 };
+
+export const getSelectedGenres = (genres) => {
+  return genres
+    .reduce((acc, item) => {
+      if (item.isSelected) acc.push(item.id);
+
+      return acc;
+    }, [])
+    .join(',');
+};
+
+export const checkIfIsNextPage = (page, totalPages) => page + 1 <= totalPages;
