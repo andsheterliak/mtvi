@@ -6,7 +6,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import HeaderDescription from '../../../common/components/PageHeader/HeaderDescription';
 import HeaderTitle from '../../../common/components/PageHeader/HeaderTitle';
 import InfoList from '../../../common/components/InfoList';
-import SocialLinks from './SocialLinks';
+import SocialLinks from './SocialLinks/SocialLinks';
 
 import { IMG_BASE_URL, IMG_SIZES } from '../../../common/tmdb-config';
 import noUserPhotoImg from '../../../../assets/img/no-user-photo.svg';
@@ -41,14 +41,6 @@ const useStyles = makeStyles((theme) => {
         flexDirection: 'row',
       },
     },
-
-    biography: {
-      marginBottom: '20px',
-    },
-
-    socialLinks: {
-      marginTop: '20px',
-    },
   };
 });
 
@@ -65,34 +57,34 @@ const PersonHeader = ({
     ? `${IMG_BASE_URL}${IMG_SIZES.profile}${profilePath}`
     : noUserPhotoImg;
 
-  const isExternalIds = [
-    externalIds.facebook_id,
-    externalIds.instagram_id,
-    externalIds.twitter_id,
-  ].some((item) => item);
+  const socialLinksMap = [];
 
-  const socialLinksMap = isExternalIds && [
-    {
+  if (externalIds.facebook_id) {
+    socialLinksMap.push({
       key: 'facebook_id',
       id: externalIds.facebook_id,
       href: 'https://www.facebook.com/',
       icon: FacebookIcon,
-    },
+    });
+  }
 
-    {
+  if (externalIds.instagram_id) {
+    socialLinksMap.push({
       key: 'instagram_id',
       id: externalIds.instagram_id,
       href: 'https://www.instagram.com/',
       icon: InstagramIcon,
-    },
+    });
+  }
 
-    {
+  if (externalIds.twitter_id) {
+    socialLinksMap.push({
       key: 'twitter_id',
       id: externalIds.twitter_id,
       href: 'https://twitter.com/',
       icon: TwitterIcon,
-    },
-  ];
+    });
+  }
 
   return (
     <section className={classes.infoBlock}>
@@ -105,10 +97,8 @@ const PersonHeader = ({
 
         <InfoList dataList={dataList} />
 
-        {isExternalIds && (
-          <div className={classes.socialLinks}>
-            <SocialLinks socialLinksMap={socialLinksMap} />
-          </div>
+        {socialLinksMap.length !== 0 && (
+          <SocialLinks socialLinksMap={socialLinksMap} />
         )}
       </div>
     </section>
