@@ -129,26 +129,18 @@ const CreditsList = ({ data, filterBy, filterByHandler }) => {
   const isTVCast = !!data.tvCredits?.cast?.length;
   const isTVCrew = !!data.tvCredits?.crew?.length;
 
+  const isData = isMovieCast || isMovieCrew || isTVCast || isTVCrew;
+
+  if (!isData) return null;
+
   const isNeedInFiltering =
     (isMovieCast || isMovieCrew) && (isTVCast || isTVCrew);
 
-  const isData = isMovieCast || isMovieCrew || isTVCast || isTVCrew;
+  let timelineData;
 
-  let projects;
-
-  if (isData) {
-    let timelineData;
-
-    timelineData = filterData(data, filterBy);
-    timelineData = createTimelineData(timelineData);
-    timelineData = sortByDateDescending(timelineData);
-
-    projects = (
-      <Section title="Projects">
-        <ProjectsTimeline data={timelineData} />
-      </Section>
-    );
-  }
+  timelineData = filterData(data, filterBy);
+  timelineData = createTimelineData(timelineData);
+  timelineData = sortByDateDescending(timelineData);
 
   return (
     <>
@@ -162,7 +154,9 @@ const CreditsList = ({ data, filterBy, filterByHandler }) => {
         </FilterContainer>
       )}
 
-      {projects}
+      <Section title="Projects">
+        <ProjectsTimeline data={timelineData} />
+      </Section>
     </>
   );
 };

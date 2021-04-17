@@ -52,24 +52,20 @@ const KnownFor = ({ data }) => {
   if (tvCast) newData.push(...tvCast);
   if (tvCrew) newData.push(...tvCrew);
 
-  let items;
+  if (newData.length === 0) return null;
 
-  if (newData.length !== 0) {
-    newData = sortByVoteDescending(newData);
-    newData = removeDuplicates(newData);
-    newData = getFirstVoted(newData);
+  newData = sortByVoteDescending(newData);
+  newData = removeDuplicates(newData);
+  newData = getFirstVoted(newData);
 
-    items = newData.length === 0 ? null : <Cards cardsData={newData} />;
-  }
+  if (newData.length === 0) return null;
 
   return (
-    <>
-      {items && (
-        <Section title="Known For">
-          <Slider isLinks>{items}</Slider>
-        </Section>
-      )}
-    </>
+    <Section title="Known For">
+      <Slider isLinks>
+        <Cards cardsData={newData} />
+      </Slider>
+    </Section>
   );
 };
 
