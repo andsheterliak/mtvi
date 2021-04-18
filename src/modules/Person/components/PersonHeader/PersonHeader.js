@@ -10,6 +10,7 @@ import SocialLinks from './SocialLinks/SocialLinks';
 
 import { IMG_BASE_URL, IMG_SIZES } from '../../../common/tmdb-config';
 import noUserPhotoImg from '../../../../assets/img/no-user-photo.svg';
+import { checkIfIsData } from '../../../common/utils/getData';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -97,7 +98,7 @@ const PersonHeader = ({
 
         <InfoList dataList={dataList} />
 
-        {socialLinksMap.length !== 0 && (
+        {checkIfIsData(socialLinksMap) && (
           <SocialLinks socialLinksMap={socialLinksMap} />
         )}
       </div>

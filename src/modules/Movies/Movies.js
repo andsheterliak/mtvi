@@ -20,6 +20,7 @@ import { MOVIES_OPTIONS_LS_NAME } from './constants';
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
 import { getLS } from '../common/utils/storage';
+import { checkIfIsData } from '../common/utils/getData';
 
 const Movies = ({ titleName }) => {
   useScrollToTop();
@@ -67,12 +68,11 @@ const Movies = ({ titleName }) => {
     };
   }, [dispatch]);
 
-  const cards =
-    movies.length !== 0 ? (
-      <CardsPage data={movies} CardsComponent={Cards} />
-    ) : (
-      'Loading...'
-    );
+  const cards = checkIfIsData(movies) ? (
+    <CardsPage data={movies} CardsComponent={Cards} />
+  ) : (
+    'Loading...'
+  );
 
   return (
     <MainContainer>

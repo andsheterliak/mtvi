@@ -20,6 +20,7 @@ import { tvShowsActions } from './tvShowsSlice';
 import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { getLS } from '../common/utils/storage';
+import { checkIfIsData } from '../common/utils/getData';
 
 const Movies = ({ titleName }) => {
   useScrollToTop();
@@ -66,12 +67,11 @@ const Movies = ({ titleName }) => {
     };
   }, [dispatch]);
 
-  const cards =
-    tvShows.length !== 0 ? (
-      <CardsPage data={tvShows} CardsComponent={Cards} />
-    ) : (
-      'Loading...'
-    );
+  const cards = checkIfIsData(tvShows) ? (
+    <CardsPage data={tvShows} CardsComponent={Cards} />
+  ) : (
+    'Loading...'
+  );
 
   return (
     <MainContainer>

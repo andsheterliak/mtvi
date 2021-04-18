@@ -1,5 +1,21 @@
+export const checkIfIsData = (data) => {
+  if (data === null || typeof data === 'undefined' || data === '') {
+    return false;
+  }
+
+  if (Array.isArray(data) && data.length === 0) {
+    return false;
+  }
+
+  if (typeof data === 'object' && Object.keys(data).length === 0) {
+    return false;
+  }
+
+  return true;
+};
+
 export const getCertification = (data) => {
-  if (!data) return null;
+  if (!checkIfIsData(data)) return null;
 
   let certification;
   let isUSCertification;
@@ -18,25 +34,15 @@ export const getCertification = (data) => {
 };
 
 export const getGenres = (genres) => {
+  if (!checkIfIsData(genres)) return null;
+
   return genres.map((item) => item.name).join(', ');
 };
 
 export const getHyphenOrData = (value) => {
   const hyphen = '-';
 
-  if (value === null || typeof value === 'undefined' || value === '') {
-    return hyphen;
-  }
-
-  if (Array.isArray(value) && value.length === 0) {
-    return hyphen;
-  }
-
-  if (typeof value === 'object' && Object.keys(value).length === 0) {
-    return hyphen;
-  }
-
-  return value;
+  return checkIfIsData(value) ? value : hyphen;
 };
 
 export const getPath = ({ name, firstAirDate, episodeCount }) => {

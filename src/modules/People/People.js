@@ -12,6 +12,7 @@ import MainContent from '../common/components/MainContent';
 import { peopleActions } from './peopleSlice';
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import useInfiniteScroll from '../common/hooks/useInfiniteScroll';
+import { checkIfIsData } from '../common/utils/getData';
 
 const People = ({ titleName }) => {
   useScrollToTop();
@@ -45,12 +46,11 @@ const People = ({ titleName }) => {
     };
   }, [dispatch]);
 
-  const cards =
-    people.length !== 0 ? (
-      <CardsPage data={people} CardsComponent={PersonCards} />
-    ) : (
-      'Loading...'
-    );
+  const cards = checkIfIsData(people) ? (
+    <CardsPage data={people} CardsComponent={PersonCards} />
+  ) : (
+    'Loading...'
+  );
 
   return (
     <MainContainer>

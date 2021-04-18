@@ -10,18 +10,26 @@ import MainContent from '../common/components/MainContent';
 
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { formatMinutes, formatDataStr } from '../common/utils/date';
-import { getCertification, getGenres } from '../common/utils/getData';
+import {
+  checkIfIsData,
+  getCertification,
+  getGenres,
+} from '../common/utils/getData';
 import { tvShowActions } from './tvShowSlice';
 
 const getCreatedBy = (data) => {
-  const creators = data.map(({ name, id }) => {
+  if (!checkIfIsData(data)) return null;
+
+  return data.map(({ name, id }) => {
     return { name, id };
   });
-
-  return creators.length !== 0 ? creators : null;
 };
 
-const getNetworks = (data) => data.map((item) => item.name).join(', ');
+const getNetworks = (data) => {
+  if (!checkIfIsData(data)) return null;
+
+  return data.map((item) => item.name).join(', ');
+};
 
 const generateDataList = (data) => {
   let certification = getCertification(data.content_ratings?.results);

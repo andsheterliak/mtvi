@@ -2,6 +2,8 @@ import Cards from '../../common/components/Cards/Cards';
 import Section from '../../common/components/Section/Section';
 import Slider from '../../common/components/Slider/Slider';
 
+import { checkIfIsData } from '../../common/utils/getData';
+
 const sortByVoteDescending = (data) => {
   const newData = [...data];
 
@@ -52,13 +54,13 @@ const KnownFor = ({ data }) => {
   if (tvCast) newData.push(...tvCast);
   if (tvCrew) newData.push(...tvCrew);
 
-  if (newData.length === 0) return null;
+  if (!checkIfIsData(newData)) return null;
 
   newData = sortByVoteDescending(newData);
   newData = removeDuplicates(newData);
   newData = getFirstVoted(newData);
 
-  if (newData.length === 0) return null;
+  if (!checkIfIsData(newData)) return null;
 
   return (
     <Section title="Known For">

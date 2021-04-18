@@ -10,11 +10,15 @@ import MainContent from '../common/components/MainContent';
 
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { movieActions } from './movieSlice';
-import { getCertification, getGenres } from '../common/utils/getData';
+import {
+  checkIfIsData,
+  getCertification,
+  getGenres,
+} from '../common/utils/getData';
 import { formatMinutes, formatDataStr } from '../common/utils/date';
 
 const getDirectors = (crew) => {
-  if (!crew) return null;
+  if (!checkIfIsData(crew)) return null;
 
   const directors = [];
 
@@ -22,7 +26,7 @@ const getDirectors = (crew) => {
     if (job === 'Director') directors.push({ name, id });
   });
 
-  return directors.length !== 0 ? directors : null;
+  return directors;
 };
 
 const generateDataList = (data) => {
