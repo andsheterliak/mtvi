@@ -44,36 +44,28 @@ const Adjustment = ({
         content={
           <>
             <SortResultsByOption
-              {...{
-                sortByOptions,
-                sortBy: options.sortBy,
-                sortByHandler,
-              }}
+              sortByOptions={sortByOptions}
+              sortBy={options.sortBy}
+              sortByHandler={sortByHandler}
             />
 
             <ReleaseDatesOption
-              {...{
-                dateFrom: options.dates.from,
-                dateTo: options.dates.to,
-                dateFromHandler,
-                dateToHandler,
-                dateTitle,
-              }}
+              dateFrom={options.dates.from}
+              dateTo={options.dates.to}
+              dateFromHandler={dateFromHandler}
+              dateToHandler={dateToHandler}
+              dateTitle={dateTitle}
             />
 
             <GenresOption
-              {...{
-                genres: options.genres,
-                toggleGenreHandler,
-              }}
+              genres={options.genres}
+              toggleGenreHandler={toggleGenreHandler}
             />
 
             <UserScoreOption
-              {...{
-                userScoreRange,
-                changeUserScoreHandler,
-                userScore: options.userScore,
-              }}
+              userScoreRange={userScoreRange}
+              changeUserScoreHandler={changeUserScoreHandler}
+              userScore={options.userScore}
             />
           </>
         }
