@@ -1,7 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import InstagramIcon from '@material-ui/icons/Instagram';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import TwitterIcon from '@material-ui/icons/Twitter';
 
 import HeaderDescription from '../../../common/components/PageHeader/HeaderDescription';
 import HeaderTitle from '../../../common/components/PageHeader/HeaderTitle';
@@ -10,7 +7,6 @@ import SocialLinks from './SocialLinks/SocialLinks';
 
 import { IMG_BASE_URL, IMG_SIZES } from '../../../common/tmdb-config';
 import noUserPhotoImg from '../../../../assets/img/no-user-photo.svg';
-import { checkIfIsData } from '../../../common/utils/getData';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -58,35 +54,6 @@ const PersonHeader = ({
     ? `${IMG_BASE_URL}${IMG_SIZES.profile}${profilePath}`
     : noUserPhotoImg;
 
-  const socialLinksMap = [];
-
-  if (externalIds.facebook_id) {
-    socialLinksMap.push({
-      key: 'facebook_id',
-      id: externalIds.facebook_id,
-      href: 'https://www.facebook.com/',
-      icon: FacebookIcon,
-    });
-  }
-
-  if (externalIds.instagram_id) {
-    socialLinksMap.push({
-      key: 'instagram_id',
-      id: externalIds.instagram_id,
-      href: 'https://www.instagram.com/',
-      icon: InstagramIcon,
-    });
-  }
-
-  if (externalIds.twitter_id) {
-    socialLinksMap.push({
-      key: 'twitter_id',
-      id: externalIds.twitter_id,
-      href: 'https://twitter.com/',
-      icon: TwitterIcon,
-    });
-  }
-
   return (
     <section className={classes.infoBlock}>
       <img className={classes.img} alt={name} src={profileImg} />
@@ -98,9 +65,7 @@ const PersonHeader = ({
 
         <InfoList dataList={dataList} />
 
-        {checkIfIsData(socialLinksMap) && (
-          <SocialLinks socialLinksMap={socialLinksMap} />
-        )}
+        <SocialLinks externalIds={externalIds} />
       </div>
     </section>
   );
