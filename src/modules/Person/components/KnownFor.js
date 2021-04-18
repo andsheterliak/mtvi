@@ -40,8 +40,8 @@ const getFirstVoted = (data) => {
   return data.filter((item) => item.vote_count);
 };
 
-const KnownFor = ({ data }) => {
-  let newData = [];
+const joinData = (data) => {
+  const newData = [];
 
   const movieCast = data.movieCredits?.cast;
   const movieCrew = data.movieCredits?.crew;
@@ -54,18 +54,32 @@ const KnownFor = ({ data }) => {
   if (tvCast) newData.push(...tvCast);
   if (tvCrew) newData.push(...tvCrew);
 
-  if (!checkIfIsData(newData)) return null;
+  return newData;
+};
 
-  newData = sortByVoteDescending(newData);
+const getKnownFor = (data) => {
+  let newData;
+
+  newData = sortByVoteDescending(data);
   newData = removeDuplicates(newData);
   newData = getFirstVoted(newData);
 
-  if (!checkIfIsData(newData)) return null;
+  return newData;
+};
+
+const KnownFor = ({ data }) => {
+  const joinedData = joinData(data);
+
+  if (!checkIfIsData(joinedData)) return null;
+
+  const knownFor = getKnownFor(joinedData);
+
+  if (!checkIfIsData(knownFor)) return null;
 
   return (
     <Section title="Known For">
       <Slider isLinks>
-        <Cards cardsData={newData} />
+        <Cards cardsData={knownFor} />
       </Slider>
     </Section>
   );
