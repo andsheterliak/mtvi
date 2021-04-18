@@ -20,34 +20,35 @@ const getGender = (gender) => {
   return gender === 1 ? 'Female' : 'Male';
 };
 
-const generateDataList = (data) => {
-  const isDeathday = !!data.deathday;
-  let deathday;
-
-  if (isDeathday) {
-    const { dateStr, dateParts } = formatDataStr(data.deathday);
+const getLifeDates = (birthday, deathday) => {
+  if (deathday) {
+    const { dateStr, dateParts } = formatDataStr(deathday);
 
     deathday = `${dateStr} (${getAge(dateParts)} years old)`;
   }
 
-  let birthday;
+  if (birthday) {
+    const { dateStr, dateParts } = formatDataStr(birthday);
 
-  if (data.birthday) {
-    const { dateStr, dateParts } = formatDataStr(data.birthday);
-
-    birthday = isDeathday
+    birthday = deathday
       ? dateStr
       : `${dateStr} (${getAge(dateParts)} years old)`;
   }
 
+  return { birthday, deathday };
+};
+
+const generateDataList = (data) => {
   const dataList = [];
+
+  const { birthday, deathday } = getLifeDates(data.birthday, data.deathday);
 
   dataList.push({
     name: 'Birthday',
     value: birthday,
   });
 
-  if (isDeathday)
+  if (deathday)
     dataList.push({
       name: 'Day of death',
       value: deathday,
