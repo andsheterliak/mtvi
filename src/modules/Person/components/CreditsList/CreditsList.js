@@ -7,6 +7,21 @@ import { formatDataStr } from '../../../common/utils/date';
 import filterConfig from '../../filterConfig';
 import { getPath } from '../../../common/utils/getData';
 
+const checkIfIsData = (data) => {
+  const isMovieCast = !!data.movieCredits?.cast?.length;
+  const isMovieCrew = !!data.movieCredits?.crew?.length;
+
+  const isTVCast = !!data.tvCredits?.cast?.length;
+  const isTVCrew = !!data.tvCredits?.crew?.length;
+
+  const isData = isMovieCast || isMovieCrew || isTVCast || isTVCrew;
+
+  const isNeedInFiltering =
+    (isMovieCast || isMovieCrew) && (isTVCast || isTVCrew);
+
+  return { isData, isNeedInFiltering };
+};
+
 const filterData = (data, filterBy) => {
   const filteredData = [];
 
@@ -122,25 +137,22 @@ const createTimelineData = (data) => {
   return Object.values(timelineData);
 };
 
-const CreditsList = ({ data, filterBy, filterByHandler }) => {
-  const isMovieCast = !!data.movieCredits?.cast?.length;
-  const isMovieCrew = !!data.movieCredits?.crew?.length;
-
-  const isTVCast = !!data.tvCredits?.cast?.length;
-  const isTVCrew = !!data.tvCredits?.crew?.length;
-
-  const isData = isMovieCast || isMovieCrew || isTVCast || isTVCrew;
-
-  if (!isData) return null;
-
-  const isNeedInFiltering =
-    (isMovieCast || isMovieCrew) && (isTVCast || isTVCrew);
-
+const getTimelineData = (data, filterBy) => {
   let timelineData;
 
   timelineData = filterData(data, filterBy);
   timelineData = createTimelineData(timelineData);
   timelineData = sortByDateDescending(timelineData);
+
+  return timelineData;
+};
+
+const CreditsList = ({ data, filterBy, filterByHandler }) => {
+  const { isData, isNeedInFiltering } = checkIfIsData(data);
+
+  if (!isData) return null;
+
+  const timelineData = getTimelineData(data, filterBy);
 
   return (
     <>
