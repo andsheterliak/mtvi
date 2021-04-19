@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
 import MainContainer from '../common/components/MainContainer';
 import PersonHeader from './components/PersonHeader/PersonHeader';
 import Spacer from '../common/components/Spacer';
-import CreditsList from './components/CreditsList/CreditsList';
+import CreditsList from './CreditsList/CreditsList';
 import KnownFor from './components/KnownFor';
 import MainContent from '../common/components/MainContent';
 import Layout from '../common/components/Layout';
@@ -13,7 +13,6 @@ import Layout from '../common/components/Layout';
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { personActions } from './personSlice';
 import { getAge, formatDataStr } from '../common/utils/date';
-import filterConfig from './filterConfig';
 
 const getGender = (gender) => {
   if (!gender) return null;
@@ -79,13 +78,7 @@ const Person = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const [filterBy, setFilterBy] = useState(filterConfig.all.value);
-
   const { person } = useSelector((state) => state.person);
-
-  const filterByHandler = (e) => {
-    setFilterBy(e.target.value);
-  };
 
   useEffect(() => {
     dispatch(personActions.fetchPerson(id));
@@ -118,14 +111,7 @@ const Person = () => {
                 }}
               />
 
-              <CreditsList
-                data={{
-                  movieCredits: person.movie_credits,
-                  tvCredits: person.tv_credits,
-                }}
-                filterBy={filterBy}
-                filterByHandler={filterByHandler}
-              />
+              <CreditsList />
             </Layout>
           </MainContainer>
         </MainContent>

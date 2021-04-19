@@ -1,12 +1,15 @@
-import Filter from '../../../common/components/Filter/Filter';
-import FilterContainer from '../../../common/components/Filter/FilterContainer';
-import ProjectsTimeline from './ProjectsTimeline/ProjectsTimeline';
-import Section from '../../../common/components/Section/Section';
-import SectionTitle from '../../../common/components/Section/SectionTitle';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
-import { formatDataStr } from '../../../common/utils/date';
-import filterConfig from '../../filterConfig';
-import { getPath } from '../../../common/utils/getData';
+import Filter from '../../common/components/Filter/Filter';
+import FilterContainer from '../../common/components/Filter/FilterContainer';
+import ProjectsTimeline from './components/ProjectsTimeline/ProjectsTimeline';
+import Section from '../../common/components/Section/Section';
+import SectionTitle from '../../common/components/Section/SectionTitle';
+
+import { formatDataStr } from '../../common/utils/date';
+import filterConfig from './filterConfig';
+import { getPath } from '../../common/utils/getData';
 
 const checkIfIsData = (data) => {
   const isMovieCast = !!data.movieCredits?.cast?.length;
@@ -148,7 +151,20 @@ const getTimelineData = (data, filterBy) => {
   return timelineData;
 };
 
-const CreditsList = ({ data, filterBy, filterByHandler }) => {
+const CreditsList = () => {
+  const { person } = useSelector((state) => state.person);
+
+  const [filterBy, setFilterBy] = useState(filterConfig.all.value);
+
+  const filterByHandler = (e) => {
+    setFilterBy(e.target.value);
+  };
+
+  const data = {
+    movieCredits: person.movie_credits,
+    tvCredits: person.tv_credits,
+  };
+
   const { isData, isNeedInFiltering } = checkIfIsData(data);
 
   if (!isData) return null;
