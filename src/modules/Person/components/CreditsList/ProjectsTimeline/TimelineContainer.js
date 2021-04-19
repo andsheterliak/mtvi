@@ -5,6 +5,7 @@ const useStyles = makeStyles(() => {
   return {
     timeline: {
       padding: 0,
+      margin: 0,
     },
   };
 });

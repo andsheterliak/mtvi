@@ -2,7 +2,7 @@ import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
-  btn: {
+  spacing: {
     marginTop: '20px',
   },
 }));
@@ -12,8 +12,12 @@ const LoadMoreBtn = ({
   isMoreData,
   isLoading,
   infiniteScrollRef,
+  isSpacing = true,
 }) => {
   const classes = useStyles();
+  const classNames = [];
+
+  if (isSpacing) classNames.push(classes.spacing);
 
   return (
     <Button
@@ -21,7 +25,7 @@ const LoadMoreBtn = ({
       size="large"
       fullWidth
       disabled={!isMoreData || isLoading}
-      className={classes.btn}
+      className={classNames.join(' ')}
       onClick={loadMoreHandler}
     >
       Load More

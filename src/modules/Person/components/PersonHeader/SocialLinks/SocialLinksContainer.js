@@ -2,16 +2,19 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => {
   return {
-    container: {
+    spacing: {
       marginTop: '20px',
     },
   };
 });
 
-const SocialLinksContainer = ({ children }) => {
+const SocialLinksContainer = ({ children, isSpacing = true }) => {
   const classes = useStyles();
+  const classNames = [classes.title];
 
-  return <div className={classes.container}>{children}</div>;
+  if (isSpacing) classNames.push(classes.spacing);
+
+  return <div className={classNames.join(' ')}>{children}</div>;
 };
 
 export default SocialLinksContainer;

@@ -5,7 +5,6 @@ const useStyles = makeStyles((theme) => {
   return {
     title: {
       textAlign: 'center',
-      margin: `${theme.spacing(2)}px 0`,
       ...theme.typography.h5,
 
       [theme.breakpoints.up('sm')]: {
@@ -17,14 +16,25 @@ const useStyles = makeStyles((theme) => {
         ...theme.typography.h3,
       },
     },
+
+    spacing: {
+      margin: `${theme.spacing(2)}px 0`,
+    },
   };
 });
 
-const HeaderTitle = ({ title }) => {
+const HeaderTitle = ({ title, isSpacing = true }) => {
   const classes = useStyles();
+  const classNames = [classes.title];
+
+  if (isSpacing) classNames.push(classes.spacing);
 
   return (
-    <Typography color="textPrimary" component="h1" className={classes.title}>
+    <Typography
+      color="textPrimary"
+      component="h1"
+      className={classNames.join(' ')}
+    >
       {title}
     </Typography>
   );
