@@ -41,9 +41,9 @@ const App = () => {
 
         <Switch>{pages}</Switch>
 
-        <Spacer />
-
-        <Footer />
+        <Spacer xs="3 0 0" sm="4 0 0">
+          <Footer />
+        </Spacer>
       </RootWrapper>
     </ThemeProvider>
   );
