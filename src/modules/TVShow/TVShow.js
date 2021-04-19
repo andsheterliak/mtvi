@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
 import PageHeader from '../common/components/PageHeader/PageHeader';
-import Spacing from '../common/components/Spacing';
+import Spacer from '../common/components/Spacer';
 import Certification from '../common/components/PageHeader/Certification';
 import Creators from '../common/components/PageHeader/Creators';
 import MainContent from '../common/components/MainContent';
@@ -79,7 +79,7 @@ const TVShow = () => {
 
   return (
     <>
-      <Spacing />
+      <Spacer />
 
       {tvShow ? (
         <MainContent>

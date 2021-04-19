@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 
 import MainContainer from '../common/components/MainContainer';
 import PersonHeader from './components/PersonHeader/PersonHeader';
-import Spacing from '../common/components/Spacing';
+import Spacer from '../common/components/Spacer';
 import CreditsList from './components/CreditsList/CreditsList';
 import KnownFor from './components/KnownFor';
 import MainContent from '../common/components/MainContent';
@@ -96,7 +96,7 @@ const Person = () => {
 
   return (
     <>
-      <Spacing />
+      <Spacer />
 
       {person ? (
         <MainContent>
@@ -109,7 +109,7 @@ const Person = () => {
               externalIds={person.external_ids}
             />
 
-            <Spacing />
+            <Spacer />
 
             <KnownFor
               data={{
@@ -118,7 +118,7 @@ const Person = () => {
               }}
             />
 
-            <Spacing />
+            <Spacer />
 
             <CreditsList
               data={{

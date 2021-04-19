@@ -8,7 +8,7 @@ import RootWrapper from './components/RootWrapper';
 import Menu from '../Menu/Menu';
 import routes from '../common/routes';
 import Footer from '../common/components/Footer';
-import Spacing from '../common/components/Spacing';
+import Spacer from '../common/components/Spacer';
 
 import { globalTheme } from '../common/theme';
 
@@ -41,7 +41,7 @@ const App = () => {
 
         <Switch>{pages}</Switch>
 
-        <Spacing />
+        <Spacer />
 
         <Footer />
       </RootWrapper>

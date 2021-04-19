@@ -12,10 +12,10 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-const Spacing = () => {
+const Spacer = () => {
   const classes = useStyles();
 
   return <div className={classes.spacing}></div>;
 };
 
-export default Spacing;
+export default Spacer;
