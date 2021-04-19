@@ -8,6 +8,7 @@ import Spacer from '../common/components/Spacer';
 import CreditsList from './components/CreditsList/CreditsList';
 import KnownFor from './components/KnownFor';
 import MainContent from '../common/components/MainContent';
+import Layout from '../common/components/Layout';
 
 import useScrollToTop from '../common/hooks/useScrollToTop';
 import { personActions } from './personSlice';
@@ -101,33 +102,31 @@ const Person = () => {
       {person ? (
         <MainContent>
           <MainContainer>
-            <PersonHeader
-              dataList={generateDataList(person)}
-              name={person.name}
-              biography={person.biography}
-              profilePath={person.profile_path}
-              externalIds={person.external_ids}
-            />
+            <Layout>
+              <PersonHeader
+                dataList={generateDataList(person)}
+                name={person.name}
+                biography={person.biography}
+                profilePath={person.profile_path}
+                externalIds={person.external_ids}
+              />
 
-            <Spacer />
+              <KnownFor
+                data={{
+                  movieCredits: person.movie_credits,
+                  tvCredits: person.tv_credits,
+                }}
+              />
 
-            <KnownFor
-              data={{
-                movieCredits: person.movie_credits,
-                tvCredits: person.tv_credits,
-              }}
-            />
-
-            <Spacer />
-
-            <CreditsList
-              data={{
-                movieCredits: person.movie_credits,
-                tvCredits: person.tv_credits,
-              }}
-              filterBy={filterBy}
-              filterByHandler={filterByHandler}
-            />
+              <CreditsList
+                data={{
+                  movieCredits: person.movie_credits,
+                  tvCredits: person.tv_credits,
+                }}
+                filterBy={filterBy}
+                filterByHandler={filterByHandler}
+              />
+            </Layout>
           </MainContainer>
         </MainContent>
       ) : (
