@@ -155,7 +155,7 @@ const CreditsList = ({ data, filterBy, filterByHandler }) => {
   const timelineData = getTimelineData(data, filterBy);
 
   return (
-    <>
+    <Section title="Projects">
       {isNeedInFiltering && (
         <FilterContainer>
           <Filter
@@ -166,10 +166,8 @@ const CreditsList = ({ data, filterBy, filterByHandler }) => {
         </FilterContainer>
       )}
 
-      <Section title="Projects">
-        <ProjectsTimeline data={timelineData} />
-      </Section>
-    </>
+      <ProjectsTimeline data={timelineData} />
+    </Section>
   );
 };
 
