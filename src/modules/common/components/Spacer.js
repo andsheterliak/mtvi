@@ -1,27 +1,40 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => {
+const generateResponsiveClasses = (theme, styleName, styleFn) => {
   const classes = theme.breakpoints.keys.reduce((classesObj, key) => {
     classesObj[key] = {
       [theme.breakpoints.up(key)]: {
-        padding(props) {
-          let value = props[key];
-
-          if (!value) return 0;
-
-          value = value
-            .split(' ')
-            .map((item) => `${theme.spacing(parseFloat(item, 10))}px`)
-            .join(' ');
-
-          return value;
+        [styleName]: (props) => {
+          return styleFn(key, props);
         },
       },
     };
 
     return classesObj;
   }, {});
+
+  return classes;
+};
+
+const useStyles = makeStyles((theme) => {
+  const classes = generateResponsiveClasses(
+    theme,
+    'padding',
+
+    (key, props) => {
+      let value = props[key];
+
+      if (!value) return 0;
+
+      value = value
+        .split(' ')
+        .map((item) => `${theme.spacing(parseFloat(item, 10))}px`)
+        .join(' ');
+
+      return value;
+    }
+  );
 
   return classes;
 });
