@@ -1,5 +1,6 @@
 import Cards from '../../common/components/Cards/Cards';
 import Section from '../../common/components/Section/Section';
+import SectionTitle from '../../common/components/Section/SectionTitle';
 import Slider from '../../common/components/Slider/Slider';
 
 import { checkIfIsData } from '../../common/utils/getData';
@@ -77,7 +78,9 @@ const KnownFor = ({ data }) => {
   if (!checkIfIsData(knownFor)) return null;
 
   return (
-    <Section title="Known For">
+    <Section>
+      <SectionTitle title="Known For" />
+
       <Slider isLinks>
         <Cards cardsData={knownFor} />
       </Slider>

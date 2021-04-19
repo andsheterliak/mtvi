@@ -2,6 +2,7 @@ import Filter from '../../../common/components/Filter/Filter';
 import FilterContainer from '../../../common/components/Filter/FilterContainer';
 import ProjectsTimeline from './ProjectsTimeline/ProjectsTimeline';
 import Section from '../../../common/components/Section/Section';
+import SectionTitle from '../../../common/components/Section/SectionTitle';
 
 import { formatDataStr } from '../../../common/utils/date';
 import filterConfig from '../../filterConfig';
@@ -155,7 +156,9 @@ const CreditsList = ({ data, filterBy, filterByHandler }) => {
   const timelineData = getTimelineData(data, filterBy);
 
   return (
-    <Section title="Projects">
+    <Section>
+      <SectionTitle title="Projects" isSpacing={false} />
+
       {isNeedInFiltering && (
         <FilterContainer>
           <Filter

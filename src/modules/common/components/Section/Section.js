@@ -1,13 +1,5 @@
-import SectionTitle from './SectionTitle';
-
-const Section = ({ children, title }) => {
-  return (
-    <section>
-      <SectionTitle title={title} />
-
-      {children}
-    </section>
-  );
+const Section = ({ children }) => {
+  return <section>{children}</section>;
 };
 
 export default Section;
