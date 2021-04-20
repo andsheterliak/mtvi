@@ -1,12 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-import HeaderDescription from '../../../common/components/PageHeader/HeaderDescription';
-import HeaderTitle from '../../../common/components/PageHeader/HeaderTitle';
-import InfoList from '../../../common/components/InfoList/InfoList';
+import HeaderDescription from '../../../../common/components/PageHeader/HeaderDescription';
+import HeaderTitle from '../../../../common/components/PageHeader/HeaderTitle';
+import InfoList from '../../../../common/components/InfoList/InfoList';
 import SocialLinks from './SocialLinks/SocialLinks';
 
-import { IMG_BASE_URL, IMG_SIZES } from '../../../common/tmdb-config';
-import noUserPhotoImg from '../../../../assets/img/no-user-photo.svg';
+import { IMG_BASE_URL, IMG_SIZES } from '../../../../common/tmdb-config';
+import noUserPhotoImg from '../../../../../assets/img/no-user-photo.svg';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -41,13 +41,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-const PersonHeader = ({
-  dataList,
-  name,
-  biography,
-  profilePath,
-  externalIds,
-}) => {
+const Header = ({ dataList, name, biography, profilePath, externalIds }) => {
   const classes = useStyles();
 
   const profileImg = profilePath
@@ -71,4 +65,4 @@ const PersonHeader = ({
   );
 };
 
-export default PersonHeader;
+export default Header;

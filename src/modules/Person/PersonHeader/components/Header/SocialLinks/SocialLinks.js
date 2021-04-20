@@ -5,7 +5,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import SocialLink from './SocialLink';
 import SocialLinksContainer from './SocialLinksContainer';
 
-import { checkIfIsData } from '../../../../common/utils/getData';
+import { checkIfIsData } from '../../../../../common/utils/getData';
 
 const createSocialLinksMap = (externalIds) => {
   const socialLinksMap = [];

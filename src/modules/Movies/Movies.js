@@ -67,7 +67,7 @@ const Movies = ({ titleName }) => {
       dispatch(moviesActions.resetState());
     };
   }, [dispatch]);
-
+  //
   const cards = checkIfIsData(movies) ? (
     <CardsPage data={movies} CardsComponent={Cards} />
   ) : (

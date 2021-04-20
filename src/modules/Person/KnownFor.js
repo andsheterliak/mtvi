@@ -1,9 +1,11 @@
-import Cards from '../../common/components/Cards/Cards';
-import Section from '../../common/components/Section/Section';
-import SectionTitle from '../../common/components/Section/SectionTitle';
-import Slider from '../../common/components/Slider/Slider';
+import { useSelector } from 'react-redux';
 
-import { checkIfIsData } from '../../common/utils/getData';
+import Cards from '../common/components/Cards/Cards';
+import Section from '../common/components/Section/Section';
+import SectionTitle from '../common/components/Section/SectionTitle';
+import Slider from '../common/components/Slider/Slider';
+
+import { checkIfIsData } from '../common/utils/getData';
 
 const sortByVoteDescending = (data) => {
   const newData = [...data];
@@ -68,7 +70,14 @@ const getKnownFor = (data) => {
   return newData;
 };
 
-const KnownFor = ({ data }) => {
+const KnownFor = () => {
+  const { person } = useSelector((state) => state.person);
+
+  const data = {
+    movieCredits: person.movie_credits,
+    tvCredits: person.tv_credits,
+  };
+
   const joinedData = joinData(data);
 
   if (!checkIfIsData(joinedData)) return null;
