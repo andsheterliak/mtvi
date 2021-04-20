@@ -11,7 +11,7 @@ import { formatDataStr } from '../../common/utils/date';
 import filterConfig from './filterConfig';
 import { getPath } from '../../common/utils/getData';
 
-const checkIfIsData = (data) => {
+const checkIfIsCredits = (data) => {
   const isMovieCast = !!data.movieCredits?.cast?.length;
   const isMovieCrew = !!data.movieCredits?.crew?.length;
 
@@ -165,7 +165,7 @@ const CreditsList = () => {
     tvCredits: person.tv_credits,
   };
 
-  const { isData, isNeedInFiltering } = checkIfIsData(data);
+  const { isData, isNeedInFiltering } = checkIfIsCredits(data);
 
   if (!isData) return null;
 
