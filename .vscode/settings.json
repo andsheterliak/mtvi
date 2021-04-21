@@ -6,4 +6,8 @@
   },
   // Disable default editor validation to enable eslint validation.
   "javascript.validate.enable": false,
+  // To disable editor's fix on save for eslint.
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": false
+  },
 }
