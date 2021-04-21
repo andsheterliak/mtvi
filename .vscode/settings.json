@@ -1,7 +1,7 @@
 {
   // --- eslint
   "[javascript]": {
-    // Disable format on save if enabled for tools like (default formatter, prettier ...).
+    // Disable editor's format on save.
     "editor.formatOnSave": false,
   },
   // Disable default editor validation to enable eslint validation.
