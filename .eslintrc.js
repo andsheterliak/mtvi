@@ -5,6 +5,8 @@ module.exports = {
     react: {
       version: 'detect', // Automatically detect the react version, will be set by default in the next major version.
     },
+
+    'import/resolver': 'webpack', // Take all defaults
   },
 
   env: {

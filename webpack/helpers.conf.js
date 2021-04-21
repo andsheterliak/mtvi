@@ -12,6 +12,9 @@ const dirNames = {
   img: 'img',
   favicon: 'favicon', 
   fonts: 'fonts',
+  modules: 'modules',
+  components: 'components',
+  common: 'common',
 };
 
 const paths = {
@@ -68,4 +71,4 @@ const paths = {
   },
 };
 
-module.exports = { isDev, isProd, paths };
+module.exports = { isDev, isProd, paths, dirNames };

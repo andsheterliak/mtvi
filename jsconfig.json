@@ -1,0 +1,41 @@
+{
+  // This config is required for VSCode to understand webpack aliases
+  // Details: https://code.visualstudio.com/docs/languages/jsconfig
+  "compilerOptions": {
+    "baseUrl": "./", // Relative to jsconfig.json
+    /**
+     * 'paths' Relative to "baseUrl".
+     * To get the shortest path when using auto-import, 'paths' should be ordered from furthest to shortest.
+     */
+    "paths": {
+      "react-dom": [
+        "@hot-loader/react-dom"
+      ],
+      "@components/*": [
+        "src/modules/common/components/*"
+      ],
+      "@common/*": [
+        "src/modules/common/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@modules/*": [
+        "src/modules/*"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+    },
+  },
+  // 'exclude/include' paths relative to jsconfig.json. When the 'include' attribute is specified, only those files are included.
+  // "include": [
+  //   "src/**/*"
+  // ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "functions",
+    "webpack",
+  ]
+}
