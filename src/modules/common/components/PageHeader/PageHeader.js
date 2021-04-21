@@ -1,13 +1,13 @@
 import { ThemeProvider } from '@material-ui/core/styles';
 
-import MainContainer from '../MainContainer';
-import InfoList from '../InfoList/InfoList';
+import { IMG_BASE_URL, IMG_SIZES } from '@common/tmdb-config';
+import { innerDarkTheme } from '@common/theme';
+
+import MainContainer from '@components/MainContainer';
+import InfoList from '@components/InfoList/InfoList';
 import HeaderTitle from './HeaderTitle';
 import HeaderDescription from './HeaderDescription';
-
-import { IMG_BASE_URL, IMG_SIZES } from '../../tmdb-config';
 import useStyles from './PageHeaderStyles';
-import { innerDarkTheme } from '../../theme';
 
 const PageHeader = ({ backdrop, title, overview, dataList }) => {
   const classes = useStyles();

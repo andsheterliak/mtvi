@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 
-import Cards from '../common/components/Cards/Cards';
-import Section from '../common/components/Section/Section';
-import SectionTitle from '../common/components/Section/SectionTitle';
-import Slider from '../common/components/Slider/Slider';
+import { checkIfIsData } from '@common/utils/getData';
 
-import { checkIfIsData } from '../common/utils/getData';
+import Section from '@components/Section/Section';
+import SectionTitle from '@components/Section/SectionTitle';
+import Slider from '@components/Slider/Slider';
+import Cards from '@components/Cards/Cards';
 
 const sortByVoteDescending = (data) => {
   const newData = [...data];

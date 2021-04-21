@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import axiosTMDB from '../common/axios-tmdb';
+import axiosTMDB from '@common/axios-tmdb';
 
 const initialState = {
   movie: null,

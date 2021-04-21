@@ -2,15 +2,16 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
-import MainContainer from '../common/components/MainContainer';
+import useScrollToTop from '@common/hooks/useScrollToTop';
+
+import MainContainer from '@components/MainContainer';
+import Layout from '@components/Layout';
+import Spacer from '@components/Spacer';
+import MainContent from '@components/MainContent';
 import PersonHeader from './PersonHeader/PersonHeader';
-import Spacer from '../common/components/Spacer';
 import CreditsList from './CreditsList/CreditsList';
 import KnownFor from './KnownFor';
-import MainContent from '../common/components/MainContent';
-import Layout from '../common/components/Layout';
 
-import useScrollToTop from '../common/hooks/useScrollToTop';
 import { personActions } from './personSlice';
 
 const Person = () => {

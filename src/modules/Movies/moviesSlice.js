@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import axiosTMDB from '../common/axios-tmdb';
-import { getSelectedGenres, checkIfIsNextPage } from '../common/utils/getData';
+import axiosTMDB from '@common/axios-tmdb';
+import { getSelectedGenres, checkIfIsNextPage } from '@common/utils/getData';
 
 const initialState = {
   movies: [],

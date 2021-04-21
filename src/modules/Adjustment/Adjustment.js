@@ -1,11 +1,12 @@
+import Modal from '@components/Modal';
 import AdjustmentButton from './components/AdjustmentButton';
 import ActionsButtons from './components/ActionsButtons';
-import useOptions from './hooks/useOptions';
-import Modal from '../common/components/Modal';
 import SortResultsByOption from './components/SortResultsByOption';
 import ReleaseDatesOption from './components/ReleaseDates/ReleaseDatesOption';
 import GenresOption from './components/GenresOption';
 import UserScoreOption from './components/UserScoreOption';
+
+import useOptions from './hooks/useOptions';
 
 const Adjustment = ({
   optionsLSName,

@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';

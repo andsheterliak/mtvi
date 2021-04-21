@@ -10,11 +10,12 @@ import { orange } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 
-import { IMG_BASE_URL, IMG_SIZES } from '../../tmdb-config';
-import { formatDataStr } from '../../utils/date';
+import { IMG_BASE_URL, IMG_SIZES } from '@common/tmdb-config';
+import { formatDataStr } from '@common/utils/date';
+import noImageImg from '@assets/img/no-image.svg';
+import { getHyphenOrData } from '@common/utils/getData';
+
 import useCardStyles from './CardStyles';
-import noImageImg from '../../../../assets/img/no-image.svg';
-import { getHyphenOrData } from '../../utils/getData';
 
 const useStyles = makeStyles(() => ({
   subInfo: {

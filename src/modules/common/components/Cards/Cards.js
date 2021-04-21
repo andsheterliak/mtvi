@@ -1,8 +1,8 @@
 import { memo } from 'react';
 
-import Card from './Card';
+import { getPath } from '@common/utils/getData';
 
-import { getPath } from '../../utils/getData';
+import Card from './Card';
 
 const Cards = ({ cardsData }) => {
   const cards = cardsData.map((item) => {

@@ -7,10 +7,10 @@ import {
   Typography,
 } from '@material-ui/core';
 
-import useStyles from '../../common/components/Cards/CardStyles';
-import { IMG_BASE_URL, IMG_SIZES } from '../../common/tmdb-config';
-import noUserPhotoImg from '../../../assets/img/no-user-photo.svg';
-import { getHyphenOrData } from '../../common/utils/getData';
+import useStyles from '@components/Cards/CardStyles';
+import { getHyphenOrData } from '@common/utils/getData';
+import { IMG_BASE_URL, IMG_SIZES } from '@common/tmdb-config';
+import noUserPhotoImg from '@assets/img/no-user-photo.svg';
 
 const PersonCard = ({ profilePath, name, knownFor, path }) => {
   const classes = useStyles();

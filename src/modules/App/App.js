@@ -4,13 +4,13 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 
-import RootWrapper from './components/RootWrapper';
-import Menu from '../Menu/Menu';
-import routes from '../common/routes';
-import Footer from '../common/components/Footer';
-import Spacer from '../common/components/Spacer';
+import routes from '@common/routes';
+import { globalTheme } from '@common/theme';
 
-import { globalTheme } from '../common/theme';
+import Footer from '@components/Footer';
+import Spacer from '@components/Spacer';
+import Menu from '@modules/Menu/Menu';
+import RootWrapper from './components/RootWrapper';
 
 const App = () => {
   const pages = Object.entries(routes).map(([key, data]) => {

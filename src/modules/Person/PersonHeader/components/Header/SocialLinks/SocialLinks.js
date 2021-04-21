@@ -2,10 +2,10 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 
+import { checkIfIsData } from '@common/utils/getData';
+
 import SocialLink from './SocialLink';
 import SocialLinksContainer from './SocialLinksContainer';
-
-import { checkIfIsData } from '../../../../../common/utils/getData';
 
 const createSocialLinksMap = (externalIds) => {
   const socialLinksMap = [];

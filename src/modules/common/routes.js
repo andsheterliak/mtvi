@@ -1,9 +1,9 @@
-import Movie from '../Movie/Movie';
-import Movies from '../Movies/Movies';
-import People from '../People/People';
-import TVShows from '../TVShows/TVShows';
-import TVShow from '../TVShow/TVShow';
-import Person from '../Person/Person';
+import Movie from '@modules/Movie/Movie';
+import Movies from '@modules/Movies/Movies';
+import People from '@modules/People/People';
+import TVShows from '@modules/TVShows/TVShows';
+import TVShow from '@modules/TVShow/TVShow';
+import Person from '@modules/Person/Person';
 
 const routes = {
   default: {
