@@ -10,4 +10,10 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": false
   },
+  // --- cSpell plugin
+  // Include words to the dictionary.
+  "cSpell.words": [
+    "TMDB",
+    "mtvi"
+  ],
 }
