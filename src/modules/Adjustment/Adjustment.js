@@ -1,4 +1,4 @@
-import Modal from '@components/Modal';
+import Modal from './components/Modal';
 import AdjustmentButton from './components/AdjustmentButton';
 import ActionsButtons from './components/ActionsButtons';
 import SortResultsByOption from './components/SortResultsByOption';
