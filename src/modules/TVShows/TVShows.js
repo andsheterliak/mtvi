@@ -22,7 +22,7 @@ import { checkIfIsData } from '@common/utils/getData';
 import { TV_OPTIONS_LS_NAME } from './constants';
 import { tvShowsActions } from './tvShowsSlice';
 
-const Movies = ({ titleName }) => {
+const TVShows = ({ titleName }) => {
   useScrollToTop();
 
   const dispatch = useDispatch();
@@ -103,4 +103,4 @@ const Movies = ({ titleName }) => {
   );
 };
 
-export default Movies;
+export default TVShows;
