@@ -8,6 +8,8 @@ import SocialLink from './SocialLink';
 import SocialLinksContainer from './SocialLinksContainer';
 
 const createSocialLinksMap = (externalIds) => {
+  if (!checkIfIsData(externalIds)) return null;
+
   const socialLinksMap = [];
 
   if (externalIds.facebook_id) {
