@@ -34,7 +34,7 @@ const Adjustment = ({
   return (
     <>
       <AdjustmentButton
-        ariaLAbel={modalTitle.toLowerCase()}
+        ariaLabel={modalTitle.toLowerCase()}
         openModalHandler={openModalHandler}
       />
 
