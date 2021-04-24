@@ -15,9 +15,9 @@ import types from '~common/types';
 import Adjustment from '~modules/Adjustment/Adjustment';
 import LoadMoreBtn from '~components/LoadMoreBtn';
 import MainContainer from '~components/MainContainer';
-import CardsGrid from '~components/Cards/CardsGrid';
+import CardsGrid from '~components/CardsGrid';
 import Cards from '~components/Cards/Cards';
-import CardsPage from '~components/Cards/CardsPage';
+import CardsPage from '~components/CardsPage';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 

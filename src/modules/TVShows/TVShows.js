@@ -16,8 +16,8 @@ import Adjustment from '~modules/Adjustment/Adjustment';
 import Cards from '~components/Cards/Cards';
 import LoadMoreBtn from '~components/LoadMoreBtn';
 import MainContainer from '~components/MainContainer';
-import CardsGrid from '~components/Cards/CardsGrid';
-import CardsPage from '~components/Cards/CardsPage';
+import CardsGrid from '~components/CardsGrid';
+import CardsPage from '~components/CardsPage';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 

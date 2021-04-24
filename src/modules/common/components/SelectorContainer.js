@@ -13,14 +13,14 @@ const useStyles = makeStyles({
   },
 });
 
-const FilterContainer = ({ children }) => {
+const SelectorContainer = ({ children }) => {
   const classes = useStyles();
 
   return <div className={classes.container}>{children}</div>;
 };
 
-FilterContainer.propTypes = {
+SelectorContainer.propTypes = {
   children: types.containerChildren,
 };
 
-export default FilterContainer;
+export default SelectorContainer;

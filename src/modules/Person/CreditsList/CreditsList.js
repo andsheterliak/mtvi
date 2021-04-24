@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { formatDataStr } from '~common/utils/date';
 import { getPath } from '~common/utils/getData';
 
-import Filter from '~components/Filter/Filter';
-import FilterContainer from '~components/Filter/FilterContainer';
-import Section from '~components/Section/Section';
-import SectionTitle from '~components/Section/SectionTitle';
+import Filter from '~components/Filter';
+import SelectorContainer from '~components/SelectorContainer';
+import Section from '~components/Section';
+import SectionTitle from '~components/SectionTitle';
 import ProjectsTimeline from '../components/ProjectsTimeline/ProjectsTimeline';
 
 import filterConfig from './filterConfig';
@@ -177,13 +177,13 @@ const CreditsList = () => {
       <SectionTitle title="Projects" isSpacing={false} />
 
       {isNeedInFiltering && (
-        <FilterContainer>
+        <SelectorContainer>
           <Filter
             config={filterConfig}
             filterBy={filterBy}
             filterByHandler={filterByHandler}
           />
-        </FilterContainer>
+        </SelectorContainer>
       )}
 
       <ProjectsTimeline data={timelineData} />
