@@ -19,6 +19,7 @@ import useScrollToTop from '@common/hooks/useScrollToTop';
 import useInfiniteScroll from '@common/hooks/useInfiniteScroll';
 import { getLS } from '@common/utils/storage';
 import { checkIfIsData } from '@common/utils/getData';
+import types from '@common/types';
 import { moviesActions } from './moviesSlice';
 import { MOVIES_OPTIONS_LS_NAME } from './constants';
 
@@ -67,7 +68,7 @@ const Movies = ({ titleName }) => {
       dispatch(moviesActions.resetState());
     };
   }, [dispatch]);
-  //
+
   const cards = checkIfIsData(movies) ? (
     <CardsPage data={movies} CardsComponent={Cards} />
   ) : (
@@ -102,6 +103,10 @@ const Movies = ({ titleName }) => {
       />
     </MainContainer>
   );
+};
+
+Movies.propTypes = {
+  titleName: types.pageTitle,
 };
 
 export default Movies;

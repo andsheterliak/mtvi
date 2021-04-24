@@ -1,3 +1,7 @@
+import { object } from 'prop-types';
+
+import types from '@common/types';
+
 /**
  * This component is only for adding new cards in optimized way.
  * Each 'CardsComponent' won't re-render (to virtual dom) because each 'CardsComponent' is wrapped in 'memo'.
@@ -8,6 +12,11 @@ const CardsPage = ({ data, CardsComponent }) => {
   return data.map(({ pageData, pageNum }) => {
     return <CardsComponent key={pageNum} cardsData={pageData} />;
   });
+};
+
+CardsPage.propTypes = {
+  data: types.cardsData,
+  CardsComponent: object.isRequired,
 };
 
 export default CardsPage;

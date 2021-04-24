@@ -1,3 +1,5 @@
+import { exact, func, string } from 'prop-types';
+
 import Modal from './components/Modal';
 import AdjustmentButton from './components/AdjustmentButton';
 import ActionsButtons from './components/ActionsButtons';
@@ -7,6 +9,7 @@ import GenresOption from './components/GenresOption';
 import UserScoreOption from './components/UserScoreOption';
 
 import useOptions from './hooks/useOptions';
+import adjustmentTypes from './adjustmentTypes';
 
 const Adjustment = ({
   optionsLSName,
@@ -80,6 +83,26 @@ const Adjustment = ({
       />
     </>
   );
+};
+
+Adjustment.propTypes = {
+  optionsLSName: string.isRequired,
+  sortByOptions: adjustmentTypes.sortByOptions,
+  userScoreRange: adjustmentTypes.userScoreRange,
+  dateTitle: adjustmentTypes.dateTitle,
+  modalTitle: adjustmentTypes.modalTitle,
+  fetchItems: func.isRequired,
+
+  initialOptions: exact({
+    sortBy: string.isRequired,
+    userScore: adjustmentTypes.userScore,
+    genres: adjustmentTypes.genres,
+
+    dates: exact({
+      from: adjustmentTypes.dates.from,
+      to: adjustmentTypes.dates.to,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default Adjustment;

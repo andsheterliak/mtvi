@@ -1,3 +1,5 @@
+import types from '@common/types';
+
 import InfoItem from './InfoItem';
 import InfoListContainer from './InfoListContainer';
 
@@ -7,6 +9,10 @@ const InfoList = ({ dataList }) => {
   });
 
   return <InfoListContainer>{items}</InfoListContainer>;
+};
+
+InfoList.propTypes = {
+  dataList: types.dataList,
 };
 
 export default InfoList;

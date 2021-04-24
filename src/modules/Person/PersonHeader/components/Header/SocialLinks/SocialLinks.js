@@ -3,6 +3,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 
 import { checkIfIsData } from '@common/utils/getData';
+import personTypes from '@modules/Person/personTypes';
 
 import SocialLink from './SocialLink';
 import SocialLinksContainer from './SocialLinksContainer';
@@ -54,6 +55,10 @@ const SocialLinks = ({ externalIds }) => {
   });
 
   return <SocialLinksContainer>{socialLinks}</SocialLinksContainer>;
+};
+
+SocialLinks.propTypes = {
+  externalIds: personTypes.externalIds,
 };
 
 export default SocialLinks;

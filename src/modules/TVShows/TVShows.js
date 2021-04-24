@@ -19,6 +19,7 @@ import useInfiniteScroll from '@common/hooks/useInfiniteScroll';
 import useScrollToTop from '@common/hooks/useScrollToTop';
 import { getLS } from '@common/utils/storage';
 import { checkIfIsData } from '@common/utils/getData';
+import types from '@common/types';
 import { TV_OPTIONS_LS_NAME } from './constants';
 import { tvShowsActions } from './tvShowsSlice';
 
@@ -101,6 +102,10 @@ const TVShows = ({ titleName }) => {
       />
     </MainContainer>
   );
+};
+
+TVShows.propTypes = {
+  titleName: types.pageTitle,
 };
 
 export default TVShows;

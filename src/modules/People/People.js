@@ -4,6 +4,7 @@ import { useCallback, useEffect } from 'react';
 import useScrollToTop from '@common/hooks/useScrollToTop';
 import useInfiniteScroll from '@common/hooks/useInfiniteScroll';
 import { checkIfIsData } from '@common/utils/getData';
+import types from '@common/types';
 
 import CardsGrid from '@components/Cards/CardsGrid';
 import MainContainer from '@components/MainContainer';
@@ -69,6 +70,10 @@ const People = ({ titleName }) => {
       />
     </MainContainer>
   );
+};
+
+People.propTypes = {
+  titleName: types.pageTitle,
 };
 
 export default People;

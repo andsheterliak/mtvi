@@ -1,4 +1,6 @@
+import types from '@common/types';
 import { makeStyles } from '@material-ui/core/styles';
+import { arrayOf, element } from 'prop-types';
 
 const useStyles = makeStyles(() => {
   return {
@@ -15,6 +17,11 @@ const SocialLinksContainer = ({ children, isSpacing = true }) => {
   if (isSpacing) classNames.push(classes.spacing);
 
   return <div className={classNames.join(' ')}>{children}</div>;
+};
+
+SocialLinksContainer.propTypes = {
+  children: arrayOf(element).isRequired,
+  isSpacing: types.isSpacing,
 };
 
 export default SocialLinksContainer;

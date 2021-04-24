@@ -1,6 +1,8 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import types from '@common/types';
+
 const useStyles = makeStyles((theme) => ({
   spacing: {
     margin: '20px 0 20px 20px',
@@ -27,6 +29,11 @@ const RouteHeader = ({ titleName, isSpacing = true }) => {
       {titleName}
     </Typography>
   );
+};
+
+RouteHeader.propTypes = {
+  titleName: types.pageTitle,
+  isSpacing: types.isSpacing,
 };
 
 export default RouteHeader;

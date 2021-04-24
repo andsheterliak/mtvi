@@ -1,3 +1,4 @@
+import { arrayOf, exact, number, string } from 'prop-types';
 import { Link as MUILink } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
@@ -14,6 +15,15 @@ const Creators = ({ creators }) => {
       </MUILink>
     );
   });
+};
+
+Creators.propTypes = {
+  creators: arrayOf(
+    exact({
+      name: string.isRequired,
+      id: number.isRequired,
+    })
+  ).isRequired,
 };
 
 export default Creators;

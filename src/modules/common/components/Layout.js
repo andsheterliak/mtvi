@@ -1,5 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+import types from '@common/types';
+
 const useStyles = makeStyles((theme) => {
   return {
     layout: {
@@ -15,6 +17,10 @@ const Layout = ({ children }) => {
   const classes = useStyles();
 
   return <div className={classes.layout}>{children}</div>;
+};
+
+Layout.propTypes = {
+  children: types.containerChildren,
 };
 
 export default Layout;

@@ -1,3 +1,4 @@
+import { arrayOf, element } from 'prop-types';
 import DateFnsUtils from '@date-io/date-fns';
 import { makeStyles } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -18,6 +19,10 @@ const DatePickerContainer = ({ children }) => {
       <div className={classes.pickerContainer}>{children}</div>
     </MuiPickersUtilsProvider>
   );
+};
+
+DatePickerContainer.propTypes = {
+  children: arrayOf(element).isRequired,
 };
 
 export default DatePickerContainer;

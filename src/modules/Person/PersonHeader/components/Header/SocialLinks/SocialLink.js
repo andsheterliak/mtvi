@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from '@material-ui/core';
+import { number, object, oneOfType, string } from 'prop-types';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -28,6 +29,12 @@ const SocialLink = ({ href, id, Icon }) => {
       <Icon fontSize="large" />
     </Link>
   );
+};
+
+SocialLink.propTypes = {
+  href: string.isRequired,
+  id: oneOfType([string, number]).isRequired,
+  Icon: object.isRequired,
 };
 
 export default SocialLink;

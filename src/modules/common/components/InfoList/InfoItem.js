@@ -1,6 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import types from '@common/types';
 import { getHyphenOrData } from '@common/utils/getData';
 
 const useStyles = makeStyles(() => {
@@ -27,6 +28,11 @@ const InfoItem = ({ name, value }) => {
       </Typography>
     </li>
   );
+};
+
+InfoItem.propTypes = {
+  name: types.dataListItem.name,
+  value: types.dataListItem.value,
 };
 
 export default InfoItem;

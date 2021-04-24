@@ -1,5 +1,7 @@
+import types from '@common/types';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { bool, object } from 'prop-types';
 
 const useStyles = makeStyles(() => ({
   spacing: {
@@ -31,6 +33,14 @@ const LoadMoreBtn = ({
       Load More
     </Button>
   );
+};
+
+LoadMoreBtn.propTypes = {
+  loadMoreHandler: types.handler,
+  isMoreData: bool.isRequired,
+  isLoading: bool.isRequired,
+  infiniteScrollRef: object.isRequired,
+  isSpacing: types.isSpacing,
 };
 
 export default LoadMoreBtn;

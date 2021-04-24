@@ -1,3 +1,4 @@
+import { number, string } from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   Card as MUiCard,
@@ -95,6 +96,15 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, id, path }) => {
       </CardActionArea>
     </MUiCard>
   );
+};
+
+Card.propTypes = {
+  posterPath: string,
+  title: string,
+  releaseDate: string,
+  voteAverage: number,
+  id: number.isRequired,
+  path: string.isRequired,
 };
 
 export default Card;

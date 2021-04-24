@@ -1,5 +1,7 @@
+import types from '@common/types';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { string } from 'prop-types';
 
 const useStyles = makeStyles({
   spacing: {
@@ -23,6 +25,11 @@ const SectionTitle = ({ title, isSpacing = true }) => {
       {title}
     </Typography>
   );
+};
+
+SectionTitle.propTypes = {
+  title: string.isRequired,
+  isSpacing: types.isSpacing,
 };
 
 export default SectionTitle;

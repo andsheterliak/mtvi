@@ -6,6 +6,7 @@ import {
   CardMedia,
   Typography,
 } from '@material-ui/core';
+import { string } from 'prop-types';
 
 import useStyles from '@components/Cards/CardStyles';
 import { getHyphenOrData } from '@common/utils/getData';
@@ -46,6 +47,13 @@ const PersonCard = ({ profilePath, name, knownFor, path }) => {
       </CardActionArea>
     </Card>
   );
+};
+
+PersonCard.propTypes = {
+  profilePath: string,
+  name: string,
+  knownFor: string,
+  path: string.isRequired,
 };
 
 export default PersonCard;

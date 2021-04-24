@@ -1,5 +1,7 @@
 import { memo } from 'react';
 
+import types from '@common/types';
+
 import PersonCard from './PersonCard';
 
 const PersonCards = ({ cardsData }) => {
@@ -20,6 +22,10 @@ const PersonCards = ({ cardsData }) => {
   });
 
   return cards;
+};
+
+PersonCards.propTypes = {
+  cardsData: types.cardsData,
 };
 
 export default memo(PersonCards);

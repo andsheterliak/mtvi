@@ -1,3 +1,4 @@
+import types from '@common/types';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,6 +18,10 @@ const CardsGrid = ({ children }) => {
   const classes = useStyles();
 
   return <div className={classes.grid}>{children}</div>;
+};
+
+CardsGrid.propTypes = {
+  children: types.cardsGridItems,
 };
 
 export default CardsGrid;

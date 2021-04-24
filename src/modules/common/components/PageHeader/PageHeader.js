@@ -2,6 +2,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 
 import { IMG_BASE_URL, IMG_SIZES } from '@common/tmdb-config';
 import { innerDarkTheme } from '@common/theme';
+import types from '@common/types';
 
 import MainContainer from '@components/MainContainer';
 import InfoList from '@components/InfoList/InfoList';
@@ -45,6 +46,13 @@ const PageHeader = ({ backdrop, title, overview, dataList }) => {
       </section>
     </ThemeProvider>
   );
+};
+
+PageHeader.propTypes = {
+  backdrop: types.pageHeader.imgPath,
+  title: types.pageHeader.headerName,
+  overview: types.pageHeader.description,
+  dataList: types.dataList,
 };
 
 export default PageHeader;
