@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { getHyphenOrData } from '../../utils/getData';
+import { getHyphenOrData } from '@common/utils/getData';
 
 const useStyles = makeStyles(() => {
   return {
