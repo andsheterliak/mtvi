@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Adjustment from '~modules/Adjustment/Adjustment';
 import {
   TV_DEFAULT_OPTIONS,
   SORT_TV_BY_OPTIONS,
@@ -12,6 +11,8 @@ import useScrollToTop from '~common/hooks/useScrollToTop';
 import { getLS } from '~common/utils/storage';
 import { checkIfIsData } from '~common/utils/getData';
 import types from '~common/types';
+
+import Adjustment from '~modules/Adjustment/Adjustment';
 import Cards from '~components/Cards/Cards';
 import LoadMoreBtn from '~components/LoadMoreBtn';
 import MainContainer from '~components/MainContainer';
