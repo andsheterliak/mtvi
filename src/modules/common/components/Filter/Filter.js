@@ -1,4 +1,7 @@
+import { exact, objectOf, string } from 'prop-types';
 import { Input, InputLabel, MenuItem, Select } from '@material-ui/core';
+
+import types from '~common/types';
 
 const Filter = ({ config, filterByHandler, filterBy }) => {
   const menus = Object.values(config).map((item) => {
@@ -28,6 +31,18 @@ const Filter = ({ config, filterByHandler, filterBy }) => {
       </Select>
     </div>
   );
+};
+
+Filter.propTypes = {
+  config: objectOf(
+    exact({
+      label: string.isRequired,
+      value: string.isRequired,
+    })
+  ).isRequired,
+
+  filterByHandler: types.handler,
+  filterBy: string.isRequired,
 };
 
 export default Filter;
