@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 
 import types from '~common/types';
 
-import SliderItems from './SliderItems';
+import SliderItems from './SliderItemsContainer';
 
 const useStyles = makeStyles(() => ({
   slider: {

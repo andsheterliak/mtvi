@@ -11,14 +11,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const SliderItems = ({ children }) => {
+const SliderItemsContainer = ({ children }) => {
   const classes = useStyles();
 
   return <div className={classes.items}>{children}</div>;
 };
 
-SliderItems.propTypes = {
+SliderItemsContainer.propTypes = {
   children: types.containerChildren,
 };
 
-export default SliderItems;
+export default SliderItemsContainer;
