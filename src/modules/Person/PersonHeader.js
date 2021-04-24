@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import { formatDataStr, getAge } from '~common/utils/date';
 
-import Header from './components/Header/Header';
+import Header from './components/Header';
 
 const getGender = (gender) => {
   if (!gender) return null;

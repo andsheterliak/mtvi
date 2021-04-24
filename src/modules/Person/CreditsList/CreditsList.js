@@ -8,7 +8,7 @@ import Filter from '~components/Filter/Filter';
 import FilterContainer from '~components/Filter/FilterContainer';
 import Section from '~components/Section/Section';
 import SectionTitle from '~components/Section/SectionTitle';
-import ProjectsTimeline from './components/ProjectsTimeline/ProjectsTimeline';
+import ProjectsTimeline from '../components/ProjectsTimeline/ProjectsTimeline';
 
 import filterConfig from './filterConfig';
 

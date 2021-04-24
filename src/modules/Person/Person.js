@@ -8,7 +8,7 @@ import MainContainer from '~components/MainContainer';
 import Layout from '~components/Layout';
 import Spacer from '~components/Spacer';
 import MainContent from '~components/MainContent';
-import PersonHeader from './PersonHeader/PersonHeader';
+import PersonHeader from './PersonHeader';
 import CreditsList from './CreditsList/CreditsList';
 import KnownFor from './KnownFor';
 

@@ -12,7 +12,7 @@ import LoadMoreBtn from '~components/LoadMoreBtn';
 import CardsPage from '~components/Cards/CardsPage';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
-import PersonCards from './components/PersonCards';
+import PersonCards from './components/PersonCards/PersonCards';
 
 import { peopleActions } from './peopleSlice';
 
