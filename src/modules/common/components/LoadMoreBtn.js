@@ -1,7 +1,7 @@
-import types from '@common/types';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { bool, object } from 'prop-types';
+import types from '~common/types';
 
 const useStyles = makeStyles(() => ({
   spacing: {

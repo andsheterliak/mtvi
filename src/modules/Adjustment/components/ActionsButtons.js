@@ -2,7 +2,7 @@ import { bool } from 'prop-types';
 
 import { Button } from '@material-ui/core';
 
-import types from '@common/types';
+import types from '~common/types';
 
 const ActionsButtons = ({ cancelHandler, acceptHandler, isReadyToAccept }) => {
   return (

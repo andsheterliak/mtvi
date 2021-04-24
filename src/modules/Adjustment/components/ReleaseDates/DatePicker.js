@@ -1,7 +1,7 @@
 import { string } from 'prop-types';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 
-import types from '@common/types';
+import types from '~common/types';
 
 const DatePicker = ({ ariaLabel, id, value, label, changeDateHandler }) => {
   return (

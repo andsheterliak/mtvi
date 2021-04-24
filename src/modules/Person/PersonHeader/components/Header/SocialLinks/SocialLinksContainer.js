@@ -1,6 +1,6 @@
-import types from '@common/types';
 import { makeStyles } from '@material-ui/core/styles';
 import { arrayOf, element } from 'prop-types';
+import types from '~common/types';
 
 const useStyles = makeStyles(() => {
   return {

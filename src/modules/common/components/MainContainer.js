@@ -1,5 +1,6 @@
-import types from '@common/types';
 import { Container } from '@material-ui/core';
+
+import types from '~common/types';
 
 const MainContainer = ({ children }) => {
   return <Container maxWidth="xl">{children}</Container>;

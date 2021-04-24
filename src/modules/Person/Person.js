@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
-import useScrollToTop from '@common/hooks/useScrollToTop';
+import useScrollToTop from '~common/hooks/useScrollToTop';
 
-import MainContainer from '@components/MainContainer';
-import Layout from '@components/Layout';
-import Spacer from '@components/Spacer';
-import MainContent from '@components/MainContent';
+import MainContainer from '~components/MainContainer';
+import Layout from '~components/Layout';
+import Spacer from '~components/Spacer';
+import MainContent from '~components/MainContent';
 import PersonHeader from './PersonHeader/PersonHeader';
 import CreditsList from './CreditsList/CreditsList';
 import KnownFor from './KnownFor';

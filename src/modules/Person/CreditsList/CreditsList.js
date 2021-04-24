@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
-import { formatDataStr } from '@common/utils/date';
-import { getPath } from '@common/utils/getData';
+import { formatDataStr } from '~common/utils/date';
+import { getPath } from '~common/utils/getData';
 
-import Filter from '@components/Filter/Filter';
-import FilterContainer from '@components/Filter/FilterContainer';
-import Section from '@components/Section/Section';
-import SectionTitle from '@components/Section/SectionTitle';
+import Filter from '~components/Filter/Filter';
+import FilterContainer from '~components/Filter/FilterContainer';
+import Section from '~components/Section/Section';
+import SectionTitle from '~components/Section/SectionTitle';
 import ProjectsTimeline from './components/ProjectsTimeline/ProjectsTimeline';
 
 import filterConfig from './filterConfig';

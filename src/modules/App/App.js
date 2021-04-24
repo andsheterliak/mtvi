@@ -4,12 +4,12 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 
-import routes from '@common/routes';
-import { globalTheme } from '@common/theme';
+import Menu from '~modules/Menu/Menu';
+import routes from '~common/routes';
+import { globalTheme } from '~common/theme';
 
-import Footer from '@components/Footer';
-import Spacer from '@components/Spacer';
-import Menu from '@modules/Menu/Menu';
+import Footer from '~components/Footer';
+import Spacer from '~components/Spacer';
 import RootWrapper from './components/RootWrapper';
 
 const App = () => {

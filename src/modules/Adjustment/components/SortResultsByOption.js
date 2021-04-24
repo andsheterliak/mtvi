@@ -2,7 +2,7 @@ import { string } from 'prop-types';
 import { memo } from 'react';
 import { Input, InputLabel, MenuItem, Select } from '@material-ui/core';
 
-import types from '@common/types';
+import types from '~common/types';
 
 import OptionContainer from './OptionContainer';
 import OptionTitle from './OptionTitle';

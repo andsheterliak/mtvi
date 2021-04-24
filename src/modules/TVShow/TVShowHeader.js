@@ -1,15 +1,14 @@
 import { useSelector } from 'react-redux';
 
-import Certification from '@components/PageHeader/Certification';
-import Creators from '@components/PageHeader/Creators';
-import PageHeader from '@components/PageHeader/PageHeader';
-
-import { formatDataStr, formatMinutes } from '@common/utils/date';
+import { formatDataStr, formatMinutes } from '~common/utils/date';
 import {
   checkIfIsData,
   getCertification,
   getGenres,
-} from '@common/utils/getData';
+} from '~common/utils/getData';
+import Certification from '~components/PageHeader/Certification';
+import Creators from '~components/PageHeader/Creators';
+import PageHeader from '~components/PageHeader/PageHeader';
 
 const getCreatedBy = (data) => {
   if (!checkIfIsData(data)) return null;

@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import { Menu as MenuIcon, Search as SearchIcon } from '@material-ui/icons';
 
-import HideOnScroll from '@components/HideOnScroll';
+import HideOnScroll from '~components/HideOnScroll';
 import useStyles from './AppBarStyles';
 import Logo from './Logo';
 

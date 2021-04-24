@@ -1,13 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-import { IMG_BASE_URL, IMG_SIZES } from '@common/tmdb-config';
-import types from '@common/types';
-import personTypes from '@modules/Person/personTypes';
-import noUserPhotoImg from '@assets/img/no-user-photo.svg';
+import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
+import types from '~common/types';
+import personTypes from '~modules/Person/personTypes';
+import noUserPhotoImg from '~assets/img/no-user-photo.svg';
 
-import HeaderDescription from '@components/PageHeader/HeaderDescription';
-import HeaderTitle from '@components/PageHeader/HeaderTitle';
-import InfoList from '@components/InfoList/InfoList';
+import HeaderDescription from '~components/PageHeader/HeaderDescription';
+import HeaderTitle from '~components/PageHeader/HeaderTitle';
+import InfoList from '~components/InfoList/InfoList';
 import SocialLinks from './SocialLinks/SocialLinks';
 
 const useStyles = makeStyles((theme) => {

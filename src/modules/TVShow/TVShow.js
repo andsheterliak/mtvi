@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
-import useScrollToTop from '@common/hooks/useScrollToTop';
+import useScrollToTop from '~common/hooks/useScrollToTop';
 
-import Spacer from '@common/components/Spacer';
-import MainContent from '@common/components/MainContent';
+import Spacer from '~common/components/Spacer';
+import MainContent from '~common/components/MainContent';
 import TVShowHeader from './TVShowHeader';
 
 import { tvShowActions } from './tvShowSlice';

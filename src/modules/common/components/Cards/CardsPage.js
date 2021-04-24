@@ -1,6 +1,6 @@
 import { object } from 'prop-types';
 
-import types from '@common/types';
+import types from '~common/types';
 
 /**
  * This component is only for adding new cards in optimized way.

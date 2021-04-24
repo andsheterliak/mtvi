@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import types from '@common/types';
+import types from '~common/types';
 
 import PersonCard from './PersonCard';
 

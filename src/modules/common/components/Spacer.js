@@ -1,7 +1,8 @@
 import { bool, string } from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
-import types from '@common/types';
+
+import types from '~common/types';
 
 const generateResponsiveClasses = (theme, styleName, styleFn) => {
   const classes = theme.breakpoints.keys.reduce((classesObj, key) => {

@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { bool, number } from 'prop-types';
 import { useEffect, useRef } from 'react';
 
-import types from '@common/types';
+import types from '~common/types';
 
 import SliderItems from './SliderItems';
 

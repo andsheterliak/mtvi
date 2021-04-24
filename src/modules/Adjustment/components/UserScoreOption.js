@@ -1,7 +1,7 @@
 import { Slider } from '@material-ui/core';
 import { useMemo } from 'react';
 
-import types from '@common/types';
+import types from '~common/types';
 
 import OptionContainer from './OptionContainer';
 import OptionTitle from './OptionTitle';

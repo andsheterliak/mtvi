@@ -1,4 +1,4 @@
-import types from '@common/types';
+import types from '~common/types';
 
 import InfoItem from './InfoItem';
 import InfoListContainer from './InfoListContainer';

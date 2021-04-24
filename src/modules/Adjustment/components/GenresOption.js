@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { Chip } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import types from '@common/types';
+import types from '~common/types';
 
 import OptionContainer from './OptionContainer';
 import OptionTitle from './OptionTitle';

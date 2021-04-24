@@ -4,10 +4,9 @@ import { IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { MovieFilter as FilterIcon } from '@material-ui/icons/';
 
-import HideOnScroll from '@components/HideOnScroll';
-
-import debounce from '@common/utils/debounce';
-import types from '@common/types';
+import debounce from '~common/utils/debounce';
+import types from '~common/types';
+import HideOnScroll from '~components/HideOnScroll';
 
 const useStyles = makeStyles((theme) => {
   return {

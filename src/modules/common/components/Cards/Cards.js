@@ -1,8 +1,8 @@
 import { memo } from 'react';
 
-import types from '@common/types';
+import types from '~common/types';
 
-import { getPath } from '@common/utils/getData';
+import { getPath } from '~common/utils/getData';
 
 import Card from './Card';
 

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { formatDataStr, getAge } from '@common/utils/date';
+import { formatDataStr, getAge } from '~common/utils/date';
 
 import Header from './components/Header/Header';
 

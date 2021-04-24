@@ -8,10 +8,10 @@ import {
 } from '@material-ui/core';
 import { string } from 'prop-types';
 
-import useStyles from '@components/Cards/CardStyles';
-import { getHyphenOrData } from '@common/utils/getData';
-import { IMG_BASE_URL, IMG_SIZES } from '@common/tmdb-config';
-import noUserPhotoImg from '@assets/img/no-user-photo.svg';
+import { getHyphenOrData } from '~common/utils/getData';
+import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
+import noUserPhotoImg from '~assets/img/no-user-photo.svg';
+import useStyles from '~components/Cards/CardStyles';
 
 const PersonCard = ({ profilePath, name, knownFor, path }) => {
   const classes = useStyles();

@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
-import { setLS } from '@common/utils/storage';
-import { formatDateToAPI } from '@common/utils/date';
+import { setLS } from '~common/utils/storage';
+import { formatDateToAPI } from '~common/utils/date';
 
 const changeGenres = (genresList, id) => {
   return genresList.map((item) => {

@@ -1,4 +1,4 @@
-import types from '@common/types';
+import types from '~common/types';
 
 const MainContent = ({ children }) => {
   return <main>{children}</main>;

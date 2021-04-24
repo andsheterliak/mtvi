@@ -1,11 +1,11 @@
 import { ThemeProvider } from '@material-ui/core/styles';
 
-import { IMG_BASE_URL, IMG_SIZES } from '@common/tmdb-config';
-import { innerDarkTheme } from '@common/theme';
-import types from '@common/types';
+import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
+import { innerDarkTheme } from '~common/theme';
+import types from '~common/types';
 
-import MainContainer from '@components/MainContainer';
-import InfoList from '@components/InfoList/InfoList';
+import MainContainer from '~components/MainContainer';
+import InfoList from '~components/InfoList/InfoList';
 import HeaderTitle from './HeaderTitle';
 import HeaderDescription from './HeaderDescription';
 import useStyles from './PageHeaderStyles';
