@@ -1,6 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { string } from 'prop-types';
+
 import types from '~common/types';
 
 const useStyles = makeStyles({
