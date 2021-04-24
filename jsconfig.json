@@ -11,19 +11,19 @@
       "react-dom": [
         "@hot-loader/react-dom"
       ],
-      "@components/*": [
+      "~components/*": [
         "src/modules/common/components/*"
       ],
-      "@common/*": [
+      "~common/*": [
         "src/modules/common/*"
       ],
-      "@assets/*": [
+      "~assets/*": [
         "src/assets/*"
       ],
-      "@modules/*": [
+      "~modules/*": [
         "src/modules/*"
       ],
-      "@/*": [
+      "~/*": [
         "src/*"
       ],
     },
