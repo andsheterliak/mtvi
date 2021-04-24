@@ -1,4 +1,4 @@
-import { object } from 'prop-types';
+import { arrayOf, exact, number, object } from 'prop-types';
 
 import types from '~common/types';
 
@@ -15,7 +15,13 @@ const CardsPage = ({ data, CardsComponent }) => {
 };
 
 CardsPage.propTypes = {
-  data: types.cardsData,
+  data: arrayOf(
+    exact({
+      pageData: types.cardsData,
+      pageNum: number.isRequired,
+    })
+  ).isRequired,
+
   CardsComponent: object.isRequired,
 };
 
