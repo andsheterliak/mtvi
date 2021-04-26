@@ -5,8 +5,6 @@ const resolveConf = {
   extensions: ['.js', '.json', '.jsx'],
 
   alias: {
-    // To replace standard react-dom with @hot-loader/react-dom
-    'react-dom': '@hot-loader/react-dom',
     '~': paths.src,
     '~assets': `${paths.src}/${dirNames.assets}`,
     '~modules': `${paths.src}/${dirNames.modules}`,

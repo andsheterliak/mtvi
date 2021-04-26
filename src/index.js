@@ -5,12 +5,16 @@ import { Provider } from 'react-redux';
 import App from './modules/App/App';
 import store from './store/store';
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>,
+const renderApp = () => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>,
 
-  document.getElementById('root')
-);
+    document.getElementById('root')
+  );
+};
+
+renderApp();
