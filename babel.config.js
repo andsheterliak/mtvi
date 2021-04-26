@@ -1,4 +1,6 @@
-module.exports = {
+const { isDev } = require('./webpack/helpers.conf');
+
+const config = {
   presets: [
     [
       '@babel/preset-env',
@@ -19,4 +21,10 @@ module.exports = {
       },
     ],
   ],
+
+  plugins: [],
 };
+
+if (isDev) config.plugins.push('react-refresh/babel');
+
+module.exports = config;

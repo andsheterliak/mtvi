@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyPlugin = require('copy-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const { isDev, paths, isProd } = require('./helpers.conf');
 
@@ -49,5 +50,7 @@ const pluginsConf = [
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
   }),
 ];
+
+if (isDev) pluginsConf.push(new ReactRefreshWebpackPlugin());
 
 module.exports = pluginsConf;

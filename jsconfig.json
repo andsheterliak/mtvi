@@ -8,9 +8,6 @@
      * To get the shortest path when using auto-import, 'paths' should be ordered from furthest to shortest.
      */
     "paths": {
-      "react-dom": [
-        "@hot-loader/react-dom"
-      ],
       "~components/*": [
         "src/modules/common/components/*"
       ],
