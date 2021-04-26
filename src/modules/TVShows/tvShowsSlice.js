@@ -73,23 +73,9 @@ const fetchTVShows = (options) => async (dispatch) => {
   dispatch(tvShowsSlice.actions.fetchTVShowsSuccess(response.data));
 };
 
-const fetchTVShow = (id) => async (dispatch) => {
-  dispatch(tvShowsSlice.actions.fetchTVShowStart());
-
-  const response = await axiosTMDB.get('', {
-    params: {
-      path: `tv/${id}`,
-      append_to_response: 'videos,credits,content_ratings',
-    },
-  });
-
-  dispatch(tvShowsSlice.actions.fetchTVShowSuccess(response.data));
-};
-
 export const tvShowsActions = {
   ...tvShowsSlice.actions,
   fetchTVShows,
-  fetchTVShow,
 };
 
 export default tvShowsSlice.reducer;
