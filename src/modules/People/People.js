@@ -22,10 +22,10 @@ const People = ({ titleName }) => {
   const dispatch = useDispatch();
 
   const nextPage = useSelector((state) => state.people.page + 1);
-  const isMoreData = useSelector((state) => state.people.isMoreData);
-  const isLoading = useSelector((state) => state.people.isLoading);
-  const isLoadMore = useSelector((state) => state.people.isLoadMore);
-  const { people } = useSelector((state) => state.people);
+
+  const { people, isMoreData, isLoading, isLoadMore } = useSelector(
+    (state) => state.people
+  );
 
   const loadMoreHandler = useCallback(() => {
     dispatch(peopleActions.loadMorePeople());

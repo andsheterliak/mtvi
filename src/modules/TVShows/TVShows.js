@@ -39,11 +39,10 @@ const TVShows = ({ titleName }) => {
   );
 
   const nextPage = useSelector((state) => state.tvShows.page + 1);
-  const isMoreData = useSelector((state) => state.tvShows.isMoreData);
-  const isLoading = useSelector((state) => state.tvShows.isLoading);
-  const isLoadMore = useSelector((state) => state.tvShows.isLoadMore);
-  const { tvShows } = useSelector((state) => state.tvShows);
-  const { options } = useSelector((state) => state.tvShows);
+
+  const { options, isMoreData, isLoading, isLoadMore, tvShows } = useSelector(
+    (state) => state.tvShows
+  );
 
   const loadMoreHandler = useCallback(() => {
     dispatch(tvShowsActions.loadMoreTVShows());

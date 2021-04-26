@@ -39,11 +39,10 @@ const Movies = ({ titleName }) => {
   );
 
   const nextPage = useSelector((state) => state.movies.page + 1);
-  const isMoreData = useSelector((state) => state.movies.isMoreData);
-  const isLoading = useSelector((state) => state.movies.isLoading);
-  const isLoadMore = useSelector((state) => state.movies.isLoadMore);
-  const { movies } = useSelector((state) => state.movies);
-  const { options } = useSelector((state) => state.movies);
+
+  const { movies, isMoreData, isLoading, isLoadMore, options } = useSelector(
+    (state) => state.movies
+  );
 
   const loadMoreHandler = useCallback(() => {
     dispatch(moviesActions.loadMoreMovies());
