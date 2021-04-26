@@ -46,7 +46,6 @@ const Movies = ({ titleName }) => {
 
   const loadMoreHandler = useCallback(() => {
     dispatch(moviesActions.loadMoreMovies());
-
     dispatch(moviesActions.fetchMovies({ ...options, page: nextPage }));
   }, [dispatch, nextPage, options]);
 

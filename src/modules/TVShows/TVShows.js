@@ -46,7 +46,6 @@ const TVShows = ({ titleName }) => {
 
   const loadMoreHandler = useCallback(() => {
     dispatch(tvShowsActions.loadMoreTVShows());
-
     dispatch(tvShowsActions.fetchTVShows({ ...options, page: nextPage }));
   }, [dispatch, nextPage, options]);
 

@@ -29,7 +29,6 @@ const People = ({ titleName }) => {
 
   const loadMoreHandler = useCallback(() => {
     dispatch(peopleActions.loadMorePeople());
-
     dispatch(peopleActions.fetchPeople({ page: nextPage }));
   }, [dispatch, nextPage]);
 
