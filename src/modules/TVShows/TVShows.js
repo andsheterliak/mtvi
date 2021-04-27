@@ -6,20 +6,20 @@ import {
   SORT_TV_BY_OPTIONS,
   USER_SCORE_RANGE,
 } from '~common/tmdb-config';
-import useInfiniteScroll from '~common/hooks/useInfiniteScroll';
 import useScrollToTop from '~common/hooks/useScrollToTop';
+import useFocusContainer from '~common/hooks/useFocusContainer';
 import { getLS } from '~common/utils/storage';
 import { checkIfIsData } from '~common/utils/getData';
+import { scrollToTop } from '~common/utils/dom';
 import types from '~common/types';
 
 import Adjustment from '~modules/Adjustment/Adjustment';
 import Cards from '~components/Cards/Cards';
-import LoadMoreBtn from '~components/LoadMoreBtn';
 import MainContainer from '~components/MainContainer';
 import CardsGrid from '~components/CardsGrid';
-import CardsPage from '~components/CardsPage';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
+import Pagination from '~components/Pagination';
 
 import { TV_OPTIONS_LS_NAME } from './constants';
 import { tvShowsActions } from './tvShowsSlice';
@@ -27,6 +27,7 @@ import { tvShowsActions } from './tvShowsSlice';
 const TVShows = ({ titleName }) => {
   useScrollToTop();
 
+  const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
 
   const fetchTVShowsWithNewOptions = useCallback(
@@ -38,40 +39,33 @@ const TVShows = ({ titleName }) => {
     [dispatch]
   );
 
-  const nextPage = useSelector((state) => state.tvShows.page + 1);
-
-  const { options, isMoreData, isLoading, isLoadMore, tvShows } = useSelector(
+  const { tvShows, isLoading, options, currentPage, totalPages } = useSelector(
     (state) => state.tvShows
   );
 
-  const loadMoreHandler = useCallback(() => {
-    dispatch(tvShowsActions.loadMoreTVShows());
-    dispatch(tvShowsActions.fetchTVShows({ ...options, page: nextPage }));
-  }, [dispatch, nextPage, options]);
+  const changePageHandler = (e, page) => {
+    if (currentPage === page) return;
 
-  const infiniteScrollRef = useInfiniteScroll(
-    loadMoreHandler,
-    isLoadMore,
-    isLoading,
-    isMoreData
-  );
+    dispatch(tvShowsActions.fetchTVShows({ ...options, page }));
+    focus();
+    scrollToTop();
+  };
+
+  const isData = checkIfIsData(tvShows);
 
   useEffect(() => {
+    if (isData) return;
+
     const startingOptions = getLS(TV_OPTIONS_LS_NAME) || TV_DEFAULT_OPTIONS;
 
     dispatch(tvShowsActions.saveOptions(startingOptions));
-    dispatch(tvShowsActions.fetchTVShows(startingOptions));
+    dispatch(
+      tvShowsActions.fetchTVShows({ ...startingOptions, page: currentPage })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    return () => {
-      dispatch(tvShowsActions.resetState());
-    };
-  }, [dispatch]);
-
-  const cards = checkIfIsData(tvShows) ? (
-    <CardsPage data={tvShows} CardsComponent={Cards} />
-  ) : (
-    'Loading...'
-  );
+  const cards = isData ? <Cards cardsData={tvShows} /> : 'Loading...';
 
   return (
     <MainContainer>
@@ -89,16 +83,20 @@ const TVShows = ({ titleName }) => {
         />
       )}
 
-      <MainContent>
-        <CardsGrid>{cards}</CardsGrid>
-      </MainContent>
+      <FocusableContainer>
+        <MainContent>
+          <CardsGrid>{cards}</CardsGrid>
+        </MainContent>
+      </FocusableContainer>
 
-      <LoadMoreBtn
-        infiniteScrollRef={infiniteScrollRef}
-        loadMoreHandler={loadMoreHandler}
-        isMoreData={isMoreData}
-        isLoading={isLoading}
-      />
+      {isData && (
+        <Pagination
+          isLoading={isLoading}
+          page={currentPage}
+          totalPages={totalPages}
+          changePageHandler={changePageHandler}
+        />
+      )}
     </MainContainer>
   );
 };

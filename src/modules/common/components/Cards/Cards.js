@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 import types from '~common/types';
 
 import { getPath } from '~common/utils/getData';
@@ -34,4 +32,4 @@ Cards.propTypes = {
   cardsData: types.cardsData,
 };
 
-export default memo(Cards);
+export default Cards;

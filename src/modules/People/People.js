@@ -1,72 +1,68 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import useScrollToTop from '~common/hooks/useScrollToTop';
-import useInfiniteScroll from '~common/hooks/useInfiniteScroll';
+import useFocusContainer from '~common/hooks/useFocusContainer';
 import { checkIfIsData } from '~common/utils/getData';
+import { scrollToTop } from '~common/utils/dom';
 import types from '~common/types';
 
 import CardsGrid from '~components/CardsGrid';
 import MainContainer from '~components/MainContainer';
-import LoadMoreBtn from '~components/LoadMoreBtn';
-import CardsPage from '~components/CardsPage';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 import PersonCards from './components/PersonCards/PersonCards';
 
 import { peopleActions } from './peopleSlice';
+import Pagination from '~components/Pagination';
 
 const People = ({ titleName }) => {
   useScrollToTop();
 
+  const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
 
-  const nextPage = useSelector((state) => state.people.page + 1);
-
-  const { people, isMoreData, isLoading, isLoadMore } = useSelector(
+  const { people, isLoading, currentPage, totalPages } = useSelector(
     (state) => state.people
   );
 
-  const loadMoreHandler = useCallback(() => {
-    dispatch(peopleActions.loadMorePeople());
-    dispatch(peopleActions.fetchPeople({ page: nextPage }));
-  }, [dispatch, nextPage]);
+  const changePageHandler = (e, page) => {
+    if (currentPage === page) return;
 
-  const infiniteScrollRef = useInfiniteScroll(
-    loadMoreHandler,
-    isLoadMore,
-    isLoading,
-    isMoreData
-  );
+    dispatch(peopleActions.fetchPeople({ page }));
+    focus();
+    scrollToTop();
+  };
+
+  const isData = checkIfIsData(people);
 
   useEffect(() => {
-    dispatch(peopleActions.fetchPeople());
+    if (isData) return;
 
-    return () => {
-      dispatch(peopleActions.resetState());
-    };
-  }, [dispatch]);
+    dispatch(peopleActions.fetchPeople({ page: currentPage }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const cards = checkIfIsData(people) ? (
-    <CardsPage data={people} CardsComponent={PersonCards} />
-  ) : (
-    'Loading...'
-  );
+  const cards = isData ? <PersonCards cardsData={people} /> : 'Loading...';
 
   return (
     <MainContainer>
       <RouteHeader titleName={titleName} />
 
-      <MainContent>
-        <CardsGrid>{cards}</CardsGrid>
-      </MainContent>
+      <FocusableContainer>
+        <MainContent>
+          <CardsGrid>{cards}</CardsGrid>
+        </MainContent>
+      </FocusableContainer>
 
-      <LoadMoreBtn
-        infiniteScrollRef={infiniteScrollRef}
-        loadMoreHandler={loadMoreHandler}
-        isMoreData={isMoreData}
-        isLoading={isLoading}
-      />
+      {isData && (
+        <Pagination
+          isLoading={isLoading}
+          page={currentPage}
+          totalPages={totalPages}
+          changePageHandler={changePageHandler}
+        />
+      )}
     </MainContainer>
   );
 };

@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import axiosTMDB from '~common/axios-tmdb';
 
 const initialState = {
+  cache: {},
   movie: null,
   isLoading: false,
 };
@@ -12,8 +13,8 @@ const movieSlice = createSlice({
   initialState,
 
   reducers: {
-    resetState() {
-      return initialState;
+    resetState(state) {
+      return { ...initialState, cache: state.cache };
     },
 
     fetchMovieStart(state) {
@@ -23,11 +24,24 @@ const movieSlice = createSlice({
     fetchMovieSuccess(state, { payload }) {
       state.isLoading = false;
       state.movie = payload;
+      state.cache[payload.id] = payload;
+    },
+
+    fetchCached(state, { payload }) {
+      state.movie = payload;
     },
   },
 });
 
-const fetchMovie = (id) => async (dispatch) => {
+const fetchMovie = (id) => async (dispatch, getState) => {
+  const state = getState().movie;
+
+  if (state.cache[id]) {
+    dispatch(movieSlice.actions.fetchCached(state.cache[id]));
+
+    return;
+  }
+
   dispatch(movieSlice.actions.fetchMovieStart());
 
   const response = await axiosTMDB.get('', {

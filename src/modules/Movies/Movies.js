@@ -7,26 +7,27 @@ import {
   USER_SCORE_RANGE,
 } from '~common/tmdb-config';
 import useScrollToTop from '~common/hooks/useScrollToTop';
-import useInfiniteScroll from '~common/hooks/useInfiniteScroll';
+import useFocusContainer from '~common/hooks/useFocusContainer';
 import { getLS } from '~common/utils/storage';
 import { checkIfIsData } from '~common/utils/getData';
+import { scrollToTop } from '~common/utils/dom';
 import types from '~common/types';
 
 import Adjustment from '~modules/Adjustment/Adjustment';
-import LoadMoreBtn from '~components/LoadMoreBtn';
 import MainContainer from '~components/MainContainer';
 import CardsGrid from '~components/CardsGrid';
 import Cards from '~components/Cards/Cards';
-import CardsPage from '~components/CardsPage';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 
 import { moviesActions } from './moviesSlice';
 import { MOVIES_OPTIONS_LS_NAME } from './constants';
+import Pagination from '~components/Pagination';
 
 const Movies = ({ titleName }) => {
   useScrollToTop();
 
+  const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
 
   const fetchMoviesWithNewOptions = useCallback(
@@ -38,41 +39,34 @@ const Movies = ({ titleName }) => {
     [dispatch]
   );
 
-  const nextPage = useSelector((state) => state.movies.page + 1);
-
-  const { movies, isMoreData, isLoading, isLoadMore, options } = useSelector(
+  const { movies, isLoading, options, currentPage, totalPages } = useSelector(
     (state) => state.movies
   );
 
-  const loadMoreHandler = useCallback(() => {
-    dispatch(moviesActions.loadMoreMovies());
-    dispatch(moviesActions.fetchMovies({ ...options, page: nextPage }));
-  }, [dispatch, nextPage, options]);
+  const changePageHandler = (e, page) => {
+    if (currentPage === page) return;
 
-  const infiniteScrollRef = useInfiniteScroll(
-    loadMoreHandler,
-    isLoadMore,
-    isLoading,
-    isMoreData
-  );
+    dispatch(moviesActions.fetchMovies({ ...options, page }));
+    focus();
+    scrollToTop();
+  };
+
+  const isData = checkIfIsData(movies);
 
   useEffect(() => {
+    if (isData) return;
+
     const startingOptions =
       getLS(MOVIES_OPTIONS_LS_NAME) || MOVIES_DEFAULT_OPTIONS;
 
     dispatch(moviesActions.saveOptions(startingOptions));
-    dispatch(moviesActions.fetchMovies(startingOptions));
+    dispatch(
+      moviesActions.fetchMovies({ ...startingOptions, page: currentPage })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    return () => {
-      dispatch(moviesActions.resetState());
-    };
-  }, [dispatch]);
-
-  const cards = checkIfIsData(movies) ? (
-    <CardsPage data={movies} CardsComponent={Cards} />
-  ) : (
-    'Loading...'
-  );
+  const cards = isData ? <Cards cardsData={movies} /> : 'Loading...';
 
   return (
     <MainContainer>
@@ -90,16 +84,20 @@ const Movies = ({ titleName }) => {
         />
       )}
 
-      <MainContent>
-        <CardsGrid>{cards}</CardsGrid>
-      </MainContent>
+      <FocusableContainer>
+        <MainContent>
+          <CardsGrid>{cards}</CardsGrid>
+        </MainContent>
+      </FocusableContainer>
 
-      <LoadMoreBtn
-        infiniteScrollRef={infiniteScrollRef}
-        loadMoreHandler={loadMoreHandler}
-        isMoreData={isMoreData}
-        isLoading={isLoading}
-      />
+      {isData && (
+        <Pagination
+          isLoading={isLoading}
+          page={currentPage}
+          totalPages={totalPages}
+          changePageHandler={changePageHandler}
+        />
+      )}
     </MainContainer>
   );
 };

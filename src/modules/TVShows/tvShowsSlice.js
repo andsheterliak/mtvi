@@ -1,15 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import axiosTMDB from '~common/axios-tmdb';
-import { getSelectedGenres, checkIfIsNextPage } from '~common/utils/getData';
+import { getSelectedGenres } from '~common/utils/getData';
 
 const initialState = {
+  cache: {},
   tvShows: [],
-  tvShow: null,
-  page: 1,
-  isMoreData: false,
+  currentPage: 1,
+  totalPages: null,
   isLoading: false,
-  isLoadMore: false,
   options: null,
 };
 
@@ -26,36 +25,41 @@ const tvShowsSlice = createSlice({
       state.options = payload;
     },
 
-    loadMoreTVShows(state) {
-      state.isLoadMore = true;
-    },
-
     fetchTVShowsStart(state) {
       state.isLoading = true;
     },
 
     fetchTVShowsSuccess(state, { payload }) {
-      const isMoreData = checkIfIsNextPage(payload.page, payload.total_pages);
-
       state.isLoading = false;
-      state.tvShows.push({ pageData: payload.results, pageNum: payload.page });
-      state.isMoreData = isMoreData;
-      state.page = payload.page;
+      state.currentPage = payload.page;
+      state.tvShows = payload.results;
+      state.cache[payload.page] = payload.results;
+      state.totalPages = payload.total_pages;
     },
 
-    fetchTVShowStart(state) {
-      state.isLoading = true;
-    },
-
-    fetchTVShowSuccess(state, { payload }) {
+    fetchCached(state, { payload }) {
       state.isLoading = false;
-      state.tvShow = payload;
+      state.currentPage = payload.page;
+      state.tvShows = payload.data;
     },
   },
 });
 
-const fetchTVShows = (options) => async (dispatch) => {
-  dispatch(tvShowsActions.fetchTVShowsStart());
+const fetchTVShows = (options) => async (dispatch, getState) => {
+  const state = getState().tvShows;
+
+  if (state.cache[options.page]) {
+    dispatch(
+      tvShowsSlice.actions.fetchCached({
+        data: state.cache[options.page],
+        page: options.page,
+      })
+    );
+
+    return;
+  }
+
+  dispatch(tvShowsSlice.actions.fetchTVShowsStart());
 
   const response = await axiosTMDB.get('', {
     params: {
@@ -66,7 +70,7 @@ const fetchTVShows = (options) => async (dispatch) => {
       with_genres: getSelectedGenres(options.genres),
       'vote_average.gte': options.userScore[0],
       'vote_average.lte': options.userScore[1],
-      page: options.page || 1,
+      page: options.page,
     },
   });
 

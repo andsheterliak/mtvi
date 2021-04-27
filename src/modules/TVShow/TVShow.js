@@ -24,7 +24,8 @@ const TVShow = () => {
     return () => {
       dispatch(tvShowActions.resetState());
     };
-  }, [dispatch, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

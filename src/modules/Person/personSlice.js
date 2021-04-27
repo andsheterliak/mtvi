@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import axiosTMDB from '~common/axios-tmdb';
 
 const initialState = {
+  cache: {},
   person: null,
   isLoading: false,
 };
@@ -12,8 +13,8 @@ const personSlice = createSlice({
   initialState,
 
   reducers: {
-    resetState() {
-      return initialState;
+    resetState(state) {
+      return { ...initialState, cache: state.cache };
     },
 
     fetchPersonStart(state) {
@@ -23,11 +24,24 @@ const personSlice = createSlice({
     fetchPersonSuccess(state, { payload }) {
       state.isLoading = false;
       state.person = payload;
+      state.cache[payload.id] = payload;
+    },
+
+    fetchCached(state, { payload }) {
+      state.person = payload;
     },
   },
 });
 
-const fetchPerson = (id) => async (dispatch) => {
+const fetchPerson = (id) => async (dispatch, getState) => {
+  const state = getState().person;
+
+  if (state.cache[id]) {
+    dispatch(personSlice.actions.fetchCached(state.cache[id]));
+
+    return;
+  }
+
   dispatch(personSlice.actions.fetchPersonStart());
 
   const response = await axiosTMDB.get('', {
