@@ -1,4 +1,4 @@
-import { exact, func, string } from 'prop-types';
+import { exact, func, string, shape } from 'prop-types';
 
 import Modal from './components/Modal';
 import AdjustmentButton from './components/AdjustmentButton';
@@ -93,7 +93,7 @@ Adjustment.propTypes = {
   modalTitle: adjustmentTypes.modalTitle,
   fetchItems: func.isRequired,
 
-  initialOptions: exact({
+  initialOptions: shape({
     sortBy: string.isRequired,
     userScore: adjustmentTypes.userScore,
     genres: adjustmentTypes.genres,
