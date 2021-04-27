@@ -21,7 +21,7 @@ import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 import Pagination from '~components/Pagination';
 
-import { TV_OPTIONS_LS_NAME } from './constants';
+import { TV_OPTIONS_LS_NAME } from './tvShowsConstants';
 import { tvShowsActions } from './tvShowsSlice';
 
 const TVShows = ({ titleName }) => {

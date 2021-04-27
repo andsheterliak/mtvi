@@ -21,7 +21,7 @@ import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 
 import { moviesActions } from './moviesSlice';
-import { MOVIES_OPTIONS_LS_NAME } from './constants';
+import { MOVIES_OPTIONS_LS_NAME } from './moviesConstants';
 import Pagination from '~components/Pagination';
 
 const Movies = ({ titleName }) => {
