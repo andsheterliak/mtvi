@@ -1,3 +1,5 @@
+import { ROUTE_NAMES } from '~common/constants';
+
 export const checkIfIsData = (data) => {
   if (data === null || typeof data === 'undefined' || data === '') {
     return false;
@@ -46,7 +48,9 @@ export const getHyphenOrData = (value) => {
 };
 
 export const getPath = ({ name, firstAirDate, episodeCount }) => {
-  return name || firstAirDate || episodeCount ? `/tv/` : `/movies/`;
+  return name || firstAirDate || episodeCount
+    ? ROUTE_NAMES.tvShow
+    : ROUTE_NAMES.movie;
 };
 
 export const getSelectedGenres = (genres) => {
