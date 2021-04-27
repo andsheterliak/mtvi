@@ -58,5 +58,3 @@ export const getSelectedGenres = (genres) => {
     }, [])
     .join(',');
 };
-
-export const checkIfIsNextPage = (page, totalPages) => page + 1 <= totalPages;
