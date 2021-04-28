@@ -12,10 +12,10 @@ const Movie = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { movie } = useSelector((state) => state.movie);
+  const { data } = useSelector((state) => state.movie);
 
   useEffect(() => {
-    dispatch(movieActions.fetchMovie(id));
+    dispatch(movieActions.fetchData(id));
 
     return () => {
       dispatch(movieActions.resetState());
@@ -27,7 +27,7 @@ const Movie = () => {
     <>
       <Spacer />
 
-      {movie ? (
+      {data ? (
         <MainContent>
           <MovieHeader />
         </MainContent>

@@ -51,15 +51,15 @@ const generateDataList = (data) => {
 };
 
 const MovieHeader = () => {
-  const { movie } = useSelector((state) => state.movie);
+  const { data } = useSelector((state) => state.movie);
 
-  const dataList = generateDataList(movie);
+  const dataList = generateDataList(data);
 
   return (
     <PageHeader
-      backdrop={movie.backdrop_path}
-      overview={movie.overview}
-      title={movie.title}
+      backdrop={data.backdrop_path}
+      overview={data.overview}
+      title={data.title}
       dataList={dataList}
     ></PageHeader>
   );

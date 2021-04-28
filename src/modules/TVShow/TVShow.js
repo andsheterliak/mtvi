@@ -12,10 +12,12 @@ const TVShow = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { tvShow } = useSelector((state) => state.tvShow);
+  const { data } = useSelector((state) => state.tvShow);
+
+  console.log('data', ':', data);
 
   useEffect(() => {
-    dispatch(tvShowActions.fetchTVShow(id));
+    dispatch(tvShowActions.fetchData(id));
 
     return () => {
       dispatch(tvShowActions.resetState());
@@ -27,7 +29,7 @@ const TVShow = () => {
     <>
       <Spacer />
 
-      {tvShow ? (
+      {data ? (
         <MainContent>
           <TVShowHeader />
         </MainContent>

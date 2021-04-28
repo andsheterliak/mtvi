@@ -16,10 +16,10 @@ const Person = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { person } = useSelector((state) => state.person);
+  const { data } = useSelector((state) => state.person);
 
   useEffect(() => {
-    dispatch(personActions.fetchPerson(id));
+    dispatch(personActions.fetchData(id));
 
     return () => {
       dispatch(personActions.resetState());
@@ -31,7 +31,7 @@ const Person = () => {
     <>
       <Spacer />
 
-      {person ? (
+      {data ? (
         <MainContent>
           <MainContainer>
             <Layout>

@@ -63,17 +63,17 @@ const generateDataList = (data) => {
 };
 
 const PersonHeader = () => {
-  const { person } = useSelector((state) => state.person);
+  const { data } = useSelector((state) => state.person);
 
-  const dataList = generateDataList(person);
+  const dataList = generateDataList(data);
 
   return (
     <Header
       dataList={dataList}
-      name={person.name}
-      biography={person.biography}
-      profilePath={person.profile_path}
-      externalIds={person.external_ids}
+      name={data.name}
+      biography={data.biography}
+      profilePath={data.profile_path}
+      externalIds={data.external_ids}
     />
   );
 };

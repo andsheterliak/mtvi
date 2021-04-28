@@ -5,14 +5,14 @@ import { getSelectedGenres } from '~common/utils/getData';
 
 const initialState = {
   cache: {},
-  movies: [],
+  data: [],
   currentPage: 1,
   totalPages: null,
   isLoading: false,
   options: null,
 };
 
-const moviesSlice = createSlice({
+const slice = createSlice({
   name: 'movies',
   initialState,
 
@@ -25,31 +25,31 @@ const moviesSlice = createSlice({
       state.options = payload;
     },
 
-    fetchMoviesStart(state) {
+    fetchDataStart(state) {
       state.isLoading = true;
     },
 
-    fetchMoviesSuccess(state, { payload }) {
+    fetchDataSuccess(state, { payload }) {
       state.isLoading = false;
       state.currentPage = payload.page;
-      state.movies = payload.results;
+      state.data = payload.results;
       state.cache[payload.page] = payload.results;
       state.totalPages = payload.total_pages;
     },
 
     fetchCached(state, { payload }) {
       state.currentPage = payload.page;
-      state.movies = payload.data;
+      state.data = payload.data;
     },
   },
 });
 
-const fetchMovies = (options) => async (dispatch, getState) => {
+const fetchData = (options) => async (dispatch, getState) => {
   const state = getState().movies;
 
   if (state.cache[options.page]) {
     dispatch(
-      moviesSlice.actions.fetchCached({
+      slice.actions.fetchCached({
         data: state.cache[options.page],
         page: options.page,
       })
@@ -58,7 +58,7 @@ const fetchMovies = (options) => async (dispatch, getState) => {
     return;
   }
 
-  dispatch(moviesSlice.actions.fetchMoviesStart());
+  dispatch(slice.actions.fetchDataStart());
 
   const response = await axiosTMDB.get('', {
     params: {
@@ -74,12 +74,12 @@ const fetchMovies = (options) => async (dispatch, getState) => {
     },
   });
 
-  dispatch(moviesSlice.actions.fetchMoviesSuccess(response.data));
+  dispatch(slice.actions.fetchDataSuccess(response.data));
 };
 
 export const moviesActions = {
-  ...moviesSlice.actions,
-  fetchMovies,
+  ...slice.actions,
+  fetchData,
 };
 
-export default moviesSlice.reducer;
+export default slice.reducer;

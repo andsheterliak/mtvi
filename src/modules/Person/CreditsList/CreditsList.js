@@ -153,7 +153,7 @@ const getTimelineData = (data, filterBy) => {
 };
 
 const CreditsList = () => {
-  const { person } = useSelector((state) => state.person);
+  const { data } = useSelector((state) => state.person);
 
   const [filterBy, setFilterBy] = useState(filterConfig.all.value);
 
@@ -161,16 +161,16 @@ const CreditsList = () => {
     setFilterBy(e.target.value);
   };
 
-  const data = {
-    movieCredits: person.movie_credits,
-    tvCredits: person.tv_credits,
+  const credits = {
+    movieCredits: data.movie_credits,
+    tvCredits: data.tv_credits,
   };
 
-  const { isData, isNeedInFiltering } = checkIfIsCredits(data);
+  const { isData, isNeedInFiltering } = checkIfIsCredits(credits);
 
   if (!isData) return null;
 
-  const timelineData = getTimelineData(data, filterBy);
+  const timelineData = getTimelineData(credits, filterBy);
 
   return (
     <Section>

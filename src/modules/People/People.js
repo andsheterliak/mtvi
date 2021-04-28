@@ -19,28 +19,28 @@ const People = ({ titleName }) => {
   const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
 
-  const { people, isLoading, currentPage, totalPages } = useSelector(
+  const { data, isLoading, currentPage, totalPages } = useSelector(
     (state) => state.people
   );
 
   const changePageHandler = (e, page) => {
     if (currentPage === page) return;
 
-    dispatch(peopleActions.fetchPeople({ page }));
+    dispatch(peopleActions.fetchData({ page }));
     focus();
     scrollToTop();
   };
 
-  const isData = checkIfIsData(people);
+  const isData = checkIfIsData(data);
 
   useEffect(() => {
     if (isData) return;
 
-    dispatch(peopleActions.fetchPeople({ page: currentPage }));
+    dispatch(peopleActions.fetchData({ page: currentPage }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const cards = isData ? <PersonCards cardsData={people} /> : 'Loading...';
+  const cards = isData ? <PersonCards cardsData={data} /> : 'Loading...';
 
   return (
     <MainContainer>

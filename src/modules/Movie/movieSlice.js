@@ -4,11 +4,11 @@ import axiosTMDB from '~common/axios-tmdb';
 
 const initialState = {
   cache: {},
-  movie: null,
+  data: null,
   isLoading: false,
 };
 
-const movieSlice = createSlice({
+const slice = createSlice({
   name: 'movie',
   initialState,
 
@@ -17,32 +17,32 @@ const movieSlice = createSlice({
       return { ...initialState, cache: state.cache };
     },
 
-    fetchMovieStart(state) {
+    fetchDataStart(state) {
       state.isLoading = true;
     },
 
-    fetchMovieSuccess(state, { payload }) {
+    fetchDataSuccess(state, { payload }) {
       state.isLoading = false;
-      state.movie = payload;
+      state.data = payload;
       state.cache[payload.id] = payload;
     },
 
     fetchCached(state, { payload }) {
-      state.movie = payload;
+      state.data = payload;
     },
   },
 });
 
-const fetchMovie = (id) => async (dispatch, getState) => {
+const fetchData = (id) => async (dispatch, getState) => {
   const state = getState().movie;
 
   if (state.cache[id]) {
-    dispatch(movieSlice.actions.fetchCached(state.cache[id]));
+    dispatch(slice.actions.fetchCached(state.cache[id]));
 
     return;
   }
 
-  dispatch(movieSlice.actions.fetchMovieStart());
+  dispatch(slice.actions.fetchDataStart());
 
   const response = await axiosTMDB.get('', {
     params: {
@@ -51,12 +51,12 @@ const fetchMovie = (id) => async (dispatch, getState) => {
     },
   });
 
-  dispatch(movieSlice.actions.fetchMovieSuccess(response.data));
+  dispatch(slice.actions.fetchDataSuccess(response.data));
 };
 
 export const movieActions = {
-  ...movieSlice.actions,
-  fetchMovie,
+  ...slice.actions,
+  fetchData,
 };
 
-export default movieSlice.reducer;
+export default slice.reducer;

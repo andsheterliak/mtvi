@@ -4,13 +4,13 @@ import axiosTMDB from '~common/axios-tmdb';
 
 const initialState = {
   cache: {},
-  people: [],
+  data: [],
   currentPage: 1,
   totalPages: null,
   isLoading: false,
 };
 
-const peopleSlice = createSlice({
+const slice = createSlice({
   name: 'people',
   initialState,
 
@@ -19,31 +19,31 @@ const peopleSlice = createSlice({
       return initialState;
     },
 
-    fetchPeopleStart(state) {
+    fetchDataStart(state) {
       state.isLoading = true;
     },
 
-    fetchPeopleSuccess(state, { payload }) {
+    fetchDataSuccess(state, { payload }) {
       state.isLoading = false;
       state.currentPage = payload.page;
-      state.people = payload.results;
+      state.data = payload.results;
       state.cache[payload.page] = payload.results;
       state.totalPages = payload.total_pages;
     },
 
-    fetchCachedSuccess(state, { payload }) {
+    fetchCached(state, { payload }) {
       state.currentPage = payload.page;
-      state.people = payload.data;
+      state.data = payload.data;
     },
   },
 });
 
-const fetchPeople = (options) => async (dispatch, getState) => {
+const fetchData = (options) => async (dispatch, getState) => {
   const state = getState().people;
 
   if (state.cache[options.page]) {
     dispatch(
-      peopleSlice.actions.fetchCachedSuccess({
+      slice.actions.fetchCached({
         data: state.cache[options.page],
         page: options.page,
       })
@@ -52,7 +52,7 @@ const fetchPeople = (options) => async (dispatch, getState) => {
     return;
   }
 
-  dispatch(peopleSlice.actions.fetchPeopleStart());
+  dispatch(slice.actions.fetchDataStart());
 
   const response = await axiosTMDB.get('', {
     params: {
@@ -61,8 +61,8 @@ const fetchPeople = (options) => async (dispatch, getState) => {
     },
   });
 
-  dispatch(peopleSlice.actions.fetchPeopleSuccess(response.data));
+  dispatch(slice.actions.fetchDataSuccess(response.data));
 };
 
-export const peopleActions = { ...peopleSlice.actions, fetchPeople };
-export default peopleSlice.reducer;
+export const peopleActions = { ...slice.actions, fetchData };
+export default slice.reducer;

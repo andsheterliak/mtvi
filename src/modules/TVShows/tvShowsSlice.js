@@ -5,14 +5,14 @@ import { getSelectedGenres } from '~common/utils/getData';
 
 const initialState = {
   cache: {},
-  tvShows: [],
+  data: [],
   currentPage: 1,
   totalPages: null,
   isLoading: false,
   options: null,
 };
 
-const tvShowsSlice = createSlice({
+const slice = createSlice({
   name: 'tvShows',
   initialState,
 
@@ -25,31 +25,31 @@ const tvShowsSlice = createSlice({
       state.options = payload;
     },
 
-    fetchTVShowsStart(state) {
+    fetchDataStart(state) {
       state.isLoading = true;
     },
 
-    fetchTVShowsSuccess(state, { payload }) {
+    fetchDataSuccess(state, { payload }) {
       state.isLoading = false;
       state.currentPage = payload.page;
-      state.tvShows = payload.results;
+      state.data = payload.results;
       state.cache[payload.page] = payload.results;
       state.totalPages = payload.total_pages;
     },
 
     fetchCached(state, { payload }) {
       state.currentPage = payload.page;
-      state.tvShows = payload.data;
+      state.data = payload.data;
     },
   },
 });
 
-const fetchTVShows = (options) => async (dispatch, getState) => {
+const fetchData = (options) => async (dispatch, getState) => {
   const state = getState().tvShows;
 
   if (state.cache[options.page]) {
     dispatch(
-      tvShowsSlice.actions.fetchCached({
+      slice.actions.fetchCached({
         data: state.cache[options.page],
         page: options.page,
       })
@@ -58,7 +58,7 @@ const fetchTVShows = (options) => async (dispatch, getState) => {
     return;
   }
 
-  dispatch(tvShowsSlice.actions.fetchTVShowsStart());
+  dispatch(slice.actions.fetchDataStart());
 
   const response = await axiosTMDB.get('', {
     params: {
@@ -73,12 +73,12 @@ const fetchTVShows = (options) => async (dispatch, getState) => {
     },
   });
 
-  dispatch(tvShowsSlice.actions.fetchTVShowsSuccess(response.data));
+  dispatch(slice.actions.fetchDataSuccess(response.data));
 };
 
 export const tvShowsActions = {
-  ...tvShowsSlice.actions,
-  fetchTVShows,
+  ...slice.actions,
+  fetchData,
 };
 
-export default tvShowsSlice.reducer;
+export default slice.reducer;

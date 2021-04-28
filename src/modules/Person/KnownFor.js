@@ -71,14 +71,12 @@ const getKnownFor = (data) => {
 };
 
 const KnownFor = () => {
-  const { person } = useSelector((state) => state.person);
+  const { data } = useSelector((state) => state.person);
 
-  const data = {
-    movieCredits: person.movie_credits,
-    tvCredits: person.tv_credits,
-  };
-
-  const joinedData = joinData(data);
+  const joinedData = joinData({
+    movieCredits: data.movie_credits,
+    tvCredits: data.tv_credits,
+  });
 
   if (!checkIfIsData(joinedData)) return null;
 

@@ -4,11 +4,11 @@ import axiosTMDB from '~common/axios-tmdb';
 
 const initialState = {
   cache: {},
-  person: null,
+  data: null,
   isLoading: false,
 };
 
-const personSlice = createSlice({
+const slice = createSlice({
   name: 'person',
   initialState,
 
@@ -17,32 +17,32 @@ const personSlice = createSlice({
       return { ...initialState, cache: state.cache };
     },
 
-    fetchPersonStart(state) {
+    fetchDataStart(state) {
       state.isLoading = true;
     },
 
-    fetchPersonSuccess(state, { payload }) {
+    fetchDataSuccess(state, { payload }) {
       state.isLoading = false;
-      state.person = payload;
+      state.data = payload;
       state.cache[payload.id] = payload;
     },
 
     fetchCached(state, { payload }) {
-      state.person = payload;
+      state.data = payload;
     },
   },
 });
 
-const fetchPerson = (id) => async (dispatch, getState) => {
+const fetchData = (id) => async (dispatch, getState) => {
   const state = getState().person;
 
   if (state.cache[id]) {
-    dispatch(personSlice.actions.fetchCached(state.cache[id]));
+    dispatch(slice.actions.fetchCached(state.cache[id]));
 
     return;
   }
 
-  dispatch(personSlice.actions.fetchPersonStart());
+  dispatch(slice.actions.fetchDataStart());
 
   const response = await axiosTMDB.get('', {
     params: {
@@ -51,8 +51,8 @@ const fetchPerson = (id) => async (dispatch, getState) => {
     },
   });
 
-  dispatch(personSlice.actions.fetchPersonSuccess(response.data));
+  dispatch(slice.actions.fetchDataSuccess(response.data));
 };
 
-export const personActions = { ...personSlice.actions, fetchPerson };
-export default personSlice.reducer;
+export const personActions = { ...slice.actions, fetchData };
+export default slice.reducer;

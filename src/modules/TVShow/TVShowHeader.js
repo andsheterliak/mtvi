@@ -55,15 +55,15 @@ const generateDataList = (data) => {
 };
 
 const TVShowHeader = () => {
-  const { tvShow } = useSelector((state) => state.tvShow);
+  const { data } = useSelector((state) => state.tvShow);
 
-  const dataList = generateDataList(tvShow);
+  const dataList = generateDataList(data);
 
   return (
     <PageHeader
-      backdrop={tvShow.backdrop_path}
-      overview={tvShow.overview}
-      title={tvShow.name}
+      backdrop={data.backdrop_path}
+      overview={data.overview}
+      title={data.name}
       dataList={dataList}
     ></PageHeader>
   );

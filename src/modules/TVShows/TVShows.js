@@ -27,28 +27,28 @@ const TVShows = ({ titleName }) => {
   const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
 
-  const fetchTVShowsWithNewOptions = useCallback(
+  const fetchDataWithNewOptions = useCallback(
     (options) => {
       dispatch(tvShowsActions.resetState());
       dispatch(tvShowsActions.saveOptions(options));
-      dispatch(tvShowsActions.fetchTVShows(options));
+      dispatch(tvShowsActions.fetchData(options));
     },
     [dispatch]
   );
 
-  const { tvShows, isLoading, options, currentPage, totalPages } = useSelector(
+  const { data, isLoading, options, currentPage, totalPages } = useSelector(
     (state) => state.tvShows
   );
 
   const changePageHandler = (e, page) => {
     if (currentPage === page) return;
 
-    dispatch(tvShowsActions.fetchTVShows({ ...options, page }));
+    dispatch(tvShowsActions.fetchData({ ...options, page }));
     focus();
     scrollToTop();
   };
 
-  const isData = checkIfIsData(tvShows);
+  const isData = checkIfIsData(data);
 
   useEffect(() => {
     if (isData) return;
@@ -57,12 +57,12 @@ const TVShows = ({ titleName }) => {
 
     dispatch(tvShowsActions.saveOptions(startingOptions));
     dispatch(
-      tvShowsActions.fetchTVShows({ ...startingOptions, page: currentPage })
+      tvShowsActions.fetchData({ ...startingOptions, page: currentPage })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const cards = isData ? <Cards cardsData={tvShows} /> : 'Loading...';
+  const cards = isData ? <Cards cardsData={data} /> : 'Loading...';
 
   return (
     <MainContainer>
@@ -75,7 +75,7 @@ const TVShows = ({ titleName }) => {
           userScoreRange={USER_SCORE_RANGE}
           dateTitle="Air Dates"
           modalTitle="Adjust TV Shows"
-          fetchItems={fetchTVShowsWithNewOptions}
+          fetchItems={fetchDataWithNewOptions}
           initialOptions={options}
         />
       )}

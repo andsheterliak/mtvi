@@ -27,28 +27,28 @@ const Movies = ({ titleName }) => {
   const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
 
-  const fetchMoviesWithNewOptions = useCallback(
+  const fetchDataWithNewOptions = useCallback(
     (options) => {
       dispatch(moviesActions.resetState());
       dispatch(moviesActions.saveOptions(options));
-      dispatch(moviesActions.fetchMovies(options));
+      dispatch(moviesActions.fetchData(options));
     },
     [dispatch]
   );
 
-  const { movies, isLoading, options, currentPage, totalPages } = useSelector(
+  const { data, isLoading, options, currentPage, totalPages } = useSelector(
     (state) => state.movies
   );
 
   const changePageHandler = (e, page) => {
     if (currentPage === page) return;
 
-    dispatch(moviesActions.fetchMovies({ ...options, page }));
+    dispatch(moviesActions.fetchData({ ...options, page }));
     focus();
     scrollToTop();
   };
 
-  const isData = checkIfIsData(movies);
+  const isData = checkIfIsData(data);
 
   useEffect(() => {
     if (isData) return;
@@ -58,12 +58,12 @@ const Movies = ({ titleName }) => {
 
     dispatch(moviesActions.saveOptions(startingOptions));
     dispatch(
-      moviesActions.fetchMovies({ ...startingOptions, page: currentPage })
+      moviesActions.fetchData({ ...startingOptions, page: currentPage })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const cards = isData ? <Cards cardsData={movies} /> : 'Loading...';
+  const cards = isData ? <Cards cardsData={data} /> : 'Loading...';
 
   return (
     <MainContainer>
@@ -76,7 +76,7 @@ const Movies = ({ titleName }) => {
           userScoreRange={USER_SCORE_RANGE}
           dateTitle="Release Dates"
           modalTitle="Adjust Movies"
-          fetchItems={fetchMoviesWithNewOptions}
+          fetchItems={fetchDataWithNewOptions}
           initialOptions={options}
         />
       )}
