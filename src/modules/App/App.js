@@ -2,15 +2,18 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 
-import Menu from '~modules/Menu/Menu';
+import useScrollToTop from '~common/hooks/useScrollToTop';
 import routes from '~common/routes';
 import { globalTheme } from '~common/theme';
 
+import Menu from '~modules/Menu/Menu';
 import Footer from '~components/Footer';
 import Spacer from '~components/Spacer';
 import RootWrapper from './components/RootWrapper';
 
 const App = () => {
+  useScrollToTop();
+
   const pages = Object.entries(routes).map(([key, data]) => {
     const { name = null, to, component: Component, redirectTo, exact } = data;
 

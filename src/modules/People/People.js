@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import useScrollToTop from '~common/hooks/useScrollToTop';
 import useFocusContainer from '~common/hooks/useFocusContainer';
 import { checkIfIsData } from '~common/utils/getData';
 import { scrollToTop } from '~common/utils/dom';
@@ -17,8 +16,6 @@ import { peopleActions } from './peopleSlice';
 import Pagination from '~components/Pagination';
 
 const People = ({ titleName }) => {
-  useScrollToTop();
-
   const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
 

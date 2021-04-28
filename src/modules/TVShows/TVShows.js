@@ -6,7 +6,6 @@ import {
   SORT_TV_BY_OPTIONS,
   USER_SCORE_RANGE,
 } from '~common/tmdb-config';
-import useScrollToTop from '~common/hooks/useScrollToTop';
 import useFocusContainer from '~common/hooks/useFocusContainer';
 import { getLS } from '~common/utils/storage';
 import { checkIfIsData } from '~common/utils/getData';
@@ -25,8 +24,6 @@ import { TV_OPTIONS_LS_NAME } from './tvShowsConstants';
 import { tvShowsActions } from './tvShowsSlice';
 
 const TVShows = ({ titleName }) => {
-  useScrollToTop();
-
   const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
 

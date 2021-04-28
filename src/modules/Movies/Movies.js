@@ -6,7 +6,6 @@ import {
   SORT_MOVIES_BY_OPTIONS,
   USER_SCORE_RANGE,
 } from '~common/tmdb-config';
-import useScrollToTop from '~common/hooks/useScrollToTop';
 import useFocusContainer from '~common/hooks/useFocusContainer';
 import { getLS } from '~common/utils/storage';
 import { checkIfIsData } from '~common/utils/getData';
@@ -25,8 +24,6 @@ import { MOVIES_OPTIONS_LS_NAME } from './moviesConstants';
 import Pagination from '~components/Pagination';
 
 const Movies = ({ titleName }) => {
-  useScrollToTop();
-
   const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
 

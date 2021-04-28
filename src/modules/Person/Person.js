@@ -2,8 +2,6 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
-import useScrollToTop from '~common/hooks/useScrollToTop';
-
 import MainContainer from '~components/MainContainer';
 import Layout from '~components/Layout';
 import Spacer from '~components/Spacer';
@@ -15,8 +13,6 @@ import KnownFor from './KnownFor';
 import { personActions } from './personSlice';
 
 const Person = () => {
-  useScrollToTop();
-
   const dispatch = useDispatch();
   const { id } = useParams();
 
