@@ -53,12 +53,12 @@ export const SORT_TV_BY_OPTIONS = {
 
   firstAirDateDesc: {
     name: 'First Air Date Descending',
-    apiName: 'first_air_date.gte',
+    apiName: 'first_air_date.desc',
   },
 
   firstAirDateAsc: {
     name: 'First Air Date Ascending',
-    apiName: 'first_air_date.lte',
+    apiName: 'first_air_date.asc',
   },
 
   ratingDesc: {
