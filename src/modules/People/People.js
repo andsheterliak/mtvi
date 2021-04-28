@@ -11,9 +11,9 @@ import MainContainer from '~components/MainContainer';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 import PersonCards from './components/PersonCards/PersonCards';
+import Pagination from '~components/Pagination';
 
 import { peopleActions } from './peopleSlice';
-import Pagination from '~components/Pagination';
 
 const People = ({ titleName }) => {
   const { focus, FocusableContainer } = useFocusContainer();

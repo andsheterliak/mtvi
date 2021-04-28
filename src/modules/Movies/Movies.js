@@ -18,10 +18,10 @@ import CardsGrid from '~components/CardsGrid';
 import Cards from '~components/Cards/Cards';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
+import Pagination from '~components/Pagination';
 
 import { moviesActions } from './moviesSlice';
 import { MOVIES_OPTIONS_LS_NAME } from './moviesConstants';
-import Pagination from '~components/Pagination';
 
 const Movies = ({ titleName }) => {
   const { focus, FocusableContainer } = useFocusContainer();
