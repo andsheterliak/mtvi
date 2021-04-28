@@ -32,7 +32,6 @@ const peopleSlice = createSlice({
     },
 
     fetchCachedSuccess(state, { payload }) {
-      state.isLoading = false;
       state.currentPage = payload.page;
       state.people = payload.data;
     },
@@ -40,8 +39,6 @@ const peopleSlice = createSlice({
 });
 
 const fetchPeople = (options) => async (dispatch, getState) => {
-  dispatch(peopleSlice.actions.fetchPeopleStart());
-
   const state = getState().people;
 
   if (state.cache[options.page]) {
@@ -54,6 +51,8 @@ const fetchPeople = (options) => async (dispatch, getState) => {
 
     return;
   }
+
+  dispatch(peopleSlice.actions.fetchPeopleStart());
 
   const response = await axiosTMDB.get('', {
     params: {

@@ -38,7 +38,6 @@ const tvShowsSlice = createSlice({
     },
 
     fetchCached(state, { payload }) {
-      state.isLoading = false;
       state.currentPage = payload.page;
       state.tvShows = payload.data;
     },
