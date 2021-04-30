@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react';
 
-import { setLS } from '~common/utils/storage';
 import { formatDateToAPI } from '~common/utils/date';
 
 const changeGenres = (genresList, id) => {
@@ -13,7 +12,7 @@ const changeGenres = (genresList, id) => {
   });
 };
 
-const useOptions = (optionsStorageName, fetchAction, options) => {
+const useOptions = (fetchAction, options) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [isReadyToAccept, setIsReadyToAccept] = useState(false);
   const [isOptionsValid, setIsOptionsValid] = useState(true);
@@ -99,7 +98,6 @@ const useOptions = (optionsStorageName, fetchAction, options) => {
       },
     };
 
-    setLS(optionsStorageName, newUserOptions);
     fetchAction(newUserOptions);
     setIsModalOpened(false);
     setIsReadyToAccept(false);

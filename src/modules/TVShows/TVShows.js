@@ -7,7 +7,7 @@ import {
   USER_SCORE_RANGE,
 } from '~common/tmdb-config';
 import useFocusContainer from '~common/hooks/useFocusContainer';
-import { getLS } from '~common/utils/storage';
+import { getLS, setLS } from '~common/utils/storage';
 import { checkIfIsData } from '~common/utils/getData';
 import { scrollToTop } from '~common/utils/dom';
 import types from '~common/types';
@@ -33,9 +33,9 @@ const TVShows = ({ titleName }) => {
 
   const fetchDataWithNewOptions = useCallback(
     (newOptions) => {
-      dispatch(tvShowsActions.resetState());
       dispatch(tvShowsActions.saveOptions(newOptions));
       dispatch(tvShowsActions.fetchData({ ...newOptions, page: currentPage }));
+      setLS(TV_OPTIONS_STORAGE_NAME, newOptions);
     },
     [currentPage, dispatch]
   );
@@ -71,7 +71,6 @@ const TVShows = ({ titleName }) => {
 
       {options && (
         <Adjustment
-          optionsLSName={TV_OPTIONS_STORAGE_NAME}
           sortByOptions={SORT_TV_BY_OPTIONS}
           userScoreRange={USER_SCORE_RANGE}
           dateTitle="Air Dates"

@@ -7,7 +7,7 @@ import {
   USER_SCORE_RANGE,
 } from '~common/tmdb-config';
 import useFocusContainer from '~common/hooks/useFocusContainer';
-import { getLS } from '~common/utils/storage';
+import { getLS, setLS } from '~common/utils/storage';
 import { checkIfIsData } from '~common/utils/getData';
 import { scrollToTop } from '~common/utils/dom';
 import types from '~common/types';
@@ -33,9 +33,9 @@ const Movies = ({ titleName }) => {
 
   const fetchDataWithNewOptions = useCallback(
     (newOptions) => {
-      dispatch(moviesActions.resetState());
       dispatch(moviesActions.saveOptions(newOptions));
       dispatch(moviesActions.fetchData({ ...newOptions, page: currentPage }));
+      setLS(MOVIES_OPTIONS_STORAGE_NAME, newOptions);
     },
     [currentPage, dispatch]
   );
@@ -71,7 +71,6 @@ const Movies = ({ titleName }) => {
 
       {options && (
         <Adjustment
-          optionsLSName={MOVIES_OPTIONS_STORAGE_NAME}
           sortByOptions={SORT_MOVIES_BY_OPTIONS}
           userScoreRange={USER_SCORE_RANGE}
           dateTitle="Release Dates"
