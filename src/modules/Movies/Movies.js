@@ -27,17 +27,17 @@ const Movies = ({ titleName }) => {
   const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
 
-  const fetchDataWithNewOptions = useCallback(
-    (options) => {
-      dispatch(moviesActions.resetState());
-      dispatch(moviesActions.saveOptions(options));
-      dispatch(moviesActions.fetchData(options));
-    },
-    [dispatch]
-  );
-
   const { data, isLoading, options, currentPage, totalPages } = useSelector(
     (state) => state.movies
+  );
+
+  const fetchDataWithNewOptions = useCallback(
+    (newOptions) => {
+      dispatch(moviesActions.resetState());
+      dispatch(moviesActions.saveOptions(newOptions));
+      dispatch(moviesActions.fetchData({ ...newOptions, page: currentPage }));
+    },
+    [currentPage, dispatch]
   );
 
   const changePageHandler = (e, page) => {

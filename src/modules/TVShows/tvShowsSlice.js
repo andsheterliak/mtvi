@@ -4,7 +4,6 @@ import axiosTMDB from '~common/axios-tmdb';
 import { getSelectedGenres } from '~common/utils/getData';
 
 const initialState = {
-  cache: {},
   data: [],
   currentPage: 1,
   totalPages: null,
@@ -33,31 +32,12 @@ const slice = createSlice({
       state.isLoading = false;
       state.currentPage = payload.page;
       state.data = payload.results;
-      state.cache[payload.page] = payload.results;
       state.totalPages = payload.total_pages;
-    },
-
-    fetchCached(state, { payload }) {
-      state.currentPage = payload.page;
-      state.data = payload.data;
     },
   },
 });
 
-const fetchData = (options) => async (dispatch, getState) => {
-  const state = getState().tvShows;
-
-  if (state.cache[options.page]) {
-    dispatch(
-      slice.actions.fetchCached({
-        data: state.cache[options.page],
-        page: options.page,
-      })
-    );
-
-    return;
-  }
-
+const fetchData = (options) => async (dispatch) => {
   dispatch(slice.actions.fetchDataStart());
 
   const response = await axiosTMDB.get('', {

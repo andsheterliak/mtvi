@@ -27,17 +27,17 @@ const TVShows = ({ titleName }) => {
   const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
 
-  const fetchDataWithNewOptions = useCallback(
-    (options) => {
-      dispatch(tvShowsActions.resetState());
-      dispatch(tvShowsActions.saveOptions(options));
-      dispatch(tvShowsActions.fetchData(options));
-    },
-    [dispatch]
-  );
-
   const { data, isLoading, options, currentPage, totalPages } = useSelector(
     (state) => state.tvShows
+  );
+
+  const fetchDataWithNewOptions = useCallback(
+    (newOptions) => {
+      dispatch(tvShowsActions.resetState());
+      dispatch(tvShowsActions.saveOptions(newOptions));
+      dispatch(tvShowsActions.fetchData({ ...newOptions, page: currentPage }));
+    },
+    [currentPage, dispatch]
   );
 
   const changePageHandler = (e, page) => {
