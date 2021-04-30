@@ -111,7 +111,6 @@ const useOptions = (initialOptions) => {
 
   return {
     options: state.options,
-    isModalOpened: state.isModalOpened,
     isReadyToAccept: state.isReadyToAccept,
     resetOptions,
     setDateFromHandler,
