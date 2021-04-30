@@ -57,18 +57,18 @@ const slice = createSlice({
     },
 
     resetOptions(state, { payload }) {
-      return initState(payload.options);
+      return initState(payload.initialOptions);
     },
   },
 });
 
 const { reducer, actions } = slice;
 
-const useOptions = (options) => {
-  const [state, dispatch] = useReducer(reducer, options, initState);
+const useOptions = (initialOptions) => {
+  const [state, dispatch] = useReducer(reducer, initialOptions, initState);
 
   const resetOptions = () => {
-    dispatch(actions.resetOptions({ options }));
+    dispatch(actions.resetOptions({ initialOptions }));
   };
 
   const setDateFromHandler = useCallback(
