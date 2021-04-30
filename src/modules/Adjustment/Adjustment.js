@@ -12,7 +12,7 @@ import useOptions from './hooks/useOptions';
 import adjustmentTypes from './adjustmentTypes';
 
 const Adjustment = ({
-  optionsLSName,
+  optionsStorageName,
   sortByOptions,
   userScoreRange,
   dateTitle,
@@ -32,7 +32,7 @@ const Adjustment = ({
     toggleGenreHandler,
     changeUserScoreHandler,
     acceptHandler,
-  } = useOptions(optionsLSName, fetchItems, initialOptions);
+  } = useOptions(optionsStorageName, fetchItems, initialOptions);
 
   return (
     <>
@@ -86,7 +86,7 @@ const Adjustment = ({
 };
 
 Adjustment.propTypes = {
-  optionsLSName: string.isRequired,
+  optionsStorageName: string.isRequired,
   sortByOptions: adjustmentTypes.sortByOptions,
   userScoreRange: adjustmentTypes.userScoreRange,
   dateTitle: adjustmentTypes.dateTitle,

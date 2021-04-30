@@ -1,1 +1,1 @@
-export const TV_OPTIONS_LS_NAME = 'tvShowsOptions';
+export const TV_OPTIONS_STORAGE_NAME = 'tvShowsOptions';

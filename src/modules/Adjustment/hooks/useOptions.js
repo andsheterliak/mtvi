@@ -13,7 +13,7 @@ const changeGenres = (genresList, id) => {
   });
 };
 
-const useOptions = (userOptionsName, fetchAction, options) => {
+const useOptions = (optionsStorageName, fetchAction, options) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [isReadyToAccept, setIsReadyToAccept] = useState(false);
   const [isOptionsValid, setIsOptionsValid] = useState(true);
@@ -99,7 +99,7 @@ const useOptions = (userOptionsName, fetchAction, options) => {
       },
     };
 
-    setLS(userOptionsName, newUserOptions);
+    setLS(optionsStorageName, newUserOptions);
     fetchAction(newUserOptions);
     setIsModalOpened(false);
     setIsReadyToAccept(false);

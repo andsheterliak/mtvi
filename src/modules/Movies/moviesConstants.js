@@ -1,1 +1,1 @@
-export const MOVIES_OPTIONS_LS_NAME = 'moviesOptions';
+export const MOVIES_OPTIONS_STORAGE_NAME = 'moviesOptions';

@@ -21,7 +21,7 @@ import MainContent from '~components/MainContent';
 import Pagination from '~components/Pagination';
 
 import { moviesActions } from './moviesSlice';
-import { MOVIES_OPTIONS_LS_NAME } from './moviesConstants';
+import { MOVIES_OPTIONS_STORAGE_NAME } from './moviesConstants';
 
 const Movies = ({ titleName }) => {
   const { focus, FocusableContainer } = useFocusContainer();
@@ -54,7 +54,7 @@ const Movies = ({ titleName }) => {
     if (isData) return;
 
     const startingOptions =
-      getLS(MOVIES_OPTIONS_LS_NAME) || MOVIES_DEFAULT_OPTIONS;
+      getLS(MOVIES_OPTIONS_STORAGE_NAME) || MOVIES_DEFAULT_OPTIONS;
 
     dispatch(moviesActions.saveOptions(startingOptions));
     dispatch(
@@ -71,7 +71,7 @@ const Movies = ({ titleName }) => {
 
       {options && (
         <Adjustment
-          optionsLSName={MOVIES_OPTIONS_LS_NAME}
+          optionsLSName={MOVIES_OPTIONS_STORAGE_NAME}
           sortByOptions={SORT_MOVIES_BY_OPTIONS}
           userScoreRange={USER_SCORE_RANGE}
           dateTitle="Release Dates"

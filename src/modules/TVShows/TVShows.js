@@ -20,7 +20,7 @@ import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 import Pagination from '~components/Pagination';
 
-import { TV_OPTIONS_LS_NAME } from './tvShowsConstants';
+import { TV_OPTIONS_STORAGE_NAME } from './tvShowsConstants';
 import { tvShowsActions } from './tvShowsSlice';
 
 const TVShows = ({ titleName }) => {
@@ -53,7 +53,8 @@ const TVShows = ({ titleName }) => {
   useEffect(() => {
     if (isData) return;
 
-    const startingOptions = getLS(TV_OPTIONS_LS_NAME) || TV_DEFAULT_OPTIONS;
+    const startingOptions =
+      getLS(TV_OPTIONS_STORAGE_NAME) || TV_DEFAULT_OPTIONS;
 
     dispatch(tvShowsActions.saveOptions(startingOptions));
     dispatch(
@@ -70,7 +71,7 @@ const TVShows = ({ titleName }) => {
 
       {options && (
         <Adjustment
-          optionsLSName={TV_OPTIONS_LS_NAME}
+          optionsLSName={TV_OPTIONS_STORAGE_NAME}
           sortByOptions={SORT_TV_BY_OPTIONS}
           userScoreRange={USER_SCORE_RANGE}
           dateTitle="Air Dates"
