@@ -75,7 +75,7 @@ const Movies = ({ titleName }) => {
           userScoreRange={USER_SCORE_RANGE}
           dateTitle="Release Dates"
           modalTitle="Adjust Movies"
-          fetchItems={fetchDataWithNewOptions}
+          onAcceptCallback={fetchDataWithNewOptions}
           initialOptions={options}
         />
       )}

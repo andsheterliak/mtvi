@@ -70,7 +70,7 @@ const slice = createSlice({
 
 const { reducer, actions } = slice;
 
-const useOptions = (fetchAction, options) => {
+const useOptions = (onAcceptCallback, options) => {
   const [state, dispatch] = useReducer(reducer, options, initState);
 
   const openModalHandler = () => {
@@ -116,7 +116,7 @@ const useOptions = (fetchAction, options) => {
   };
 
   const acceptHandler = () => {
-    fetchAction(state.options);
+    onAcceptCallback(state.options);
     dispatch(actions.accept());
   };
 

@@ -75,7 +75,7 @@ const TVShows = ({ titleName }) => {
           userScoreRange={USER_SCORE_RANGE}
           dateTitle="Air Dates"
           modalTitle="Adjust TV Shows"
-          fetchItems={fetchDataWithNewOptions}
+          onAcceptCallback={fetchDataWithNewOptions}
           initialOptions={options}
         />
       )}

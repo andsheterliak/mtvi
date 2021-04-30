@@ -16,7 +16,7 @@ const Adjustment = ({
   userScoreRange,
   dateTitle,
   modalTitle,
-  fetchItems,
+  onAcceptCallback,
   initialOptions,
 }) => {
   const {
@@ -31,7 +31,7 @@ const Adjustment = ({
     toggleGenreHandler,
     changeUserScoreHandler,
     acceptHandler,
-  } = useOptions(fetchItems, initialOptions);
+  } = useOptions(onAcceptCallback, initialOptions);
 
   return (
     <>
@@ -89,7 +89,7 @@ Adjustment.propTypes = {
   userScoreRange: adjustmentTypes.userScoreRange,
   dateTitle: adjustmentTypes.dateTitle,
   modalTitle: adjustmentTypes.modalTitle,
-  fetchItems: func.isRequired,
+  onAcceptCallback: func.isRequired,
 
   initialOptions: shape({
     sortBy: string.isRequired,
