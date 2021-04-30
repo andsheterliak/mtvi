@@ -39,19 +39,19 @@ const filterData = (data, filterBy) => {
   switch (filterBy) {
     case filterConfig.all.value:
       [movieCast, movieCrew, tvCast, tvCrew].forEach((item) => {
-        if (item) filteredData.push(...item);
+        if (item) filteredData.push(item);
       });
       break;
 
     case filterConfig.movies.value:
       [movieCast, movieCrew].forEach((item) => {
-        if (item) filteredData.push(...item);
+        if (item) filteredData.push(item);
       });
       break;
 
     case filterConfig.tvShows.value:
       [tvCast, tvCrew].forEach((item) => {
-        if (item) filteredData.push(...item);
+        if (item) filteredData.push(item);
       });
       break;
 
@@ -59,7 +59,7 @@ const filterData = (data, filterBy) => {
       break;
   }
 
-  return filteredData;
+  return filteredData.flat();
 };
 
 const sortByDateDescending = (data) => {
