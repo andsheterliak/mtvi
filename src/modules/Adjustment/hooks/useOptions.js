@@ -1,118 +1,129 @@
-import { useCallback, useState } from 'react';
+import { createSlice } from '@reduxjs/toolkit';
+import { useCallback, useReducer } from 'react';
 
 import { formatDateToAPI } from '~common/utils/date';
 
-const changeGenres = (genresList, id) => {
-  return genresList.map((item) => {
-    if (item.id === id) {
-      return { ...item, isSelected: !item.isSelected };
-    }
-
-    return item;
-  });
+const initState = (initialOptions) => {
+  return {
+    options: initialOptions,
+    isModalOpened: false,
+    isReadyToAccept: false,
+    isOptionsValid: true,
+  };
 };
 
+const slice = createSlice({
+  name: 'options',
+
+  reducers: {
+    validateDate(state, { payload }) {
+      if (payload.date?.toString() === 'Invalid Date') {
+        state.isOptionsValid = false;
+        state.isReadyToAccept = false;
+      } else {
+        state.isOptionsValid = true;
+        state.isReadyToAccept = true;
+      }
+    },
+
+    toggleGenres(state, { payload }) {
+      state.options.genres.forEach((item) => {
+        if (item.id !== payload.id) return;
+        item.isSelected = !item.isSelected;
+      });
+
+      if (state.isOptionsValid) state.isReadyToAccept = true;
+    },
+
+    sortBy(state, { payload }) {
+      state.options.sortBy = payload.value;
+      if (state.isOptionsValid) state.isReadyToAccept = true;
+    },
+
+    setDateFrom(state, { payload }) {
+      state.options.dates.from = formatDateToAPI(payload.date);
+    },
+
+    setDateTo(state, { payload }) {
+      state.options.dates.to = formatDateToAPI(payload.date);
+    },
+
+    changeUserScore(state, { payload }) {
+      state.options.userScore = payload.value;
+      if (state.isOptionsValid) state.isReadyToAccept = true;
+    },
+
+    accept(state) {
+      state.isModalOpened = false;
+      state.isReadyToAccept = false;
+    },
+
+    openModal(state) {
+      state.isModalOpened = true;
+    },
+
+    closeModal(state, { payload }) {
+      return initState(payload.options);
+    },
+  },
+});
+
+const { reducer, actions } = slice;
+
 const useOptions = (fetchAction, options) => {
-  const [isModalOpened, setIsModalOpened] = useState(false);
-  const [isReadyToAccept, setIsReadyToAccept] = useState(false);
-  const [isOptionsValid, setIsOptionsValid] = useState(true);
-
-  const [genres, setGenres] = useState(options.genres);
-  const [sortBy, setSortBy] = useState(options.sortBy);
-  const [dateFrom, setDateFrom] = useState(options.dates.from);
-  const [dateTo, setDateTo] = useState(options.dates.to);
-  const [userScore, setUserScore] = useState(options.userScore);
-
-  const cancelOptions = () => {
-    setGenres(options.genres);
-    setSortBy(options.sortBy);
-    setDateFrom(options.dates.from);
-    setDateTo(options.dates.to);
-    setUserScore(options.userScore);
-    setIsReadyToAccept(false);
-  };
-
-  const validateIfDateIsInValid = (date) => {
-    if (date?.toString() === 'Invalid Date') {
-      setIsOptionsValid(false);
-      setIsReadyToAccept(false);
-    } else {
-      setIsOptionsValid(true);
-      setIsReadyToAccept(true);
-    }
-  };
+  const [state, dispatch] = useReducer(reducer, options, initState);
 
   const openModalHandler = () => {
-    setIsModalOpened(true);
+    dispatch(actions.openModal());
   };
 
   const closeModalHandler = () => {
-    setIsModalOpened(false);
-    cancelOptions();
-    setIsOptionsValid(true);
+    dispatch(actions.closeModal({ options }));
   };
 
-  const dateFromHandler = useCallback((date) => {
-    validateIfDateIsInValid(date);
-    setDateFrom(formatDateToAPI(date));
-  }, []);
+  const dateFromHandler = useCallback(
+    (date) => {
+      dispatch(actions.validateDate({ date }));
+      dispatch(actions.setDateFrom({ date }));
+    },
+    [dispatch]
+  );
 
-  const dateToHandler = useCallback((date) => {
-    validateIfDateIsInValid(date);
-    setDateTo(formatDateToAPI(date));
-  }, []);
+  const dateToHandler = useCallback(
+    (date) => {
+      dispatch(actions.validateDate({ date }));
+      dispatch(actions.setDateTo({ date }));
+    },
+    [dispatch]
+  );
 
   const sortByHandler = useCallback(
     (e) => {
-      setSortBy(e.target.value);
-      if (isOptionsValid) setIsReadyToAccept(true);
+      dispatch(actions.sortBy({ value: e.target.value }));
     },
-    [isOptionsValid]
+    [dispatch]
   );
 
   const toggleGenreHandler = useCallback(
     (id) => {
-      setGenres((prevGenres) => {
-        return changeGenres(prevGenres, id);
-      });
-
-      if (isOptionsValid) setIsReadyToAccept(true);
+      dispatch(actions.toggleGenres({ id }));
     },
-    [isOptionsValid]
+    [dispatch]
   );
 
-  const changeUserScoreHandler = (event, newValue) => {
-    setUserScore(newValue);
-    if (isOptionsValid) setIsReadyToAccept(true);
+  const changeUserScoreHandler = (event, value) => {
+    dispatch(actions.changeUserScore({ value }));
   };
 
   const acceptHandler = () => {
-    const newUserOptions = {
-      sortBy,
-      userScore,
-      genres,
-
-      dates: {
-        from: dateFrom,
-        to: dateTo,
-      },
-    };
-
-    fetchAction(newUserOptions);
-    setIsModalOpened(false);
-    setIsReadyToAccept(false);
+    fetchAction(state.options);
+    dispatch(actions.accept());
   };
 
   return {
-    options: {
-      sortBy,
-      userScore,
-      genres,
-      dates: { from: dateFrom, to: dateTo },
-    },
-
-    isModalOpened,
-    isReadyToAccept,
+    options: state.options,
+    isModalOpened: state.isModalOpened,
+    isReadyToAccept: state.isReadyToAccept,
     openModalHandler,
     closeModalHandler,
     dateFromHandler,
