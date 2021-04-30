@@ -85,6 +85,7 @@ const sortByDateDescending = (data) => {
 const createTimelineData = (data) => {
   const timelineData = {};
 
+  // Join all the items with the same id, (items from the API are duplicated if a person had several jobs and they differ only in those jobs).
   data.forEach((item) => {
     const job = item.character || item.job;
     const name = item.title || item.name;
@@ -99,6 +100,7 @@ const createTimelineData = (data) => {
       firstAirDate: item.episode_count,
     });
 
+    // If no timeline item with the 'id', create it.
     if (!timelineData[item.id]) {
       timelineData[item.id] = {
         id: item.id,
@@ -107,7 +109,6 @@ const createTimelineData = (data) => {
         dateStr,
         path,
 
-        // Doesn't need fallback
         employment: {
           [departmentKey]: {
             name: departmentName,
@@ -121,9 +122,11 @@ const createTimelineData = (data) => {
 
     const itemEmployment = timelineData[item.id].employment;
 
+    // If is created item with the same 'id', check if it has 'employment' with the 'departmentKey'.
     if (itemEmployment[departmentKey]) {
       const itemDepartment = itemEmployment[departmentKey];
 
+      // If is a 'value', append new value from the current item. If no 'value', just add it.
       if (itemDepartment.value) {
         itemDepartment.value += `, ${job}`;
       } else {
@@ -133,6 +136,7 @@ const createTimelineData = (data) => {
       return;
     }
 
+    // If created item with the same 'id' hasn't an 'employment' with the 'departmentKey', create it.
     itemEmployment[departmentKey] = {
       name: departmentName,
       value: job,
