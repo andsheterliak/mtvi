@@ -25,8 +25,8 @@ const Adjustment = ({
     isReadyToAccept,
     openModalHandler,
     closeModalHandler,
-    dateFromHandler,
-    dateToHandler,
+    setDateFromHandler,
+    setDateToHandler,
     sortByHandler,
     toggleGenreHandler,
     changeUserScoreHandler,
@@ -55,8 +55,8 @@ const Adjustment = ({
             <ReleaseDatesOption
               dateFrom={options.dates.from}
               dateTo={options.dates.to}
-              dateFromHandler={dateFromHandler}
-              dateToHandler={dateToHandler}
+              setDateFromHandler={setDateFromHandler}
+              setDateToHandler={setDateToHandler}
               dateTitle={dateTitle}
             />
 

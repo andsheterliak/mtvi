@@ -81,7 +81,7 @@ const useOptions = (fetchAction, options) => {
     dispatch(actions.closeModal({ options }));
   };
 
-  const dateFromHandler = useCallback(
+  const setDateFromHandler = useCallback(
     (date) => {
       dispatch(actions.validateDate({ date }));
       dispatch(actions.setDateFrom({ date }));
@@ -89,7 +89,7 @@ const useOptions = (fetchAction, options) => {
     [dispatch]
   );
 
-  const dateToHandler = useCallback(
+  const setDateToHandler = useCallback(
     (date) => {
       dispatch(actions.validateDate({ date }));
       dispatch(actions.setDateTo({ date }));
@@ -126,8 +126,8 @@ const useOptions = (fetchAction, options) => {
     isReadyToAccept: state.isReadyToAccept,
     openModalHandler,
     closeModalHandler,
-    dateFromHandler,
-    dateToHandler,
+    setDateFromHandler,
+    setDateToHandler,
     sortByHandler,
     toggleGenreHandler,
     changeUserScoreHandler,

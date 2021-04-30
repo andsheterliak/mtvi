@@ -12,8 +12,8 @@ const ReleaseDatesOption = ({
   dateTitle,
   dateFrom,
   dateTo,
-  dateFromHandler,
-  dateToHandler,
+  setDateFromHandler,
+  setDateToHandler,
 }) => {
   return (
     <OptionContainer>
@@ -22,7 +22,7 @@ const ReleaseDatesOption = ({
       <DatePickerContainer>
         <DatePicker
           value={dateFrom}
-          changeDateHandler={dateFromHandler}
+          changeDateHandler={setDateFromHandler}
           id="date-picker-from"
           ariaLabel="change release dates from"
           label="From"
@@ -30,7 +30,7 @@ const ReleaseDatesOption = ({
 
         <DatePicker
           value={dateTo}
-          changeDateHandler={dateToHandler}
+          changeDateHandler={setDateToHandler}
           id="date-picker-to"
           ariaLabel="change release dates to"
           label="To"
@@ -44,8 +44,8 @@ ReleaseDatesOption.propTypes = {
   dateTitle: adjustmentTypes.dateTitle,
   dateFrom: adjustmentTypes.dates.from,
   dateTo: adjustmentTypes.dates.to,
-  dateFromHandler: types.handler,
-  dateToHandler: types.handler,
+  setDateFromHandler: types.handler,
+  setDateToHandler: types.handler,
 };
 
 export default memo(ReleaseDatesOption);
