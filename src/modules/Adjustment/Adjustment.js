@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { exact, func, string, shape } from 'prop-types';
 
 import Modal from './components/Modal';
@@ -21,17 +22,31 @@ const Adjustment = ({
 }) => {
   const {
     options,
-    isModalOpened,
     isReadyToAccept,
-    openModalHandler,
-    closeModalHandler,
+    resetOptions,
     setDateFromHandler,
     setDateToHandler,
     sortByHandler,
     toggleGenreHandler,
     changeUserScoreHandler,
-    acceptHandler,
-  } = useOptions(onAcceptCallback, initialOptions);
+    acceptOptions,
+  } = useOptions(initialOptions);
+  const [isModalOpened, setIsModalOpened] = useState(false);
+
+  const openModalHandler = () => {
+    setIsModalOpened(true);
+  };
+
+  const closeModalHandler = () => {
+    resetOptions();
+    setIsModalOpened(false);
+  };
+
+  const acceptHandler = () => {
+    onAcceptCallback(options);
+    acceptOptions();
+    setIsModalOpened(false);
+  };
 
   return (
     <>

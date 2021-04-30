@@ -6,7 +6,6 @@ import { formatDateToAPI } from '~common/utils/date';
 const initState = (initialOptions) => {
   return {
     options: initialOptions,
-    isModalOpened: false,
     isReadyToAccept: false,
     isOptionsValid: true,
   };
@@ -53,16 +52,11 @@ const slice = createSlice({
       if (state.isOptionsValid) state.isReadyToAccept = true;
     },
 
-    accept(state) {
-      state.isModalOpened = false;
+    acceptOptions(state) {
       state.isReadyToAccept = false;
     },
 
-    openModal(state) {
-      state.isModalOpened = true;
-    },
-
-    closeModal(state, { payload }) {
+    resetOptions(state, { payload }) {
       return initState(payload.options);
     },
   },
@@ -70,15 +64,11 @@ const slice = createSlice({
 
 const { reducer, actions } = slice;
 
-const useOptions = (onAcceptCallback, options) => {
+const useOptions = (options) => {
   const [state, dispatch] = useReducer(reducer, options, initState);
 
-  const openModalHandler = () => {
-    dispatch(actions.openModal());
-  };
-
-  const closeModalHandler = () => {
-    dispatch(actions.closeModal({ options }));
+  const resetOptions = () => {
+    dispatch(actions.resetOptions({ options }));
   };
 
   const setDateFromHandler = useCallback(
@@ -115,23 +105,21 @@ const useOptions = (onAcceptCallback, options) => {
     dispatch(actions.changeUserScore({ value }));
   };
 
-  const acceptHandler = () => {
-    onAcceptCallback(state.options);
-    dispatch(actions.accept());
+  const acceptOptions = () => {
+    dispatch(actions.acceptOptions());
   };
 
   return {
     options: state.options,
     isModalOpened: state.isModalOpened,
     isReadyToAccept: state.isReadyToAccept,
-    openModalHandler,
-    closeModalHandler,
+    resetOptions,
     setDateFromHandler,
     setDateToHandler,
     sortByHandler,
     toggleGenreHandler,
     changeUserScoreHandler,
-    acceptHandler,
+    acceptOptions,
   };
 };
 
