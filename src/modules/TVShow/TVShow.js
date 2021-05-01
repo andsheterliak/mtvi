@@ -14,8 +14,6 @@ const TVShow = () => {
 
   const { data } = useSelector((state) => state.tvShow);
 
-  console.log('data', ':', data);
-
   useEffect(() => {
     dispatch(tvShowActions.fetchData(id));
 
