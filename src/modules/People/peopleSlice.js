@@ -4,7 +4,6 @@ import axiosTMDB from '~common/axios-tmdb';
 
 const initialState = {
   data: [],
-  currentPage: 1,
   totalPages: null,
   isLoading: false,
 };
@@ -24,7 +23,6 @@ const slice = createSlice({
 
     fetchDataSuccess(state, { payload }) {
       state.isLoading = false;
-      state.currentPage = payload.page;
       state.data = payload.results;
       state.totalPages = payload.total_pages;
     },

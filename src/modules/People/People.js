@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import useFocusContainer from '~common/hooks/useFocusContainer';
+import usePagination from '~common/hooks/usePagination';
 import { checkIfIsData } from '~common/utils/getData';
 import { scrollToTop } from '~common/utils/dom';
 import types from '~common/types';
@@ -18,15 +19,13 @@ import { peopleActions } from './peopleSlice';
 const People = ({ titleName }) => {
   const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
+  const { pathname, page } = usePagination();
 
-  const { data, isLoading, currentPage, totalPages } = useSelector(
-    (state) => state.people
-  );
+  const { data, isLoading, totalPages } = useSelector((state) => state.people);
 
-  const changePageHandler = (e, page) => {
-    if (currentPage === page) return;
+  const changePageHandler = (e, newPage) => {
+    if (page === newPage) return;
 
-    dispatch(peopleActions.fetchData({ page }));
     focus();
     scrollToTop();
   };
@@ -34,9 +33,13 @@ const People = ({ titleName }) => {
   const isData = checkIfIsData(data);
 
   useEffect(() => {
-    if (isData) return;
+    dispatch(peopleActions.fetchData({ page }));
+  }, [dispatch, page]);
 
-    dispatch(peopleActions.fetchData({ page: currentPage }));
+  useEffect(() => {
+    return () => {
+      dispatch(peopleActions.resetState());
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -55,7 +58,8 @@ const People = ({ titleName }) => {
       {isData && (
         <Pagination
           isLoading={isLoading}
-          page={currentPage}
+          page={page}
+          path={pathname}
           totalPages={totalPages}
           changePageHandler={changePageHandler}
         />

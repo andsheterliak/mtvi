@@ -7,6 +7,7 @@ import {
   USER_SCORE_RANGE,
 } from '~common/tmdb-config';
 import useFocusContainer from '~common/hooks/useFocusContainer';
+import usePagination from '~common/hooks/usePagination';
 import { getLS, setLS } from '~common/utils/storage';
 import { checkIfIsData } from '~common/utils/getData';
 import { scrollToTop } from '~common/utils/dom';
@@ -26,24 +27,24 @@ import { MOVIES_OPTIONS_STORAGE_NAME } from './moviesConstants';
 const Movies = ({ titleName }) => {
   const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
+  const { pathname, page } = usePagination();
 
-  const { data, isLoading, options, currentPage, totalPages } = useSelector(
+  const { data, isLoading, options, totalPages } = useSelector(
     (state) => state.movies
   );
 
   const fetchDataWithNewOptions = useCallback(
     (newOptions) => {
       dispatch(moviesActions.saveOptions(newOptions));
-      dispatch(moviesActions.fetchData({ ...newOptions, page: currentPage }));
+      dispatch(moviesActions.fetchData({ ...newOptions, page }));
       setLS(MOVIES_OPTIONS_STORAGE_NAME, newOptions);
     },
-    [currentPage, dispatch]
+    [dispatch, page]
   );
 
-  const changePageHandler = (e, page) => {
-    if (currentPage === page) return;
+  const changePageHandler = (e, newPage) => {
+    if (page === newPage) return;
 
-    dispatch(moviesActions.fetchData({ ...options, page }));
     focus();
     scrollToTop();
   };
@@ -51,15 +52,19 @@ const Movies = ({ titleName }) => {
   const isData = checkIfIsData(data);
 
   useEffect(() => {
-    if (isData) return;
-
     const startingOptions =
-      getLS(MOVIES_OPTIONS_STORAGE_NAME) || MOVIES_DEFAULT_OPTIONS;
+      options || getLS(MOVIES_OPTIONS_STORAGE_NAME) || MOVIES_DEFAULT_OPTIONS;
 
-    dispatch(moviesActions.saveOptions(startingOptions));
-    dispatch(
-      moviesActions.fetchData({ ...startingOptions, page: currentPage })
-    );
+    if (!options) dispatch(moviesActions.saveOptions(startingOptions));
+
+    dispatch(moviesActions.fetchData({ ...startingOptions, page }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, page]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(moviesActions.resetState());
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -88,8 +93,9 @@ const Movies = ({ titleName }) => {
 
       {isData && (
         <Pagination
+          path={pathname}
           isLoading={isLoading}
-          page={currentPage}
+          page={page}
           totalPages={totalPages}
           changePageHandler={changePageHandler}
         />

@@ -7,6 +7,7 @@ import {
   USER_SCORE_RANGE,
 } from '~common/tmdb-config';
 import useFocusContainer from '~common/hooks/useFocusContainer';
+import usePagination from '~common/hooks/usePagination';
 import { getLS, setLS } from '~common/utils/storage';
 import { checkIfIsData } from '~common/utils/getData';
 import { scrollToTop } from '~common/utils/dom';
@@ -26,24 +27,24 @@ import { tvShowsActions } from './tvShowsSlice';
 const TVShows = ({ titleName }) => {
   const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
+  const { pathname, page } = usePagination();
 
-  const { data, isLoading, options, currentPage, totalPages } = useSelector(
+  const { data, isLoading, options, totalPages } = useSelector(
     (state) => state.tvShows
   );
 
   const fetchDataWithNewOptions = useCallback(
     (newOptions) => {
       dispatch(tvShowsActions.saveOptions(newOptions));
-      dispatch(tvShowsActions.fetchData({ ...newOptions, page: currentPage }));
+      dispatch(tvShowsActions.fetchData({ ...newOptions, page }));
       setLS(TV_OPTIONS_STORAGE_NAME, newOptions);
     },
-    [currentPage, dispatch]
+    [page, dispatch]
   );
 
-  const changePageHandler = (e, page) => {
-    if (currentPage === page) return;
+  const changePageHandler = (e, newPage) => {
+    if (page === newPage) return;
 
-    dispatch(tvShowsActions.fetchData({ ...options, page }));
     focus();
     scrollToTop();
   };
@@ -51,15 +52,19 @@ const TVShows = ({ titleName }) => {
   const isData = checkIfIsData(data);
 
   useEffect(() => {
-    if (isData) return;
-
     const startingOptions =
-      getLS(TV_OPTIONS_STORAGE_NAME) || TV_DEFAULT_OPTIONS;
+      options || getLS(TV_OPTIONS_STORAGE_NAME) || TV_DEFAULT_OPTIONS;
 
-    dispatch(tvShowsActions.saveOptions(startingOptions));
-    dispatch(
-      tvShowsActions.fetchData({ ...startingOptions, page: currentPage })
-    );
+    if (!options) dispatch(tvShowsActions.saveOptions(startingOptions));
+
+    dispatch(tvShowsActions.fetchData({ ...startingOptions, page }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, page]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(tvShowsActions.resetState());
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -88,8 +93,9 @@ const TVShows = ({ titleName }) => {
 
       {isData && (
         <Pagination
+          path={pathname}
           isLoading={isLoading}
-          page={currentPage}
+          page={page}
           totalPages={totalPages}
           changePageHandler={changePageHandler}
         />
