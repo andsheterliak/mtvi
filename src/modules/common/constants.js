@@ -1,9 +1,9 @@
 export const ROUTE_NAMES = {
   root: '/',
   movies: '/movies',
-  movie: '/movies/',
-  tvShows: '/tv',
-  tvShow: '/tv/',
+  movie: '/movie',
+  tvShows: '/tvshows',
+  tvShow: '/tvshow',
   people: '/people',
-  person: '/people/',
+  person: '/person',
 };

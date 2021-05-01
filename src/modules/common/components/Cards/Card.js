@@ -47,7 +47,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Card = ({ posterPath, title, releaseDate, voteAverage, id, path }) => {
+const Card = ({ posterPath, title, releaseDate, voteAverage, path }) => {
   const classes = useStyles();
   const cardClasses = useCardStyles();
 
@@ -57,11 +57,7 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, id, path }) => {
 
   return (
     <MUiCard raised>
-      <CardActionArea
-        component={Link}
-        to={`${path}${id}`}
-        className={cardClasses.action}
-      >
+      <CardActionArea component={Link} to={path} className={cardClasses.action}>
         <CardMedia
           component="div"
           alt={title}
@@ -103,7 +99,6 @@ Card.propTypes = {
   title: string,
   releaseDate: string,
   voteAverage: number,
-  id: number.isRequired,
   path: string.isRequired,
 };
 

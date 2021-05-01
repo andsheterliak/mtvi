@@ -2,6 +2,8 @@ import { arrayOf, exact, number, string } from 'prop-types';
 import { Link as MUILink } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
+import { ROUTE_NAMES } from '~common/constants';
+
 const Creators = ({ creators }) => {
   const creatorsLength = creators.length;
 
@@ -9,7 +11,12 @@ const Creators = ({ creators }) => {
     const isComma = index < creatorsLength - 1;
 
     return (
-      <MUILink color="inherit" key={id} component={Link} to={`/people/${id}`}>
+      <MUILink
+        color="inherit"
+        key={id}
+        component={Link}
+        to={`${ROUTE_NAMES.person}/${id}`}
+      >
         {name}
         {isComma && ', '}
       </MUILink>

@@ -15,12 +15,11 @@ const Cards = ({ cardsData }) => {
     return (
       <Card
         key={item.id}
-        path={path}
+        path={`${path}/${item.id}`}
         posterPath={item.poster_path}
         title={item.title || item.name}
         releaseDate={item.release_date || item.first_air_date}
         voteAverage={item.vote_average}
-        id={item.id}
       />
     );
   });

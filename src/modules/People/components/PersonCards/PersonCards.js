@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { ROUTE_NAMES } from '~common/constants';
 
 import types from '~common/types';
 
@@ -16,7 +17,7 @@ const PersonCards = ({ cardsData }) => {
         profilePath={item.profile_path}
         name={item.name}
         knownFor={knownFor}
-        path={`/people/${item.id}`}
+        path={`${ROUTE_NAMES.person}/${item.id}`}
       />
     );
   });
