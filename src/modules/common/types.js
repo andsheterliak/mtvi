@@ -8,6 +8,8 @@ const dataListItem = {
 const types = {
   isSpacing: bool,
   pageTitle: string.isRequired,
+  path: string.isRequired,
+  title: string,
 
   pageHeader: {
     headerName: string,

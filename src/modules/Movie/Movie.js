@@ -6,9 +6,12 @@ import useScrollToTop from '~common/hooks/useScrollToTop';
 
 import Spacer from '~components/Spacer';
 import MainContent from '~components/MainContent';
+import MainContainer from '~components/MainContainer';
+import Layout from '~components/Layout';
 import MovieHeader from './MovieHeader';
 
 import { movieActions } from './movieSlice';
+import TopBilledCast from './TopBilledCast';
 
 const Movie = () => {
   useScrollToTop();
@@ -33,7 +36,13 @@ const Movie = () => {
 
       {data ? (
         <MainContent>
-          <MovieHeader />
+          <MainContainer>
+            <Layout>
+              <MovieHeader />
+
+              <TopBilledCast />
+            </Layout>
+          </MainContainer>
         </MainContent>
       ) : (
         'Loading'

@@ -62,3 +62,5 @@ export const getSelectedGenres = (genres) => {
     }, [])
     .join(',');
 };
+
+export const getTopItems = (items) => items.slice(0, 9);
