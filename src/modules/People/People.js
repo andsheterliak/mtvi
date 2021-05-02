@@ -11,7 +11,7 @@ import CardsGrid from '~components/CardsGrid';
 import MainContainer from '~components/MainContainer';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
-import PersonCards from './components/PersonCards/PersonCards';
+import PersonCards from './components/PersonCards';
 import Pagination from '~components/Pagination';
 
 import { peopleActions } from './peopleSlice';

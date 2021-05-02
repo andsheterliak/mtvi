@@ -13,7 +13,7 @@ import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import noUserPhotoImg from '~assets/img/no-user-photo.svg';
 import useStyles from '~components/Cards/CardStyles';
 
-const PersonCard = ({ profilePath, name, knownFor, path }) => {
+const PersonCard = ({ profilePath, name, bodyContent, path }) => {
   const classes = useStyles();
 
   const profileImg = profilePath
@@ -41,7 +41,7 @@ const PersonCard = ({ profilePath, name, knownFor, path }) => {
             component="p"
             className={classes.subText}
           >
-            {knownFor}
+            {bodyContent}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -52,7 +52,7 @@ const PersonCard = ({ profilePath, name, knownFor, path }) => {
 PersonCard.propTypes = {
   profilePath: string,
   name: string,
-  knownFor: string,
+  bodyContent: string,
   path: string.isRequired,
 };
 

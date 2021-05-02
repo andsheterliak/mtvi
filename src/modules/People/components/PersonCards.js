@@ -1,9 +1,8 @@
-import { memo } from 'react';
 import { ROUTE_NAMES } from '~common/constants';
 
 import types from '~common/types';
 
-import PersonCard from './PersonCard';
+import PersonCard from '~components/PersonCard';
 
 const PersonCards = ({ cardsData }) => {
   const cards = cardsData.map((item) => {
@@ -16,7 +15,7 @@ const PersonCards = ({ cardsData }) => {
         key={item.id}
         profilePath={item.profile_path}
         name={item.name}
-        knownFor={knownFor}
+        bodyContent={knownFor}
         path={`${ROUTE_NAMES.person}/${item.id}`}
       />
     );
@@ -29,4 +28,4 @@ PersonCards.propTypes = {
   cardsData: types.cardsData,
 };
 
-export default memo(PersonCards);
+export default PersonCards;
