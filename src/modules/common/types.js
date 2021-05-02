@@ -18,7 +18,6 @@ const types = {
   dataList: arrayOf(exact(dataListItem)).isRequired,
   dataListItem,
   cardsData: arrayOf(object).isRequired,
-  cardsGridItems: node.isRequired,
   containerChildren: node,
   handler: func.isRequired,
 };
