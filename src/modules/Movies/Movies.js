@@ -7,10 +7,10 @@ import {
   USER_SCORE_RANGE,
 } from '~common/tmdb-config';
 import useFocusContainer from '~common/hooks/useFocusContainer';
+import useScrollToTop from '~common/hooks/useScrollToTop';
 import usePagination from '~common/hooks/usePagination';
 import { getLS, setLS } from '~common/utils/storage';
 import { checkIfIsData } from '~common/utils/getData';
-import { scrollToTop } from '~common/utils/dom';
 import types from '~common/types';
 
 import Adjustment from '~modules/Adjustment/Adjustment';
@@ -25,6 +25,8 @@ import { moviesActions } from './moviesSlice';
 import { MOVIES_OPTIONS_STORAGE_NAME } from './moviesConstants';
 
 const Movies = ({ titleName }) => {
+  useScrollToTop();
+
   const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
   const { pathname, page } = usePagination();
@@ -46,7 +48,6 @@ const Movies = ({ titleName }) => {
     if (page === newPage) return;
 
     focus();
-    scrollToTop();
   };
 
   const isData = checkIfIsData(data);

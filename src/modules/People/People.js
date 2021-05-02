@@ -2,9 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import useFocusContainer from '~common/hooks/useFocusContainer';
+import useScrollToTop from '~common/hooks/useScrollToTop';
 import usePagination from '~common/hooks/usePagination';
 import { checkIfIsData } from '~common/utils/getData';
-import { scrollToTop } from '~common/utils/dom';
 import types from '~common/types';
 
 import CardsGrid from '~components/CardsGrid';
@@ -17,6 +17,8 @@ import Pagination from '~components/Pagination';
 import { peopleActions } from './peopleSlice';
 
 const People = ({ titleName }) => {
+  useScrollToTop();
+
   const { focus, FocusableContainer } = useFocusContainer();
   const dispatch = useDispatch();
   const { pathname, page } = usePagination();
@@ -27,7 +29,6 @@ const People = ({ titleName }) => {
     if (page === newPage) return;
 
     focus();
-    scrollToTop();
   };
 
   const isData = checkIfIsData(data);
