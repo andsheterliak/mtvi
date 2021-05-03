@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => {
       display: 'grid',
       gridTemplateColumns: '100%',
       gap: `${theme.spacing(6)}px`,
-      placeItems: 'start',
+      alignItems: 'start',
     },
   };
 });
