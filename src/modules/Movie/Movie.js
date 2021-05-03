@@ -5,7 +5,6 @@ import MainContent from '~components/MainContent';
 import MainContainer from '~components/MainContainer';
 import Layout from '~components/Layout';
 import MovieHeader from './MovieHeader';
-
 import TopBilledCast from './TopBilledCast';
 
 import useMovieState from './hooks/useMovieState';
