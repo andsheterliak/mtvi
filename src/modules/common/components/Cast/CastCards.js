@@ -11,7 +11,7 @@ const CastCards = ({ cardsData }) => {
         key={item.id}
         profilePath={item.profile_path}
         name={item.name}
-        bodyContent={item.character}
+        bodyContent={item.character ?? item.roles[0].character}
         path={`${ROUTE_NAMES.person}/${item.id}`}
       />
     );
