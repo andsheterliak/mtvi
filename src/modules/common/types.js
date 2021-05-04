@@ -10,6 +10,7 @@ const types = {
   pageTitle: string.isRequired,
   path: string.isRequired,
   title: string,
+  imgPath: string.isRequired,
 
   pageHeader: {
     headerName: string,

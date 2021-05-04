@@ -64,3 +64,60 @@ export const getSelectedGenres = (genres) => {
 };
 
 export const getTopItems = (items) => items.slice(0, 9);
+
+const creditNameToTitle = (name) => {
+  return name
+    .split('_')
+    .map((namePart) => `${namePart[0].toUpperCase()}${namePart.substring(1)}`)
+    .join(' ');
+};
+
+export const createCreditsData = (credits) => {
+  const commonCredits = {};
+  const crew = {};
+
+  Object.entries(credits).forEach(([creditName, creditItems]) => {
+    if (creditName === 'crew') return;
+
+    creditName = creditNameToTitle(creditName);
+
+    commonCredits[creditName] = creditItems.map((item) => {
+      const name = item.title || item.name;
+      const { id, profile_path: profilePath } = item;
+
+      return {
+        name,
+        info: item.character ?? item.roles[0].character,
+        id,
+        profilePath,
+      };
+    });
+  });
+
+  credits.crew.forEach((item) => {
+    const { department, name, id, profile_path: profilePath } = item;
+    const info = item.job ?? item.roles[0].job;
+
+    if (!crew[department]) {
+      crew[department] = {
+        [id]: { name, info, id, profilePath },
+      };
+
+      return;
+    }
+
+    const savedDepartment = crew[department];
+
+    if (savedDepartment[id]) {
+      const savedItem = savedDepartment[id];
+
+      savedItem.info += savedItem.info ? `, ${info}` : info;
+
+      return;
+    }
+
+    savedDepartment[id] = { name, info, id, profilePath };
+  });
+
+  return { ...commonCredits, Team: crew };
+};
