@@ -174,7 +174,7 @@ const CreditsList = () => {
 
   return (
     <Section>
-      <SectionTitle title="Projects" isSpacing={false} />
+      <SectionTitle title="Projects" />
 
       {isNeedInFiltering && (
         <SelectorContainer>

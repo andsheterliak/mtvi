@@ -6,6 +6,7 @@ const useStyles = makeStyles({
   container: {
     display: 'flex',
     justifyContent: 'flex-end',
+    marginBottom: '5px',
 
     '& > :not(:last-child)': {
       marginRight: '10px',
