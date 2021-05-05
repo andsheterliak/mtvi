@@ -4,7 +4,7 @@ export const IMG_SIZES = {
   poster: 'w500',
   backdrop: 'w1280',
   profile: 'h632',
-  profileFace: 'w100_and_h100_face',
+  profileFace: 'w90_and_h90_face',
   logo: 'w154', // Company logos (Netflix...)
   still: 'w300', // TV Show Episode img
 };
