@@ -4,8 +4,6 @@ import { useEffect, useRef } from 'react';
 
 import types from '~common/types';
 
-import SliderItems from './SliderItemsContainer';
-
 const useStyles = makeStyles(() => ({
   slider: {
     overflow: 'auto',
@@ -133,7 +131,7 @@ const Slider = ({ children, isLinks = false, acceleration = 2 }) => {
       onMouseDown={initSliderHandler}
       className={classes.slider}
     >
-      <SliderItems>{children}</SliderItems>
+      {children}
     </div>
   );
 };

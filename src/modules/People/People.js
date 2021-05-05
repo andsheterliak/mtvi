@@ -7,7 +7,7 @@ import usePagination from '~common/hooks/usePagination';
 import { checkIfIsData } from '~common/utils/getData';
 import types from '~common/types';
 
-import CardsGrid from '~components/CardsGrid';
+import CardsGrid from '~components/grids/CardsGrid';
 import MainContainer from '~components/MainContainer';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';

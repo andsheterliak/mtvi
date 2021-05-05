@@ -4,8 +4,9 @@ import { checkIfIsData } from '~common/utils/getData';
 
 import Section from '~components/Section';
 import SectionTitle from '~components/SectionTitle';
-import Slider from '~components/Slider/Slider';
+import Slider from '~components/Slider';
 import Cards from '~components/Cards/Cards';
+import CardsGridRow from '~components/grids/CardsGridRow';
 
 const sortByVoteDescending = (data) => {
   const newData = [...data];
@@ -89,7 +90,9 @@ const KnownFor = () => {
       <SectionTitle title="Known For" />
 
       <Slider isLinks>
-        <Cards cardsData={knownFor} />
+        <CardsGridRow>
+          <Cards cardsData={knownFor} />
+        </CardsGridRow>
       </Slider>
     </Section>
   );

@@ -11,14 +11,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const SliderItemsContainer = ({ children }) => {
+const CardsGridRow = ({ children }) => {
   const classes = useStyles();
 
   return <div className={classes.items}>{children}</div>;
 };
 
-SliderItemsContainer.propTypes = {
+CardsGridRow.propTypes = {
   children: types.containerChildren,
 };
 
-export default SliderItemsContainer;
+export default CardsGridRow;
