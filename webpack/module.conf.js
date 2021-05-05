@@ -2,23 +2,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { isDev, paths } = require('./helpers.conf');
 
-const setJSLoaders = () => {
-  const loaders = ['babel-loader'];
-
-  if (isDev) {
-    loaders.push({
-      loader: 'eslint-loader',
-
-      options: {
-        fix: true,
-        emitWarning: true, // Emit warnings instead of errors.
-      },
-    });
-  }
-
-  return loaders;
-};
-
 const styleLoaders = {
   styleLoader: {
     loader: isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
@@ -61,7 +44,7 @@ const moduleConf = {
       test: /\.jsx?$/,
       include: paths.src,
       exclude: /node_modules/,
-      loader: setJSLoaders(),
+      loader: 'babel-loader',
     },
 
     // CSS

@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyPlugin = require('copy-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const { isDev, paths, isProd } = require('./helpers.conf');
 
@@ -44,6 +45,12 @@ const pluginsConf = [
 
   new CopyPlugin({
     patterns: [paths.favicon],
+  }),
+
+  new ESLintPlugin({
+    extensions: ['js', 'jsx'],
+    fix: true,
+    failOnError: false,
   }),
 
   new DefinePlugin({
