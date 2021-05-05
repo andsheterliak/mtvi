@@ -78,6 +78,7 @@ export const createCreditsData = (credits) => {
 
   Object.entries(credits).forEach(([creditName, creditItems]) => {
     if (creditName === 'crew') return;
+    if (!checkIfIsData(creditItems)) return;
 
     creditName = creditNameToTitle(creditName);
 
