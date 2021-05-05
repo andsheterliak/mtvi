@@ -8,7 +8,7 @@ import TVShow from '~modules/TVShow/TVShow';
 import Person from '~modules/Person/Person';
 import MovieCredits from '~modules/Movie/MovieCredits';
 
-const routes = {
+const routesConfig = {
   default: {
     name: 'Movies',
     to: ROUTE_NAMES.root,
@@ -63,4 +63,4 @@ const routes = {
   },
 };
 
-export default routes;
+export default routesConfig;

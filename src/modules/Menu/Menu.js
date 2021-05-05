@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import routes from '~common/routes';
+import routesConfig from '~common/routesConfig';
 
 import AppBar from './components/AppBar';
 import Drawer from './components/Drawer';
@@ -38,13 +38,13 @@ const Menu = () => {
         isSearchOpened={isSearchOpened}
         toggleSearchHandler={toggleSearchHandler}
         toggleDrawerHandler={toggleDrawerHandler(true)}
-        routes={routes}
+        routes={routesConfig}
         nav={
           <Nav className={classes.nav}>
             <Links
               linkProps={{ dense: true, classes: classes.link }}
               location={location}
-              routes={routes}
+              routes={routesConfig}
             />
           </Nav>
         }
@@ -59,7 +59,7 @@ const Menu = () => {
             onClick={toggleDrawerHandler(false)}
             onKeyDown={toggleDrawerHandler(false)}
           >
-            <Links location={location} routes={routes} />
+            <Links location={location} routes={routesConfig} />
           </Nav>
         }
       />
