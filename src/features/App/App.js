@@ -5,7 +5,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import routesConfig from '~common/routesConfig';
 import { globalTheme } from '~common/theme';
 
-import Menu from '~modules/Menu/Menu';
+import Menu from '~features/Menu/Menu';
 import Footer from '~components/Footer';
 import Spacer from '~components/Spacer';
 import RootWrapper from './components/RootWrapper';

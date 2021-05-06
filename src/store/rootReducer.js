@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import moviesReducer from '~modules/Movies/moviesSlice';
-import movieReducer from '~modules/Movie/movieSlice';
-import tvShowsReducer from '~modules/TVShows/tvShowsSlice';
-import tvShowReducer from '~modules/TVShow/tvShowSlice';
-import peopleReducer from '~modules/People/peopleSlice';
-import personReducer from '~modules/Person/personSlice';
+import moviesReducer from '~features/Movies/moviesSlice';
+import movieReducer from '~features/Movie/movieSlice';
+import tvShowsReducer from '~features/TVShows/tvShowsSlice';
+import tvShowReducer from '~features/TVShow/tvShowSlice';
+import peopleReducer from '~features/People/peopleSlice';
+import personReducer from '~features/Person/personSlice';
 
 const rootReducer = combineReducers({
   movies: moviesReducer,

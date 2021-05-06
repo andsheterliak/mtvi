@@ -1,12 +1,12 @@
 import { ROUTE_NAMES } from '~common/constants';
 
-import Movie from '~modules/Movie/Movie';
-import Movies from '~modules/Movies/Movies';
-import People from '~modules/People/People';
-import TVShows from '~modules/TVShows/TVShows';
-import TVShow from '~modules/TVShow/TVShow';
-import Person from '~modules/Person/Person';
-import MovieCredits from '~modules/Movie/MovieCredits';
+import Movie from '~features/Movie/Movie';
+import Movies from '~features/Movies/Movies';
+import People from '~features/People/People';
+import TVShows from '~features/TVShows/TVShows';
+import TVShow from '~features/TVShow/TVShow';
+import Person from '~features/Person/Person';
+import MovieCredits from '~features/Movie/MovieCredits';
 
 const routesConfig = {
   default: {
