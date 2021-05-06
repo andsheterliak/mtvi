@@ -31,7 +31,7 @@ const routesConfig = {
   },
 
   movieCredits: {
-    to: `${ROUTE_NAMES.movieCredits}/:id`,
+    to: `${ROUTE_NAMES.movie}/:id/${ROUTE_NAMES.credits}`,
     component: MovieCredits,
     exact: true,
   },

@@ -1,10 +1,8 @@
-const MOVIE = '/movie';
-
 export const ROUTE_NAMES = {
   root: '/',
   movies: '/movies',
-  movie: MOVIE,
-  movieCredits: `${MOVIE}/credits`,
+  movie: '/movie',
+  credits: `credits`,
   tvShows: '/tvshows',
   tvShow: '/tvshow',
   people: '/people',
