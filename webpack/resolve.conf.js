@@ -7,9 +7,9 @@ const resolveConf = {
   alias: {
     '~': paths.src,
     '~assets': `${paths.src}/${dirNames.assets}`,
-    '~modules': `${paths.src}/${dirNames.modules}`,
-    '~common': `${paths.src}/${dirNames.modules}/${dirNames.common}`,
-    '~components': `${paths.src}/${dirNames.modules}/${dirNames.common}/${dirNames.components}`,
+    '~features': `${paths.src}/${dirNames.features}`,
+    '~common': `${paths.src}/${dirNames.common}`,
+    '~components': `${paths.src}/${dirNames.common}/${dirNames.components}`,
   },
 };
 

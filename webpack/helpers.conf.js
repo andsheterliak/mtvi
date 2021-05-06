@@ -12,7 +12,7 @@ const dirNames = {
   img: 'img',
   favicon: 'favicon', 
   fonts: 'fonts',
-  modules: 'modules',
+  features: 'features',
   components: 'components',
   common: 'common',
 };

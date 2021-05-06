@@ -9,16 +9,16 @@
      */
     "paths": {
       "~components/*": [
-        "src/modules/common/components/*"
+        "src/common/components/*"
       ],
       "~common/*": [
-        "src/modules/common/*"
+        "src/common/*"
       ],
       "~assets/*": [
         "src/assets/*"
       ],
-      "~modules/*": [
-        "src/modules/*"
+      "~features/*": [
+        "src/features/*"
       ],
       "~/*": [
         "src/*"
