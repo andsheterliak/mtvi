@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { Chip } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
 import types from '~common/types';
 
@@ -39,9 +40,9 @@ const GenresOption = ({ genres, toggleGenreHandler }) => {
     return (
       <li key={id} className={classes.chipItem}>
         <Chip
-          className={`${classes.chip} ${
-            isSelected ? classes.chipChosen : null
-          }`}
+          className={classNames(classes.chip, {
+            [classes.chipChosen]: isSelected,
+          })}
           variant={isSelected ? 'default' : 'outlined'}
           label={name}
           onClick={() => toggleGenreHandler(id)}
