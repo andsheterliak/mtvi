@@ -10,7 +10,7 @@ const ProjectsTimeline = ({ data }) => {
         key={item.id}
         name={item.name}
         year={item.year}
-        path={`${item.path}${item.id}`}
+        path={`${item.path}/${item.id}`}
         infoListData={infoListData}
       />
     );
