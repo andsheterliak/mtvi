@@ -2,10 +2,10 @@ import { useSelector } from 'react-redux';
 
 import { checkIfIsData } from '~common/utils/getData';
 
-import Section from '~components/Section';
-import SectionTitle from '~components/SectionTitle';
+import Section from '~components/section/Section';
+import SectionTitle from '~components/section/SectionTitle';
 import Slider from '~components/Slider';
-import Cards from '~components/Cards/Cards';
+import Cards from '~components/Cards';
 import CardsGridRow from '~components/grids/CardsGridRow';
 
 const sortByVoteDescending = (data) => {

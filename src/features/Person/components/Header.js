@@ -5,10 +5,10 @@ import types from '~common/types';
 import personTypes from '~features/Person/personTypes';
 import noUserPhotoImg from '~assets/img/no-user-photo.svg';
 
-import HeaderDescription from '~components/PageHeader/HeaderDescription';
-import HeaderTitle from '~components/PageHeader/HeaderTitle';
-import InfoList from '~components/InfoList/InfoList';
-import SocialLinks from './SocialLinks/SocialLinks';
+import HeaderDescription from '~components/header/Description';
+import HeaderTitle from '~components/header/HeaderTitle';
+import InfoList from '~components/InfoList';
+import SocialLinks from './SocialLinks';
 
 const useStyles = makeStyles((theme) => {
   return {

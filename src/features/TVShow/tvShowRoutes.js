@@ -1,5 +1,5 @@
 import { ROUTE_NAMES } from '~common/constants';
-import TVShow from './TVShow';
+import TVShow from '.';
 
 const tvShowRoutes = {
   tvShow: {

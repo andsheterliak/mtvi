@@ -11,7 +11,7 @@ import { string } from 'prop-types';
 import { getHyphenOrData } from '~common/utils/getData';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import noUserPhotoImg from '~assets/img/no-user-photo.svg';
-import useStyles from '~components/Cards/CardStyles';
+import useStyles from '~common/styles/CardStyles';
 
 const PersonCard = ({ profilePath, name, bodyContent, path }) => {
   const classes = useStyles();

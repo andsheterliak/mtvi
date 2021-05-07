@@ -2,8 +2,8 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  MOVIES_DEFAULT_OPTIONS,
-  SORT_MOVIES_BY_OPTIONS,
+  TV_DEFAULT_OPTIONS,
+  SORT_TV_BY_OPTIONS,
   USER_SCORE_RANGE,
 } from '~common/tmdb-config';
 import useFocusContainer from '~common/hooks/useFocusContainer';
@@ -13,18 +13,18 @@ import { getLS, setLS } from '~common/utils/storage';
 import { checkIfIsData } from '~common/utils/getData';
 import types from '~common/types';
 
-import Adjustment from '~features/Adjustment/Adjustment';
+import Adjustment from '~features/Adjustment';
+import Cards from '~components/Cards';
 import MainContainer from '~components/MainContainer';
 import CardsGrid from '~components/grids/CardsGrid';
-import Cards from '~components/Cards/Cards';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 import Pagination from '~components/Pagination';
 
-import { moviesActions } from './moviesSlice';
-import { MOVIES_OPTIONS_STORAGE_NAME } from './moviesConstants';
+import { TV_OPTIONS_STORAGE_NAME } from './tvShowsConstants';
+import { tvShowsActions } from './tvShowsSlice';
 
-const Movies = ({ titleName }) => {
+const TVShows = ({ titleName }) => {
   useScrollToTop();
 
   const { focus, FocusableContainer } = useFocusContainer();
@@ -32,16 +32,16 @@ const Movies = ({ titleName }) => {
   const { pathname, page } = usePagination();
 
   const { data, isLoading, options, totalPages } = useSelector(
-    (state) => state.movies
+    (state) => state.tvShows
   );
 
   const fetchDataWithNewOptions = useCallback(
     (newOptions) => {
-      dispatch(moviesActions.saveOptions(newOptions));
-      dispatch(moviesActions.fetchData({ ...newOptions, page }));
-      setLS(MOVIES_OPTIONS_STORAGE_NAME, newOptions);
+      dispatch(tvShowsActions.saveOptions(newOptions));
+      dispatch(tvShowsActions.fetchData({ ...newOptions, page }));
+      setLS(TV_OPTIONS_STORAGE_NAME, newOptions);
     },
-    [dispatch, page]
+    [page, dispatch]
   );
 
   const changePageHandler = (e, newPage) => {
@@ -54,17 +54,17 @@ const Movies = ({ titleName }) => {
 
   useEffect(() => {
     const startingOptions =
-      options || getLS(MOVIES_OPTIONS_STORAGE_NAME) || MOVIES_DEFAULT_OPTIONS;
+      options || getLS(TV_OPTIONS_STORAGE_NAME) || TV_DEFAULT_OPTIONS;
 
-    if (!options) dispatch(moviesActions.saveOptions(startingOptions));
+    if (!options) dispatch(tvShowsActions.saveOptions(startingOptions));
 
-    dispatch(moviesActions.fetchData({ ...startingOptions, page }));
+    dispatch(tvShowsActions.fetchData({ ...startingOptions, page }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, page]);
 
   useEffect(() => {
     return () => {
-      dispatch(moviesActions.resetState());
+      dispatch(tvShowsActions.resetState());
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -77,10 +77,10 @@ const Movies = ({ titleName }) => {
 
       {options && (
         <Adjustment
-          sortByOptions={SORT_MOVIES_BY_OPTIONS}
+          sortByOptions={SORT_TV_BY_OPTIONS}
           userScoreRange={USER_SCORE_RANGE}
-          dateTitle="Release Dates"
-          modalTitle="Adjust Movies"
+          dateTitle="Air Dates"
+          modalTitle="Adjust TV Shows"
           onAcceptCallback={fetchDataWithNewOptions}
           initialOptions={options}
         />
@@ -105,8 +105,8 @@ const Movies = ({ titleName }) => {
   );
 };
 
-Movies.propTypes = {
+TVShows.propTypes = {
   titleName: types.pageTitle,
 };
 
-export default Movies;
+export default TVShows;

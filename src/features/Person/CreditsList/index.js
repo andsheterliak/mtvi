@@ -6,9 +6,9 @@ import { getPath } from '~common/utils/getData';
 
 import Filter from '~components/Filter';
 import SelectorContainer from '~components/SelectorContainer';
-import Section from '~components/Section';
-import SectionTitle from '~components/SectionTitle';
-import ProjectsTimeline from '../components/ProjectsTimeline/ProjectsTimeline';
+import Section from '~components/section/Section';
+import SectionTitle from '~components/section/SectionTitle';
+import ProjectsTimeline from '../components/ProjectsTimeline';
 
 import filterConfig from './filterConfig';
 

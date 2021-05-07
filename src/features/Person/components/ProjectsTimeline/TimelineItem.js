@@ -11,7 +11,7 @@ import {
 import { Typography, Link as MUILink } from '@material-ui/core';
 
 import { getHyphenOrData } from '~common/utils/getData';
-import InfoList from '~components/InfoList/InfoList';
+import InfoList from '~components/InfoList';
 
 const useStyles = makeStyles(() => {
   const padding = 4;

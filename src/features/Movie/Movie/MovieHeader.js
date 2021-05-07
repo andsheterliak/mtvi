@@ -6,9 +6,9 @@ import {
   getCertification,
   getGenres,
 } from '~common/utils/getData';
-import Certification from '~components/PageHeader/Certification';
-import Creators from '~components/PageHeader/Creators';
-import PageHeader from '~components/PageHeader/PageHeader';
+import Certification from '~components/header/Certification';
+import Creators from '~components/header/Creators';
+import PageHeader from '~components/PageHeader';
 
 const getDirectors = (crew) => {
   if (!checkIfIsData(crew)) return null;

@@ -5,8 +5,8 @@ import types from '~common/types';
 import creditsTypes from '~components/Credits/creditsTypes';
 
 import Layout from '~components/Layout';
-import Section from '~components/Section';
-import SectionTitle from '~components/SectionTitle';
+import Section from '~components/section/Section';
+import SectionTitle from '~components/section/SectionTitle';
 import CreditCard from './CreditCard';
 import CreditsGrid from './CreditsGrid';
 

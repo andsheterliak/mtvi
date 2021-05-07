@@ -5,7 +5,7 @@ import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import { checkIfIsData, createCreditsData } from '~common/utils/getData';
 
 import BackToHeader from '~components/BackToHeader';
-import Credits from '~components/Credits/Credits';
+import Credits from '~components/Credits';
 
 import useMovieState from './hooks/useMovieState';
 

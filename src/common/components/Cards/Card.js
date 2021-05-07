@@ -16,7 +16,7 @@ import { formatDataStr } from '~common/utils/date';
 import noImageImg from '~assets/img/no-image.svg';
 import { getHyphenOrData } from '~common/utils/getData';
 
-import useCardStyles from './CardStyles';
+import useCardStyles from '../../styles/CardStyles';
 
 const useStyles = makeStyles(() => ({
   subInfo: {

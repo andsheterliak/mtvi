@@ -5,8 +5,7 @@ import MainContent from '~components/MainContent';
 import Layout from '~components/Layout';
 import MovieHeader from './MovieHeader';
 import TopBilledCast from './TopBilledCast';
-
-import useMovieState from './hooks/useMovieState';
+import useMovieState from '../hooks/useMovieState';
 
 const Movie = () => {
   useScrollToTop();

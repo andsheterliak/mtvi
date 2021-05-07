@@ -4,7 +4,7 @@ import { useRouteMatch } from 'react-router';
 import { ROUTE_NAMES } from '~common/constants';
 import { checkIfIsData, getTopItems } from '~common/utils/getData';
 
-import Cast from '~components/Cast/Cast';
+import Cast from '~components/Cast';
 import MainContainer from '~components/MainContainer';
 
 const TopBilledCast = () => {

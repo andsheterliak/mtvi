@@ -9,7 +9,7 @@ import Layout from '~components/Layout';
 import Spacer from '~components/Spacer';
 import MainContent from '~components/MainContent';
 import PersonHeader from './PersonHeader';
-import CreditsList from './CreditsList/CreditsList';
+import CreditsList from './CreditsList';
 import KnownFor from './KnownFor';
 
 import { personActions } from './personSlice';

@@ -5,9 +5,9 @@ import { innerDarkTheme } from '~common/theme';
 import types from '~common/types';
 
 import MainContainer from '~components/MainContainer';
-import InfoList from '~components/InfoList/InfoList';
-import HeaderTitle from './HeaderTitle';
-import HeaderDescription from './HeaderDescription';
+import InfoList from '~components/InfoList';
+import HeaderTitle from '../header/HeaderTitle';
+import HeaderDescription from '../header/Description';
 import useStyles from './PageHeaderStyles';
 
 const PageHeader = ({ backdrop, title, overview, dataList }) => {
