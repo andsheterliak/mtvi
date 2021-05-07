@@ -1,5 +1,6 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 import { bool, string } from 'prop-types';
 
 import types from '~common/types';
@@ -12,14 +13,15 @@ const useStyles = makeStyles({
 
 const SectionTitle = ({ title, isSubsection = false, isSpacing = true }) => {
   const classes = useStyles();
-  const classNames = [classes.title];
 
-  if (isSpacing) classNames.push(classes.spacing);
+  const rootClasses = classNames({
+    [classes.spacing]: isSpacing,
+  });
 
   return (
     <Typography
       color="textPrimary"
-      className={classNames.join(' ')}
+      className={rootClasses}
       variant={isSubsection ? 'h6' : 'h5'}
       component={isSubsection ? 'h3' : 'h2'}
     >

@@ -1,5 +1,6 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
 import types from '~common/types';
 
@@ -15,16 +16,17 @@ const useStyles = makeStyles((theme) => ({
 
 const RouteHeader = ({ titleName, isSpacing = true }) => {
   const classes = useStyles();
-  const classNames = [];
 
-  if (isSpacing) classNames.push(classes.spacing);
+  const rootClasses = classNames({
+    [classes.spacing]: isSpacing,
+  });
 
   return (
     <Typography
       color="textPrimary"
       variant="h4"
       component="h1"
-      className={classNames.join(' ')}
+      className={rootClasses}
     >
       {titleName}
     </Typography>

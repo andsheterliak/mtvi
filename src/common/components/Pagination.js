@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { bool, number, string } from 'prop-types';
 
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import types from '~common/types';
 
 const useStyles = makeStyles(() => ({
@@ -28,12 +29,13 @@ const Pagination = ({
   isSpacing = true,
 }) => {
   const classes = useStyles();
-  const classNames = [classes.root];
 
-  if (isSpacing) classNames.push(classes.spacing);
+  const rootClasses = classNames(classes.root, {
+    [classes.spacing]: isSpacing,
+  });
 
   return (
-    <div className={classNames.join(' ')}>
+    <div className={rootClasses}>
       <MUIPagination
         className={classes.pagination}
         page={page}

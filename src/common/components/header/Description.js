@@ -2,6 +2,7 @@ import { string } from 'prop-types';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+import classNames from 'classnames';
 import types from '~common/types';
 
 const useStyles = makeStyles(() => {
@@ -14,16 +15,17 @@ const useStyles = makeStyles(() => {
 
 const HeaderDescription = ({ description, isSpacing = true }) => {
   const classes = useStyles();
-  const classNames = [classes.title];
 
-  if (isSpacing) classNames.push(classes.spacing);
+  const rootClasses = classNames({
+    [classes.spacing]: isSpacing,
+  });
 
   return (
     <Typography
       color="textPrimary"
       component="p"
       variant="body1"
-      className={classNames.join(' ')}
+      className={rootClasses}
     >
       {description}
     </Typography>

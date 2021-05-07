@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 import { arrayOf, element } from 'prop-types';
 import types from '~common/types';
 
@@ -12,11 +13,12 @@ const useStyles = makeStyles(() => {
 
 const SocialLinksContainer = ({ children, isSpacing = true }) => {
   const classes = useStyles();
-  const classNames = [classes.title];
 
-  if (isSpacing) classNames.push(classes.spacing);
+  const rootClasses = classNames({
+    [classes.spacing]: isSpacing,
+  });
 
-  return <div className={classNames.join(' ')}>{children}</div>;
+  return <div className={rootClasses}>{children}</div>;
 };
 
 SocialLinksContainer.propTypes = {
