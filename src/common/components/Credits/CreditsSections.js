@@ -28,7 +28,7 @@ const CreditsSubsections = ({ data }) => {
   return Object.entries(data).map(([creditsName, creditsData]) => {
     return (
       <Section key={creditsName}>
-        <SectionTitle isSubsection title={creditsName} />
+        <SectionTitle isSubtitle title={creditsName} />
 
         <CreditsGrid>
           <CreditsCards data={Object.values(creditsData)} />

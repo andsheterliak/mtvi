@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   },
 });
 
-const SectionTitle = ({ title, isSubsection = false, isSpacing = true }) => {
+const SectionTitle = ({ title, isSubtitle = false, isSpacing = true }) => {
   const classes = useStyles();
 
   const rootClasses = classNames({
@@ -22,8 +22,8 @@ const SectionTitle = ({ title, isSubsection = false, isSpacing = true }) => {
     <Typography
       color="textPrimary"
       className={rootClasses}
-      variant={isSubsection ? 'h6' : 'h5'}
-      component={isSubsection ? 'h3' : 'h2'}
+      variant={isSubtitle ? 'h6' : 'h5'}
+      component={isSubtitle ? 'h3' : 'h2'}
     >
       {title}
     </Typography>
@@ -33,7 +33,7 @@ const SectionTitle = ({ title, isSubsection = false, isSpacing = true }) => {
 SectionTitle.propTypes = {
   title: string.isRequired,
   isSpacing: types.isSpacing,
-  isSubsection: bool,
+  isSubtitle: bool,
 };
 
 export default SectionTitle;
