@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
 import types from '~common/types';
 
@@ -6,18 +7,25 @@ const useStyles = makeStyles({
   container: {
     display: 'flex',
     justifyContent: 'flex-end',
-    marginBottom: '5px',
 
     '& > :not(:last-child)': {
       marginRight: '10px',
     },
   },
+
+  spacing: {
+    marginBottom: '6px',
+  },
 });
 
-const SelectorContainer = ({ children }) => {
+const SelectorContainer = ({ children, isSpacing = true }) => {
   const classes = useStyles();
 
-  return <div className={classes.container}>{children}</div>;
+  const rootClasses = classNames(classes.container, {
+    [classes.spacing]: isSpacing,
+  });
+
+  return <div className={rootClasses}>{children}</div>;
 };
 
 SelectorContainer.propTypes = {
