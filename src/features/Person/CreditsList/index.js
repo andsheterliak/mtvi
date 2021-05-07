@@ -92,7 +92,7 @@ const createTimelineData = (data) => {
     const departmentName = item.department || 'Acting';
     const departmentKey = departmentName.toLowerCase();
     const dateStr = item.release_date || item.first_air_date;
-    const year = dateStr && formatDataStr(dateStr).dateParts.year;
+    const year = dateStr ? formatDataStr(dateStr).dateParts.year : null;
 
     const path = getPath({
       name: item.name,
