@@ -4,7 +4,7 @@ import { setup } from 'axios-cache-adapter';
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
-const maxAge = HOUR * 12;
+const maxAge = HOUR * 24;
 
 const configure = () => {
   const forageStore = localforage.createInstance({
