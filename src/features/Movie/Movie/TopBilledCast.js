@@ -4,7 +4,7 @@ import { useRouteMatch } from 'react-router';
 import { ROUTE_NAMES } from '~common/constants';
 import { checkIfIsData, getTopItems } from '~common/utils/getData';
 
-import Cast from '~components/Cast';
+import TopCast from '~components/TopCast';
 import MainContainer from '~components/MainContainer';
 
 const TopBilledCast = () => {
@@ -18,7 +18,7 @@ const TopBilledCast = () => {
 
   return (
     <MainContainer>
-      <Cast
+      <TopCast
         creditsPath={`${url}/${ROUTE_NAMES.credits}`}
         seeAllLinkName="Full Cast & Crew"
         title="Top Billed Cast"
