@@ -12,7 +12,7 @@ const TopCast = ({ data, title, creditsPath, seeAllLinkName }) => {
     <Section>
       <SectionTitle title={title} />
 
-      <Slider isLinks>
+      <Slider>
         <CardsGridRow>
           <CastCards cardsData={data} />
         </CardsGridRow>

@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { bool, node, number } from 'prop-types';
+import { node, number } from 'prop-types';
 import { useEffect, useRef } from 'react';
 
 const useStyles = makeStyles(() => ({
@@ -32,7 +32,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Slider = ({ children, isLinks = false, acceleration = 2 }) => {
+const Slider = ({ children, acceleration = 2 }) => {
   const classes = useStyles();
 
   const sliderRef = useRef(null);
@@ -46,9 +46,8 @@ const Slider = ({ children, isLinks = false, acceleration = 2 }) => {
   });
 
   useEffect(() => {
-    if (!isLinks) return null;
-
     const links = sliderRef.current.querySelectorAll('a');
+    const imgs = sliderRef.current.querySelectorAll('img');
 
     const preventOpeningHandler = (e) => {
       if (isSwipingRef.current) e.preventDefault();
@@ -63,13 +62,21 @@ const Slider = ({ children, isLinks = false, acceleration = 2 }) => {
       link.addEventListener('dragstart', preventDraggingHandler);
     });
 
+    imgs.forEach((link) => {
+      link.addEventListener('dragstart', preventDraggingHandler);
+    });
+
     return () => {
       links.forEach((link) => {
         link.removeEventListener('click', preventOpeningHandler);
         link.removeEventListener('dragstart', preventDraggingHandler);
       });
+
+      imgs.forEach((link) => {
+        link.removeEventListener('dragstart', preventDraggingHandler);
+      });
     };
-  }, [isLinks]);
+  }, []);
 
   const moveSliderHandler = (e) => {
     isSwipingRef.current = true;
@@ -136,7 +143,6 @@ const Slider = ({ children, isLinks = false, acceleration = 2 }) => {
 
 Slider.propTypes = {
   children: node.isRequired,
-  isLinks: bool,
   acceleration: number,
 };
 

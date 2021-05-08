@@ -89,7 +89,7 @@ const KnownFor = () => {
     <Section>
       <SectionTitle title="Known For" />
 
-      <Slider isLinks>
+      <Slider>
         <CardsGridRow>
           <Cards cardsData={knownFor} />
         </CardsGridRow>
