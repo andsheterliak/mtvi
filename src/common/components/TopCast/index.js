@@ -7,7 +7,7 @@ import Slider from '~components/Slider';
 import CardsGridRow from '~components/grids/CardsGridRow';
 import CastCards from './CastCards';
 
-const Cast = ({ data, title, creditsPath, seeAllLinkName }) => {
+const TopCast = ({ data, title, creditsPath, seeAllLinkName }) => {
   return (
     <Section>
       <SectionTitle title={title} />
@@ -23,11 +23,11 @@ const Cast = ({ data, title, creditsPath, seeAllLinkName }) => {
   );
 };
 
-Cast.propTypes = {
+TopCast.propTypes = {
   data: types.specific.cardsData,
   title: types.generic.title.isRequired,
   creditsPath: types.generic.path.isRequired,
   seeAllLinkName: types.specific.seeAllLinkName,
 };
 
-export default Cast;
+export default TopCast;
