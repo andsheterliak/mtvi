@@ -10,11 +10,7 @@ const useStyles = makeStyles(() => ({
     userSelect: 'none',
     display: 'flex',
 
-    '& * a': {
-      cursor: 'inherit',
-    },
-
-    '& > *': {
+    '& *': {
       cursor: 'inherit',
     },
 
