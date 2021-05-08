@@ -63,7 +63,7 @@ export const getSelectedGenres = (genres) => {
     .join(',');
 };
 
-export const getTopItems = (items) => items.slice(0, 9);
+export const getTopItems = (items, number = 9) => items.slice(0, number);
 
 const creditNameToTitle = (name) => {
   return name
