@@ -44,8 +44,8 @@ ReleaseDatesOption.propTypes = {
   dateTitle: adjustmentTypes.dateTitle,
   dateFrom: adjustmentTypes.dates.from,
   dateTo: adjustmentTypes.dates.to,
-  setDateFromHandler: types.handler,
-  setDateToHandler: types.handler,
+  setDateFromHandler: types.generic.handler.isRequired,
+  setDateToHandler: types.generic.handler.isRequired,
 };
 
 export default memo(ReleaseDatesOption);

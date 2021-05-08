@@ -1,6 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from '@material-ui/core';
-import { number, object, oneOfType, string } from 'prop-types';
+import { elementType } from 'prop-types';
+import types from '~common/types';
+import personTypes from '~features/Person/personTypes';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -32,9 +34,9 @@ const SocialLink = ({ href, id, Icon }) => {
 };
 
 SocialLink.propTypes = {
-  href: string.isRequired,
-  id: oneOfType([string, number]).isRequired,
-  Icon: object.isRequired,
+  href: types.generic.path.isRequired,
+  id: personTypes.id.isRequired,
+  Icon: elementType.isRequired,
 };
 
 export default SocialLink;

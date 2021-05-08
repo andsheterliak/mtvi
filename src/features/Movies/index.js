@@ -106,7 +106,7 @@ const Movies = ({ titleName }) => {
 };
 
 Movies.propTypes = {
-  titleName: types.pageTitle,
+  titleName: types.specific.pageTitle,
 };
 
 export default Movies;

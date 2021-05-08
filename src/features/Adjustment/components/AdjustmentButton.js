@@ -1,4 +1,3 @@
-import { string } from 'prop-types';
 import { useEffect, useState } from 'react';
 import { IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -56,8 +55,8 @@ const AdjustmentButton = ({ ariaLabel, openModalHandler }) => {
 };
 
 AdjustmentButton.propTypes = {
-  ariaLabel: string.isRequired,
-  openModalHandler: types.handler,
+  ariaLabel: types.generic.label.isRequired,
+  openModalHandler: types.generic.handler.isRequired,
 };
 
 export default AdjustmentButton;

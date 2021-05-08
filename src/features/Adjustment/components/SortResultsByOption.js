@@ -1,4 +1,3 @@
-import { string } from 'prop-types';
 import { memo } from 'react';
 import { Input, InputLabel, MenuItem, Select } from '@material-ui/core';
 
@@ -43,8 +42,8 @@ const SortResultsByOption = ({ sortByOptions, sortBy, sortByHandler }) => {
 
 SortResultsByOption.propTypes = {
   sortByOptions: adjustmentTypes.sortByOptions,
-  sortBy: string.isRequired,
-  sortByHandler: types.handler,
+  sortBy: adjustmentTypes.sortBy,
+  sortByHandler: types.generic.handler.isRequired,
 };
 
 export default memo(SortResultsByOption);

@@ -41,7 +41,7 @@ Filter.propTypes = {
     })
   ).isRequired,
 
-  filterByHandler: types.handler,
+  filterByHandler: types.generic.handler.isRequired,
   filterBy: string.isRequired,
 };
 

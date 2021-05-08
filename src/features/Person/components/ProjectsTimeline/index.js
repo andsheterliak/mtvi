@@ -1,3 +1,6 @@
+import { arrayOf, exact, number, objectOf, shape, string } from 'prop-types';
+import types from '~common/types';
+import projectsTimelineTypes from './projectsTimelineTypes';
 import TimelineContainer from './TimelineContainer';
 import TimelineItem from './TimelineItem';
 
@@ -17,6 +20,19 @@ const ProjectsTimeline = ({ data }) => {
   });
 
   return <TimelineContainer>{timelineItems}</TimelineContainer>;
+};
+
+ProjectsTimeline.propTypes = {
+  data: arrayOf(
+    shape({
+      dateStr: string,
+      id: number.isRequired,
+      name: projectsTimelineTypes.name,
+      path: projectsTimelineTypes.path,
+      year: projectsTimelineTypes.year,
+      employment: objectOf(exact(types.specific.dataListItem)).isRequired,
+    })
+  ),
 };
 
 export default ProjectsTimeline;

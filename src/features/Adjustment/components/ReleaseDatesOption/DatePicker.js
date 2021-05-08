@@ -23,11 +23,11 @@ const DatePicker = ({ ariaLabel, id, value, label, changeDateHandler }) => {
 };
 
 DatePicker.propTypes = {
-  ariaLabel: string.isRequired,
+  ariaLabel: types.generic.label.isRequired,
   id: string.isRequired,
   value: string,
-  label: string.isRequired,
-  changeDateHandler: types.handler,
+  label: types.generic.label.isRequired,
+  changeDateHandler: types.generic.handler.isRequired,
 };
 
 export default DatePicker;

@@ -106,7 +106,7 @@ const TVShows = ({ titleName }) => {
 };
 
 TVShows.propTypes = {
-  titleName: types.pageTitle,
+  titleName: types.specific.pageTitle,
 };
 
 export default TVShows;

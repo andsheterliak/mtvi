@@ -21,7 +21,7 @@ const CastCards = ({ cardsData }) => {
 };
 
 CastCards.propTypes = {
-  cardsData: types.cardsData,
+  cardsData: types.specific.cardsData,
 };
 
 export default CastCards;

@@ -1,4 +1,3 @@
-import { string } from 'prop-types';
 import types from '~common/types';
 
 import SeeAllLink from '~components/SeeAllLink';
@@ -25,10 +24,10 @@ const Cast = ({ data, title, creditsPath, seeAllLinkName }) => {
 };
 
 Cast.propTypes = {
-  data: types.cardsData,
-  title: types.title.isRequired,
-  creditsPath: types.path,
-  seeAllLinkName: string.isRequired,
+  data: types.specific.cardsData,
+  title: types.generic.title.isRequired,
+  creditsPath: types.generic.path.isRequired,
+  seeAllLinkName: types.specific.seeAllLinkName,
 };
 
 export default Cast;

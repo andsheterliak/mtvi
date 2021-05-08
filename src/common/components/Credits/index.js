@@ -1,4 +1,4 @@
-import { element } from 'prop-types';
+import types from '~common/types';
 
 import creditsTypes from '~components/Credits/creditsTypes';
 
@@ -34,7 +34,7 @@ const Credits = ({ credits, header }) => {
 
 Credits.propTypes = {
   credits: creditsTypes.creditsData,
-  header: element.isRequired,
+  header: types.specific.goBackHeader,
 };
 
 export default Credits;

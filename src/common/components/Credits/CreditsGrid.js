@@ -21,7 +21,7 @@ const CreditsGrid = ({ children }) => {
 };
 
 CreditsGrid.propTypes = {
-  children: types.containerChildren.isRequired,
+  children: types.generic.gridItems.isRequired,
 };
 
 export default CreditsGrid;

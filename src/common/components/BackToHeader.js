@@ -84,9 +84,9 @@ const BackToHeader = ({ title, imgPath, path, linkName }) => {
 };
 
 BackToHeader.propTypes = {
-  title: types.title,
-  imgPath: types.imgPath,
-  path: types.path,
+  title: types.generic.title,
+  imgPath: types.generic.path.isRequired,
+  path: types.generic.path.isRequired,
   linkName: string.isRequired,
 };
 

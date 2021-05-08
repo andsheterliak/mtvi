@@ -67,7 +67,7 @@ const CreditsSections = ({ data }) => {
 };
 
 CreditsCards.propTypes = {
-  data: types.cardsData,
+  data: types.specific.cardsData,
 };
 
 CreditsSubsections.propTypes = {
@@ -75,7 +75,7 @@ CreditsSubsections.propTypes = {
 };
 
 CreditsSections.propTypes = {
-  data: creditsTypes.creditsData,
+  data: creditsTypes.creditsData.isRequired,
 };
 
 export default CreditsSections;

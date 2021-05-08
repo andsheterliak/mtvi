@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import { bool, string } from 'prop-types';
+import { bool } from 'prop-types';
 
 import types from '~common/types';
 
@@ -31,8 +31,8 @@ const SectionTitle = ({ title, isSubtitle = false, isSpacing = true }) => {
 };
 
 SectionTitle.propTypes = {
-  title: string.isRequired,
-  isSpacing: types.isSpacing,
+  title: types.generic.title.isRequired,
+  isSpacing: types.specific.isSpacing,
   isSubtitle: bool,
 };
 

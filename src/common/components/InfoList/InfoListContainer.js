@@ -1,6 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-
-import types from '~common/types';
+import { arrayOf, element } from 'prop-types';
 
 const useStyles = makeStyles(() => {
   return {
@@ -19,7 +18,7 @@ const InfoListContainer = ({ children }) => {
 };
 
 InfoListContainer.propTypes = {
-  children: types.containerChildren,
+  children: arrayOf(element).isRequired,
 };
 
 export default InfoListContainer;

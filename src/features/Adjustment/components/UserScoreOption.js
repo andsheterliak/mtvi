@@ -38,7 +38,7 @@ const UserScoreOption = ({
 
 UserScoreOption.propTypes = {
   userScoreRange: adjustmentTypes.userScoreRange,
-  changeUserScoreHandler: types.handler,
+  changeUserScoreHandler: types.generic.handler.isRequired,
   userScore: adjustmentTypes.userScore,
 };
 

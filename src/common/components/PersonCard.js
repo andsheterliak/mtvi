@@ -12,6 +12,7 @@ import { getHyphenOrData } from '~common/utils/getData';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import noUserPhotoImg from '~assets/img/no-user-photo.svg';
 import useStyles from '~common/styles/CardStyles';
+import types from '~common/types';
 
 const PersonCard = ({ profilePath, name, bodyContent, path }) => {
   const classes = useStyles();
@@ -35,14 +36,16 @@ const PersonCard = ({ profilePath, name, bodyContent, path }) => {
             {getHyphenOrData(name)}
           </Typography>
 
-          <Typography
-            variant="caption"
-            color="textSecondary"
-            component="p"
-            className={classes.subText}
-          >
-            {bodyContent}
-          </Typography>
+          {bodyContent && (
+            <Typography
+              variant="caption"
+              color="textSecondary"
+              component="p"
+              className={classes.subText}
+            >
+              {bodyContent}
+            </Typography>
+          )}
         </CardContent>
       </CardActionArea>
     </Card>
@@ -50,10 +53,10 @@ const PersonCard = ({ profilePath, name, bodyContent, path }) => {
 };
 
 PersonCard.propTypes = {
-  profilePath: string,
-  name: string,
+  profilePath: types.generic.path,
+  name: types.generic.name,
   bodyContent: string,
-  path: string.isRequired,
+  path: types.generic.path.isRequired,
 };
 
 export default PersonCard;

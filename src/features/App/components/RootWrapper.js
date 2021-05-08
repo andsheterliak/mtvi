@@ -24,7 +24,7 @@ const RootWrapper = ({ children }) => {
 };
 
 RootWrapper.propTypes = {
-  children: types.containerChildren,
+  children: types.generic.anyChildren.isRequired,
 };
 
 export default RootWrapper;

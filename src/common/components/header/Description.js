@@ -1,4 +1,3 @@
-import { string } from 'prop-types';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -33,8 +32,8 @@ const HeaderDescription = ({ description, isSpacing = true }) => {
 };
 
 HeaderDescription.propTypes = {
-  description: string.isRequired,
-  isSpacing: types.isSpacing,
+  description: types.generic.description.isRequired,
+  isSpacing: types.specific.isSpacing,
 };
 
 export default HeaderDescription;

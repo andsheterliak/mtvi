@@ -69,10 +69,10 @@ const CreditCard = ({ profilePath, name, info, path }) => {
 };
 
 CreditCard.propTypes = {
-  profilePath: string,
-  name: string,
+  profilePath: types.generic.path,
+  name: types.generic.name,
   info: string,
-  path: types.path,
+  path: types.generic.path.isRequired,
 };
 
 export default CreditCard;

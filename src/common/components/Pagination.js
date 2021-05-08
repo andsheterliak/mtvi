@@ -1,6 +1,6 @@
 import { Pagination as MUIPagination, PaginationItem } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
-import { bool, number, string } from 'prop-types';
+import { bool, number } from 'prop-types';
 
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
@@ -57,12 +57,12 @@ const Pagination = ({
 };
 
 Pagination.propTypes = {
-  path: string.isRequired,
+  path: types.generic.path.isRequired,
   page: number.isRequired,
   totalPages: number.isRequired,
   isLoading: bool.isRequired,
-  changePageHandler: types.handler,
-  isSpacing: types.isSpacing,
+  changePageHandler: types.generic.handler.isRequired,
+  isSpacing: types.specific.isSpacing,
 };
 
 export default Pagination;

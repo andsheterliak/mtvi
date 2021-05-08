@@ -17,7 +17,7 @@ const Section = ({ children }) => {
 };
 
 Section.propTypes = {
-  children: types.containerChildren,
+  children: types.generic.anyChildren.isRequired,
 };
 
 export default Section;

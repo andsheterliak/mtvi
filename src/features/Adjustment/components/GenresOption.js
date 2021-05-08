@@ -63,7 +63,7 @@ const GenresOption = ({ genres, toggleGenreHandler }) => {
 
 GenresOption.propTypes = {
   genres: adjustmentTypes.genres,
-  toggleGenreHandler: types.handler,
+  toggleGenreHandler: types.generic.handler.isRequired,
 };
 
 export default memo(GenresOption);

@@ -1,4 +1,13 @@
-import { arrayOf, bool, exact, func, node, object, string } from 'prop-types';
+import {
+  arrayOf,
+  bool,
+  element,
+  exact,
+  func,
+  node,
+  object,
+  string,
+} from 'prop-types';
 
 const dataListItem = {
   name: string.isRequired,
@@ -6,23 +15,26 @@ const dataListItem = {
 };
 
 const types = {
-  isSpacing: bool,
-  pageTitle: string.isRequired,
-  path: string.isRequired,
-  title: string,
-  imgPath: string.isRequired,
-
-  pageHeader: {
-    headerName: string,
+  generic: {
+    title: string,
+    path: string,
+    handler: func,
+    name: string,
     description: string,
-    imgPath: string,
+    gridItems: node,
+    anyChildren: node,
+    label: string,
   },
 
-  dataList: arrayOf(exact(dataListItem)).isRequired,
-  dataListItem,
-  cardsData: arrayOf(object).isRequired,
-  containerChildren: node,
-  handler: func.isRequired,
+  specific: {
+    isSpacing: bool,
+    pageTitle: string.isRequired,
+    dataList: arrayOf(exact(dataListItem)).isRequired,
+    dataListItem,
+    cardsData: arrayOf(object).isRequired,
+    goBackHeader: element.isRequired,
+    seeAllLinkName: string.isRequired,
+  },
 };
 
 export default types;

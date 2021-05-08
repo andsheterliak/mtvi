@@ -1,4 +1,4 @@
-import { bool, node } from 'prop-types';
+import { bool } from 'prop-types';
 import {
   Dialog,
   DialogActions,
@@ -8,7 +8,6 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 
 import types from '~common/types';
-
 import adjustmentTypes from '../adjustmentTypes';
 
 const useStyles = makeStyles((theme) => {
@@ -45,10 +44,10 @@ const Modal = ({ closeModalHandler, isOpened, title, content, actions }) => {
 
 Modal.propTypes = {
   title: adjustmentTypes.modalTitle,
-  closeModalHandler: types.handler,
+  closeModalHandler: types.generic.handler.isRequired,
   isOpened: bool.isRequired,
-  content: node.isRequired,
-  actions: node.isRequired,
+  content: types.generic.anyChildren.isRequired,
+  actions: types.generic.anyChildren.isRequired,
 };
 
 export default Modal;

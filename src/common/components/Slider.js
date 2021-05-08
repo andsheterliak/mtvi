@@ -1,8 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { bool, number } from 'prop-types';
+import { bool, node, number } from 'prop-types';
 import { useEffect, useRef } from 'react';
-
-import types from '~common/types';
 
 const useStyles = makeStyles(() => ({
   slider: {
@@ -137,7 +135,7 @@ const Slider = ({ children, isLinks = false, acceleration = 2 }) => {
 };
 
 Slider.propTypes = {
-  children: types.containerChildren,
+  children: node.isRequired,
   isLinks: bool,
   acceleration: number,
 };

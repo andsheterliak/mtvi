@@ -12,7 +12,7 @@ const InfoList = ({ dataList }) => {
 };
 
 InfoList.propTypes = {
-  dataList: types.dataList,
+  dataList: types.specific.dataList,
 };
 
 export default InfoList;

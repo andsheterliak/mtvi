@@ -24,8 +24,8 @@ const ActionsButtons = ({ cancelHandler, acceptHandler, isReadyToAccept }) => {
 };
 
 ActionsButtons.propTypes = {
-  cancelHandler: types.handler,
-  acceptHandler: types.handler,
+  cancelHandler: types.generic.handler.isRequired,
+  acceptHandler: types.generic.handler.isRequired,
   isReadyToAccept: bool.isRequired,
 };
 

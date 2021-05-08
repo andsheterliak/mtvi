@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link as MUILink } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { string } from 'prop-types';
 
 import types from '~common/types';
 
@@ -39,9 +38,9 @@ const SeeAllLink = ({ children, path, isSpacing = true }) => {
 };
 
 SeeAllLink.propTypes = {
-  children: string.isRequired,
-  path: types.path,
-  isSpacing: types.isSpacing,
+  children: types.specific.seeAllLinkName,
+  path: types.generic.path.isRequired,
+  isSpacing: types.specific.isSpacing,
 };
 
 export default SeeAllLink;

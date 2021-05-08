@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { exact, func, string, shape } from 'prop-types';
+import { exact, shape } from 'prop-types';
 
 import Modal from './components/Modal';
 import AdjustmentButton from './components/AdjustmentButton';
@@ -11,6 +11,7 @@ import UserScoreOption from './components/UserScoreOption';
 
 import useOptions from './hooks/useOptions';
 import adjustmentTypes from './adjustmentTypes';
+import types from '~common/types';
 
 const Adjustment = ({
   sortByOptions,
@@ -104,10 +105,10 @@ Adjustment.propTypes = {
   userScoreRange: adjustmentTypes.userScoreRange,
   dateTitle: adjustmentTypes.dateTitle,
   modalTitle: adjustmentTypes.modalTitle,
-  onAcceptCallback: func.isRequired,
+  onAcceptCallback: types.generic.handler.isRequired,
 
   initialOptions: shape({
-    sortBy: string.isRequired,
+    sortBy: adjustmentTypes.sortBy,
     userScore: adjustmentTypes.userScore,
     genres: adjustmentTypes.genres,
 

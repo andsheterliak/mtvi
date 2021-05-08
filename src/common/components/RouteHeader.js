@@ -34,8 +34,8 @@ const RouteHeader = ({ titleName, isSpacing = true }) => {
 };
 
 RouteHeader.propTypes = {
-  titleName: types.pageTitle,
-  isSpacing: types.isSpacing,
+  titleName: types.generic.title.isRequired,
+  isSpacing: types.specific.isSpacing,
 };
 
 export default RouteHeader;

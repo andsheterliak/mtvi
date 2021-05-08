@@ -70,7 +70,7 @@ const People = ({ titleName }) => {
 };
 
 People.propTypes = {
-  titleName: types.pageTitle,
+  titleName: types.specific.pageTitle,
 };
 
 export default People;

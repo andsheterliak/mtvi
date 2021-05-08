@@ -49,10 +49,10 @@ const PageHeader = ({ backdrop, title, overview, dataList }) => {
 };
 
 PageHeader.propTypes = {
-  backdrop: types.pageHeader.imgPath,
-  title: types.pageHeader.headerName,
-  overview: types.pageHeader.description,
-  dataList: types.dataList,
+  backdrop: types.generic.path,
+  title: types.generic.title,
+  overview: types.generic.description,
+  dataList: types.specific.dataList,
 };
 
 export default PageHeader;

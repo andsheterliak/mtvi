@@ -1,4 +1,3 @@
-import { string } from 'prop-types';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -42,8 +41,8 @@ const HeaderTitle = ({ title, isSpacing = true }) => {
 };
 
 HeaderTitle.propTypes = {
-  title: string.isRequired,
-  isSpacing: types.isSpacing,
+  title: types.generic.title.isRequired,
+  isSpacing: types.specific.isSpacing,
 };
 
 export default HeaderTitle;

@@ -14,7 +14,7 @@ const HideOnScroll = ({ children, direction }) => {
 };
 
 HideOnScroll.propTypes = {
-  children: types.containerChildren,
+  children: types.generic.anyChildren.isRequired,
   direction: string,
 };
 

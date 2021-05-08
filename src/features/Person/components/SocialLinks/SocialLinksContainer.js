@@ -23,7 +23,7 @@ const SocialLinksContainer = ({ children, isSpacing = true }) => {
 
 SocialLinksContainer.propTypes = {
   children: arrayOf(element).isRequired,
-  isSpacing: types.isSpacing,
+  isSpacing: types.specific.isSpacing,
 };
 
 export default SocialLinksContainer;

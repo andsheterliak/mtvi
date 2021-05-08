@@ -17,6 +17,7 @@ import noImageImg from '~assets/img/no-image.svg';
 import { getHyphenOrData } from '~common/utils/getData';
 
 import useCardStyles from '../../styles/CardStyles';
+import types from '~common/types';
 
 const useStyles = makeStyles(() => ({
   subInfo: {
@@ -95,11 +96,11 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, path }) => {
 };
 
 Card.propTypes = {
-  posterPath: string,
-  title: string,
+  posterPath: types.generic.path,
+  title: types.generic.title,
   releaseDate: string,
   voteAverage: number,
-  path: string.isRequired,
+  path: types.generic.path.isRequired,
 };
 
 export default Card;

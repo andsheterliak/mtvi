@@ -1,5 +1,5 @@
-import { node } from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import types from '~common/types';
 
 const useStyles = makeStyles((theme) => ({
   optionContainer: {
@@ -18,7 +18,7 @@ const OptionContainer = ({ children }) => {
 };
 
 OptionContainer.propTypes = {
-  children: node.isRequired,
+  children: types.generic.anyChildren.isRequired,
 };
 
 export default OptionContainer;

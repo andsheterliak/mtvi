@@ -79,7 +79,7 @@ Spacer.propTypes = {
   lg: sizeType,
   xl: sizeType,
   isResponsive: bool,
-  children: types.containerChildren,
+  children: types.generic.anyChildren,
 };
 
 export default Spacer;

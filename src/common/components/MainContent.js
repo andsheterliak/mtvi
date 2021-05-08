@@ -5,7 +5,7 @@ const MainContent = ({ children }) => {
 };
 
 MainContent.propTypes = {
-  children: types.containerChildren,
+  children: types.generic.anyChildren.isRequired,
 };
 
 export default MainContent;

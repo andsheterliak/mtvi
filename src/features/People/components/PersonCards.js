@@ -25,7 +25,7 @@ const PersonCards = ({ cardsData }) => {
 };
 
 PersonCards.propTypes = {
-  cardsData: types.cardsData,
+  cardsData: types.specific.cardsData,
 };
 
 export default PersonCards;

@@ -29,7 +29,7 @@ const SelectorContainer = ({ children, isSpacing = true }) => {
 };
 
 SelectorContainer.propTypes = {
-  children: types.containerChildren,
+  children: types.generic.anyChildren.isRequired,
 };
 
 export default SelectorContainer;

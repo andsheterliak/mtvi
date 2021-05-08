@@ -7,7 +7,7 @@ const MainContainer = ({ children }) => {
 };
 
 MainContainer.propTypes = {
-  children: types.containerChildren,
+  children: types.generic.anyChildren.isRequired,
 };
 
 export default MainContainer;

@@ -1,5 +1,6 @@
 import { string } from 'prop-types';
 import { Typography } from '@material-ui/core';
+import types from '~common/types';
 
 const OptionTitle = ({ id = null, children }) => {
   return (
@@ -17,7 +18,7 @@ const OptionTitle = ({ id = null, children }) => {
 
 OptionTitle.propTypes = {
   id: string,
-  children: string.isRequired,
+  children: types.generic.title.isRequired,
 };
 
 export default OptionTitle;

@@ -31,8 +31,8 @@ const InfoItem = ({ name, value }) => {
 };
 
 InfoItem.propTypes = {
-  name: types.dataListItem.name,
-  value: types.dataListItem.value,
+  name: types.specific.dataListItem.name,
+  value: types.specific.dataListItem.value,
 };
 
 export default InfoItem;

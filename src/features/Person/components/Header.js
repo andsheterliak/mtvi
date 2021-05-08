@@ -68,10 +68,10 @@ const Header = ({ dataList, name, biography, profilePath, externalIds }) => {
 };
 
 Header.propTypes = {
-  dataList: types.dataList,
-  name: types.pageHeader.headerName,
-  biography: types.pageHeader.description,
-  profilePath: types.pageHeader.imgPath,
+  dataList: types.specific.dataList,
+  name: types.generic.name,
+  biography: types.generic.description,
+  profilePath: types.generic.path,
   externalIds: personTypes.externalIds,
 };
 

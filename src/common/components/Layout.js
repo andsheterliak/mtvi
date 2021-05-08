@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
 };
 
 Layout.propTypes = {
-  children: types.containerChildren,
+  children: types.generic.anyChildren.isRequired,
 };
 
 export default Layout;

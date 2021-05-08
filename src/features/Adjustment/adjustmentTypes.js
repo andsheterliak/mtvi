@@ -30,6 +30,7 @@ const adjustmentTypes = {
   },
 
   userScore: arrayOf(number).isRequired,
+  sortBy: string.isRequired,
 
   genres: arrayOf(
     shape({

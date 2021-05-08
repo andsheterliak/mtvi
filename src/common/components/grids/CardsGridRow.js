@@ -18,7 +18,7 @@ const CardsGridRow = ({ children }) => {
 };
 
 CardsGridRow.propTypes = {
-  children: types.containerChildren,
+  children: types.generic.gridItems.isRequired,
 };
 
 export default CardsGridRow;
