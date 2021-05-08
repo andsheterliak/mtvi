@@ -22,10 +22,6 @@ const useStyles = makeStyles(() => ({
       minWidth: '10px', // "width" doesn't work in container with "overflow: 'auto'".
     },
   },
-
-  isActive: {
-    cursor: 'grabbing',
-  },
 }));
 
 const Slider = ({ children, acceleration = 2 }) => {
@@ -97,18 +93,12 @@ const Slider = ({ children, acceleration = 2 }) => {
       isSwipingRef.current = false;
     }, 0);
 
-    const slider = sliderRef.current;
-
-    slider.classList.remove(classes.isActive);
-
     document.removeEventListener('mousemove', moveSliderHandler);
     document.removeEventListener('mouseup', destroySliderHandler);
   };
 
   const initSliderHandler = (e) => {
     const slider = sliderRef.current;
-
-    slider.classList.add(classes.isActive);
 
     startPositionsRef.current = {
       // Get the current scroll positions from start (top, left) of the slider element.
