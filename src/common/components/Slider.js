@@ -27,6 +27,7 @@ const Slider = ({ children, acceleration = 2 }) => {
   const classes = useStyles();
 
   const sliderRef = useRef(null);
+  const sliderElementsRef = useRef(null);
   const isSwipingRef = useRef(false);
 
   const startPositionsRef = useRef({
@@ -37,39 +38,27 @@ const Slider = ({ children, acceleration = 2 }) => {
   });
 
   useEffect(() => {
-    const links = sliderRef.current.querySelectorAll('a');
-    const imgs = sliderRef.current.querySelectorAll('img');
-
-    const preventOpeningHandler = (e) => {
-      if (isSwipingRef.current) e.preventDefault();
-    };
-
-    const preventDraggingHandler = (e) => {
-      e.preventDefault();
-    };
-
-    links.forEach((link) => {
-      link.addEventListener('click', preventOpeningHandler);
-      link.addEventListener('dragstart', preventDraggingHandler);
-    });
-
-    imgs.forEach((link) => {
-      link.addEventListener('dragstart', preventDraggingHandler);
-    });
-
-    return () => {
-      links.forEach((link) => {
-        link.removeEventListener('click', preventOpeningHandler);
-        link.removeEventListener('dragstart', preventDraggingHandler);
-      });
-
-      imgs.forEach((link) => {
-        link.removeEventListener('dragstart', preventDraggingHandler);
-      });
-    };
+    sliderElementsRef.current = sliderRef.current.querySelectorAll(
+      ':scope >:first-child > *'
+    );
   }, []);
 
+  const disableInteracting = () => {
+    if (isSwipingRef.current) return;
+
+    sliderElementsRef.current.forEach((item) => {
+      item.style.pointerEvents = 'none';
+    });
+  };
+
+  const enableInteracting = () => {
+    sliderElementsRef.current.forEach((item) => {
+      item.style.pointerEvents = 'unset';
+    });
+  };
+
   const moveSliderHandler = (e) => {
+    disableInteracting();
     isSwipingRef.current = true;
 
     const slider = sliderRef.current;
@@ -87,10 +76,8 @@ const Slider = ({ children, acceleration = 2 }) => {
   };
 
   const destroySliderHandler = () => {
-    // 'mouseup' fires before 'click', so to prevent links from opening, assigning 'isSwiping = false' must be deferred.
-    setTimeout(() => {
-      isSwipingRef.current = false;
-    }, 0);
+    enableInteracting();
+    isSwipingRef.current = false;
 
     document.removeEventListener('mousemove', moveSliderHandler);
     document.removeEventListener('mouseup', destroySliderHandler);
