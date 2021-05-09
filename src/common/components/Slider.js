@@ -6,12 +6,11 @@ const useStyles = makeStyles(() => ({
   slider: {
     overflow: 'auto',
     paddingBottom: '25px',
-    cursor: 'pointer',
     userSelect: 'none',
     display: 'flex',
 
     '& *': {
-      cursor: 'inherit',
+      cursor: 'pointer',
     },
 
     // Set fake side paddings, (normal paddings don't work properly in container with "overflow: 'auto'").
