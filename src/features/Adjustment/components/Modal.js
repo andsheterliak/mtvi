@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => {
 const Modal = ({ closeModalHandler, isOpened, title, content, actions }) => {
   const classes = useStyles();
 
-  const label = `${title.toLowerCase().split(' ').join('-')}menu`; // example: Some text --> some-text-menu.
+  const label = `adjustment-title`;
 
   return (
     <Dialog
