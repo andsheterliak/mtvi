@@ -6,6 +6,7 @@ import Layout from '~components/Layout';
 import MovieHeader from './MovieHeader';
 import TopBilledCast from './TopBilledCast';
 import useMovieState from '../hooks/useMovieState';
+import Videos from './Videos';
 
 const Movie = () => {
   useScrollToTop();
@@ -22,6 +23,8 @@ const Movie = () => {
             <MovieHeader />
 
             <TopBilledCast />
+
+            <Videos />
           </Layout>
         </MainContent>
       ) : (

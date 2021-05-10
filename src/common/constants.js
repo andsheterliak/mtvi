@@ -7,4 +7,5 @@ export const ROUTE_NAMES = {
   tvShow: '/tvshow',
   people: '/people',
   person: '/person',
+  videos: 'videos',
 };
