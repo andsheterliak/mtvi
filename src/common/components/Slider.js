@@ -75,12 +75,11 @@ const Slider = ({ children, acceleration = 2 }) => {
     slider.scrollLeft = startPositions.scrollLeft - accelerationX;
   };
 
-  const destroySliderHandler = () => {
-    enableInteracting();
+  const stopSliderHandler = () => {
     isSwipingRef.current = false;
 
     document.removeEventListener('mousemove', moveSliderHandler);
-    document.removeEventListener('mouseup', destroySliderHandler);
+    document.removeEventListener('mouseup', stopSliderHandler);
   };
 
   const initSliderHandler = (e) => {
@@ -97,7 +96,7 @@ const Slider = ({ children, acceleration = 2 }) => {
     };
 
     document.addEventListener('mousemove', moveSliderHandler);
-    document.addEventListener('mouseup', destroySliderHandler);
+    document.addEventListener('mouseup', stopSliderHandler);
   };
 
   return (
