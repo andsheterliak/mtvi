@@ -7,8 +7,12 @@ const useStyles = makeStyles((theme) => {
     layout: {
       display: 'grid',
       gridTemplateColumns: '100%',
-      gap: `${theme.spacing(6)}px`,
+      gap: `${theme.spacing(4)}px`,
       alignItems: 'start',
+
+      [theme.breakpoints.up('sm')]: {
+        gap: `${theme.spacing(5)}px`,
+      },
     },
   };
 });
