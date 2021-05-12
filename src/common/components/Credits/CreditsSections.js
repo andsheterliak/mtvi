@@ -1,8 +1,10 @@
 import { object, objectOf } from 'prop-types';
+import { Fragment } from 'react';
 
 import { ROUTE_NAMES } from '~common/constants';
 import types from '~common/types';
 import creditsTypes from '~components/Credits/creditsTypes';
+import Separator from '~components/Divider';
 
 import Layout from '~components/Layout';
 import Section from '~components/section/Section';
@@ -39,29 +41,42 @@ const CreditsSubsections = ({ data }) => {
 };
 
 const CreditsSections = ({ data }) => {
-  const credits = Object.entries(data).map(([creditsName, creditsData]) => {
-    if (creditsName !== 'Team') {
-      return (
-        <Section key={creditsName}>
-          <SectionTitle title={creditsName} />
+  const dataLength = Object.entries(data).length;
 
-          <CreditsGrid>
-            <CreditsCards data={creditsData} />
-          </CreditsGrid>
-        </Section>
+  const credits = Object.entries(data).map(
+    ([creditsName, creditsData], index) => {
+      const isLastElement = index > dataLength - 1;
+      const separator = !isLastElement && <Separator />;
+
+      if (creditsName !== 'Team') {
+        return (
+          <Fragment key={creditsName}>
+            <Section>
+              <SectionTitle title={creditsName} />
+
+              <CreditsGrid>
+                <CreditsCards data={creditsData} />
+              </CreditsGrid>
+            </Section>
+
+            {separator}
+          </Fragment>
+        );
+      }
+
+      return (
+        <Fragment key={creditsName}>
+          <Section>
+            <SectionTitle title={creditsName} />
+
+            <Layout>
+              <CreditsSubsections data={creditsData} />
+            </Layout>
+          </Section>
+        </Fragment>
       );
     }
-
-    return (
-      <Section key={creditsName}>
-        <SectionTitle title={creditsName} />
-
-        <Layout>
-          <CreditsSubsections data={creditsData} />
-        </Layout>
-      </Section>
-    );
-  });
+  );
 
   return credits;
 };

@@ -13,6 +13,7 @@ import CreditsList from './CreditsList';
 import KnownFor from './KnownFor';
 
 import { personActions } from './personSlice';
+import Separator from '~components/Divider';
 
 const Person = () => {
   useScrollToTop();
@@ -41,7 +42,11 @@ const Person = () => {
             <Layout>
               <PersonHeader />
 
+              <Separator />
+
               <KnownFor />
+
+              <Separator />
 
               <CreditsList />
             </Layout>

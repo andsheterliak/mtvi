@@ -5,7 +5,6 @@ import { ROUTE_NAMES } from '~common/constants';
 import { checkIfIsData, getTopItems } from '~common/utils/getData';
 
 import TopCast from '~components/TopCast';
-import MainContainer from '~components/MainContainer';
 
 const TopBilledCast = () => {
   const { url } = useRouteMatch();
@@ -17,14 +16,12 @@ const TopBilledCast = () => {
   if (!checkIfIsData(topBilledCast)) return null;
 
   return (
-    <MainContainer>
-      <TopCast
-        creditsPath={`${url}/${ROUTE_NAMES.credits}`}
-        seeAllLinkName="Full Cast & Crew"
-        title="Top Billed Cast"
-        data={getTopItems(topBilledCast)}
-      />
-    </MainContainer>
+    <TopCast
+      creditsPath={`${url}/${ROUTE_NAMES.credits}`}
+      seeAllLinkName="Full Cast & Crew"
+      title="Top Billed Cast"
+      data={getTopItems(topBilledCast)}
+    />
   );
 };
 

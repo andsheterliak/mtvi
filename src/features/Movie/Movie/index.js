@@ -7,6 +7,8 @@ import MovieHeader from './MovieHeader';
 import TopBilledCast from './TopBilledCast';
 import useMovieState from '../hooks/useMovieState';
 import Videos from './Videos';
+import Separator from '~components/Divider';
+import MainContainer from '~components/MainContainer';
 
 const Movie = () => {
   useScrollToTop();
@@ -19,13 +21,19 @@ const Movie = () => {
 
       {data ? (
         <MainContent>
-          <Layout>
-            <MovieHeader />
+          <MovieHeader />
 
-            <TopBilledCast />
+          <Spacer />
 
-            <Videos />
-          </Layout>
+          <MainContainer>
+            <Layout>
+              <TopBilledCast />
+
+              <Separator />
+
+              <Videos />
+            </Layout>
+          </MainContainer>
         </MainContent>
       ) : (
         'Loading'
