@@ -1,10 +1,7 @@
 import { Dialog, DialogTitle, IconButton, Typography } from '@material-ui/core';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import { bool, exact } from 'prop-types';
 import { innerDarkTheme } from '~common/theme';
-import types from '~common/types';
-import videoCardsTypes from './videoCardsTypes';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -86,16 +83,6 @@ const VideoModal = ({ isOpened, closeModalHandler, data }) => {
       </Dialog>
     </ThemeProvider>
   );
-};
-
-VideoModal.propTypes = {
-  isOpened: bool.isRequired,
-  closeModalHandler: types.generic.handler.isRequired,
-
-  data: exact({
-    id: videoCardsTypes.id,
-    name: videoCardsTypes.name,
-  }).isRequired,
 };
 
 export default VideoModal;

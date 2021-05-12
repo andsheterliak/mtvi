@@ -1,9 +1,6 @@
-import { object, objectOf } from 'prop-types';
 import { Fragment } from 'react';
 
 import { ROUTE_NAMES } from '~common/constants';
-import types from '~common/types';
-import creditsTypes from '~components/Credits/creditsTypes';
 import Separator from '~components/Divider';
 
 import Layout from '~components/Layout';
@@ -79,18 +76,6 @@ const CreditsSections = ({ data }) => {
   );
 
   return credits;
-};
-
-CreditsCards.propTypes = {
-  data: types.specific.cardsData,
-};
-
-CreditsSubsections.propTypes = {
-  data: objectOf(object).isRequired,
-};
-
-CreditsSections.propTypes = {
-  data: creditsTypes.creditsData.isRequired,
 };
 
 export default CreditsSections;

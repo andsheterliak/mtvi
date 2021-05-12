@@ -1,7 +1,5 @@
 import { ROUTE_NAMES } from '~common/constants';
 
-import types from '~common/types';
-
 import PersonCard from '~components/PersonCard';
 
 const CastCards = ({ cardsData }) => {
@@ -18,10 +16,6 @@ const CastCards = ({ cardsData }) => {
   });
 
   return cards;
-};
-
-CastCards.propTypes = {
-  cardsData: types.specific.cardsData,
 };
 
 export default CastCards;

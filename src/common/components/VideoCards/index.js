@@ -1,7 +1,5 @@
-import { arrayOf, shape, string } from 'prop-types';
 import { useState } from 'react';
 import VideoCard from './VideoCard';
-import videoCardsTypes from './videoCardsTypes';
 import VideoModal from './VideoModal';
 
 const VideoCards = ({ data }) => {
@@ -46,16 +44,6 @@ const VideoCards = ({ data }) => {
       )}
     </>
   );
-};
-
-VideoCards.propTypes = {
-  data: arrayOf(
-    shape({
-      key: videoCardsTypes.id,
-      name: videoCardsTypes.name,
-      site: string.isRequired,
-    })
-  ).isRequired,
 };
 
 export default VideoCards;

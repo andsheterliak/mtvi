@@ -1,7 +1,3 @@
-import types from '~common/types';
-
-import creditsTypes from '~components/Credits/creditsTypes';
-
 import Layout from '~components/Layout';
 import MainContainer from '~components/MainContainer';
 import MainContent from '~components/MainContent';
@@ -30,11 +26,6 @@ const Credits = ({ credits, header }) => {
       </Layout>
     </>
   );
-};
-
-Credits.propTypes = {
-  credits: creditsTypes.creditsData,
-  header: types.specific.goBackHeader,
 };
 
 export default Credits;

@@ -1,4 +1,3 @@
-import types from '~common/types';
 import { getTopItems } from '~common/utils/getData';
 import Section from '~components/section/Section';
 import SectionTitle from '~components/section/SectionTitle';
@@ -21,12 +20,6 @@ const TopVideos = ({ title, data, videosPath }) => {
       <SeeAllLink path={videosPath}>View All Videos</SeeAllLink>
     </Section>
   );
-};
-
-TopVideos.propTypes = {
-  title: types.generic.title.isRequired,
-  data: types.specific.cardsData,
-  videosPath: types.generic.path.isRequired,
 };
 
 export default TopVideos;

@@ -1,8 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
-import types from '~common/types';
-
 const useStyles = makeStyles({
   container: {
     display: 'flex',
@@ -26,10 +24,6 @@ const SelectorContainer = ({ children, isSpacing = true }) => {
   });
 
   return <div className={rootClasses}>{children}</div>;
-};
-
-SelectorContainer.propTypes = {
-  children: types.generic.anyChildren.isRequired,
 };
 
 export default SelectorContainer;

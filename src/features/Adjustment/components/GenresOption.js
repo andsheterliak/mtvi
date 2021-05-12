@@ -3,12 +3,8 @@ import { Chip } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
-import types from '~common/types';
-
 import OptionContainer from './OptionContainer';
 import OptionTitle from './OptionTitle';
-
-import adjustmentTypes from '../adjustmentTypes';
 
 const useStyles = makeStyles((theme) => ({
   chipItems: {
@@ -59,11 +55,6 @@ const GenresOption = ({ genres, toggleGenreHandler }) => {
       <ul className={classes.chipItems}>{genreItems}</ul>
     </OptionContainer>
   );
-};
-
-GenresOption.propTypes = {
-  genres: adjustmentTypes.genres,
-  toggleGenreHandler: types.generic.handler.isRequired,
 };
 
 export default memo(GenresOption);

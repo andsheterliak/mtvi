@@ -11,7 +11,6 @@ import useScrollToTop from '~common/hooks/useScrollToTop';
 import usePagination from '~common/hooks/usePagination';
 import { getLS, setLS } from '~common/utils/storage';
 import { checkIfIsData } from '~common/utils/getData';
-import types from '~common/types';
 
 import Adjustment from '~features/Adjustment';
 import Cards from '~components/Cards';
@@ -103,10 +102,6 @@ const TVShows = ({ titleName }) => {
       )}
     </MainContainer>
   );
-};
-
-TVShows.propTypes = {
-  titleName: types.specific.pageTitle,
 };
 
 export default TVShows;

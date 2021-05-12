@@ -1,7 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-import types from '~common/types';
-
 const useStyles = makeStyles(() => {
   return {
     root: {
@@ -21,10 +19,6 @@ const RootWrapper = ({ children }) => {
   const classes = useStyles();
 
   return <div className={classes.root}>{children}</div>;
-};
-
-RootWrapper.propTypes = {
-  children: types.generic.anyChildren.isRequired,
 };
 
 export default RootWrapper;

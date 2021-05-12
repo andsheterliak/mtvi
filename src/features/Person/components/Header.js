@@ -1,8 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
-import types from '~common/types';
-import personTypes from '~features/Person/personTypes';
 import noUserPhotoImg from '~assets/img/no-user-photo.svg';
 
 import HeaderDescription from '~components/header/Description';
@@ -65,14 +63,6 @@ const Header = ({ dataList, name, biography, profilePath, externalIds }) => {
       </div>
     </section>
   );
-};
-
-Header.propTypes = {
-  dataList: types.specific.dataList,
-  name: types.generic.name,
-  biography: types.generic.description,
-  profilePath: types.generic.path,
-  externalIds: personTypes.externalIds,
 };
 
 export default Header;

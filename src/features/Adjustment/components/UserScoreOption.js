@@ -1,12 +1,8 @@
 import { Slider } from '@material-ui/core';
 import { useMemo } from 'react';
 
-import types from '~common/types';
-
 import OptionContainer from './OptionContainer';
 import OptionTitle from './OptionTitle';
-
-import adjustmentTypes from '../adjustmentTypes';
 
 const UserScoreOption = ({
   userScoreRange: { min, max },
@@ -34,12 +30,6 @@ const UserScoreOption = ({
       />
     </OptionContainer>
   );
-};
-
-UserScoreOption.propTypes = {
-  userScoreRange: adjustmentTypes.userScoreRange,
-  changeUserScoreHandler: types.generic.handler.isRequired,
-  userScore: adjustmentTypes.userScore,
 };
 
 export default UserScoreOption;

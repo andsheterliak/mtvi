@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { bool, node, number } from 'prop-types';
 import { useEffect, useRef } from 'react';
 
 const useStyles = makeStyles(() => ({
@@ -188,12 +187,6 @@ const Slider = ({ children, acceleration = 1.5, isMomentum = true }) => {
       <div className={classes.container}>{children}</div>
     </div>
   );
-};
-
-Slider.propTypes = {
-  children: node.isRequired,
-  acceleration: number,
-  isMomentum: bool,
 };
 
 export default Slider;

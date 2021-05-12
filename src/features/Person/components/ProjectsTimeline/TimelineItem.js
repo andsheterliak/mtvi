@@ -12,8 +12,6 @@ import { Typography, Link as MUILink } from '@material-ui/core';
 
 import { getHyphenOrData } from '~common/utils/getData';
 import InfoList from '~components/InfoList';
-import types from '~common/types';
-import projectsTimelineTypes from './projectsTimelineTypes';
 
 const useStyles = makeStyles(() => {
   const padding = 4;
@@ -70,13 +68,6 @@ const TimelineItem = ({ path, year, name, infoListData }) => {
       </TimelineContent>
     </MUITimelineItem>
   );
-};
-
-TimelineItem.propTypes = {
-  name: projectsTimelineTypes.name,
-  path: projectsTimelineTypes.path,
-  year: projectsTimelineTypes.year,
-  infoListData: types.specific.dataList,
 };
 
 export default TimelineItem;

@@ -1,12 +1,8 @@
 import { memo } from 'react';
 import { Input, InputLabel, MenuItem, Select } from '@material-ui/core';
 
-import types from '~common/types';
-
 import OptionContainer from './OptionContainer';
 import OptionTitle from './OptionTitle';
-
-import adjustmentTypes from '../adjustmentTypes';
 
 const SortResultsByOption = ({ sortByOptions, sortBy, sortByHandler }) => {
   const menuItems = Object.values(sortByOptions).map((item) => {
@@ -38,12 +34,6 @@ const SortResultsByOption = ({ sortByOptions, sortBy, sortByHandler }) => {
       </Select>
     </OptionContainer>
   );
-};
-
-SortResultsByOption.propTypes = {
-  sortByOptions: adjustmentTypes.sortByOptions,
-  sortBy: adjustmentTypes.sortBy,
-  sortByHandler: types.generic.handler.isRequired,
 };
 
 export default memo(SortResultsByOption);

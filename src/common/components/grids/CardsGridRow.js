@@ -1,7 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-import types from '~common/types';
-
 const useStyles = makeStyles(() => ({
   items: {
     display: 'grid',
@@ -15,10 +13,6 @@ const CardsGridRow = ({ children }) => {
   const classes = useStyles();
 
   return <div className={classes.items}>{children}</div>;
-};
-
-CardsGridRow.propTypes = {
-  children: types.generic.gridItems.isRequired,
 };
 
 export default CardsGridRow;

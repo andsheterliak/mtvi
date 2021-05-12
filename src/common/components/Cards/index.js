@@ -1,5 +1,3 @@
-import types from '~common/types';
-
 import { getPath } from '~common/utils/getData';
 
 import Card from './Card';
@@ -25,10 +23,6 @@ const Cards = ({ cardsData }) => {
   });
 
   return cards;
-};
-
-Cards.propTypes = {
-  cardsData: types.specific.cardsData,
 };
 
 export default Cards;

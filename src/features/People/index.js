@@ -5,7 +5,6 @@ import useFocusContainer from '~common/hooks/useFocusContainer';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import usePagination from '~common/hooks/usePagination';
 import { checkIfIsData } from '~common/utils/getData';
-import types from '~common/types';
 
 import CardsGrid from '~components/grids/CardsGrid';
 import MainContainer from '~components/MainContainer';
@@ -67,10 +66,6 @@ const People = ({ titleName }) => {
       )}
     </MainContainer>
   );
-};
-
-People.propTypes = {
-  titleName: types.specific.pageTitle,
 };
 
 export default People;

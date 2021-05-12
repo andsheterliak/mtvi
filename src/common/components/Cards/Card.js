@@ -1,4 +1,3 @@
-import { number, string } from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   Card as MUiCard,
@@ -17,7 +16,6 @@ import noImageImg from '~assets/img/no-image.svg';
 import { getHyphenOrData } from '~common/utils/getData';
 
 import useCardStyles from '../../styles/CardStyles';
-import types from '~common/types';
 
 const useStyles = makeStyles(() => ({
   subInfo: {
@@ -93,14 +91,6 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, path }) => {
       </CardActionArea>
     </MUiCard>
   );
-};
-
-Card.propTypes = {
-  posterPath: types.generic.path,
-  title: types.generic.title,
-  releaseDate: string,
-  voteAverage: number,
-  path: types.generic.path.isRequired,
 };
 
 export default Card;

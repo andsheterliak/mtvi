@@ -2,9 +2,6 @@ import { Link } from 'react-router-dom';
 import { Button, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { string } from 'prop-types';
-
-import types from '~common/types';
 
 import MainContainer from '~components/MainContainer';
 
@@ -81,13 +78,6 @@ const BackToHeader = ({ title, imgPath, path, linkName }) => {
       </MainContainer>
     </Paper>
   );
-};
-
-BackToHeader.propTypes = {
-  title: types.generic.title,
-  imgPath: types.generic.path.isRequired,
-  path: types.generic.path.isRequired,
-  linkName: string.isRequired,
 };
 
 export default BackToHeader;

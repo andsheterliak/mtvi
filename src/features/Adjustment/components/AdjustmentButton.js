@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { MovieFilter as FilterIcon } from '@material-ui/icons/';
 
 import debounce from '~common/utils/debounce';
-import types from '~common/types';
 import HideOnScroll from '~components/HideOnScroll';
 
 const useStyles = makeStyles((theme) => {
@@ -52,11 +51,6 @@ const AdjustmentButton = ({ ariaLabel, openModalHandler }) => {
       </HideOnScroll>
     </>
   );
-};
-
-AdjustmentButton.propTypes = {
-  ariaLabel: types.generic.label.isRequired,
-  openModalHandler: types.generic.handler.isRequired,
 };
 
 export default AdjustmentButton;

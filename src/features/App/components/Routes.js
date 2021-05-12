@@ -1,4 +1,3 @@
-import { bool, elementType, objectOf, shape, string } from 'prop-types';
 import { Redirect, Route } from 'react-router';
 
 const Routes = ({ config }) => {
@@ -20,18 +19,6 @@ const Routes = ({ config }) => {
       />
     );
   });
-};
-
-Routes.propTypes = {
-  config: objectOf(
-    shape({
-      name: string,
-      to: string.isRequired,
-      redirectTo: string,
-      exact: bool,
-      component: elementType.isRequired,
-    })
-  ),
 };
 
 export default Routes;

@@ -1,6 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { Timeline } from '@material-ui/lab';
-import { arrayOf, element } from 'prop-types';
 
 const useStyles = makeStyles(() => {
   return {
@@ -19,10 +18,6 @@ const TimelineContainer = ({ children }) => {
       {children}
     </Timeline>
   );
-};
-
-TimelineContainer.propTypes = {
-  children: arrayOf(element).isRequired,
 };
 
 export default TimelineContainer;

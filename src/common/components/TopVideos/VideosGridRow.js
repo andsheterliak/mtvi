@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import types from '~common/types';
 
 const useStyles = makeStyles((theme) => ({
   items: {
@@ -26,10 +25,6 @@ const VideosGridRow = ({ children }) => {
   const classes = useStyles();
 
   return <div className={classes.items}>{children}</div>;
-};
-
-VideosGridRow.propTypes = {
-  children: types.generic.gridItems.isRequired,
 };
 
 export default VideosGridRow;

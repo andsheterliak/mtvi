@@ -7,11 +7,9 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import { string } from 'prop-types';
 
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import noUserPhotoImg from '~assets/img/no-user-photo.svg';
-import types from '~common/types';
 import { getHyphenOrData } from '~common/utils/getData';
 
 const useStyles = makeStyles(() => ({
@@ -66,13 +64,6 @@ const CreditCard = ({ profilePath, name, info, path }) => {
       </CardActionArea>
     </Card>
   );
-};
-
-CreditCard.propTypes = {
-  profilePath: types.generic.path,
-  name: types.generic.name,
-  info: string,
-  path: types.generic.path.isRequired,
 };
 
 export default CreditCard;

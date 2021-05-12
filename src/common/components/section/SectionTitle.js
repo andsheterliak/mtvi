@@ -1,9 +1,6 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import { bool } from 'prop-types';
-
-import types from '~common/types';
 
 const useStyles = makeStyles({
   spacing: {
@@ -28,12 +25,6 @@ const SectionTitle = ({ title, isSubtitle = false, isSpacing = true }) => {
       {title}
     </Typography>
   );
-};
-
-SectionTitle.propTypes = {
-  title: types.generic.title.isRequired,
-  isSpacing: types.specific.isSpacing,
-  isSubtitle: bool,
 };
 
 export default SectionTitle;

@@ -1,7 +1,4 @@
-import { string } from 'prop-types';
 import { KeyboardDatePicker } from '@material-ui/pickers';
-
-import types from '~common/types';
 
 const DatePicker = ({ ariaLabel, id, value, label, changeDateHandler }) => {
   return (
@@ -20,14 +17,6 @@ const DatePicker = ({ ariaLabel, id, value, label, changeDateHandler }) => {
       invalidDateMessage="Month/Day/Year"
     />
   );
-};
-
-DatePicker.propTypes = {
-  ariaLabel: types.generic.label.isRequired,
-  id: string.isRequired,
-  value: string,
-  label: types.generic.label.isRequired,
-  changeDateHandler: types.generic.handler.isRequired,
 };
 
 export default DatePicker;

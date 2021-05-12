@@ -1,8 +1,6 @@
 import { Card, CardActionArea, CardMedia } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import types from '~common/types';
-import videoCardsTypes from './videoCardsTypes';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -50,12 +48,6 @@ const VideoCard = ({ id, name, openModalHandler }) => {
       </CardActionArea>
     </Card>
   );
-};
-
-VideoCard.propTypes = {
-  id: videoCardsTypes.id,
-  name: videoCardsTypes.name,
-  openModalHandler: types.generic.handler.isRequired,
 };
 
 export default VideoCard;

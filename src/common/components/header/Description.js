@@ -2,7 +2,6 @@ import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import classNames from 'classnames';
-import types from '~common/types';
 
 const useStyles = makeStyles(() => {
   return {
@@ -29,11 +28,6 @@ const HeaderDescription = ({ description, isSpacing = true }) => {
       {description}
     </Typography>
   );
-};
-
-HeaderDescription.propTypes = {
-  description: types.generic.description.isRequired,
-  isSpacing: types.specific.isSpacing,
 };
 
 export default HeaderDescription;
