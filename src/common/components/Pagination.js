@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   },
 
   spacing: {
-    marginTop: '25px',
+    marginTop: '35px',
   },
 }));
 

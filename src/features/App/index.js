@@ -21,9 +21,9 @@ const App = () => {
 
         <Switch>{<Routes config={routesConfig} />}</Switch>
 
-        <Spacer xs="3 0 0" sm="4 0 0">
-          <Footer />
-        </Spacer>
+        <Spacer />
+
+        <Footer />
       </RootWrapper>
     </ThemeProvider>
   );
