@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { checkIfIsData } from '~common/utils/getData';
+import { checkIfIsData, getTopItems } from '~common/utils/getData';
 
 import Section from '~components/section/Section';
 import SectionTitle from '~components/section/SectionTitle';
@@ -38,12 +38,6 @@ const removeDuplicates = (data) => {
   return filteredArr;
 };
 
-const getFirstVoted = (data) => {
-  data = data.slice(0, 9);
-
-  return data.filter((item) => item.vote_count);
-};
-
 const joinData = (data) => {
   const newData = [];
 
@@ -66,7 +60,7 @@ const getKnownFor = (data) => {
 
   newData = sortByVoteDescending(data);
   newData = removeDuplicates(newData);
-  newData = getFirstVoted(newData);
+  newData = getTopItems(newData);
 
   return newData;
 };
