@@ -4,6 +4,7 @@ const useStyles = makeStyles((theme) => {
   return {
     appBar: {
       backgroundColor: theme.palette.background.paper,
+      boxShadow: '0px 0px 10px hsla(0, 0%, 0%, 30%)',
     },
 
     toolBar: {
