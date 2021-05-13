@@ -7,6 +7,7 @@ import SectionTitle from '~components/section/SectionTitle';
 import Slider from '~components/Slider';
 import Cards from '~components/Cards';
 import CardsGridRow from '~components/grids/CardsGridRow';
+import NoContent from '~components/NoContent';
 
 const sortByVoteDescending = (data) => {
   const newData = [...data];
@@ -69,25 +70,25 @@ const KnownFor = () => {
   const { data } = useSelector((state) => state.person);
 
   const joinedData = joinData({
-    movieCredits: data.movie_credits,
+    movieCredits: null,
     tvCredits: data.tv_credits,
   });
 
-  if (!checkIfIsData(joinedData)) return null;
-
-  const knownFor = getKnownFor(joinedData);
-
-  if (!checkIfIsData(knownFor)) return null;
+  const content = checkIfIsData(joinedData) ? (
+    <Slider>
+      <CardsGridRow>
+        <Cards cardsData={getKnownFor(joinedData)} />
+      </CardsGridRow>
+    </Slider>
+  ) : (
+    <NoContent message="We don't have added any data for this section." />
+  );
 
   return (
     <Section>
       <SectionTitle title="Known For" />
 
-      <Slider>
-        <CardsGridRow>
-          <Cards cardsData={knownFor} />
-        </CardsGridRow>
-      </Slider>
+      {content}
     </Section>
   );
 };

@@ -1,15 +1,17 @@
+import { checkIfIsData } from '~common/utils/getData';
 import Layout from '~components/Layout';
 import MainContainer from '~components/MainContainer';
 import MainContent from '~components/MainContent';
+import NoContent from '~components/NoContent';
 import Spacer from '~components/Spacer';
 import CreditsSections from './CreditsSections';
 
 const Credits = ({ credits, header }) => {
-  let creditSections;
-
-  if (credits) {
-    creditSections = <CreditsSections data={credits} />;
-  }
+  const content = checkIfIsData(credits) ? (
+    <CreditsSections data={credits} />
+  ) : (
+    <NoContent message="We don't have added any credits." />
+  );
 
   return (
     <>
@@ -20,7 +22,7 @@ const Credits = ({ credits, header }) => {
 
         <MainContent>
           <MainContainer>
-            <Layout>{creditSections}</Layout>
+            <Layout>{content}</Layout>
           </MainContainer>
         </MainContent>
       </Layout>

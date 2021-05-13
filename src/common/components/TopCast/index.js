@@ -4,17 +4,25 @@ import SectionTitle from '~components/section/SectionTitle';
 import Slider from '~components/Slider';
 import CardsGridRow from '~components/grids/CardsGridRow';
 import CastCards from './CastCards';
+import { checkIfIsData } from '~common/utils/getData';
+import NoContent from '~components/NoContent';
 
 const TopCast = ({ data, title, creditsPath, seeAllLinkName }) => {
+  const content = checkIfIsData(data) ? (
+    <Slider>
+      <CardsGridRow>
+        <CastCards cardsData={data} />
+      </CardsGridRow>
+    </Slider>
+  ) : (
+    <NoContent message="We don't have added any cast." />
+  );
+
   return (
     <Section>
       <SectionTitle title={title} />
 
-      <Slider>
-        <CardsGridRow>
-          <CastCards cardsData={data} />
-        </CardsGridRow>
-      </Slider>
+      {content}
 
       <SeeAllLink path={creditsPath}>{seeAllLinkName}</SeeAllLink>
     </Section>

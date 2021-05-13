@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router';
 
 import { ROUTE_NAMES } from '~common/constants';
-import { checkIfIsData, getTopItems } from '~common/utils/getData';
+import { getTopItems } from '~common/utils/getData';
 
 import TopCast from '~components/TopCast';
 
@@ -11,16 +11,15 @@ const TopBilledCast = () => {
 
   const { data } = useSelector((state) => state.movie);
 
-  const topBilledCast = data.credits?.cast;
-
-  if (!checkIfIsData(topBilledCast)) return null;
+  let topBilledCast = data.credits?.cast;
+  topBilledCast = getTopItems(topBilledCast);
 
   return (
     <TopCast
       creditsPath={`${url}/${ROUTE_NAMES.credits}`}
       seeAllLinkName="Full Cast & Crew"
       title="Top Billed Cast"
-      data={getTopItems(topBilledCast)}
+      data={topBilledCast}
     />
   );
 };

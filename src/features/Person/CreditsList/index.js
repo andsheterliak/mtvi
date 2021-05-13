@@ -11,6 +11,7 @@ import SectionTitle from '~components/section/SectionTitle';
 import ProjectsTimeline from '../components/ProjectsTimeline';
 
 import filterConfig from './filterConfig';
+import NoContent from '~components/NoContent';
 
 const checkIfIsCredits = (data) => {
   const isMovieCast = !!data.movieCredits?.cast?.length;
@@ -168,9 +169,11 @@ const CreditsList = () => {
 
   const { isData, isNeedInFiltering } = checkIfIsCredits(credits);
 
-  if (!isData) return null;
-
-  const timelineData = getTimelineData(credits, filterBy);
+  const content = isData ? (
+    <ProjectsTimeline data={getTimelineData(credits, filterBy)} />
+  ) : (
+    <NoContent message="We don't have added any projects." />
+  );
 
   return (
     <Section>
@@ -186,7 +189,7 @@ const CreditsList = () => {
         </SelectorContainer>
       )}
 
-      <ProjectsTimeline data={timelineData} />
+      {content}
     </Section>
   );
 };
