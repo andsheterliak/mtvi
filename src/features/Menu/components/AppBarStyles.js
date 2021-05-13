@@ -2,6 +2,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => {
   return {
+    appBar: {
+      backgroundColor: theme.palette.background.paper,
+    },
+
     toolBar: {
       minHeight: '56px', // To avoid content shifting.
 

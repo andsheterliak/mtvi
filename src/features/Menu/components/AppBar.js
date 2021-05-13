@@ -60,7 +60,7 @@ const AppBar = ({
   return (
     <>
       <HideOnScroll>
-        <MuiAppBar position="sticky" color="inherit">
+        <MuiAppBar className={classes.appBar} position="sticky">
           <Container maxWidth="xl">
             <Toolbar variant="regular" className={classes.toolBar}>
               {isSearchOpened ? search : toolbarInner}
