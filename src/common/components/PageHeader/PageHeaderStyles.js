@@ -42,7 +42,8 @@ const useStyles = makeStyles((theme) => {
       objectFit: 'cover',
       objectPosition: 'top',
       borderRadius: '4px',
-      opacity: 0.2,
+      opacity: 0.5,
+      filter: 'brightness(.4)',
     },
 
     infoBlock: {
