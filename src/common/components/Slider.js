@@ -90,12 +90,6 @@ const Slider = ({ children, acceleration = 1.5, isMomentum = true }) => {
     }
   };
 
-  const startMomentumLoop = () => {
-    const state = stateRef.current;
-
-    state.momentumID = requestAnimationFrame(runMomentumLoop);
-  };
-
   const initMomentum = () => {
     const state = stateRef.current;
 
@@ -103,7 +97,7 @@ const Slider = ({ children, acceleration = 1.5, isMomentum = true }) => {
     const timePassedFromLastSwipe = Date.now() - state.lastSwipeTime;
 
     if (ifStartMomentum(timePassedFromLastSwipe, TIME_PASSED_THRESHOLD)) {
-      startMomentumLoop();
+      runMomentumLoop();
     }
   };
 
