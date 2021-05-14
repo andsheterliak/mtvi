@@ -1,7 +1,6 @@
 import { memo } from 'react';
-import { Chip } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+import { ToggleButton } from '@material-ui/lab';
 
 import OptionContainer from './OptionContainer';
 import OptionTitle from './OptionTitle';
@@ -21,11 +20,9 @@ const useStyles = makeStyles((theme) => ({
   },
 
   chip: {
-    transition: 'border 0.2s ease-out',
-  },
-
-  chipChosen: {
-    border: '1px solid hsla(0, 0%, 0%, 0)',
+    borderRadius: '40px',
+    textTransform: 'none',
+    padding: '5px 10px',
   },
 }));
 
@@ -35,15 +32,15 @@ const GenresOption = ({ genres, toggleGenreHandler }) => {
   const genreItems = genres.map(({ name, id, isSelected }) => {
     return (
       <li key={id} className={classes.chipItem}>
-        <Chip
-          className={classNames(classes.chip, {
-            [classes.chipChosen]: isSelected,
-          })}
-          variant={isSelected ? 'default' : 'outlined'}
-          label={name}
-          onClick={() => toggleGenreHandler(id)}
-          component="button"
-        />
+        <ToggleButton
+          className={classes.chip}
+          aria-label={name}
+          selected={isSelected}
+          onChange={() => toggleGenreHandler(id)}
+          size="small"
+        >
+          {name}
+        </ToggleButton>
       </li>
     );
   });
