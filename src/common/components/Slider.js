@@ -56,7 +56,7 @@ const Slider = ({ children, acceleration = 1.5, isMomentum = true }) => {
     const state = stateRef.current;
 
     if (state.isInteractionDisabled) {
-      sliderInnerRef.current.style.pointerEvents = 'unset';
+      sliderInnerRef.current.style.pointerEvents = '';
       state.isInteractionDisabled = false;
     }
   };
