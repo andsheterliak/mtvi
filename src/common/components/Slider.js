@@ -157,6 +157,10 @@ const Slider = ({ children, acceleration = 1.5, isMomentum = true }) => {
     document.addEventListener('mouseup', stopSliderHandler);
   };
 
+  const preventDragHandler = (e) => {
+    e.preventDefault();
+  };
+
   useEffect(() => {
     const slider = sliderRef.current;
 
@@ -176,6 +180,7 @@ const Slider = ({ children, acceleration = 1.5, isMomentum = true }) => {
       ref={sliderRef}
       onMouseDown={initSliderHandler}
       onWheel={destroyMomentumLoop}
+      onDragStart={preventDragHandler}
       className={classes.slider}
     >
       <div className={classes.container}>{children}</div>
