@@ -1,8 +1,8 @@
-const { useEffect } = require('react');
-const { useDispatch, useSelector } = require('react-redux');
-const { useParams } = require('react-router');
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 
-const { movieActions } = require('../movieSlice');
+import { movieActions } from '../movieSlice';
 
 const useMovieState = () => {
   const dispatch = useDispatch();
