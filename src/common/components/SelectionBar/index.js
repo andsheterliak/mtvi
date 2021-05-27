@@ -5,6 +5,8 @@ import Slider from '~components/Slider';
 
 import SelectionItems from './SelectionItems';
 
+export { default as useSelectionBar } from './useSelectionBar';
+
 const useStyles = makeStyles((theme) => ({
   title: {
     backgroundColor: 'hsl(0, 0%, 0%, 13%)',

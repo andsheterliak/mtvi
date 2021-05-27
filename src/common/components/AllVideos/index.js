@@ -7,7 +7,7 @@ import Layout from '~components/Layout';
 import MainContainer from '~components/MainContainer';
 import MainContent from '~components/MainContent';
 import NoContent from '~components/NoContent';
-import SelectionBar from '~components/SelectionBar';
+import SelectionBar, { useSelectionBar } from '~components/SelectionBar';
 import Spacer from '~components/Spacer';
 import VideoCards from '~components/VideoCards';
 
@@ -37,7 +37,7 @@ const createVideosData = (data) => {
 };
 
 const AllVideos = ({ data, header }) => {
-  const [selected, setSelected] = useState('Trailer');
+  const { selected, setSelected } = useSelectionBar('Trailer');
   const videosData = createVideosData(data);
 
   const selectHandler = (e, key) => {
