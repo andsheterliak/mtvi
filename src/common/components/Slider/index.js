@@ -7,7 +7,7 @@ const useStyles = makeStyles(() => ({
     overflow: 'auto',
     userSelect: 'none',
     // To expand 'container' to set 'cursor: pointer' correctly
-    display: 'flex',
+    display: 'grid',
   },
 
   container: {
