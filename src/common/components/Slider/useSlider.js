@@ -1,19 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
 import { useEffect, useRef } from 'react';
-
-const useStyles = makeStyles(() => ({
-  slider: {
-    overflow: 'auto',
-    userSelect: 'none',
-    // To expand 'container' to set 'cursor: pointer' correctly
-    display: 'flex',
-  },
-
-  container: {
-    cursor: 'pointer',
-    padding: ' 0 10px 20px',
-  },
-}));
 
 export const calcHowFar = (clientPosition, prevClientPosition) => {
   return clientPosition - prevClientPosition;
@@ -25,9 +10,7 @@ export const calcVelocity = (scroll, prevScroll) => {
 
 export const ifIsForward = (value) => Math.sign(value) === -1;
 
-const Slider = ({ children, momentumDowngrade = 0.94, isMomentum = true }) => {
-  const classes = useStyles();
-
+const useSlider = ({ momentumDowngrade = 0.94, isMomentum = true } = {}) => {
   const sliderRef = useRef(null);
   const sliderInnerRef = useRef(null);
   const stateRef = useRef({
@@ -220,19 +203,12 @@ const Slider = ({ children, momentumDowngrade = 0.94, isMomentum = true }) => {
     };
   }, []);
 
-  return (
-    // This is a native scrollable element, so it doesn't need additional attributes I think?!.
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div
-      ref={sliderRef}
-      onMouseDown={initSliderHandler}
-      onWheel={destroyMomentum}
-      onDragStart={preventDragHandler}
-      className={classes.slider}
-    >
-      <div className={classes.container}>{children}</div>
-    </div>
-  );
+  return {
+    sliderRef,
+    initSliderHandler,
+    destroyMomentum,
+    preventDragHandler,
+  };
 };
 
-export default Slider;
+export default useSlider;
