@@ -1,15 +1,27 @@
 import SeeAllLink from '~components/SeeAllLink';
 import Section from '~components/section/Section';
 import SectionTitle from '~components/section/SectionTitle';
-import Slider from '~components/Slider';
+import Slider, { useSlider } from '~components/Slider';
 import CardsGridRow from '~components/grids/CardsGridRow';
 import CastCards from './CastCards';
 import { checkIfIsData } from '~common/utils/getData';
 import NoContent from '~components/NoContent';
 
 const TopCast = ({ data, title, creditsPath, seeAllLinkName }) => {
+  const {
+    sliderRef,
+    destroyMomentum,
+    initSliderHandler,
+    preventDragHandler,
+  } = useSlider();
+
   const content = checkIfIsData(data) ? (
-    <Slider>
+    <Slider
+      sliderRef={sliderRef}
+      destroyMomentum={destroyMomentum}
+      initSliderHandler={initSliderHandler}
+      preventDragHandler={preventDragHandler}
+    >
       <CardsGridRow>
         <CastCards cardsData={data} />
       </CardsGridRow>

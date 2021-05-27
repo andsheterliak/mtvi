@@ -4,7 +4,7 @@ import { checkIfIsData, getTopItems } from '~common/utils/getData';
 
 import Section from '~components/section/Section';
 import SectionTitle from '~components/section/SectionTitle';
-import Slider from '~components/Slider';
+import Slider, { useSlider } from '~components/Slider';
 import Cards from '~components/Cards';
 import CardsGridRow from '~components/grids/CardsGridRow';
 import NoContent from '~components/NoContent';
@@ -68,6 +68,12 @@ const getKnownFor = (data) => {
 
 const KnownFor = () => {
   const { data } = useSelector((state) => state.person);
+  const {
+    sliderRef,
+    destroyMomentum,
+    initSliderHandler,
+    preventDragHandler,
+  } = useSlider();
 
   const joinedData = joinData({
     movieCredits: null,
@@ -75,7 +81,12 @@ const KnownFor = () => {
   });
 
   const content = checkIfIsData(joinedData) ? (
-    <Slider>
+    <Slider
+      sliderRef={sliderRef}
+      destroyMomentum={destroyMomentum}
+      initSliderHandler={initSliderHandler}
+      preventDragHandler={preventDragHandler}
+    >
       <CardsGridRow>
         <Cards cardsData={getKnownFor(joinedData)} />
       </CardsGridRow>

@@ -3,15 +3,26 @@ import NoContent from '~components/NoContent';
 import Section from '~components/section/Section';
 import SectionTitle from '~components/section/SectionTitle';
 import SeeAllLink from '~components/SeeAllLink';
-import Slider from '~components/Slider';
+import Slider, { useSlider } from '~components/Slider';
 import VideoCards from '~components/VideoCards';
 import VideosGridRow from './VideosGridRow';
 
 const TopVideos = ({ title, data, videosPath }) => {
   const isData = checkIfIsData(data);
+  const {
+    sliderRef,
+    destroyMomentum,
+    initSliderHandler,
+    preventDragHandler,
+  } = useSlider();
 
   const content = isData ? (
-    <Slider>
+    <Slider
+      sliderRef={sliderRef}
+      destroyMomentum={destroyMomentum}
+      initSliderHandler={initSliderHandler}
+      preventDragHandler={preventDragHandler}
+    >
       <VideosGridRow>
         <VideoCards data={getTopItems(data, 6)} />
       </VideosGridRow>

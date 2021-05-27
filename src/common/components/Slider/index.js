@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-import useSlider from './useSlider';
+export { default as useSlider } from './useSlider';
 
 const useStyles = makeStyles(() => ({
   slider: {
@@ -18,14 +18,15 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Slider = ({ children, padding = '0 10px 20px' }) => {
+const Slider = ({
+  children,
+  sliderRef,
+  destroyMomentum,
+  initSliderHandler,
+  preventDragHandler,
+  padding = '0 10px 20px',
+}) => {
   const classes = useStyles({ padding });
-  const {
-    sliderRef,
-    destroyMomentum,
-    initSliderHandler,
-    preventDragHandler,
-  } = useSlider();
 
   return (
     // This is a native scrollable element, so it doesn't need additional attributes I think?!.

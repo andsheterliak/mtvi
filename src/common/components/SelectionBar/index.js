@@ -1,7 +1,7 @@
 import { Card, CardHeader, List } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Slider from '~components/Slider';
+import Slider, { useSlider } from '~components/Slider';
 
 import SelectionItems from './SelectionItems';
 
@@ -25,6 +25,12 @@ const useStyles = makeStyles((theme) => ({
 
 const SelectionBar = ({ title, data, selectHandler, selected }) => {
   const classes = useStyles();
+  const {
+    sliderRef,
+    destroyMomentum,
+    initSliderHandler,
+    preventDragHandler,
+  } = useSlider();
 
   return (
     <Card raised>
@@ -34,7 +40,13 @@ const SelectionBar = ({ title, data, selectHandler, selected }) => {
         className={classes.title}
       />
 
-      <Slider padding="0">
+      <Slider
+        padding="0"
+        sliderRef={sliderRef}
+        destroyMomentum={destroyMomentum}
+        initSliderHandler={initSliderHandler}
+        preventDragHandler={preventDragHandler}
+      >
         <List component="div" className={classes.list}>
           <SelectionItems
             data={data}
