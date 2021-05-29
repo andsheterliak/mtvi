@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-import Modal from './components/Modal';
+import Modal, { useModal } from './components/Modal';
 import AdjustmentButton from './components/AdjustmentButton';
 import ActionsButtons from './components/ActionsButtons';
 import SortResultsByOption from './components/SortResultsByOption';
@@ -29,7 +27,7 @@ const Adjustment = ({
     changeUserScoreHandler,
     acceptOptions,
   } = useOptions(initialOptions);
-  const [isModalOpened, setIsModalOpened] = useState(false);
+  const { isModalOpened, setIsModalOpened } = useModal(false);
 
   const openModalHandler = () => {
     setIsModalOpened(true);
