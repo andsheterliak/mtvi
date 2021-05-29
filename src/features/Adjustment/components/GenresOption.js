@@ -38,6 +38,7 @@ const GenresOption = ({ genres, toggleGenreHandler }) => {
           selected={isSelected}
           onChange={() => toggleGenreHandler(id)}
           size="small"
+          value={name}
         >
           {name}
         </ToggleButton>
