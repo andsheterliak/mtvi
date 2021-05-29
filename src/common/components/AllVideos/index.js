@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { checkIfIsData } from '~common/utils/getData';
 
 import PageGrid from '~components/grids/PageGrid';
