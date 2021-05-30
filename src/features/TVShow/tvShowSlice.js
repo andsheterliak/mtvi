@@ -33,7 +33,7 @@ const fetchData = (id) => async (dispatch) => {
   const response = await axiosTMDB.get('', {
     params: {
       path: `tv/${id}`,
-      append_to_response: 'videos,credits,content_ratings',
+      append_to_response: 'videos,aggregate_credits,content_ratings',
     },
   });
 
