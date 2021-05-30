@@ -6,12 +6,9 @@ const useStyles = makeStyles(() => ({
   slider: {
     overflow: 'auto',
     userSelect: 'none',
-    // To expand 'container' to set 'cursor: pointer' correctly
-    display: 'grid',
   },
 
   container: {
-    cursor: 'pointer',
     padding({ padding }) {
       return padding;
     },
