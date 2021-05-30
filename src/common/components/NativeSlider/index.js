@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export { default as useSlider } from './useSlider';
+export { default as useNativeSlider } from './useNativeSlider';
 
 const useStyles = makeStyles(() => ({
   slider: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Slider = ({
+const NativeSlider = ({
   children,
   sliderRef,
   destroyMomentum,
@@ -40,4 +40,4 @@ const Slider = ({
   );
 };
 
-export default Slider;
+export default NativeSlider;

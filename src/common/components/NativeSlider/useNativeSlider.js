@@ -10,7 +10,10 @@ export const calcVelocity = (scroll, prevScroll) => {
 
 export const ifIsForward = (value) => Math.sign(value) === -1;
 
-const useSlider = ({ momentumDowngrade = 0.94, isMomentum = true } = {}) => {
+const useNativeSlider = ({
+  momentumDowngrade = 0.94,
+  isMomentum = true,
+} = {}) => {
   const sliderRef = useRef(null);
   const sliderInnerRef = useRef(null);
   const stateRef = useRef({
@@ -211,4 +214,4 @@ const useSlider = ({ momentumDowngrade = 0.94, isMomentum = true } = {}) => {
   };
 };
 
-export default useSlider;
+export default useNativeSlider;
