@@ -6,6 +6,8 @@ const useStyles = makeStyles(() => ({
   slider: {
     overflow: 'auto',
     userSelect: 'none',
+    // To expand 'container' to set paddings properly.
+    display: 'grid',
   },
 
   container: {
