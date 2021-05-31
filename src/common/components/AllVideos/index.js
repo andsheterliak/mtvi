@@ -24,6 +24,10 @@ const createVideosData = (data) => {
   data.forEach((video) => {
     if (video.site !== 'YouTube') return;
 
+    if (video.type === 'Opening Credits') {
+      videosData[video.type] = { name: video.type, amount: 0, data: [] };
+    }
+
     const { type } = video;
     const mapValue = videosData[type];
 
