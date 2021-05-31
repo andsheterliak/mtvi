@@ -10,6 +10,11 @@ const theme = {
       light: grey[500],
       dark: grey[800],
     },
+
+    background: {
+      paper: 'hsl(0, 0%, 12%)',
+      default: 'hsl(0, 0%, 5%)',
+    },
   },
 
   breakpoints: {
