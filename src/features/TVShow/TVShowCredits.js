@@ -36,7 +36,7 @@ const MovieCredits = () => {
           credits={credits}
           header={
             <BackToHeader
-              title={data.title || data.name}
+              title={data.name}
               imgPath={posterImg}
               path={`${ROUTE_NAMES.tvShow}/${data.id}`}
               linkName={`Back to TV Show`}
