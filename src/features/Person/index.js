@@ -13,7 +13,7 @@ import CreditsList from './CreditsList';
 import KnownFor from './KnownFor';
 
 import { personActions } from './personSlice';
-import Separator from '~components/Divider';
+import Separator from '~components/Separator';
 
 const Person = () => {
   useScrollToTop();

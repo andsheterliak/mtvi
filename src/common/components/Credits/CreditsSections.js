@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 
 import { ROUTE_NAMES } from '~common/constants';
-import Separator from '~components/Divider';
+import Separator from '~components/Separator';
 
 import Layout from '~components/Layout';
 import Section from '~components/section/Section';

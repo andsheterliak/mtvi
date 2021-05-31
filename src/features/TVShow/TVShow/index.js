@@ -6,7 +6,7 @@ import TVShowHeader from '../TVShowHeader';
 
 import SeriesCast from './SeriesCast';
 import Layout from '~components/Layout';
-import Separator from '~components/Divider';
+import Separator from '~components/Separator';
 import MainContainer from '~components/MainContainer';
 import useTVShowsState from '../hooks/useTVShowsState';
 
