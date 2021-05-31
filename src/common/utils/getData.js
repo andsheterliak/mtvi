@@ -83,12 +83,18 @@ export const createCreditsData = (credits) => {
     creditName = creditNameToTitle(creditName);
 
     commonCredits[creditName] = creditItems.map((item) => {
-      const name = item.title || item.name;
-      const { id, profile_path: profilePath } = item;
+      const { id, profile_path: profilePath, name } = item;
+
+      const info = item.roles
+        ? item.roles
+            .map((roleItem) => roleItem.character)
+            .filter(Boolean)
+            .join(', ')
+        : item.character;
 
       return {
         name,
-        info: item.character ?? item.roles[0].character,
+        info,
         id,
         profilePath,
       };
@@ -97,7 +103,10 @@ export const createCreditsData = (credits) => {
 
   credits.crew.forEach((item) => {
     const { department, name, id, profile_path: profilePath } = item;
-    const info = item.job ?? item.roles[0].job;
+
+    const info = item.jobs
+      ? item.jobs.map((jobItem) => jobItem.job).join(', ')
+      : item.job;
 
     if (!crew[department]) {
       crew[department] = {
