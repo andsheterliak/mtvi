@@ -10,6 +10,7 @@ import Separator from '~components/Separator';
 import MainContainer from '~components/MainContainer';
 import useTVShowsState from '../hooks/useTVShowsState';
 import Videos from './Videos';
+import LastSeason from './LastSeason';
 
 const TVShow = () => {
   useScrollToTop();
@@ -29,6 +30,10 @@ const TVShow = () => {
           <MainContainer>
             <Layout>
               <SeriesCast />
+
+              <Separator />
+
+              <LastSeason />
 
               <Separator />
 

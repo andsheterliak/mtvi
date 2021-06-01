@@ -8,4 +8,6 @@ export const ROUTE_NAMES = {
   people: '/people',
   person: '/person',
   videos: 'videos',
+  seasons: 'seasons',
+  season: 'season',
 };
