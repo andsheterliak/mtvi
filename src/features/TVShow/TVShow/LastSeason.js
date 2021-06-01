@@ -44,7 +44,7 @@ const LastSeason = () => {
       <SeasonCard
         releaseDate={lastReleasedSeason.air_date}
         episodeCount={lastReleasedSeason.episode_count}
-        path={`${url}/${ROUTE_NAMES.season}/${lastReleasedSeason.id}}`}
+        path={`${url}/${ROUTE_NAMES.season}/${lastReleasedSeason.id}`}
         posterPath={lastReleasedSeason.poster_path}
         name={lastReleasedSeason.name}
         overview={lastReleasedSeason.overview}
