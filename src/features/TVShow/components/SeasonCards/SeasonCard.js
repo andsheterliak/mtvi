@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import { getHyphenOrData } from '~common/utils/getData';
 import noImg from '~assets/img/no-image.svg';
+import { formatDataStr } from '~common/utils/date';
 
 const useStyles = makeStyles((theme) => ({
   action: {
@@ -80,7 +81,9 @@ const SeasonCard = ({
             </Typography>
 
             <Typography component="p" variant="body1" color="textPrimary">
-              {`${getHyphenOrData(releaseDate)} | ${episodes}`}
+              {`${getHyphenOrData(
+                formatDataStr(releaseDate).dateStr
+              )} | ${episodes}`}
             </Typography>
 
             <Typography component="p" variant="body2" color="textSecondary">
