@@ -14,6 +14,10 @@ import noImg from '~assets/img/no-image.svg';
 import { formatDataStr } from '~common/utils/date';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.background.default,
+  },
+
   action: {
     height: '100%',
   },
@@ -67,7 +71,7 @@ const SeasonCard = ({
   const date = getHyphenOrData(formatDataStr(releaseDate).dateStr);
 
   return (
-    <Card raised>
+    <Card elevation={0} className={classes.root}>
       <CardActionArea component={Link} to={path} className={classes.action}>
         <CardContent className={classes.content}>
           <CardMedia
