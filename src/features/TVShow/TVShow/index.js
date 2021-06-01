@@ -2,7 +2,7 @@ import useScrollToTop from '~common/hooks/useScrollToTop';
 
 import Spacer from '~common/components/Spacer';
 import MainContent from '~common/components/MainContent';
-import TVShowHeader from '../TVShowHeader';
+import TVShowHeader from './TVShowHeader';
 
 import SeriesCast from './SeriesCast';
 import Layout from '~components/Layout';
