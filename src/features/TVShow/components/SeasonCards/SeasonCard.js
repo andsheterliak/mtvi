@@ -64,6 +64,8 @@ const SeasonCard = ({
       ? `${episodeCount} episodes`
       : `${episodeCount || 0} episode`;
 
+  const date = getHyphenOrData(formatDataStr(releaseDate).dateStr);
+
   return (
     <Card raised>
       <CardActionArea component={Link} to={path} className={classes.action}>
@@ -81,9 +83,7 @@ const SeasonCard = ({
             </Typography>
 
             <Typography component="p" variant="body1" color="textPrimary">
-              {`${getHyphenOrData(
-                formatDataStr(releaseDate).dateStr
-              )} | ${episodes}`}
+              {`${date} | ${episodes}`}
             </Typography>
 
             <Typography component="p" variant="body2" color="textSecondary">
