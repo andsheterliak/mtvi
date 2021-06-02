@@ -15,13 +15,26 @@ import { formatDataStr } from '~common/utils/date';
 import noImageImg from '~assets/img/no-image.svg';
 import { getHyphenOrData } from '~common/utils/getData';
 
-import useCardStyles from '../../styles/CardStyles';
+const useStyles = makeStyles((theme) => ({
+  action: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    alignItems: 'stretch',
+  },
 
-const useStyles = makeStyles(() => ({
+  content: {
+    height: '100%',
+    display: 'grid',
+    padding: theme.spacing(1.5),
+  },
+
   subInfo: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    alignSelf: 'end',
+    marginTop: '5px',
   },
 
   vote: {
@@ -48,7 +61,6 @@ const useStyles = makeStyles(() => ({
 
 const Card = ({ posterPath, title, releaseDate, voteAverage, path }) => {
   const classes = useStyles();
-  const cardClasses = useCardStyles();
 
   const posterImg = posterPath
     ? `${IMG_BASE_URL}${IMG_SIZES.poster}${posterPath}`
@@ -56,7 +68,7 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, path }) => {
 
   return (
     <MUiCard raised>
-      <CardActionArea component={Link} to={path} className={cardClasses.action}>
+      <CardActionArea component={Link} to={path} className={classes.action}>
         <CardMedia
           component="div"
           alt={title}
@@ -64,7 +76,7 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, path }) => {
           className={classes.media}
         />
 
-        <CardContent className={cardClasses.content}>
+        <CardContent className={classes.content}>
           <Typography
             color="textPrimary"
             gutterBottom
@@ -78,7 +90,7 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, path }) => {
             variant="caption"
             color="textSecondary"
             component="p"
-            className={`${classes.subInfo} ${cardClasses.subText}`}
+            className={classes.subInfo}
           >
             {getHyphenOrData(formatDataStr(releaseDate)?.dateStr)}
 

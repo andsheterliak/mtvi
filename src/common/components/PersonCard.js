@@ -6,11 +6,31 @@ import {
   CardMedia,
   Typography,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { getHyphenOrData } from '~common/utils/getData';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import noUserPhotoImg from '~assets/img/no-user-photo.svg';
-import useStyles from '~common/styles/CardStyles';
+
+const useStyles = makeStyles((theme) => ({
+  action: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    alignItems: 'stretch',
+  },
+
+  content: {
+    height: '100%',
+    display: 'grid',
+    padding: theme.spacing(1.5),
+  },
+
+  subText: {
+    alignSelf: 'end',
+    marginTop: '5px',
+  },
+}));
 
 const PersonCard = ({ profilePath, name, bodyContent, path }) => {
   const classes = useStyles();
