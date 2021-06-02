@@ -9,7 +9,7 @@ const SeasonCards = ({ data, basePath }) => {
         episodeCount={season.episode_count}
         name={season.name}
         overview={season.overview}
-        path={`${basePath}/${season.id}`}
+        path={`${basePath}/${season.season_number}`}
         posterPath={season.poster_path}
         releaseDate={season.air_date}
       />
