@@ -6,14 +6,13 @@ import {
   CardMedia,
   Typography,
 } from '@material-ui/core';
-import { orange } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import { formatDataStr } from '~common/utils/date';
 import noImageImg from '~assets/img/no-image.svg';
 import { getHyphenOrData } from '~common/utils/getData';
+import Vote from '~components/Vote';
 
 const useStyles = makeStyles((theme) => ({
   action: {
@@ -35,21 +34,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignSelf: 'end',
     marginTop: '5px',
-  },
-
-  vote: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-
-    '&>*:first-child': {
-      marginRight: '3px',
-      marginBottom: '3px',
-    },
-  },
-
-  starIcon: {
-    color: orange[300],
   },
 
   media: {
@@ -94,10 +78,7 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, path }) => {
           >
             {getHyphenOrData(formatDataStr(releaseDate)?.dateStr)}
 
-            <span className={classes.vote}>
-              <StarBorderIcon className={classes.starIcon} fontSize="small" />
-              {getHyphenOrData(voteAverage)}
-            </span>
+            <Vote vote={voteAverage} />
           </Typography>
         </CardContent>
       </CardActionArea>
