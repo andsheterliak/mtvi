@@ -1,7 +1,6 @@
 import { ROUTE_NAMES } from '~common/constants';
 import TVShow from '.';
 import AllSeasons from './AllSeasons';
-import Season from './Season';
 import TVShowAllVideos from './TVShowAllVideos';
 import TVShowCredits from './TVShowCredits';
 
@@ -27,12 +26,6 @@ const tvShowRoutes = {
   tvShowSeasons: {
     to: `${ROUTE_NAMES.tvShow}/:id/${ROUTE_NAMES.seasons}`,
     component: AllSeasons,
-    exact: true,
-  },
-
-  tvShowSeason: {
-    to: `${ROUTE_NAMES.tvShow}/:id/${ROUTE_NAMES.season}/:seasonNumber`,
-    component: Season,
     exact: true,
   },
 };

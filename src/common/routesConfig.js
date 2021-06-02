@@ -4,6 +4,7 @@ import moviesRoutes from '~features/Movies/moviesRoutes';
 import movieRoutes from '~features/Movie/movieRoutes';
 import tvShowsRoutes from '~features/TVShows/tvShowsRoutes';
 import tvShowRoutes from '~features/TVShow/tvShowRoutes';
+import seasonRoutes from '~features/Season/seasonRoutes';
 import peopleRoutes from '~features/People/peopleRoutes';
 import personRoutes from '~features/Person/personRoutes';
 
@@ -22,6 +23,7 @@ const routesConfig = {
   ...tvShowRoutes,
   ...peopleRoutes,
   ...personRoutes,
+  ...seasonRoutes,
 };
 
 export default routesConfig;
