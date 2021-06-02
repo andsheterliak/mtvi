@@ -2,11 +2,11 @@ import { orange } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 
-import { getHyphenOrData } from '~common/utils/getData';
+import { checkIfIsData, getHyphenOrData } from '~common/utils/getData';
 
 const useStyles = makeStyles(() => ({
   vote: {
-    display: 'flex',
+    display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'space-between',
 
@@ -24,10 +24,13 @@ const useStyles = makeStyles(() => ({
 const Vote = ({ vote }) => {
   const classes = useStyles();
 
+  const value = checkIfIsData(vote) ? vote.toFixed(1) : getHyphenOrData();
+
   return (
     <span className={classes.vote}>
       <StarBorderIcon className={classes.starIcon} fontSize="small" />
-      {getHyphenOrData(vote)}
+
+      {value}
     </span>
   );
 };
