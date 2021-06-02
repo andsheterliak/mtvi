@@ -40,7 +40,7 @@ const PersonCard = ({ profilePath, name, bodyContent, path }) => {
     : noUserPhotoImg;
 
   return (
-    <Card raised>
+    <Card>
       <CardActionArea component={Link} to={path} className={classes.action}>
         <CardMedia component="img" alt={name} image={profileImg} />
 

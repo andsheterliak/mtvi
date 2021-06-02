@@ -34,7 +34,7 @@ const VideoCard = ({ id, name, openModalHandler }) => {
   const imgPath = getYouTubeImgPath(id);
 
   return (
-    <Card raised>
+    <Card>
       <CardActionArea
         onClick={(e) => {
           openModalHandler(e, { id, name });

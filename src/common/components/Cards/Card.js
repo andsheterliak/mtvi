@@ -51,7 +51,7 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, path }) => {
     : noImageImg;
 
   return (
-    <MUiCard raised>
+    <MUiCard>
       <CardActionArea component={Link} to={path} className={classes.action}>
         <CardMedia
           component="div"

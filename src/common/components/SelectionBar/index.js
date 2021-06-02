@@ -27,7 +27,7 @@ const SelectionBar = ({ title, data, selectHandler, selected }) => {
   const classes = useStyles();
 
   return (
-    <Card raised>
+    <Card>
       <CardHeader
         titleTypographyProps={{ color: 'textPrimary' }}
         title={title}

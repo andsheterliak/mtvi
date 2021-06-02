@@ -43,7 +43,7 @@ const CreditCard = ({ profilePath, name, info, path }) => {
     : noUserPhotoImg;
 
   return (
-    <Card raised>
+    <Card>
       <CardActionArea component={Link} to={path} className={classes.action}>
         <CardMedia
           className={classes.img}
