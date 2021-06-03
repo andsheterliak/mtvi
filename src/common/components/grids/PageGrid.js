@@ -3,12 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   grid: {
     display: 'grid',
-    gap: '20px',
+    gap: '40px',
     alignItems: 'start',
 
     [theme.breakpoints.up('md')]: {
       gridTemplateColumns: '260px 1fr',
-      gap: '40px',
     },
   },
 }));
