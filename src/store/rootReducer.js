@@ -7,6 +7,7 @@ import tvShowReducer from '~features/TVShow/tvShowSlice';
 import seasonReducer from '~features/Season/seasonSlice';
 import peopleReducer from '~features/People/peopleSlice';
 import personReducer from '~features/Person/personSlice';
+import episodeReducer from '~features/episode/episodeSlice';
 
 const rootReducer = combineReducers({
   movies: moviesReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   season: seasonReducer,
   people: peopleReducer,
   person: personReducer,
+  episode: episodeReducer,
 });
 
 export default rootReducer;
