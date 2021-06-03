@@ -39,7 +39,7 @@ const MovieCredits = () => {
               title={data.name}
               imgPath={posterImg}
               path={`${ROUTE_NAMES.tvShow}/${data.id}`}
-              linkName={`Back to TV Show`}
+              linkName="Back to TV Show"
             />
           }
         />
