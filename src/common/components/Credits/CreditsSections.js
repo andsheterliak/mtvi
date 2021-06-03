@@ -42,7 +42,7 @@ const CreditsSections = ({ data }) => {
 
   const credits = Object.entries(data).map(
     ([creditsName, creditsData], index) => {
-      const isLastElement = index > dataLength - 1;
+      const isLastElement = index >= dataLength - 1;
       const separator = !isLastElement && <Separator />;
 
       if (creditsName !== 'Team') {
@@ -70,6 +70,8 @@ const CreditsSections = ({ data }) => {
               <CreditsSubsections data={creditsData} />
             </Layout>
           </Section>
+
+          {separator}
         </Fragment>
       );
     }

@@ -101,6 +101,8 @@ export const createCreditsData = (credits) => {
     });
   });
 
+  if (!checkIfIsData(credits.crew)) return commonCredits;
+
   credits.crew.forEach((item) => {
     const { department, name, id, profile_path: profilePath } = item;
 
