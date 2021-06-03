@@ -12,7 +12,7 @@ const theme = {
     },
 
     background: {
-      paper: 'hsl(0, 0%, 12%)',
+      paper: 'hsl(0, 0%, 11%)',
       default: 'hsl(0, 0%, 5%)',
     },
   },
