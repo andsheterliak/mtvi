@@ -16,7 +16,7 @@ import { useState } from 'react';
 import { getHyphenOrData } from '~common/utils/getData';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import { formatDataStr } from '~common/utils/date';
-import noImg from '~assets/img/no-image.svg';
+import noImg from '~assets/img/no-image-wide.svg';
 import Vote from '~components/Vote';
 
 const useStyles = makeStyles((theme) => ({
