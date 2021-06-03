@@ -4,11 +4,11 @@ import MainContainer from '~components/MainContainer';
 import MainContent from '~components/MainContent';
 import NoContent from '~components/NoContent';
 import Spacer from '~components/Spacer';
-import CreditsSections from './CreditsSections';
+import CreditSections from './CreditSections';
 
 const Credits = ({ credits, header }) => {
   const content = checkIfIsData(credits) ? (
-    <CreditsSections data={credits} />
+    <CreditSections data={credits} />
   ) : (
     <NoContent message="We don't have added any credits." />
   );

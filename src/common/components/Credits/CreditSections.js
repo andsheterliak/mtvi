@@ -9,7 +9,7 @@ import SectionTitle from '~components/section/SectionTitle';
 import CreditCard from './CreditCard';
 import CreditsGrid from './CreditsGrid';
 
-const CreditsCards = ({ data }) => {
+const CreditCards = ({ data }) => {
   return data.map(({ name, info, id, profilePath }) => {
     return (
       <CreditCard
@@ -23,21 +23,21 @@ const CreditsCards = ({ data }) => {
   });
 };
 
-const CreditsSubsections = ({ data }) => {
+const CreditSubsections = ({ data }) => {
   return Object.entries(data).map(([creditsName, creditsData]) => {
     return (
       <Section key={creditsName}>
         <SectionTitle isSubtitle title={creditsName} />
 
         <CreditsGrid>
-          <CreditsCards data={Object.values(creditsData)} />
+          <CreditCards data={Object.values(creditsData)} />
         </CreditsGrid>
       </Section>
     );
   });
 };
 
-const CreditsSections = ({ data }) => {
+const CreditSections = ({ data }) => {
   const dataLength = Object.entries(data).length;
 
   const credits = Object.entries(data).map(
@@ -52,7 +52,7 @@ const CreditsSections = ({ data }) => {
               <SectionTitle title={creditsName} />
 
               <CreditsGrid>
-                <CreditsCards data={creditsData} />
+                <CreditCards data={creditsData} />
               </CreditsGrid>
             </Section>
 
@@ -67,7 +67,7 @@ const CreditsSections = ({ data }) => {
             <SectionTitle title={creditsName} />
 
             <Layout>
-              <CreditsSubsections data={creditsData} />
+              <CreditSubsections data={creditsData} />
             </Layout>
           </Section>
 
@@ -80,4 +80,4 @@ const CreditsSections = ({ data }) => {
   return credits;
 };
 
-export default CreditsSections;
+export default CreditSections;
