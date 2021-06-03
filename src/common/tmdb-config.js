@@ -6,7 +6,7 @@ export const IMG_SIZES = {
   profile: 'h632',
   profileFace: 'w90_and_h90_face',
   logo: 'w154', // Company logos (Netflix...)
-  still: 'w300', // TV Show Episode img
+  still: 'w500', // TV Show Episode img
 };
 
 export const SORT_MOVIES_BY_OPTIONS = {

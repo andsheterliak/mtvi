@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { useParams, useRouteMatch } from 'react-router';
 
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import BackToHeader from '~components/BackToHeader';
@@ -9,12 +9,14 @@ import Spacer from '~components/Spacer';
 import noImg from '~assets/img/no-image.svg';
 import { seasonActions } from './seasonSlice';
 import { ROUTE_NAMES } from '~common/constants';
+import EpisodeCards from './components/EpisodeCards';
+import Layout from '~components/Layout';
+import MainContainer from '~components/MainContainer';
 
 const Season = () => {
   const { id, seasonNumber } = useParams();
   const dispatch = useDispatch();
-
-  console.log('params', ':', id, seasonNumber);
+  const { url } = useRouteMatch();
 
   const { data } = useSelector((state) => state.season);
 
@@ -29,8 +31,6 @@ const Season = () => {
   let imgPath;
 
   if (data) {
-    console.log('data', ':', data);
-
     imgPath = data.poster_path
       ? `${IMG_BASE_URL}${IMG_SIZES.poster}${data.poster_path}`
       : noImg;
@@ -41,7 +41,7 @@ const Season = () => {
       <Spacer />
 
       {data ? (
-        <MainContent>
+        <Layout>
           <BackToHeader
             imgPath={imgPath}
             path={`${ROUTE_NAMES.tvShow}/${id}`}
@@ -49,8 +49,12 @@ const Season = () => {
             title={data.name}
           />
 
-          <Spacer />
-        </MainContent>
+          <MainContainer>
+            <MainContent>
+              <EpisodeCards data={data.episodes} basePath={url} />
+            </MainContent>
+          </MainContainer>
+        </Layout>
       ) : (
         'Loading...'
       )}

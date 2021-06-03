@@ -10,4 +10,5 @@ export const ROUTE_NAMES = {
   videos: 'videos',
   seasons: 'seasons',
   season: 'season',
+  episode: 'episode',
 };
