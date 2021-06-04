@@ -1,12 +1,12 @@
 import { ROUTE_NAMES } from '~common/constants';
 
-import moviesRoutes from '~features/Movies/moviesRoutes';
-import movieRoutes from '~features/Movie/movieRoutes';
-import tvShowsRoutes from '~features/TVShows/tvShowsRoutes';
-import tvShowRoutes from '~features/TVShow/tvShowRoutes';
-import seasonRoutes from '~features/Season/seasonRoutes';
-import peopleRoutes from '~features/People/peopleRoutes';
-import personRoutes from '~features/Person/personRoutes';
+import moviesRoutes from '~features/movies/moviesRoutes';
+import movieRoutes from '~features/movie/movieRoutes';
+import tvShowsRoutes from '~features/tvShows/tvShowsRoutes';
+import tvShowRoutes from '~features/tvShow/tvShowRoutes';
+import seasonRoutes from '~features/season/seasonRoutes';
+import peopleRoutes from '~features/people/peopleRoutes';
+import personRoutes from '~features/person/personRoutes';
 import episodeRoutes from '~features/episode/episodeRoutes';
 
 const routesConfig = {

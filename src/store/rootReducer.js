@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
 
-import moviesReducer from '~features/Movies/moviesSlice';
-import movieReducer from '~features/Movie/movieSlice';
-import tvShowsReducer from '~features/TVShows/tvShowsSlice';
-import tvShowReducer from '~features/TVShow/tvShowSlice';
-import seasonReducer from '~features/Season/seasonSlice';
-import peopleReducer from '~features/People/peopleSlice';
-import personReducer from '~features/Person/personSlice';
+import moviesReducer from '~features/movies/moviesSlice';
+import movieReducer from '~features/movie/movieSlice';
+import tvShowsReducer from '~features/tvShows/tvShowsSlice';
+import tvShowReducer from '~features/tvShow/tvShowSlice';
+import seasonReducer from '~features/season/seasonSlice';
+import peopleReducer from '~features/people/peopleSlice';
+import personReducer from '~features/person/personSlice';
 import episodeReducer from '~features/episode/episodeSlice';
 
 const rootReducer = combineReducers({

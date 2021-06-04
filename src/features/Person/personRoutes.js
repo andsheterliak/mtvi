@@ -1,5 +1,5 @@
 import { ROUTE_NAMES } from '~common/constants';
-import Person from '.';
+import Person from './Person';
 
 const personRoutes = {
   person: {

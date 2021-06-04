@@ -6,7 +6,7 @@ import routesConfig from '~common/routesConfig';
 import { globalTheme } from '~common/theme';
 
 import Menu from '~features/Menu';
-import Footer from '~components/Footer';
+import Footer from './components/Footer';
 import Spacer from '~components/Spacer';
 import RootWrapper from './components/RootWrapper';
 import Routes from './components/Routes';

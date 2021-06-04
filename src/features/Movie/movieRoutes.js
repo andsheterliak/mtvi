@@ -1,12 +1,12 @@
 import { ROUTE_NAMES } from '~common/constants';
-import MoviePage from '.';
+import Movie from './Movie';
 import MovieAllVideos from './MovieAllVideos';
 import MovieCredits from './MovieCredits';
 
 const movieRoutes = {
   movie: {
     to: `${ROUTE_NAMES.movie}/:id`,
-    component: MoviePage,
+    component: Movie,
     exact: true,
   },
 

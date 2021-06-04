@@ -1,5 +1,5 @@
 import { ROUTE_NAMES } from '~common/constants';
-import Season from '.';
+import Season from './Season';
 
 const seasonRoutes = {
   season: {

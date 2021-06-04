@@ -1,5 +1,5 @@
 import { ROUTE_NAMES } from '~common/constants';
-import Movies from '.';
+import Movies from './Movies';
 
 const moviesRoutes = {
   movies: {

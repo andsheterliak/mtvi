@@ -1,5 +1,5 @@
 import { ROUTE_NAMES } from '~common/constants';
-import TVShow from '.';
+import TVShow from './TVShow';
 import AllSeasons from './AllSeasons';
 import TVShowAllVideos from './TVShowAllVideos';
 import TVShowCredits from './TVShowCredits';
