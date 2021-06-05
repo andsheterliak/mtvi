@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import useScrollToTop from '~common/hooks/useScrollToTop';
-import usePagination from '~common/hooks/usePagination';
 import { checkIfIsData } from '~common/utils/getData';
 
 import FocusableContainer, { useFocus } from '~components/FocusableContainer';
@@ -11,7 +10,7 @@ import MainContainer from '~components/MainContainer';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 import PersonCards from './components/PersonCards';
-import Pagination from '~components/Pagination';
+import Pagination, { usePagination } from '~components/Pagination';
 
 import { peopleActions } from './peopleSlice';
 

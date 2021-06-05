@@ -7,7 +7,6 @@ import {
   USER_SCORE_RANGE,
 } from '~common/tmdb-config';
 import useScrollToTop from '~common/hooks/useScrollToTop';
-import usePagination from '~common/hooks/usePagination';
 import { getLS, setLS } from '~common/utils/storage';
 import { checkIfIsData } from '~common/utils/getData';
 
@@ -18,7 +17,7 @@ import MainContainer from '~components/MainContainer';
 import CardsGrid from '~components/grids/CardsGrid';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
-import Pagination from '~components/Pagination';
+import Pagination, { usePagination } from '~components/Pagination';
 
 import { TV_OPTIONS_STORAGE_NAME } from './tvShowsConstants';
 import { tvShowsActions } from './tvShowsSlice';
