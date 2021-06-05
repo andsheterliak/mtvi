@@ -8,6 +8,7 @@ import seasonRoutes from '~features/season/seasonRoutes';
 import peopleRoutes from '~features/people/peopleRoutes';
 import personRoutes from '~features/person/personRoutes';
 import episodeRoutes from '~features/episode/episodeRoutes';
+import searchRoutes from '~features/search/searchRoutes';
 
 const routesConfig = {
   default: {
@@ -26,6 +27,7 @@ const routesConfig = {
   ...personRoutes,
   ...seasonRoutes,
   ...episodeRoutes,
+  ...searchRoutes,
 };
 
 export default routesConfig;
