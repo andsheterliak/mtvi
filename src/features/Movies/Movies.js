@@ -27,7 +27,7 @@ const Movies = ({ titleName }) => {
 
   const { focus, containerRef } = useFocus();
   const dispatch = useDispatch();
-  const { pathname, page } = usePagination();
+  const { page, changePage } = usePagination();
 
   const { data, isLoading, options, totalPages } = useSelector(
     (state) => state.movies
@@ -42,9 +42,8 @@ const Movies = ({ titleName }) => {
     [dispatch, page]
   );
 
-  const changePageHandler = (e, newPage) => {
-    if (page === newPage) return;
-
+  const changePageHandler = (event, newPage) => {
+    if (!changePage(event, newPage)) return;
     focus();
   };
 
@@ -92,7 +91,6 @@ const Movies = ({ titleName }) => {
 
       {isData && (
         <Pagination
-          path={pathname}
           isLoading={isLoading}
           page={page}
           totalPages={totalPages}

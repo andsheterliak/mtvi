@@ -19,13 +19,12 @@ const People = ({ titleName }) => {
 
   const { focus, containerRef } = useFocus();
   const dispatch = useDispatch();
-  const { pathname, page } = usePagination();
+  const { page, changePage } = usePagination();
 
   const { data, isLoading, totalPages } = useSelector((state) => state.people);
 
-  const changePageHandler = (e, newPage) => {
-    if (page === newPage) return;
-
+  const changePageHandler = (event, newPage) => {
+    if (!changePage(event, newPage)) return;
     focus();
   };
 
@@ -58,7 +57,6 @@ const People = ({ titleName }) => {
         <Pagination
           isLoading={isLoading}
           page={page}
-          path={pathname}
           totalPages={totalPages}
           changePageHandler={changePageHandler}
         />

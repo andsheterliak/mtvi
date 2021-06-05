@@ -1,6 +1,5 @@
-import { Pagination as MUIPagination, PaginationItem } from '@material-ui/lab';
+import { Pagination as MUIPagination } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 export { default as usePagination } from './usePagination';
@@ -21,13 +20,14 @@ const useStyles = makeStyles(() => ({
 
 const Pagination = ({
   page,
-  path,
   totalPages,
   isLoading,
   changePageHandler,
   isSpacing = true,
 }) => {
   const classes = useStyles();
+
+  if (totalPages === 1) return null;
 
   const rootClasses = classNames(classes.root, {
     [classes.spacing]: isSpacing,
@@ -43,13 +43,6 @@ const Pagination = ({
         disabled={isLoading}
         onChange={changePageHandler}
         size="medium"
-        renderItem={(item) => (
-          <PaginationItem
-            component={Link}
-            to={`${path}${item.page === 1 ? '' : `?page=${item.page}`}`}
-            {...item}
-          />
-        )}
       />
     </div>
   );
