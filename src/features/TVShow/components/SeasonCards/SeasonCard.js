@@ -68,7 +68,7 @@ const SeasonCard = ({
       ? `${episodeCount} episodes`
       : `${episodeCount || 0} episode`;
 
-  const date = getHyphenOrData(formatDataStr(releaseDate).dateStr);
+  const date = getHyphenOrData(formatDataStr(releaseDate)?.dateStr);
 
   return (
     <Card elevation={0} className={classes.root}>
