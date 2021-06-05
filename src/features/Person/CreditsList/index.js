@@ -154,7 +154,7 @@ const getTimelineData = (data, filterBy) => {
 };
 
 const CreditsList = () => {
-  const { data } = useSelector((state) => state.person);
+  const data = useSelector((state) => state.person.data);
 
   const [filterBy, setFilterBy] = useState(filterConfig.all.value);
 

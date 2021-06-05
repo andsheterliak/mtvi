@@ -67,7 +67,7 @@ const getKnownFor = (data) => {
 };
 
 const KnownFor = () => {
-  const { data } = useSelector((state) => state.person);
+  const data = useSelector((state) => state.person.data);
 
   const joinedData = joinData({
     movieCredits: null,

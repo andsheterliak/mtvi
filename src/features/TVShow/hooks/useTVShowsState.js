@@ -8,7 +8,7 @@ const useTVShowsState = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { data } = useSelector((state) => state.tvShow);
+  const data = useSelector((state) => state.tvShow.data);
 
   useEffect(() => {
     dispatch(tvShowActions.fetchData(id));

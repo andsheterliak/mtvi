@@ -21,7 +21,9 @@ const People = ({ titleName }) => {
   const dispatch = useDispatch();
   const { page, changePage } = usePagination();
 
-  const { data, isLoading, totalPages } = useSelector((state) => state.people);
+  const data = useSelector((state) => state.people.data);
+  const isLoading = useSelector((state) => state.people.isLoading);
+  const totalPages = useSelector((state) => state.people.totalPages);
 
   const changePageHandler = (event, newPage) => {
     if (!changePage(event, newPage)) return;

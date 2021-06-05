@@ -8,7 +8,7 @@ const useEpisodeState = () => {
   const { id, seasonNumber, episodeNumber } = useParams();
   const dispatch = useDispatch();
 
-  const { data } = useSelector((state) => state.episode);
+  const data = useSelector((state) => state.episode.data);
 
   useEffect(() => {
     dispatch(episodeActions.fetchData({ id, seasonNumber, episodeNumber }));

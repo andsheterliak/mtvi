@@ -29,9 +29,10 @@ const Movies = ({ titleName }) => {
   const dispatch = useDispatch();
   const { page, changePage } = usePagination();
 
-  const { data, isLoading, options, totalPages } = useSelector(
-    (state) => state.movies
-  );
+  const data = useSelector((state) => state.movies.data);
+  const isLoading = useSelector((state) => state.movies.isLoading);
+  const options = useSelector((state) => state.movies.options);
+  const totalPages = useSelector((state) => state.movies.totalPages);
 
   const fetchDataWithNewOptions = useCallback(
     (newOptions) => {

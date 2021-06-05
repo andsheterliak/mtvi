@@ -21,7 +21,7 @@ const Person = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { data } = useSelector((state) => state.person);
+  const data = useSelector((state) => state.person.data);
 
   useEffect(() => {
     dispatch(personActions.fetchData(id));

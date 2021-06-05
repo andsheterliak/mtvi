@@ -18,7 +18,7 @@ const Season = () => {
   const dispatch = useDispatch();
   const { url } = useRouteMatch();
 
-  const { data } = useSelector((state) => state.season);
+  const data = useSelector((state) => state.season.data);
 
   useEffect(() => {
     dispatch(seasonActions.fetchData({ id, seasonNumber }));

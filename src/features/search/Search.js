@@ -42,7 +42,9 @@ const Search = () => {
   const { selected, setSelected } = useSelectionBar('movie');
   const { page, changePage } = usePagination();
 
-  const { data, isLoading, totalPages } = useSelector((state) => state.search);
+  const isLoading = useSelector((state) => state.search.isLoading);
+  const totalPages = useSelector((state) => state.search.totalPages);
+  const data = useSelector((state) => state.search.data);
 
   let selectionBarData;
   let cards;

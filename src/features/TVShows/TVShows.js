@@ -29,9 +29,10 @@ const TVShows = ({ titleName }) => {
   const dispatch = useDispatch();
   const { page, changePage } = usePagination();
 
-  const { data, isLoading, options, totalPages } = useSelector(
-    (state) => state.tvShows
-  );
+  const data = useSelector((state) => state.tvShows.data);
+  const isLoading = useSelector((state) => state.tvShows.isLoading);
+  const options = useSelector((state) => state.tvShows.options);
+  const totalPages = useSelector((state) => state.tvShows.totalPages);
 
   const fetchDataWithNewOptions = useCallback(
     (newOptions) => {

@@ -63,7 +63,7 @@ const generateDataList = (data) => {
 };
 
 const PersonHeader = () => {
-  const { data } = useSelector((state) => state.person);
+  const data = useSelector((state) => state.person.data);
 
   const dataList = generateDataList(data);
 

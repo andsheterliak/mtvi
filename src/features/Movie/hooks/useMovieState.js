@@ -8,7 +8,7 @@ const useMovieState = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { data } = useSelector((state) => state.movie);
+  const data = useSelector((state) => state.movie.data);
 
   useEffect(() => {
     dispatch(movieActions.fetchData(id));
