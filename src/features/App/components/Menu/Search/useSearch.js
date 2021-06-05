@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 
 const useSearch = ({ isVisible = false, searchBasePath } = {}) => {
   const history = useHistory();
-  const [value, setValue] = useState();
+  const [value, setValue] = useState('');
   const [isSearchVisible, setIsSearchVisible] = useState(isVisible);
 
   const toggleSearchHandler = () => {
