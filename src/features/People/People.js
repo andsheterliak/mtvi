@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import useFocusContainer from '~common/hooks/useFocusContainer';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import usePagination from '~common/hooks/usePagination';
 import { checkIfIsData } from '~common/utils/getData';
 
+import FocusableContainer, { useFocus } from '~components/FocusableContainer';
 import CardsGrid from '~components/grids/CardsGrid';
 import MainContainer from '~components/MainContainer';
 import RouteHeader from '~components/RouteHeader';
@@ -18,7 +18,7 @@ import { peopleActions } from './peopleSlice';
 const People = ({ titleName }) => {
   useScrollToTop();
 
-  const { focus, FocusableContainer } = useFocusContainer();
+  const { focus, containerRef } = useFocus();
   const dispatch = useDispatch();
   const { pathname, page } = usePagination();
 
@@ -49,7 +49,7 @@ const People = ({ titleName }) => {
     <MainContainer>
       <RouteHeader titleName={titleName} />
 
-      <FocusableContainer>
+      <FocusableContainer containerRef={containerRef}>
         <MainContent>
           <CardsGrid>{cards}</CardsGrid>
         </MainContent>

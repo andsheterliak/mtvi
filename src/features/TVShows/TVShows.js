@@ -6,13 +6,13 @@ import {
   SORT_TV_BY_OPTIONS,
   USER_SCORE_RANGE,
 } from '~common/tmdb-config';
-import useFocusContainer from '~common/hooks/useFocusContainer';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import usePagination from '~common/hooks/usePagination';
 import { getLS, setLS } from '~common/utils/storage';
 import { checkIfIsData } from '~common/utils/getData';
 
 import Adjustment from '~features/Adjustment';
+import FocusableContainer, { useFocus } from '~components/FocusableContainer';
 import Cards from '~components/Cards';
 import MainContainer from '~components/MainContainer';
 import CardsGrid from '~components/grids/CardsGrid';
@@ -26,7 +26,7 @@ import { tvShowsActions } from './tvShowsSlice';
 const TVShows = ({ titleName }) => {
   useScrollToTop();
 
-  const { focus, FocusableContainer } = useFocusContainer();
+  const { focus, containerRef } = useFocus();
   const dispatch = useDispatch();
   const { pathname, page } = usePagination();
 
@@ -85,7 +85,7 @@ const TVShows = ({ titleName }) => {
         />
       )}
 
-      <FocusableContainer>
+      <FocusableContainer containerRef={containerRef}>
         <MainContent>
           <CardsGrid>{cards}</CardsGrid>
         </MainContent>

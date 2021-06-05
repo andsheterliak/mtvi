@@ -6,7 +6,6 @@ import {
   SORT_MOVIES_BY_OPTIONS,
   USER_SCORE_RANGE,
 } from '~common/tmdb-config';
-import useFocusContainer from '~common/hooks/useFocusContainer';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import usePagination from '~common/hooks/usePagination';
 import { getLS, setLS } from '~common/utils/storage';
@@ -19,6 +18,7 @@ import Cards from '~components/Cards';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 import Pagination from '~components/Pagination';
+import FocusableContainer, { useFocus } from '~components/FocusableContainer';
 
 import { moviesActions } from './moviesSlice';
 import { MOVIES_OPTIONS_STORAGE_NAME } from './moviesConstants';
@@ -26,7 +26,7 @@ import { MOVIES_OPTIONS_STORAGE_NAME } from './moviesConstants';
 const Movies = ({ titleName }) => {
   useScrollToTop();
 
-  const { focus, FocusableContainer } = useFocusContainer();
+  const { focus, containerRef } = useFocus();
   const dispatch = useDispatch();
   const { pathname, page } = usePagination();
 
@@ -85,7 +85,7 @@ const Movies = ({ titleName }) => {
         />
       )}
 
-      <FocusableContainer>
+      <FocusableContainer containerRef={containerRef}>
         <MainContent>
           <CardsGrid>{cards}</CardsGrid>
         </MainContent>
