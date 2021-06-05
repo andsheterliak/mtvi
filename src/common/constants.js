@@ -11,4 +11,5 @@ export const ROUTE_NAMES = {
   seasons: 'seasons',
   season: 'season',
   episode: 'episode',
+  search: '/search',
 };

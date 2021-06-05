@@ -5,19 +5,14 @@ const useStyles = makeStyles((theme) => {
   return {
     logoIcon: {
       verticalAlign: 'middle',
-      width: '35px',
-      height: '35px',
+      width: '30px',
+      height: '30px',
       fill: 'none',
       stroke: theme.palette.text.primary,
       strokeWidth: '2',
       strokeLinecap: 'round',
       strokeLinejoin: 'round',
       marginRight: '5px',
-
-      [theme.breakpoints.up('md')]: {
-        width: '40px',
-        height: '40px',
-      },
     },
 
     logoText: {
@@ -31,7 +26,7 @@ const Logo = () => {
 
   return (
     <div>
-      <SvgIcon className={`${classes.logoIcon}`}>
+      <SvgIcon className={classes.logoIcon}>
         <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" />
         <path d="M7 2v20" />
         <path d="M17 2v20" />
@@ -45,6 +40,7 @@ const Logo = () => {
       <Typography
         color="textPrimary"
         component="span"
+        variant="h5"
         className={classes.logoText}
       >
         MTvI.
