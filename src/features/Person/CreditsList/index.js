@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { formatDataStr } from '~common/utils/date';
 import { getPath } from '~common/utils/getData';
 
-import Filter from '~components/Filter';
+import Filter, { useFilter } from '~components/Filter';
 import SelectorContainer from '~components/SelectorContainer';
 import Section from '~components/section/Section';
 import SectionTitle from '~components/section/SectionTitle';
@@ -155,12 +155,7 @@ const getTimelineData = (data, filterBy) => {
 
 const CreditsList = () => {
   const data = useSelector((state) => state.person.data);
-
-  const [filterBy, setFilterBy] = useState(filterConfig.all.value);
-
-  const filterByHandler = (e) => {
-    setFilterBy(e.target.value);
-  };
+  const { filterBy, filterByHandler } = useFilter(filterConfig.all.value);
 
   const credits = {
     movieCredits: data.movie_credits,

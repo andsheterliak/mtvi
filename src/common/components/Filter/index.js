@@ -1,5 +1,7 @@
 import { Input, InputLabel, MenuItem, Select } from '@material-ui/core';
 
+export { default as useFilter } from './useFilter';
+
 const Filter = ({ config, filterByHandler, filterBy }) => {
   const menus = Object.values(config).map((item) => {
     return (
