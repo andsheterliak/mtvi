@@ -40,8 +40,7 @@ const People = ({ titleName }) => {
     return () => {
       dispatch(peopleActions.resetState());
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   const cards = isData ? <PersonCards cardsData={data} /> : 'Loading...';
 

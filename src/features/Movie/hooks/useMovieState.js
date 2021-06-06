@@ -16,8 +16,7 @@ const useMovieState = () => {
     return () => {
       dispatch(movieActions.resetState());
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, id]);
 
   return { data };
 };

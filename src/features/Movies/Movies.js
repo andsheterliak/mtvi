@@ -64,8 +64,7 @@ const Movies = ({ titleName }) => {
     return () => {
       dispatch(moviesActions.resetState());
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   const cards = isData ? <Cards cardsData={data} /> : 'Loading...';
 

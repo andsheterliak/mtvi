@@ -29,8 +29,7 @@ const Person = () => {
     return () => {
       dispatch(personActions.resetState());
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, id]);
 
   return (
     <>
