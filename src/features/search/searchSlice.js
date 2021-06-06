@@ -5,7 +5,7 @@ import axiosTMDB from '~common/axios-tmdb';
 const initialState = {
   data: null,
   totalPages: null,
-  isLoading: false,
+  isLoading: true,
 };
 
 const slice = createSlice({

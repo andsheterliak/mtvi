@@ -6,7 +6,7 @@ import { getSelectedGenres } from '~common/utils/getData';
 const initialState = {
   data: [],
   totalPages: null,
-  isLoading: false,
+  isLoading: true,
   options: null,
 };
 
