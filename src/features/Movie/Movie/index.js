@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+
 import useScrollToTop from '~common/hooks/useScrollToTop';
 
 import Spacer from '~components/Spacer';
@@ -9,12 +11,14 @@ import MovieHeader from './MovieHeader';
 import TopBilledCast from './TopBilledCast';
 import Videos from './Videos';
 
-import useMovieState from '../hooks/useMovieState';
+import useMovie from '../hooks/useMovie';
+import { getData } from '../movieSelectors';
 
 const Movie = () => {
   useScrollToTop();
+  useMovie();
 
-  const { data } = useMovieState();
+  const data = useSelector(getData);
 
   return (
     <>

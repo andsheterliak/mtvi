@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
 
 import { formatDataStr, formatMinutes } from '~common/utils/date';
 import {
@@ -9,6 +10,7 @@ import {
 import Certification from '~components/header/Certification';
 import Creators from '~components/header/Creators';
 import PageHeader from '~components/PageHeader';
+import { getData } from '../tvShowSelectors';
 
 const getCreatedBy = (data) => {
   if (!checkIfIsData(data)) return null;
@@ -24,7 +26,7 @@ const getNetworks = (data) => {
   return data.map((item) => item.name).join(', ');
 };
 
-const generateDataList = (data) => {
+const getDataList = createSelector(getData, (data) => {
   let certification = getCertification(data.content_ratings?.results);
 
   certification = certification && (
@@ -52,12 +54,11 @@ const generateDataList = (data) => {
   ];
 
   return dataList;
-};
+});
 
 const TVShowHeader = () => {
-  const { data } = useSelector((state) => state.tvShow);
-
-  const dataList = generateDataList(data);
+  const data = useSelector(getData);
+  const dataList = useSelector(getDataList);
 
   return (
     <PageHeader

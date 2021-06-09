@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+
 import AllVideos from '~components/AllVideos';
 import BackToHeader from '~components/BackToHeader';
 
@@ -7,12 +9,14 @@ import { ROUTE_NAMES } from '~common/constants';
 
 import noImageImg from '~assets/img/no-image.svg';
 
-import useMovieState from './hooks/useMovieState';
+import useMovie from './hooks/useMovie';
+import { getData } from './movieSelectors';
 
 const MovieAllVideos = () => {
   useScrollToTop();
+  useMovie();
 
-  const { data } = useMovieState();
+  const data = useSelector(getData);
 
   let posterImg;
 

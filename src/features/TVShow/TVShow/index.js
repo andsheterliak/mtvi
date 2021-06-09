@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+
 import useScrollToTop from '~common/hooks/useScrollToTop';
 
 import Spacer from '~common/components/Spacer';
@@ -8,14 +10,16 @@ import SeriesCast from './SeriesCast';
 import Layout from '~components/Layout';
 import Separator from '~components/Separator';
 import MainContainer from '~components/MainContainer';
-import useTVShowsState from '../hooks/useTVShowsState';
+import useTVShows from '../hooks/useTVShows';
 import Videos from './Videos';
 import LastSeason from './LastSeason';
+import { getData } from '../tvShowSelectors';
 
 const TVShow = () => {
   useScrollToTop();
+  useTVShows();
 
-  const { data } = useTVShowsState();
+  const data = useSelector(getData);
 
   return (
     <>

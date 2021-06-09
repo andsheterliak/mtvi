@@ -1,29 +1,29 @@
+import { useSelector } from 'react-redux';
 import noImageImg from '~assets/img/no-image.svg';
 import { ROUTE_NAMES } from '~common/constants';
 import useScrollToTop from '~common/hooks/useScrollToTop';
+import { createGetCreditsDataInstance } from '~common/selectors';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
-import { checkIfIsData, createCreditsData } from '~common/utils/getData';
 
 import BackToHeader from '~components/BackToHeader';
 import Credits from '~components/Credits';
 
-import useTVShowsState from './hooks/useTVShowsState';
+import useTVShows from './hooks/useTVShows';
+import { getData } from './tvShowSelectors';
+
+const getCredits = (state) => state.tvShow.data?.aggregate_credits;
+const getCreditsData = createGetCreditsDataInstance(getCredits);
 
 const MovieCredits = () => {
   useScrollToTop();
+  useTVShows();
 
-  const { data } = useTVShowsState();
+  const data = useSelector(getData);
+  const creditsData = useSelector(getCreditsData);
 
   let posterImg;
-  let credits;
 
   if (data) {
-    const isCredits = Object.values(data.aggregate_credits).some((item) => {
-      return checkIfIsData(item);
-    });
-
-    if (isCredits) credits = createCreditsData(data.aggregate_credits);
-
     posterImg = data.poster_path
       ? `${IMG_BASE_URL}${IMG_SIZES.poster}${data.poster_path}`
       : noImageImg;
@@ -33,7 +33,7 @@ const MovieCredits = () => {
     <>
       {data ? (
         <Credits
-          credits={credits}
+          credits={creditsData}
           header={
             <BackToHeader
               title={data.name}

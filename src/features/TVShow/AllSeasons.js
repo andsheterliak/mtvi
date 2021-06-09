@@ -1,8 +1,10 @@
+import { useSelector } from 'react-redux';
+
 import BackToHeader from '~components/BackToHeader';
 import MainContent from '~components/MainContent';
 import Spacer from '~components/Spacer';
 import MainContainer from '~components/MainContainer';
-import useTVShowsState from './hooks/useTVShowsState';
+import useTVShows from './hooks/useTVShows';
 import noImg from '~assets/img/no-image.svg';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import useScrollToTop from '~common/hooks/useScrollToTop';
@@ -10,21 +12,23 @@ import { ROUTE_NAMES } from '~common/constants';
 import { checkIfIsData } from '~common/utils/getData';
 import SeasonCards from './components/SeasonCards';
 import NoContent from '~components/NoContent';
+import { getData } from './tvShowSelectors';
 
 const AllSeasons = () => {
   useScrollToTop();
+  useTVShows();
 
-  const { data } = useTVShowsState();
+  const data = useSelector(getData);
 
   let imgPath;
-  let seasons;
+  let seasonsCards;
 
   if (data) {
     imgPath = data.poster_path
       ? `${IMG_BASE_URL}${IMG_SIZES.profile}${data.poster_path}`
       : noImg;
 
-    seasons = checkIfIsData(data.seasons) ? (
+    seasonsCards = checkIfIsData(data.seasons) ? (
       <SeasonCards
         data={data.seasons}
         basePath={`${ROUTE_NAMES.tvShow}/${data.id}/${ROUTE_NAMES.season}`}
@@ -49,7 +53,7 @@ const AllSeasons = () => {
 
           <Spacer />
 
-          <MainContainer>{seasons}</MainContainer>
+          <MainContainer>{seasonsCards}</MainContainer>
         </MainContent>
       ) : (
         'Loading'

@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { createSelector } from '@reduxjs/toolkit';
 
 import { formatDataStr } from '~common/utils/date';
 import { getPath } from '~common/utils/getData';
@@ -12,13 +12,14 @@ import ProjectsTimeline from '../components/ProjectsTimeline';
 
 import filterConfig from './filterConfig';
 import NoContent from '~components/NoContent';
+import { getMovieCredits, getTVCredits } from '../personSelectors';
 
-const checkIfIsCredits = (data) => {
-  const isMovieCast = !!data.movieCredits?.cast?.length;
-  const isMovieCrew = !!data.movieCredits?.crew?.length;
+const getCreditsState = ({ movieCredits, tvCredits }) => {
+  const isMovieCast = !!movieCredits?.cast?.length;
+  const isMovieCrew = !!movieCredits?.crew?.length;
 
-  const isTVCast = !!data.tvCredits?.cast?.length;
-  const isTVCrew = !!data.tvCredits?.crew?.length;
+  const isTVCast = !!tvCredits?.cast?.length;
+  const isTVCrew = !!tvCredits?.crew?.length;
 
   const isData = isMovieCast || isMovieCrew || isTVCast || isTVCrew;
 
@@ -28,14 +29,14 @@ const checkIfIsCredits = (data) => {
   return { isData, isNeedInFiltering };
 };
 
-const filterData = (data, filterBy) => {
+const filterData = ({ movieCredits, tvCredits, filterBy }) => {
   const filteredData = [];
 
-  const movieCast = data.movieCredits?.cast;
-  const movieCrew = data.movieCredits?.crew;
+  const movieCast = movieCredits?.cast;
+  const movieCrew = movieCredits?.crew;
 
-  const tvCast = data.tvCredits?.cast;
-  const tvCrew = data.tvCredits?.crew;
+  const tvCast = tvCredits?.cast;
+  const tvCrew = tvCredits?.crew;
 
   switch (filterBy) {
     case filterConfig.all.value:
@@ -143,29 +144,34 @@ const createTimelineData = (data) => {
   return Object.values(timelineData);
 };
 
-const getTimelineData = (data, filterBy) => {
-  let timelineData;
+const getTimelineData = createSelector(
+  [getMovieCredits, getTVCredits, (_, filterBy) => filterBy],
+  (movieCredits, tvCredits, filterBy) => {
+    const { isData, isNeedInFiltering } = getCreditsState({
+      movieCredits,
+      tvCredits,
+    });
 
-  timelineData = filterData(data, filterBy);
-  timelineData = createTimelineData(timelineData);
-  timelineData = sortByDateDescending(timelineData);
+    if (!isData) return null;
 
-  return timelineData;
-};
+    let data;
+
+    data = filterData({ movieCredits, tvCredits, filterBy });
+    data = createTimelineData(data);
+    data = sortByDateDescending(data);
+
+    return { data, isNeedInFiltering };
+  }
+);
 
 const CreditsList = () => {
-  const data = useSelector((state) => state.person.data);
-  const { filterBy, filterByHandler } = useFilter(filterConfig.all.value);
+  const { filterBy, filterByHandler } = useFilter({
+    initialValue: filterConfig.all.value,
+  });
+  const timelineData = useSelector((state) => getTimelineData(state, filterBy));
 
-  const credits = {
-    movieCredits: data.movie_credits,
-    tvCredits: data.tv_credits,
-  };
-
-  const { isData, isNeedInFiltering } = checkIfIsCredits(credits);
-
-  const content = isData ? (
-    <ProjectsTimeline data={getTimelineData(credits, filterBy)} />
+  const content = timelineData.data ? (
+    <ProjectsTimeline data={timelineData.data} />
   ) : (
     <NoContent message="We don't have added any projects." />
   );
@@ -174,7 +180,7 @@ const CreditsList = () => {
     <Section>
       <SectionTitle title="Projects" />
 
-      {isNeedInFiltering && (
+      {timelineData.data && timelineData.isNeedInFiltering && (
         <SelectorContainer>
           <Filter
             config={filterConfig}

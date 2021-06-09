@@ -1,8 +1,10 @@
 import { useSelector } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
 
 import { formatDataStr, getAge } from '~common/utils/date';
 
 import Header from './components/Header';
+import { getData } from './personSelectors';
 
 const getGender = (gender) => {
   if (!gender) return null;
@@ -28,7 +30,7 @@ const getLifeDates = (birthday, deathday) => {
   return { birthday, deathday };
 };
 
-const generateDataList = (data) => {
+const getDataList = createSelector(getData, (data) => {
   const dataList = [];
 
   const { birthday, deathday } = getLifeDates(data.birthday, data.deathday);
@@ -60,12 +62,11 @@ const generateDataList = (data) => {
   });
 
   return dataList;
-};
+});
 
 const PersonHeader = () => {
-  const data = useSelector((state) => state.person.data);
-
-  const dataList = generateDataList(data);
+  const data = useSelector(getData);
+  const dataList = useSelector(getDataList);
 
   return (
     <Header

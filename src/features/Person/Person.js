@@ -14,6 +14,7 @@ import KnownFor from './KnownFor';
 
 import { personActions } from './personSlice';
 import Separator from '~components/Separator';
+import { getData } from './personSelectors';
 
 const Person = () => {
   useScrollToTop();
@@ -21,7 +22,7 @@ const Person = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const data = useSelector((state) => state.person.data);
+  const data = useSelector(getData);
 
   useEffect(() => {
     dispatch(personActions.fetchData(id));

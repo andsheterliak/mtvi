@@ -1,23 +1,29 @@
+import { useSelector } from 'react-redux';
+
 import { ROUTE_NAMES } from '~common/constants';
+import useScrollToTop from '~common/hooks/useScrollToTop';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
-import { checkIfIsData, createCreditsData } from '~common/utils/getData';
 import noImageImg from '~assets/img/no-image-wide.svg';
 import BackToHeader from '~components/BackToHeader';
 import Credits from '~components/Credits';
-import useEpisodeState from './hooks/useEpisodeState';
+import useEpisode from './hooks/useEpisode';
+import { createGetCreditsDataInstance } from '~common/selectors';
+import { getData } from './episodeSelectors';
+
+const getCredits = (state) => state.episode.data?.credits;
+const getCreditsData = createGetCreditsDataInstance(getCredits);
 
 const EpisodeCredits = () => {
-  const { data, params } = useEpisodeState();
+  useScrollToTop();
+
+  const { params } = useEpisode();
+
+  const data = useSelector(getData);
+  const creditsData = useSelector(getCreditsData);
 
   let stillImg;
-  let credits;
 
   if (data) {
-    const isCredits = Object.values(data.credits).some((item) => {
-      return checkIfIsData(item);
-    });
-    if (isCredits) credits = createCreditsData(data.credits);
-
     stillImg = data.still_path
       ? `${IMG_BASE_URL}${IMG_SIZES.still}${data.still_path}`
       : noImageImg;
@@ -27,7 +33,7 @@ const EpisodeCredits = () => {
     <>
       {data ? (
         <Credits
-          credits={credits}
+          credits={creditsData}
           header={
             <BackToHeader
               title={`${data.season_number}x${data.episode_number} ${data.name}`}

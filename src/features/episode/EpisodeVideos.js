@@ -1,15 +1,19 @@
+import { useSelector } from 'react-redux';
+
 import AllVideos from '~components/AllVideos';
 import BackToHeader from '~components/BackToHeader';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { ROUTE_NAMES } from '~common/constants';
 import noImageImg from '~assets/img/no-image-wide.svg';
-import useEpisodeState from './hooks/useEpisodeState';
+import useEpisode from './hooks/useEpisode';
+import { getData } from './episodeSelectors';
 
 const EpisodeVideos = () => {
   useScrollToTop();
 
-  const { data, params } = useEpisodeState();
+  const { params } = useEpisode();
+  const data = useSelector(getData);
 
   let stillImg;
 

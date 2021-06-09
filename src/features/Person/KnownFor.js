@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
 
 import { checkIfIsData, getTopItems } from '~common/utils/getData';
 
@@ -8,6 +9,7 @@ import Cards from '~components/Cards';
 import CardsGridRow from '~components/grids/CardsGridRow';
 import NoContent from '~components/NoContent';
 import Slider from '~components/Slider';
+import { getMovieCredits, getTVCredits } from './personSelectors';
 
 const sortByVoteDescending = (data) => {
   const newData = [...data];
@@ -39,14 +41,14 @@ const removeDuplicates = (data) => {
   return filteredArr;
 };
 
-const joinData = (data) => {
+const joinData = ({ movieCredits, tvCredits }) => {
   const newData = [];
 
-  const movieCast = data.movieCredits?.cast;
-  const movieCrew = data.movieCredits?.crew;
+  const movieCast = movieCredits?.cast;
+  const movieCrew = movieCredits?.crew;
 
-  const tvCast = data.tvCredits?.cast;
-  const tvCrew = data.tvCredits?.crew;
+  const tvCast = tvCredits?.cast;
+  const tvCrew = tvCredits?.crew;
 
   if (movieCast) newData.push(...movieCast);
   if (movieCrew) newData.push(...movieCrew);
@@ -56,28 +58,30 @@ const joinData = (data) => {
   return newData;
 };
 
-const getKnownFor = (data) => {
-  let newData;
+const getKnownForData = createSelector(
+  [getMovieCredits, getTVCredits],
+  (movieCredits, tvCredits) => {
+    const joinedData = joinData({ movieCredits, tvCredits });
 
-  newData = sortByVoteDescending(data);
-  newData = removeDuplicates(newData);
-  newData = getTopItems(newData);
+    if (!checkIfIsData(joinedData)) return null;
 
-  return newData;
-};
+    let newData;
+
+    newData = sortByVoteDescending(joinedData);
+    newData = removeDuplicates(newData);
+    newData = getTopItems(newData);
+
+    return newData;
+  }
+);
 
 const KnownFor = () => {
-  const data = useSelector((state) => state.person.data);
+  const knownForData = useSelector(getKnownForData);
 
-  const joinedData = joinData({
-    movieCredits: null,
-    tvCredits: data.tv_credits,
-  });
-
-  const content = checkIfIsData(joinedData) ? (
+  const content = knownForData ? (
     <Slider>
       <CardsGridRow>
-        <Cards cardsData={getKnownFor(joinedData)} />
+        <Cards cardsData={knownForData} />
       </CardsGridRow>
     </Slider>
   ) : (

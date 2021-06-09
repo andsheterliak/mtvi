@@ -7,8 +7,7 @@ import TopVideos from '~components/TopVideos';
 
 const Videos = () => {
   const { url } = useRouteMatch();
-  const { data } = useSelector((state) => state.tvShow);
-  const videos = data.videos?.results;
+  const videos = useSelector((state) => state.tvShow.data.videos?.results);
 
   return (
     <TopVideos

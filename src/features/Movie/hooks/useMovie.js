@@ -1,14 +1,12 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
 
 import { movieActions } from '../movieSlice';
 
-const useMovieState = () => {
+const useMovie = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-
-  const data = useSelector((state) => state.movie.data);
 
   useEffect(() => {
     dispatch(movieActions.fetchData(id));
@@ -17,8 +15,6 @@ const useMovieState = () => {
       dispatch(movieActions.resetState());
     };
   }, [dispatch, id]);
-
-  return { data };
 };
 
-export default useMovieState;
+export default useMovie;

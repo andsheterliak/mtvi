@@ -2,17 +2,15 @@ import { useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router';
 
 import { ROUTE_NAMES } from '~common/constants';
-import { getTopItems } from '~common/utils/getData';
-
+import { createGetTopCastInstance } from '~common/selectors';
 import TopCast from '~components/TopCast';
+
+const getCast = (state) => state.movie.data.credits.cast;
+const getTopBilledCast = createGetTopCastInstance(getCast);
 
 const TopBilledCast = () => {
   const { url } = useRouteMatch();
-
-  const { data } = useSelector((state) => state.movie);
-
-  let topBilledCast = data.credits?.cast;
-  topBilledCast = getTopItems(topBilledCast);
+  const topBilledCast = useSelector(getTopBilledCast);
 
   return (
     <TopCast

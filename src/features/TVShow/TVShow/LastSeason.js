@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router';
+import { createSelector } from '@reduxjs/toolkit';
 
 import { ROUTE_NAMES } from '~common/constants';
 import { checkIfIsData } from '~common/utils/getData';
@@ -10,7 +11,11 @@ import SectionTitle from '~components/section/SectionTitle';
 import SeeAllLink from '~components/SeeAllLink';
 import SeasonCard from '../components/SeasonCards/SeasonCard';
 
-const getLastReleasedSeason = (seasons) => {
+const getSeasons = (state) => state.tvShow.data.seasons;
+
+const getLastReleasedSeason = createSelector(getSeasons, (seasons) => {
+  if (!checkIfIsData(seasons)) return null;
+
   let lastReleasedSeason;
 
   for (let i = seasons.length - 1; i >= 0; i--) {
@@ -31,16 +36,18 @@ const getLastReleasedSeason = (seasons) => {
   }
 
   return lastReleasedSeason;
-};
+});
 
 const LastSeason = () => {
   const { url } = useRouteMatch();
-  const { data } = useSelector((state) => state.tvShow);
+  const lastReleasedSeason = useSelector(getLastReleasedSeason);
+  const isLoading = useSelector((state) => state.isLoading);
+  const seasons = useSelector(getSeasons);
 
-  if (checkIfIsData(data.seasons)) {
-    let lastReleasedSeason = getLastReleasedSeason(data.seasons);
+  let season;
 
-    lastReleasedSeason = lastReleasedSeason ? (
+  if (!isLoading) {
+    season = lastReleasedSeason ? (
       <SeasonCard
         releaseDate={lastReleasedSeason.air_date}
         episodeCount={lastReleasedSeason.episode_count}
@@ -52,21 +59,21 @@ const LastSeason = () => {
     ) : (
       <NoContent message="We don't have added last season." />
     );
+  }
 
-    return (
-      <Section>
-        <SectionTitle title="Last Season" />
+  return (
+    <Section>
+      <SectionTitle title="Last Season" />
 
-        {lastReleasedSeason}
+      {season}
 
+      {!isLoading && !checkIfIsData(seasons) ? null : (
         <SeeAllLink path={`${url}/${ROUTE_NAMES.seasons}`}>
           View All Seasons
         </SeeAllLink>
-      </Section>
-    );
-  }
-
-  return <NoContent message="We don't have added any seasons." />;
+      )}
+    </Section>
+  );
 };
 
 export default LastSeason;

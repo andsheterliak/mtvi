@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
+import { createSelector } from '@reduxjs/toolkit';
+
 import { checkIfIsData } from '~common/utils/getData';
 import Cards from '~components/Cards';
 import CardsGrid from '~components/grids/CardsGrid';
@@ -8,14 +10,17 @@ import PageGrid from '~components/grids/PageGrid';
 import MainContainer from '~components/MainContainer';
 import MainContent from '~components/MainContent';
 import NoContent from '~components/NoContent';
-
 import Pagination, { usePagination } from '~components/Pagination';
 import SelectionBar, { useSelectionBar } from '~components/SelectionBar';
 import Spacer from '~components/Spacer';
 import PersonCards from '~features/people/components/PersonCards';
 import { searchActions } from './searchSlice';
 
-const createSelectionBarData = (data) => {
+const getSearchData = (state) => state.search.data;
+
+const getSelectionBarData = createSelector(getSearchData, (searchData) => {
+  if (!searchData) return null;
+
   const mediaTypes = { movie: 'movie', tv: 'tv', person: 'person' };
 
   const selectionBarData = {
@@ -24,7 +29,7 @@ const createSelectionBarData = (data) => {
     [mediaTypes.person]: { name: 'People', amount: 0, data: [] },
   };
 
-  data.forEach((item) => {
+  searchData.forEach((item) => {
     if (!mediaTypes[item.media_type]) return;
 
     const mapValue = selectionBarData[item.media_type];
@@ -34,7 +39,7 @@ const createSelectionBarData = (data) => {
   });
 
   return selectionBarData;
-};
+});
 
 const Search = () => {
   const location = useLocation();
@@ -44,14 +49,11 @@ const Search = () => {
 
   const isLoading = useSelector((state) => state.search.isLoading);
   const totalPages = useSelector((state) => state.search.totalPages);
-  const data = useSelector((state) => state.search.data);
+  const selectionBarData = useSelector(getSelectionBarData);
 
-  let selectionBarData;
   let cards;
 
-  if (data) {
-    selectionBarData = createSelectionBarData(data);
-
+  if (selectionBarData) {
     const CardsComponent = selected === 'person' ? PersonCards : Cards;
 
     cards = checkIfIsData(selectionBarData[selected].data) ? (
@@ -91,7 +93,7 @@ const Search = () => {
     <>
       <Spacer />
 
-      {data && (
+      {selectionBarData && (
         <MainContent>
           <MainContainer>
             <PageGrid>

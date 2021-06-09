@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+
 import AllVideos from '~components/AllVideos';
 import BackToHeader from '~components/BackToHeader';
 
@@ -7,12 +9,14 @@ import { ROUTE_NAMES } from '~common/constants';
 
 import noImageImg from '~assets/img/no-image.svg';
 
-import useTVShowsState from './hooks/useTVShowsState';
+import useTVShows from './hooks/useTVShows';
+import { getData } from './tvShowSelectors';
 
 const TVShowAllVideos = () => {
   useScrollToTop();
+  useTVShows();
 
-  const { data } = useTVShowsState();
+  const data = useSelector(getData);
 
   let posterImg;
 
