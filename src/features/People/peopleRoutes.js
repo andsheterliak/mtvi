@@ -4,7 +4,7 @@ import People from './People';
 const peopleRoutes = {
   people: {
     name: 'People',
-    to: ROUTE_NAMES.people,
+    to: `/${ROUTE_NAMES.people}`,
     component: People,
     exact: true,
   },

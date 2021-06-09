@@ -14,7 +14,7 @@ const Creators = ({ creators }) => {
         color="inherit"
         key={id}
         component={Link}
-        to={`${ROUTE_NAMES.person}/${id}`}
+        to={`/${ROUTE_NAMES.person}/${id}`}
       >
         {name}
         {isComma && ', '}

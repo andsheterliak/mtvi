@@ -31,7 +31,7 @@ const AllSeasons = () => {
     seasonsCards = checkIfIsData(data.seasons) ? (
       <SeasonCards
         data={data.seasons}
-        basePath={`${ROUTE_NAMES.tvShow}/${data.id}/${ROUTE_NAMES.season}`}
+        basePath={`/${ROUTE_NAMES.tvShow}/${data.id}/${ROUTE_NAMES.season}`}
       />
     ) : (
       <NoContent message="We don't have added any seasons." />
@@ -48,7 +48,7 @@ const AllSeasons = () => {
             imgPath={imgPath}
             linkName="Back to TV Show"
             title={data.name}
-            path={`${ROUTE_NAMES.tvShow}/${data.id}`}
+            path={`/${ROUTE_NAMES.tvShow}/${data.id}`}
           />
 
           <Spacer />

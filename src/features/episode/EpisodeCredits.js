@@ -38,7 +38,7 @@ const EpisodeCredits = () => {
             <BackToHeader
               title={`${data.season_number}x${data.episode_number} ${data.name}`}
               imgPath={stillImg}
-              path={`${ROUTE_NAMES.tvShow}/${params.id}/${ROUTE_NAMES.season}/${params.seasonNumber}`}
+              path={`/${ROUTE_NAMES.tvShow}/${params.id}/${ROUTE_NAMES.season}/${params.seasonNumber}`}
               linkName="Back to Season"
             />
           }

@@ -4,7 +4,7 @@ import TVShows from './TVShows';
 const tvShowsRoutes = {
   tvShows: {
     name: 'TV Shows',
-    to: ROUTE_NAMES.tvShows,
+    to: `/${ROUTE_NAMES.tvShows}`,
     component: TVShows,
     exact: true,
   },

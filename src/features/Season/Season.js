@@ -44,7 +44,7 @@ const Season = () => {
         <Layout>
           <BackToHeader
             imgPath={imgPath}
-            path={`${ROUTE_NAMES.tvShow}/${id}`}
+            path={`/${ROUTE_NAMES.tvShow}/${id}`}
             linkName="Back to TV Show"
             title={data.name}
           />

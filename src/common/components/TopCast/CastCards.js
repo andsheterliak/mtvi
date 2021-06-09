@@ -10,7 +10,7 @@ const CastCards = ({ cardsData }) => {
         profilePath={item.profile_path}
         name={item.name}
         bodyContent={item.character ?? item.roles[0].character}
-        path={`${ROUTE_NAMES.person}/${item.id}`}
+        path={`/${ROUTE_NAMES.person}/${item.id}`}
       />
     );
   });

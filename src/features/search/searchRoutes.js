@@ -3,7 +3,7 @@ import Search from './Search';
 
 const searchRoutes = {
   search: {
-    to: ROUTE_NAMES.search,
+    to: `/${ROUTE_NAMES.search}`,
     component: Search,
     exact: true,
   },

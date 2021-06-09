@@ -14,7 +14,7 @@ const PersonCards = ({ cardsData }) => {
         profilePath={item.profile_path}
         name={item.name}
         bodyContent={knownFor}
-        path={`${ROUTE_NAMES.person}/${item.id}`}
+        path={`/${ROUTE_NAMES.person}/${item.id}`}
       />
     );
   });

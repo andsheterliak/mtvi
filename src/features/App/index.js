@@ -21,7 +21,7 @@ const App = () => {
 
       <RootWrapper>
         <Menu
-          searchBasePath={ROUTE_NAMES.search}
+          searchBasePath={`/${ROUTE_NAMES.search}`}
           locationPathname={location.pathname}
           logoRoute={routesConfig.default.redirectTo}
           routes={[

@@ -17,7 +17,7 @@ const CreditCards = ({ data }) => {
         profilePath={profilePath}
         name={name}
         info={info}
-        path={`${ROUTE_NAMES.person}/${id}`}
+        path={`/${ROUTE_NAMES.person}/${id}`}
       />
     );
   });

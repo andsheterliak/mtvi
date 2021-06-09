@@ -4,7 +4,7 @@ import Movies from './Movies';
 const moviesRoutes = {
   movies: {
     name: 'Movies',
-    to: ROUTE_NAMES.movies,
+    to: `/${ROUTE_NAMES.movies}`,
     component: Movies,
     exact: true,
   },
