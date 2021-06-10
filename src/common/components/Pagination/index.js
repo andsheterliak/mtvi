@@ -27,7 +27,7 @@ const Pagination = ({
 }) => {
   const classes = useStyles();
 
-  if (totalPages === 1) return null;
+  if (totalPages < 2) return null;
 
   const rootClasses = classNames(classes.root, {
     [classes.spacing]: isSpacing,
