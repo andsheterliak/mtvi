@@ -16,7 +16,7 @@ import FocusableContainer, { useFocus } from '~components/FocusableContainer';
 import PersonCards from '~features/people/components/PersonCards';
 import { searchActions } from './searchSlice';
 import { SEARCH_PATHS } from '~common/tmdb-config';
-import { checkIfIsData } from '~common/utils/getData';
+import { ifIsData } from '~common/utils/getData';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 
 const searchPathsToNames = {
@@ -79,7 +79,7 @@ const Search = () => {
       searchIn === SEARCH_PATHS.person ? PersonCards : Cards;
     const { data } = selectionBarData[searchIn];
 
-    cards = checkIfIsData(data) ? (
+    cards = ifIsData(data) ? (
       <CardsGrid>
         <CardsComponent cardsData={data} />
       </CardsGrid>

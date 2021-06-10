@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import { checkIfIsData, getTopItems } from './utils/getData';
+import { ifIsData, getTopItems } from './utils/getData';
 
 export const createGetTopCastInstance = (getCastSelector) => {
   return createSelector(getCastSelector, (cast) => getTopItems(cast));
@@ -18,7 +18,7 @@ export const createGetCreditsDataInstance = (getCreditsSelector) => {
     if (!credits) return null;
 
     const isCredits = Object.values(credits).some((item) => {
-      return checkIfIsData(item);
+      return ifIsData(item);
     });
 
     if (!isCredits) return null;
@@ -28,7 +28,7 @@ export const createGetCreditsDataInstance = (getCreditsSelector) => {
 
     Object.entries(credits).forEach(([creditName, creditItems]) => {
       if (creditName === 'crew') return;
-      if (!checkIfIsData(creditItems)) return;
+      if (!ifIsData(creditItems)) return;
 
       creditName = creditNameToTitle(creditName);
 
@@ -51,7 +51,7 @@ export const createGetCreditsDataInstance = (getCreditsSelector) => {
       });
     });
 
-    if (!checkIfIsData(credits.crew)) return commonCredits;
+    if (!ifIsData(credits.crew)) return commonCredits;
 
     credits.crew.forEach((item) => {
       const { department, name, id, profile_path: profilePath } = item;

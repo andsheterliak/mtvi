@@ -2,13 +2,13 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 
-import { checkIfIsData } from '~common/utils/getData';
+import { ifIsData } from '~common/utils/getData';
 
 import SocialLink from './SocialLink';
 import SocialLinksContainer from './SocialLinksContainer';
 
 const createSocialLinksMap = (externalIds) => {
-  if (!checkIfIsData(externalIds)) return null;
+  if (!ifIsData(externalIds)) return null;
 
   const socialLinksMap = [];
 
@@ -39,7 +39,7 @@ const createSocialLinksMap = (externalIds) => {
     });
   }
 
-  if (!checkIfIsData(socialLinksMap)) return null;
+  if (!ifIsData(socialLinksMap)) return null;
 
   return socialLinksMap;
 };

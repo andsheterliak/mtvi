@@ -1,4 +1,4 @@
-import { checkIfIsData } from '~common/utils/getData';
+import { ifIsData } from '~common/utils/getData';
 
 import PageGrid from '~components/grids/PageGrid';
 import Layout from '~components/Layout';
@@ -46,7 +46,7 @@ const AllVideos = ({ data, header }) => {
     setSelected(key);
   };
 
-  const videos = checkIfIsData(videosData[selected].data) ? (
+  const videos = ifIsData(videosData[selected].data) ? (
     <VideosGrid>
       <VideoCards data={videosData[selected].data} />
     </VideosGrid>

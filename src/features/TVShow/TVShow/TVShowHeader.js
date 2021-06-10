@@ -2,18 +2,14 @@ import { useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
 import { formatDataStr, formatMinutes } from '~common/utils/date';
-import {
-  checkIfIsData,
-  getCertification,
-  getGenres,
-} from '~common/utils/getData';
+import { ifIsData, getCertification, getGenres } from '~common/utils/getData';
 import Certification from '~components/header/Certification';
 import Creators from '~components/header/Creators';
 import PageHeader from '~components/PageHeader';
 import { getData } from '../tvShowSelectors';
 
 const getCreatedBy = (data) => {
-  if (!checkIfIsData(data)) return null;
+  if (!ifIsData(data)) return null;
 
   return data.map(({ name, id }) => {
     return { name, id };
@@ -21,7 +17,7 @@ const getCreatedBy = (data) => {
 };
 
 const getNetworks = (data) => {
-  if (!checkIfIsData(data)) return null;
+  if (!ifIsData(data)) return null;
 
   return data.map((item) => item.name).join(', ');
 };

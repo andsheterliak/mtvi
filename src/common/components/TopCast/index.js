@@ -3,12 +3,12 @@ import Section from '~components/section/Section';
 import SectionTitle from '~components/section/SectionTitle';
 import CardsGridRow from '~components/grids/CardsGridRow';
 import CastCards from './CastCards';
-import { checkIfIsData } from '~common/utils/getData';
+import { ifIsData } from '~common/utils/getData';
 import NoContent from '~components/NoContent';
 import Slider from '~components/Slider';
 
 const TopCast = ({ data, title, creditsPath, seeAllLinkName }) => {
-  const content = checkIfIsData(data) ? (
+  const content = ifIsData(data) ? (
     <Slider>
       <CardsGridRow>
         <CastCards cardsData={data} />

@@ -1,6 +1,6 @@
 import { ROUTE_NAMES } from '~common/constants';
 
-export const checkIfIsData = (data) => {
+export const ifIsData = (data) => {
   if (data === null || typeof data === 'undefined' || data === '') {
     return false;
   }
@@ -17,7 +17,7 @@ export const checkIfIsData = (data) => {
 };
 
 export const getCertification = (data) => {
-  if (!checkIfIsData(data)) return null;
+  if (!ifIsData(data)) return null;
 
   let certification;
   let isUSCertification;
@@ -36,7 +36,7 @@ export const getCertification = (data) => {
 };
 
 export const getGenres = (genres) => {
-  if (!checkIfIsData(genres)) return null;
+  if (!ifIsData(genres)) return null;
 
   return genres.map((item) => item.name).join(', ');
 };
@@ -44,7 +44,7 @@ export const getGenres = (genres) => {
 export const getHyphenOrData = (value) => {
   const hyphen = '-';
 
-  return checkIfIsData(value) ? value : hyphen;
+  return ifIsData(value) ? value : hyphen;
 };
 
 export const getPath = ({ name, firstAirDate, episodeCount }) => {

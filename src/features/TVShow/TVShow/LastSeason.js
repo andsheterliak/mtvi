@@ -3,7 +3,7 @@ import { useRouteMatch } from 'react-router';
 import { createSelector } from '@reduxjs/toolkit';
 
 import { ROUTE_NAMES } from '~common/constants';
-import { checkIfIsData } from '~common/utils/getData';
+import { ifIsData } from '~common/utils/getData';
 import { formatDataStr } from '~common/utils/date';
 import NoContent from '~components/NoContent';
 import Section from '~components/section/Section';
@@ -14,7 +14,7 @@ import SeasonCard from '../components/SeasonCards/SeasonCard';
 const getSeasons = (state) => state.tvShow.data.seasons;
 
 const getLastReleasedSeason = createSelector(getSeasons, (seasons) => {
-  if (!checkIfIsData(seasons)) return null;
+  if (!ifIsData(seasons)) return null;
 
   let lastReleasedSeason;
 
@@ -67,7 +67,7 @@ const LastSeason = () => {
 
       {season}
 
-      {!isLoading && !checkIfIsData(seasons) ? null : (
+      {!isLoading && !ifIsData(seasons) ? null : (
         <SeeAllLink path={`${url}/${ROUTE_NAMES.seasons}`}>
           View All Seasons
         </SeeAllLink>

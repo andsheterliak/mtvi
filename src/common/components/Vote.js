@@ -2,7 +2,7 @@ import { orange } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 
-import { checkIfIsData, getHyphenOrData } from '~common/utils/getData';
+import { ifIsData, getHyphenOrData } from '~common/utils/getData';
 
 const useStyles = makeStyles(() => ({
   vote: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
 const Vote = ({ vote }) => {
   const classes = useStyles();
 
-  const value = checkIfIsData(vote) ? vote.toFixed(1) : getHyphenOrData();
+  const value = ifIsData(vote) ? vote.toFixed(1) : getHyphenOrData();
 
   return (
     <span className={classes.vote}>

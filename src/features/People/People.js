@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 import useScrollToTop from '~common/hooks/useScrollToTop';
-import { checkIfIsData } from '~common/utils/getData';
+import { ifIsData } from '~common/utils/getData';
 
 import FocusableContainer, { useFocus } from '~components/FocusableContainer';
 import CardsGrid from '~components/grids/CardsGrid';
@@ -30,7 +30,7 @@ const People = ({ titleName }) => {
     focus();
   };
 
-  const isData = checkIfIsData(data);
+  const isData = ifIsData(data);
 
   useEffect(() => {
     dispatch(peopleActions.fetchData({ page }));

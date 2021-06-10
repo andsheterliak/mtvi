@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
-import { checkIfIsData, getTopItems } from '~common/utils/getData';
+import { ifIsData, getTopItems } from '~common/utils/getData';
 
 import Section from '~components/section/Section';
 import SectionTitle from '~components/section/SectionTitle';
@@ -63,7 +63,7 @@ const getKnownForData = createSelector(
   (movieCredits, tvCredits) => {
     const joinedData = joinData({ movieCredits, tvCredits });
 
-    if (!checkIfIsData(joinedData)) return null;
+    if (!ifIsData(joinedData)) return null;
 
     let newData;
 

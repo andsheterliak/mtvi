@@ -8,7 +8,7 @@ import {
 } from '~common/tmdb-config';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { getLS, setLS } from '~common/utils/storage';
-import { checkIfIsData } from '~common/utils/getData';
+import { ifIsData } from '~common/utils/getData';
 
 import Adjustment from '~features/Adjustment';
 import FocusableContainer, { useFocus } from '~components/FocusableContainer';
@@ -48,7 +48,7 @@ const TVShows = ({ titleName }) => {
     focus();
   };
 
-  const isData = checkIfIsData(data);
+  const isData = ifIsData(data);
 
   useEffect(() => {
     const startingOptions =

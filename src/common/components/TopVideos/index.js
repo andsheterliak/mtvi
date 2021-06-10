@@ -1,4 +1,4 @@
-import { checkIfIsData, getTopItems } from '~common/utils/getData';
+import { ifIsData, getTopItems } from '~common/utils/getData';
 import NoContent from '~components/NoContent';
 import Section from '~components/section/Section';
 import SectionTitle from '~components/section/SectionTitle';
@@ -8,7 +8,7 @@ import VideoCards from '~components/VideoCards';
 import VideosGridRow from './VideosGridRow';
 
 const TopVideos = ({ title, data, videosPath }) => {
-  const isData = checkIfIsData(data);
+  const isData = ifIsData(data);
 
   const content = isData ? (
     <Slider>
