@@ -19,22 +19,24 @@ const useStyles = makeStyles({
 const Drawer = ({ isOpened, closeDrawerHandler, routes, locationPathname }) => {
   const classes = useStyles();
 
-  const links = routes.map(({ name, to }) => {
-    return (
-      <ListItem
-        button
-        selected={locationPathname === to}
-        component={Link}
-        to={to}
-        key={name}
-      >
-        <ListItemText
-          primaryTypographyProps={{ color: 'textPrimary' }}
-          primary={name}
-        />
-      </ListItem>
-    );
-  });
+  const links = [routes.movies, routes.tvShows, routes.people].map(
+    ({ name, to }) => {
+      return (
+        <ListItem
+          button
+          selected={locationPathname === to}
+          component={Link}
+          to={to}
+          key={name}
+        >
+          <ListItemText
+            primaryTypographyProps={{ color: 'textPrimary' }}
+            primary={name}
+          />
+        </ListItem>
+      );
+    }
+  );
 
   return (
     <MUIDrawer

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
 const useFilter = ({ initialValue }) => {
-  const [filterBy, setFilterBy] = useState(initialValue);
+  const [searchIn, setFilterBy] = useState(initialValue);
 
   const filterByHandler = (e) => {
     setFilterBy(e.target.value);
   };
 
-  return { filterBy, filterByHandler };
+  return { searchIn, filterByHandler };
 };
 
 export default useFilter;

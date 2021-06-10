@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 
-const useSearch = ({ isVisible = false, searchBasePath } = {}) => {
+const useSearch = ({
+  isVisible = false,
+  searchBasePath,
+  searchInValue,
+} = {}) => {
   const history = useHistory();
   const [value, setValue] = useState('');
   const [isSearchVisible, setIsSearchVisible] = useState(isVisible);
@@ -18,7 +22,10 @@ const useSearch = ({ isVisible = false, searchBasePath } = {}) => {
     e.preventDefault();
     if (!value.trim()) return;
 
-    const searchParams = new URLSearchParams(`query=${value}`);
+    const searchParams = new URLSearchParams();
+
+    searchParams.set('searchIn', searchInValue);
+    searchParams.set('query', value);
 
     history.push(`${searchBasePath}?${searchParams}`);
     toggleSearchHandler();

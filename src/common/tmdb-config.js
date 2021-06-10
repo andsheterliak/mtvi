@@ -248,3 +248,9 @@ export const TV_DEFAULT_OPTIONS = {
     to: null,
   },
 };
+
+export const SEARCH_PATHS = {
+  movie: 'movie',
+  tvShow: 'tv',
+  person: 'person',
+};

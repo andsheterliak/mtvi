@@ -11,6 +11,7 @@ import Spacer from '~components/Spacer';
 import RootWrapper from './components/RootWrapper';
 import Routes from './components/Routes';
 import { ROUTE_NAMES } from '~common/constants';
+import { SEARCH_PATHS } from '~common/tmdb-config';
 
 const App = () => {
   const location = useLocation();
@@ -23,12 +24,8 @@ const App = () => {
         <Menu
           searchBasePath={`/${ROUTE_NAMES.search}`}
           locationPathname={location.pathname}
-          logoRoute={routesConfig.default.redirectTo}
-          routes={[
-            routesConfig.movies,
-            routesConfig.tvShows,
-            routesConfig.people,
-          ]}
+          routes={routesConfig}
+          searchPaths={SEARCH_PATHS}
         />
 
         <Switch>{<Routes config={routesConfig} />}</Switch>

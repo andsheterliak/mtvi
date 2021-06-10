@@ -11,6 +11,7 @@ import IconBtn from './IconBtn';
 import Logo from './Logo';
 import Drawer, { useDrawer } from './Drawer';
 import Search, { useSearch } from './Search';
+import useSearchIn from './Search/useSearchIn';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -28,9 +29,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Menu = ({ locationPathname, routes, logoRoute, searchBasePath }) => {
+const Menu = ({ locationPathname, routes, searchPaths, searchBasePath }) => {
   const classes = useStyles();
-  const { isDrawerOpened, closeDrawerHandler, openDrawerHandler } = useDrawer();
+
+  const {
+    searchInValue,
+    isMenuFilterOpened,
+    menuFilterAnchorEl,
+    closeMenuFilterHandler,
+    openMenuFilterHandler,
+    selectMenuFilterItemHandler,
+  } = useSearchIn({ value: searchPaths.movie });
+
   const {
     isSearchVisible,
     toggleSearchHandler,
@@ -38,7 +48,9 @@ const Menu = ({ locationPathname, routes, logoRoute, searchBasePath }) => {
     submitSearchHandler,
     clearSearchHandler,
     searchValue,
-  } = useSearch({ searchBasePath });
+  } = useSearch({ searchBasePath, searchInValue });
+
+  const { isDrawerOpened, closeDrawerHandler, openDrawerHandler } = useDrawer();
 
   return (
     <>
@@ -53,7 +65,11 @@ const Menu = ({ locationPathname, routes, logoRoute, searchBasePath }) => {
                 icon={MenuOpenIcon}
               />
 
-              <MUILink underline="none" component={Link} to={logoRoute}>
+              <MUILink
+                underline="none"
+                component={Link}
+                to={routes.default.redirectTo}
+              >
                 <Logo />
               </MUILink>
 
@@ -72,6 +88,13 @@ const Menu = ({ locationPathname, routes, logoRoute, searchBasePath }) => {
             submitSearchHandler={submitSearchHandler}
             clearSearchHandler={clearSearchHandler}
             value={searchValue}
+            searchPaths={searchPaths}
+            searchInValue={searchInValue}
+            isMenuFilterOpened={isMenuFilterOpened}
+            menuFilterAnchorEl={menuFilterAnchorEl}
+            closeMenuFilterHandler={closeMenuFilterHandler}
+            openMenuFilterHandler={openMenuFilterHandler}
+            selectMenuFilterItemHandler={selectMenuFilterItemHandler}
           />
         </AppBar>
       </HideOnScroll>
