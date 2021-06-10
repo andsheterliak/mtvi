@@ -26,6 +26,7 @@ const useStyles = makeStyles(() => ({
     width: '100px',
     height: '100px',
     borderRadius: '50%',
+    flexShrink: 0,
   },
 
   content: {
