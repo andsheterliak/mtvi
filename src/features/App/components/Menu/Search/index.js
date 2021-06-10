@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     padding: `${theme.spacing(1.5)}px ${theme.spacing(3)}px`,
     visibility: 'visible', // To preserve on scroll down if is not unmounted.
+    boxShadow: theme.shadows[1],
   },
 }));
 
