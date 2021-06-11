@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { ifIsData } from '~common/utils/getData';
+import { ROUTE_NAMES } from '~common/constants';
+import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 
 import FocusableContainer, { useFocus } from '~components/FocusableContainer';
 import CardsGrid from '~components/grids/CardsGrid';
@@ -11,7 +13,7 @@ import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 import PersonCards from './components/PersonCards';
 import Pagination, { usePagination } from '~components/Pagination';
-
+import noImage from '~assets/img/no-image.svg';
 import { peopleActions } from './peopleSlice';
 
 const People = ({ titleName }) => {
@@ -42,7 +44,19 @@ const People = ({ titleName }) => {
     };
   }, [dispatch]);
 
-  const cards = isData ? <PersonCards cardsData={data} /> : 'Loading...';
+  const cards = isData ? (
+    <PersonCards
+      cardsData={data}
+      routeName={ROUTE_NAMES.person}
+      imgData={{
+        basePath: IMG_BASE_URL,
+        size: IMG_SIZES.profile,
+        fallback: noImage,
+      }}
+    />
+  ) : (
+    'Loading...'
+  );
 
   return (
     <MainContainer>

@@ -5,6 +5,8 @@ import { formatDataStr, getAge } from '~common/utils/date';
 
 import Header from './components/Header';
 import { getData } from './personSelectors';
+import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
+import noUserPhotoImg from '~assets/img/no-user-photo.svg';
 
 const getGender = (gender) => {
   if (!gender) return null;
@@ -73,8 +75,13 @@ const PersonHeader = () => {
       dataList={dataList}
       name={data.name}
       biography={data.biography}
-      profilePath={data.profile_path}
       externalIds={data.external_ids}
+      imgData={{
+        basePath: IMG_BASE_URL,
+        size: IMG_SIZES.profile,
+        path: data.profile_path,
+        fallback: noUserPhotoImg,
+      }}
     />
   );
 };

@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { ROUTE_NAMES } from '~common/constants';
+import { getImagePath } from '~common/utils/getData';
 import Separator from '~components/Separator';
 
 import Layout from '~components/Layout';
@@ -9,35 +9,41 @@ import SectionTitle from '~components/section/SectionTitle';
 import CreditCard from './CreditCard';
 import CreditsGrid from './CreditsGrid';
 
-const CreditCards = ({ data }) => {
+const CreditCards = ({ data, routeName, imgData }) => {
   return data.map(({ name, info, id, profilePath }) => {
+    const imgPath = getImagePath({ ...imgData, path: profilePath });
+
     return (
       <CreditCard
         key={id}
-        profilePath={profilePath}
+        imgPath={imgPath}
         name={name}
         info={info}
-        path={`/${ROUTE_NAMES.person}/${id}`}
+        path={`/${routeName}/${id}`}
       />
     );
   });
 };
 
-const CreditSubsections = ({ data }) => {
+const CreditSubsections = ({ data, routeName, imgData }) => {
   return Object.entries(data).map(([creditsName, creditsData]) => {
     return (
       <Section key={creditsName}>
         <SectionTitle isSubtitle title={creditsName} />
 
         <CreditsGrid>
-          <CreditCards data={Object.values(creditsData)} />
+          <CreditCards
+            data={Object.values(creditsData)}
+            routeName={routeName}
+            imgData={imgData}
+          />
         </CreditsGrid>
       </Section>
     );
   });
 };
 
-const CreditSections = ({ data }) => {
+const CreditSections = ({ data, routeName, imgData }) => {
   const dataLength = Object.entries(data).length;
 
   const credits = Object.entries(data).map(
@@ -52,7 +58,11 @@ const CreditSections = ({ data }) => {
               <SectionTitle title={creditsName} />
 
               <CreditsGrid>
-                <CreditCards data={creditsData} />
+                <CreditCards
+                  data={creditsData}
+                  routeName={routeName}
+                  imgData={imgData}
+                />
               </CreditsGrid>
             </Section>
 
@@ -67,7 +77,11 @@ const CreditSections = ({ data }) => {
             <SectionTitle title={creditsName} />
 
             <Layout>
-              <CreditSubsections data={creditsData} />
+              <CreditSubsections
+                data={creditsData}
+                routeName={routeName}
+                imgData={imgData}
+              />
             </Layout>
           </Section>
 

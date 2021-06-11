@@ -2,6 +2,8 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
+  IMG_BASE_URL,
+  IMG_SIZES,
   MOVIES_DEFAULT_OPTIONS,
   SORT_MOVIES_BY_OPTIONS,
   USER_SCORE_RANGE,
@@ -18,9 +20,10 @@ import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 import Pagination, { usePagination } from '~components/Pagination';
 import FocusableContainer, { useFocus } from '~components/FocusableContainer';
-
+import noImage from '~assets/img/no-image.svg';
 import { moviesActions } from './moviesSlice';
 import { MOVIES_OPTIONS_STORAGE_NAME } from './moviesConstants';
+import { ROUTE_NAMES } from '~common/constants';
 
 const Movies = ({ titleName }) => {
   useScrollToTop();
@@ -66,7 +69,19 @@ const Movies = ({ titleName }) => {
     };
   }, [dispatch]);
 
-  const cards = isData ? <Cards cardsData={data} /> : 'Loading...';
+  const cards = isData ? (
+    <Cards
+      cardsData={data}
+      routeNames={{ tvShow: ROUTE_NAMES.tvShow, movie: ROUTE_NAMES.movie }}
+      imgData={{
+        basePath: IMG_BASE_URL,
+        size: IMG_SIZES.poster,
+        fallback: noImage,
+      }}
+    />
+  ) : (
+    'Loading...'
+  );
 
   return (
     <MainContainer>

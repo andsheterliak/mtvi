@@ -14,9 +14,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 import { getHyphenOrData } from '~common/utils/getData';
-import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import { formatDataStr } from '~common/utils/date';
-import noImg from '~assets/img/no-image-wide.svg';
 import Vote from '~components/Vote';
 
 const useStyles = makeStyles((theme) => ({
@@ -71,13 +69,9 @@ const EpisodeCard = ({
   const classes = useStyles();
   const { anchorEl, isMenuOpened, onCloseMenu, onOpenMenu } = useMenu();
 
-  const stillPath = imgPath
-    ? `${IMG_BASE_URL}${IMG_SIZES.still}${imgPath}`
-    : noImg;
-
   return (
     <Card className={classes.root}>
-      <CardMedia component="img" alt={name} image={stillPath} />
+      <CardMedia component="img" alt={name} image={imgPath} />
 
       <CardContent className={classes.content}>
         <Typography

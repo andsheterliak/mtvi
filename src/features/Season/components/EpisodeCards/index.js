@@ -1,13 +1,16 @@
 import { ROUTE_NAMES } from '~common/constants';
+import { getImagePath } from '~common/utils/getData';
 import EpisodeCard from './EpisodeCard';
 import EpisodesGrid from './EpisodesGrid';
 
-const EpisodeCards = ({ data, basePath }) => {
+const EpisodeCards = ({ data, basePath, imgData }) => {
   const cards = data.map((item) => {
+    const imgPath = getImagePath({ ...imgData, path: item.still_path });
+
     return (
       <EpisodeCard
         key={item.id}
-        imgPath={item.still_path}
+        imgPath={imgPath}
         name={item.name}
         overview={item.overview}
         releaseDate={item.air_date}

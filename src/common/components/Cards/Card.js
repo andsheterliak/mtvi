@@ -8,9 +8,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import { formatDataStr } from '~common/utils/date';
-import noImageImg from '~assets/img/no-image.svg';
 import { getHyphenOrData } from '~common/utils/getData';
 import Vote from '~components/Vote';
 
@@ -43,12 +41,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Card = ({ posterPath, title, releaseDate, voteAverage, path }) => {
+const Card = ({ imgPath, title, releaseDate, voteAverage, path }) => {
   const classes = useStyles();
-
-  const posterImg = posterPath
-    ? `${IMG_BASE_URL}${IMG_SIZES.poster}${posterPath}`
-    : noImageImg;
 
   return (
     <MUiCard>
@@ -56,7 +50,7 @@ const Card = ({ posterPath, title, releaseDate, voteAverage, path }) => {
         <CardMedia
           component="div"
           alt={title}
-          image={posterImg}
+          image={imgPath}
           className={classes.media}
         />
 

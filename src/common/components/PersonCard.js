@@ -9,8 +9,6 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 
 import { getHyphenOrData } from '~common/utils/getData';
-import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
-import noUserPhotoImg from '~assets/img/no-user-photo.svg';
 
 const useStyles = makeStyles((theme) => ({
   action: {
@@ -32,17 +30,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PersonCard = ({ profilePath, name, bodyContent, path }) => {
+const PersonCard = ({ imgPath, name, bodyContent, path }) => {
   const classes = useStyles();
-
-  const profileImg = profilePath
-    ? `${IMG_BASE_URL}${IMG_SIZES.profile}${profilePath}`
-    : noUserPhotoImg;
 
   return (
     <Card>
       <CardActionArea component={Link} to={path} className={classes.action}>
-        <CardMedia component="img" alt={name} image={profileImg} />
+        <CardMedia component="img" alt={name} image={imgPath} />
 
         <CardContent className={classes.content}>
           <Typography

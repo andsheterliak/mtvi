@@ -1,9 +1,7 @@
 import { Link as MUILink } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-import { ROUTE_NAMES } from '~common/constants';
-
-const Creators = ({ creators }) => {
+const Creators = ({ creators, routeName }) => {
   const creatorsLength = creators.length;
 
   return creators.map(({ name, id }, index) => {
@@ -14,7 +12,7 @@ const Creators = ({ creators }) => {
         color="inherit"
         key={id}
         component={Link}
-        to={`/${ROUTE_NAMES.person}/${id}`}
+        to={`/${routeName}/${id}`}
       >
         {name}
         {isComma && ', '}

@@ -10,6 +10,9 @@ import CardsGridRow from '~components/grids/CardsGridRow';
 import NoContent from '~components/NoContent';
 import Slider from '~components/Slider';
 import { getMovieCredits, getTVCredits } from './personSelectors';
+import { ROUTE_NAMES } from '~common/constants';
+import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
+import noImage from '~assets/img/no-image.svg';
 
 const sortByVoteDescending = (data) => {
   const newData = [...data];
@@ -81,7 +84,15 @@ const KnownFor = () => {
   const content = knownForData ? (
     <Slider>
       <CardsGridRow>
-        <Cards cardsData={knownForData} />
+        <Cards
+          cardsData={knownForData}
+          routeNames={{ tvShow: ROUTE_NAMES.tvShow, movie: ROUTE_NAMES.movie }}
+          imgData={{
+            basePath: IMG_BASE_URL,
+            size: IMG_SIZES.poster,
+            fallback: noImage,
+          }}
+        />
       </CardsGridRow>
     </Slider>
   ) : (

@@ -1,5 +1,3 @@
-import { ROUTE_NAMES } from '~common/constants';
-
 export const ifIsData = (data) => {
   if (data === null || typeof data === 'undefined' || data === '') {
     return false;
@@ -47,10 +45,14 @@ export const getHyphenOrData = (value) => {
   return ifIsData(value) ? value : hyphen;
 };
 
-export const getPath = ({ name, firstAirDate, episodeCount }) => {
+export const getPath = ({ name, firstAirDate, episodeCount, routeNames }) => {
   return name || firstAirDate || episodeCount
-    ? `/${ROUTE_NAMES.tvShow}`
-    : `/${ROUTE_NAMES.movie}`;
+    ? `/${routeNames.tvShow}`
+    : `/${routeNames.movie}`;
+};
+
+export const getImagePath = ({ basePath, size, path, fallback }) => {
+  return path ? `${basePath}${size}${path}` : fallback;
 };
 
 export const getSelectedGenres = (genres) => {

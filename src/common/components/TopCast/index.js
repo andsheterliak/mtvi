@@ -7,11 +7,18 @@ import { ifIsData } from '~common/utils/getData';
 import NoContent from '~components/NoContent';
 import Slider from '~components/Slider';
 
-const TopCast = ({ data, title, creditsPath, seeAllLinkName }) => {
+const TopCast = ({
+  data,
+  title,
+  creditsPath,
+  seeAllLinkName,
+  imgData,
+  routeName,
+}) => {
   const content = ifIsData(data) ? (
     <Slider>
       <CardsGridRow>
-        <CastCards cardsData={data} />
+        <CastCards cardsData={data} routeName={routeName} imgData={imgData} />
       </CardsGridRow>
     </Slider>
   ) : (

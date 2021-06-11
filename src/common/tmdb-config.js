@@ -254,3 +254,13 @@ export const SEARCH_PATHS = {
   tvShow: 'tv',
   person: 'person',
 };
+
+export const VIDEO_TYPES = {
+  trailer: { key: 'Trailer', name: 'Trailers' },
+  teaser: { key: 'Teaser', name: 'Teasers' },
+  clip: { key: 'Clip', name: 'Clips' },
+  behindTheScenes: { key: 'Behind the Scenes', name: 'Behind the Scenes' },
+  blooper: { key: 'Blooper', name: 'Bloopers' },
+  featurette: { key: 'Featurette', name: 'Featurettes' },
+  openingCredits: { key: 'Opening Credits', name: 'Opening Credits' },
+};

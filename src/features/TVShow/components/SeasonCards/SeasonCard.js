@@ -8,9 +8,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
-import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import { getHyphenOrData } from '~common/utils/getData';
-import noImg from '~assets/img/no-image.svg';
 import { formatDataStr } from '~common/utils/date';
 
 const useStyles = makeStyles((theme) => ({
@@ -53,15 +51,11 @@ const SeasonCard = ({
   releaseDate,
   episodeCount,
   path,
-  posterPath,
+  imgPath,
   name,
   overview,
 }) => {
   const classes = useStyles();
-
-  const img = posterPath
-    ? `${IMG_BASE_URL}${IMG_SIZES.profile}${posterPath}`
-    : noImg;
 
   const episodes =
     episodeCount > 1
@@ -78,7 +72,7 @@ const SeasonCard = ({
             className={classes.img}
             component="img"
             alt={name ?? ''}
-            image={img}
+            image={imgPath}
           />
 
           <div className={classes.textContent}>

@@ -15,9 +15,11 @@ import Spacer from '~components/Spacer';
 import FocusableContainer, { useFocus } from '~components/FocusableContainer';
 import PersonCards from '~features/people/components/PersonCards';
 import { searchActions } from './searchSlice';
-import { SEARCH_PATHS } from '~common/tmdb-config';
+import { IMG_BASE_URL, IMG_SIZES, SEARCH_PATHS } from '~common/tmdb-config';
 import { ifIsData } from '~common/utils/getData';
 import useScrollToTop from '~common/hooks/useScrollToTop';
+import { ROUTE_NAMES } from '~common/constants';
+import noImage from '~assets/img/no-image.svg';
 
 const searchPathsToNames = {
   [SEARCH_PATHS.movie]: 'Movies',
@@ -72,24 +74,48 @@ const Search = () => {
   );
   const selectionBarData = useSelector(getSelectionBarData);
 
-  let cards;
+  let content;
 
   if (selectionBarData) {
-    const CardsComponent =
-      searchIn === SEARCH_PATHS.person ? PersonCards : Cards;
     const { data } = selectionBarData[searchIn];
 
-    cards = ifIsData(data) ? (
-      <CardsGrid>
-        <CardsComponent cardsData={data} />
-      </CardsGrid>
-    ) : (
-      <NoContent
-        message={`There are no ${selectionBarData[
-          searchIn
-        ].name.toLowerCase()} that matched your query.`}
-      />
-    );
+    if (ifIsData(data)) {
+      const cards =
+        searchIn === SEARCH_PATHS.person ? (
+          <PersonCards
+            cardsData={data}
+            routeName={ROUTE_NAMES.person}
+            imgData={{
+              basePath: IMG_BASE_URL,
+              size: IMG_SIZES.profile,
+              fallback: noImage,
+            }}
+          />
+        ) : (
+          <Cards
+            cardsData={data}
+            routeNames={{
+              tvShow: ROUTE_NAMES.tvShow,
+              movie: ROUTE_NAMES.movie,
+            }}
+            imgData={{
+              basePath: IMG_BASE_URL,
+              size: IMG_SIZES.poster,
+              fallback: noImage,
+            }}
+          />
+        );
+
+      content = <CardsGrid>{cards}</CardsGrid>;
+    } else {
+      content = (
+        <NoContent
+          message={`There are no ${selectionBarData[
+            searchIn
+          ].name.toLowerCase()} that matched your query.`}
+        />
+      );
+    }
   }
 
   useEffect(() => {
@@ -134,7 +160,7 @@ const Search = () => {
 
               <div>
                 <FocusableContainer containerRef={containerRef}>
-                  {cards}
+                  {content}
                 </FocusableContainer>
 
                 <Pagination

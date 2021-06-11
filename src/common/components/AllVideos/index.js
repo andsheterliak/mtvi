@@ -5,47 +5,13 @@ import Layout from '~components/Layout';
 import MainContainer from '~components/MainContainer';
 import MainContent from '~components/MainContent';
 import NoContent from '~components/NoContent';
-import SelectionBar, { useSelectionBar } from '~components/SelectionBar';
+import SelectionBar from '~components/SelectionBar';
 import Spacer from '~components/Spacer';
 import VideoCards from '~components/VideoCards';
 
 import VideosGrid from './VideosGrid';
 
-const createVideosData = (data) => {
-  const videosData = {
-    Trailer: { name: 'Trailers', amount: 0, data: [] },
-    Teaser: { name: 'Teasers', amount: 0, data: [] },
-    Clip: { name: 'Clips', amount: 0, data: [] },
-    'Behind the Scenes': { name: 'Behind the Scenes', amount: 0, data: [] },
-    Blooper: { name: 'Bloopers', amount: 0, data: [] },
-    Featurette: { name: 'Featurettes', amount: 0, data: [] },
-  };
-
-  data.forEach((video) => {
-    if (video.site !== 'YouTube') return;
-
-    if (video.type === 'Opening Credits') {
-      videosData[video.type] = { name: video.type, amount: 0, data: [] };
-    }
-
-    const { type } = video;
-    const mapValue = videosData[type];
-
-    mapValue.amount += 1;
-    mapValue.data.push(video);
-  });
-
-  return videosData;
-};
-
-const AllVideos = ({ data, header }) => {
-  const { selected, setSelected } = useSelectionBar('Trailer');
-  const videosData = createVideosData(data);
-
-  const selectHandler = (e, key) => {
-    setSelected(key);
-  };
-
+const AllVideos = ({ videosData, header, selectHandler, selected }) => {
   const videos = ifIsData(videosData[selected].data) ? (
     <VideosGrid>
       <VideoCards data={videosData[selected].data} />

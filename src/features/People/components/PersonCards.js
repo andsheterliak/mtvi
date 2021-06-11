@@ -1,20 +1,21 @@
-import { ROUTE_NAMES } from '~common/constants';
-
+import { getImagePath } from '~common/utils/getData';
 import PersonCard from '~components/PersonCard';
 
-const PersonCards = ({ cardsData }) => {
+const PersonCards = ({ cardsData, imgData, routeName }) => {
   const cards = cardsData.map((item) => {
     const knownFor = item.known_for
       .map((el) => el.original_name || el.title)
       .join(', ');
 
+    const imgPath = getImagePath({ ...imgData, path: item.profile_path });
+
     return (
       <PersonCard
         key={item.id}
-        profilePath={item.profile_path}
+        imgPath={imgPath}
         name={item.name}
         bodyContent={knownFor}
-        path={`/${ROUTE_NAMES.person}/${item.id}`}
+        path={`/${routeName}/${item.id}`}
       />
     );
   });

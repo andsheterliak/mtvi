@@ -1,8 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
-import noUserPhotoImg from '~assets/img/no-user-photo.svg';
-
+import { getImagePath } from '~common/utils/getData';
 import HeaderDescription from '~components/header/Description';
 import HeaderTitle from '~components/header/HeaderTitle';
 import InfoList from '~components/InfoList';
@@ -41,16 +39,14 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-const Header = ({ dataList, name, biography, profilePath, externalIds }) => {
+const Header = ({ dataList, name, biography, imgData, externalIds }) => {
   const classes = useStyles();
 
-  const profileImg = profilePath
-    ? `${IMG_BASE_URL}${IMG_SIZES.profile}${profilePath}`
-    : noUserPhotoImg;
+  const imgPath = getImagePath(imgData);
 
   return (
     <section className={classes.infoBlock}>
-      <img className={classes.img} alt={name} src={profileImg} />
+      <img className={classes.img} alt={name} src={imgPath} />
 
       <div>
         {name && <HeaderTitle title={name} />}

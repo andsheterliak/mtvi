@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@material-ui/core/styles';
 
-import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import { innerDarkTheme } from '~common/theme';
+import { getImagePath } from '~common/utils/getData';
 
 import MainContainer from '~components/MainContainer';
 import InfoList from '~components/InfoList';
@@ -9,19 +9,17 @@ import HeaderTitle from '../header/HeaderTitle';
 import HeaderDescription from '../header/Description';
 import useStyles from './PageHeaderStyles';
 
-const PageHeader = ({ backdrop, title, overview, dataList }) => {
+const PageHeader = ({ title, overview, dataList, imgData }) => {
   const classes = useStyles();
 
-  const backdropPath = backdrop
-    ? `${IMG_BASE_URL}${IMG_SIZES.backdrop}${backdrop}`
-    : null;
+  const imgPath = getImagePath(imgData);
 
-  const img = backdropPath ? (
-    <img src={backdropPath} alt="" className={classes.img} />
+  const img = imgPath ? (
+    <img src={imgPath} alt="" className={classes.img} />
   ) : null;
 
-  const imgBackground = backdropPath ? (
-    <img src={backdropPath} alt="" className={classes.imgBackground} />
+  const imgBackground = imgPath ? (
+    <img src={imgPath} alt="" className={classes.imgBackground} />
   ) : null;
 
   return (

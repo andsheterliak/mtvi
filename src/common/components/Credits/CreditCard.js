@@ -8,8 +8,6 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
-import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
-import noUserPhotoImg from '~assets/img/no-user-photo.svg';
 import { getHyphenOrData } from '~common/utils/getData';
 
 const useStyles = makeStyles(() => ({
@@ -36,12 +34,8 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CreditCard = ({ profilePath, name, info, path }) => {
+const CreditCard = ({ imgPath, name, info, path }) => {
   const classes = useStyles();
-
-  const profileImg = profilePath
-    ? `${IMG_BASE_URL}${IMG_SIZES.profileFace}${profilePath}`
-    : noUserPhotoImg;
 
   return (
     <Card>
@@ -50,7 +44,7 @@ const CreditCard = ({ profilePath, name, info, path }) => {
           className={classes.img}
           component="img"
           alt={name ?? ''}
-          image={profileImg}
+          image={imgPath}
         />
 
         <CardContent className={classes.content}>

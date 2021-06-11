@@ -5,6 +5,8 @@ import {
   TV_DEFAULT_OPTIONS,
   SORT_TV_BY_OPTIONS,
   USER_SCORE_RANGE,
+  IMG_BASE_URL,
+  IMG_SIZES,
 } from '~common/tmdb-config';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { getLS, setLS } from '~common/utils/storage';
@@ -18,9 +20,10 @@ import CardsGrid from '~components/grids/CardsGrid';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 import Pagination, { usePagination } from '~components/Pagination';
-
+import noImage from '~assets/img/no-image.svg';
 import { TV_OPTIONS_STORAGE_NAME } from './tvShowsConstants';
 import { tvShowsActions } from './tvShowsSlice';
+import { ROUTE_NAMES } from '~common/constants';
 
 const TVShows = ({ titleName }) => {
   useScrollToTop();
@@ -67,7 +70,19 @@ const TVShows = ({ titleName }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const cards = isData ? <Cards cardsData={data} /> : 'Loading...';
+  const cards = isData ? (
+    <Cards
+      cardsData={data}
+      routeNames={{ tvShow: ROUTE_NAMES.tvShow, movie: ROUTE_NAMES.movie }}
+      imgData={{
+        basePath: IMG_BASE_URL,
+        size: IMG_SIZES.poster,
+        fallback: noImage,
+      }}
+    />
+  ) : (
+    'Loading...'
+  );
 
   return (
     <MainContainer>
