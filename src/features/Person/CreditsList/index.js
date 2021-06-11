@@ -13,6 +13,7 @@ import ProjectsTimeline from '../components/ProjectsTimeline';
 import filterConfig from './filterConfig';
 import NoContent from '~components/NoContent';
 import { getMovieCredits, getTVCredits } from '../personSelectors';
+import { ROUTE_NAMES } from '~common/constants';
 
 const getCreditsState = ({ movieCredits, tvCredits }) => {
   const isMovieCast = !!movieCredits?.cast?.length;
@@ -100,6 +101,7 @@ const createTimelineData = (data) => {
       name: item.name,
       episodeCount: item.first_air_date,
       firstAirDate: item.episode_count,
+      routeNames: { movie: ROUTE_NAMES.movie, tvShow: ROUTE_NAMES.tvShow },
     });
 
     // If no timeline item with the 'id', create it.
@@ -165,10 +167,10 @@ const getTimelineData = createSelector(
 );
 
 const CreditsList = () => {
-  const { filterBy, filterByHandler } = useFilter({
+  const { searchIn, filterByHandler } = useFilter({
     initialValue: filterConfig.all.value,
   });
-  const timelineData = useSelector((state) => getTimelineData(state, filterBy));
+  const timelineData = useSelector((state) => getTimelineData(state, searchIn));
 
   const content = timelineData.data ? (
     <ProjectsTimeline data={timelineData.data} />
@@ -184,7 +186,7 @@ const CreditsList = () => {
         <SelectorContainer>
           <Filter
             config={filterConfig}
-            filterBy={filterBy}
+            searchIn={searchIn}
             filterByHandler={filterByHandler}
           />
         </SelectorContainer>
