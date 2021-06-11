@@ -26,12 +26,12 @@ const Movie = () => {
 
       {data ? (
         <MainContent>
-          <MovieHeader />
-
-          <Spacer />
-
           <MainContainer>
             <Layout>
+              <MovieHeader />
+
+              <Separator />
+
               <TopBilledCast />
 
               <Separator />

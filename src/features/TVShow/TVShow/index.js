@@ -27,12 +27,12 @@ const TVShow = () => {
 
       {data ? (
         <MainContent>
-          <TVShowHeader />
-
-          <Spacer />
-
           <MainContainer>
             <Layout>
+              <TVShowHeader />
+
+              <Separator />
+
               <SeriesCast />
 
               <Separator />
