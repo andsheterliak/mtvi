@@ -147,7 +147,7 @@ const Search = () => {
     <>
       <Spacer />
 
-      {selectionBarData && (
+      {selectionBarData ? (
         <MainContent>
           <MainContainer>
             <PageGrid>
@@ -173,6 +173,8 @@ const Search = () => {
             </PageGrid>
           </MainContainer>
         </MainContent>
+      ) : (
+        'Loading...'
       )}
     </>
   );
