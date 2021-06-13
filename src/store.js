@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 
 import { moviesReducer } from '~features/Movies';
 import movieReducer from '~common/services/movie/movieSlice';
@@ -10,7 +10,7 @@ import { personReducer } from '~features/Person';
 import episodeReducer from '~common/services/episode/episodeSlice';
 import { searchReducer } from '~features/Search';
 
-const rootReducer = combineReducers({
+const reducers = {
   movies: moviesReducer,
   movie: movieReducer,
   tvShows: tvShowsReducer,
@@ -20,6 +20,10 @@ const rootReducer = combineReducers({
   person: personReducer,
   episode: episodeReducer,
   search: searchReducer,
+};
+
+const store = configureStore({
+  reducer: reducers,
 });
 
-export default rootReducer;
+export default store;
