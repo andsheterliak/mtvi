@@ -18,6 +18,7 @@ const configure = () => {
 
     // `axios-cache-adapter` options
     cache: {
+      limit: 100,
       maxAge,
       store: forageStore,
       exclude: { query: false },
