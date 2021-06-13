@@ -1,7 +1,7 @@
 import { ROUTE_NAMES } from '~common/constants';
 
 import Movies from '~features/Movies';
-import Movie from '~features/movie';
+import Movie from '~features/Movie';
 import MovieVideos from '~features/MovieVideos';
 import MovieCredits from '~features/MovieCredits';
 import TVShows from '~features/TVShows';
