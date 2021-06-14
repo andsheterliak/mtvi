@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import { scrollToTop } from '~common/utils/dom';
 
-const useScrollToTop = () => {
+const useScrollToTop = ({ triggers = [] } = {}) => {
   const { pathname, search } = useLocation();
 
   useEffect(() => {
@@ -13,7 +13,8 @@ const useScrollToTop = () => {
         scrollToTop();
       });
     });
-  }, [pathname, search]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname, search, ...triggers]);
 };
 
 export default useScrollToTop;

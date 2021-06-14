@@ -23,8 +23,6 @@ import { useGetMoviesQuery } from '~common/services/tmdb';
 import useOptions from '~common/hooks/useOptions';
 
 const Movies = ({ titleName }) => {
-  useScrollToTop();
-
   const { focus, containerRef } = useFocus();
   const { page, changePage } = usePagination();
 
@@ -32,6 +30,8 @@ const Movies = ({ titleName }) => {
     storageOptionsName: MOVIES_OPTIONS_STORAGE_NAME,
     defaultOptions: MOVIES_DEFAULT_OPTIONS,
   });
+
+  useScrollToTop({ triggers: [options] });
 
   const { data, isLoading } = useGetMoviesQuery({ options, page });
 

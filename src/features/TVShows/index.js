@@ -33,6 +33,8 @@ const TVShows = ({ titleName }) => {
     defaultOptions: TV_DEFAULT_OPTIONS,
   });
 
+  useScrollToTop({ triggers: [options] });
+
   const { data, isLoading } = useGetTVShowsQuery({ options, page });
 
   const changePageHandler = (event, newPage) => {
