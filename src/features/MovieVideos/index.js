@@ -4,6 +4,7 @@ import AllVideos from '~components/AllVideos';
 import BackToHeader from '~components/BackToHeader';
 import { useSelectionBar } from '~components/SelectionBar';
 
+import { getImagePath } from '~common/utils/getData';
 import { IMG_BASE_URL, IMG_SIZES, VIDEO_TYPES } from '~common/tmdb-config';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { ROUTE_NAMES } from '~common/constants';
@@ -31,9 +32,12 @@ const MovieVideos = () => {
   let posterImg;
 
   if (data) {
-    posterImg = data.poster_path
-      ? `${IMG_BASE_URL}${IMG_SIZES.poster}${data.poster_path}`
-      : noImageImg;
+    posterImg = getImagePath({
+      basePath: IMG_BASE_URL,
+      path: data.poster_path,
+      size: IMG_SIZES.poster,
+      fallback: noImageImg,
+    });
   }
 
   return (

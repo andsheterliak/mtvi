@@ -9,6 +9,7 @@ import { ROUTE_NAMES } from '~common/constants';
 import { createGetVideosDataInstance } from '~common/selectors';
 import useEpisode from '~common/services/episode/useEpisode';
 import { getEpisodeData } from '~common/services/episode/episodeSelectors';
+import { getImagePath } from '~common/utils/getData';
 import noImageImg from '~assets/img/no-image-wide.svg';
 
 const getVideos = (state) => getEpisodeData(state)?.videos.results;
@@ -29,9 +30,12 @@ const EpisodeVideos = () => {
   let stillImg;
 
   if (data) {
-    stillImg = data.still_path
-      ? `${IMG_BASE_URL}${IMG_SIZES.still}${data.still_path}`
-      : noImageImg;
+    stillImg = getImagePath({
+      basePath: IMG_BASE_URL,
+      path: data.still_path,
+      size: IMG_SIZES.still,
+      fallback: noImageImg,
+    });
   }
 
   return (
