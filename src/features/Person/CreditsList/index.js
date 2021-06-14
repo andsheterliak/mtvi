@@ -167,7 +167,7 @@ const getTimelineData = createSelector(
 );
 
 const CreditsList = () => {
-  const { searchIn, filterByHandler } = useFilter({
+  const { filterBy, filterByHandler } = useFilter({
     initialValue: filterConfig.all.value,
   });
   const timelineData = useSelector((state) => getTimelineData(state, searchIn));
@@ -186,7 +186,7 @@ const CreditsList = () => {
         <SelectorContainer>
           <Filter
             config={filterConfig}
-            searchIn={searchIn}
+            filterBy={filterBy}
             filterByHandler={filterByHandler}
           />
         </SelectorContainer>

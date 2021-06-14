@@ -2,7 +2,7 @@ import { Input, InputLabel, MenuItem, Select } from '@material-ui/core';
 
 export { default as useFilter } from './useFilter';
 
-const Filter = ({ config, filterByHandler, searchIn }) => {
+const Filter = ({ config, filterByHandler, filterBy }) => {
   const menus = Object.values(config).map((item) => {
     return (
       <MenuItem key={item.label} value={item.value}>
@@ -22,7 +22,7 @@ const Filter = ({ config, filterByHandler, searchIn }) => {
         disableUnderline
         labelId="filter-results-by-label"
         id="filter-results-by"
-        value={searchIn}
+        value={filterBy}
         input={<Input />}
         onChange={filterByHandler}
       >
