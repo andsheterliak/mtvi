@@ -11,7 +11,7 @@ import SeriesCast from './SeriesCast';
 import Layout from '~components/Layout';
 import Separator from '~components/Separator';
 import MainContainer from '~components/MainContainer';
-import Videos from './Videos';
+import TVShowVideos from './TVShowVideos';
 import LastSeason from './LastSeason';
 
 const TVShow = () => {
@@ -40,7 +40,7 @@ const TVShow = () => {
 
               <Separator />
 
-              <Videos />
+              <TVShowVideos />
             </Layout>
           </MainContainer>
         </MainContent>

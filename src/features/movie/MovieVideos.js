@@ -2,18 +2,16 @@ import { useRouteMatch } from 'react-router';
 import { useParams } from 'react-router-dom';
 
 import { ROUTE_NAMES } from '~common/constants';
-import { useGetTVShowQuery } from '~common/services/tmdb';
+import { useGetMovieQuery } from '~common/services/tmdb';
 
 import TopVideos from '~components/TopVideos';
 
-const Videos = () => {
+const MovieVideos = () => {
   const { url } = useRouteMatch();
   const { id } = useParams();
 
-  const { videos } = useGetTVShowQuery(id, {
-    selectFromResult: ({ data }) => ({
-      videos: data.videos.results,
-    }),
+  const { videos } = useGetMovieQuery(id, {
+    selectFromResult: ({ data }) => ({ videos: data.videos.results }),
   });
 
   return (
@@ -25,4 +23,4 @@ const Videos = () => {
   );
 };
 
-export default Videos;
+export default MovieVideos;

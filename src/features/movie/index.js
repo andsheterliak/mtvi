@@ -9,7 +9,7 @@ import Separator from '~components/Separator';
 import MainContainer from '~components/MainContainer';
 import MovieHeader from './MovieHeader';
 import TopBilledCast from './TopBilledCast';
-import Videos from './Videos';
+import MovieVideos from './MovieVideos';
 import { useGetMovieQuery } from '~common/services/tmdb';
 
 const Movie = () => {
@@ -34,7 +34,7 @@ const Movie = () => {
 
               <Separator />
 
-              <Videos />
+              <MovieVideos />
             </Layout>
           </MainContainer>
         </MainContent>
