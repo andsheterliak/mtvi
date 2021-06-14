@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { createSelector } from '@reduxjs/toolkit';
 
 import { formatDataStr, formatMinutes } from '~common/utils/date';
 import { ifIsData, getCertification, getGenres } from '~common/utils/getData';
 import { ROUTE_NAMES } from '~common/constants';
+import { useGetMovieQuery } from '~common/services/tmdb';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
-import { getMovieData } from '~common/services/movie/movieSelectors';
 import Certification from '~components/header/Certification';
 import Creators from '~components/header/Creators';
 import PageHeader from '~components/PageHeader';
@@ -22,38 +22,47 @@ const getDirectors = (crew) => {
   return directors;
 };
 
-const getDataList = createSelector(getMovieData, (data) => {
-  let certification = getCertification(data.release_dates?.results);
+const getDataList = createSelector(
+  (data) => data,
+  (data) => {
+    let certification = getCertification(data.release_dates?.results);
 
-  certification = certification && (
-    <Certification certification={certification} />
-  );
+    certification = certification && (
+      <Certification certification={certification} />
+    );
 
-  let directors = getDirectors(data.credits?.crew);
-  directors = ifIsData(directors) ? (
-    <Creators creators={directors} routeName={ROUTE_NAMES.person} />
-  ) : null;
+    let directors = getDirectors(data.credits?.crew);
+    directors = ifIsData(directors) ? (
+      <Creators creators={directors} routeName={ROUTE_NAMES.person} />
+    ) : null;
 
-  const releaseDate = formatDataStr(data.release_date)?.dateStr;
-  const genres = getGenres(data.genres);
-  const time = formatMinutes(data.runtime);
+    const releaseDate = formatDataStr(data.release_date)?.dateStr;
+    const genres = getGenres(data.genres);
+    const time = formatMinutes(data.runtime);
 
-  const dataList = [
-    { name: 'Certification', value: certification },
-    { name: 'Rating', value: data.vote_average },
-    { name: 'Genres', value: genres },
-    { name: 'Release date', value: releaseDate },
-    { name: 'Status', value: data.status },
-    { name: 'Time', value: time },
-    { name: 'Directors', value: directors },
-  ];
+    const dataList = [
+      { name: 'Certification', value: certification },
+      { name: 'Rating', value: data.vote_average },
+      { name: 'Genres', value: genres },
+      { name: 'Release date', value: releaseDate },
+      { name: 'Status', value: data.status },
+      { name: 'Time', value: time },
+      { name: 'Directors', value: directors },
+    ];
 
-  return dataList;
-});
+    return dataList;
+  }
+);
 
 const MovieHeader = () => {
-  const data = useSelector(getMovieData);
-  const dataList = useSelector(getDataList);
+  const { id } = useParams();
+
+  const { data, dataList } = useGetMovieQuery(id, {
+    selectFromResult: (result) => ({
+      data: result.data,
+      dataList: getDataList(result.data),
+    }),
+  });
 
   return (
     <PageHeader

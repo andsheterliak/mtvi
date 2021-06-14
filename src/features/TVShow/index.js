@@ -1,11 +1,10 @@
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import useScrollToTop from '~common/hooks/useScrollToTop';
 
 import Spacer from '~common/components/Spacer';
 import MainContent from '~common/components/MainContent';
-import useTVShows from '~/common/services/tvShow/useTVShows';
-import { getTVShowData } from '~common/services/tvShow/tvShowServices';
+import { useGetTVShowQuery } from '~common/services/tmdb';
 import TVShowHeader from './TVShowHeader';
 
 import SeriesCast from './SeriesCast';
@@ -17,9 +16,9 @@ import LastSeason from './LastSeason';
 
 const TVShow = () => {
   useScrollToTop();
-  useTVShows();
 
-  const data = useSelector(getTVShowData);
+  const { id } = useParams();
+  const { data } = useGetTVShowQuery(id);
 
   return (
     <>

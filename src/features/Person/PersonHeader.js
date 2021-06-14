@@ -1,11 +1,12 @@
-import { useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
+import { useParams } from 'react-router-dom';
 
 import { formatDataStr, getAge } from '~common/utils/date';
 
 import Header from './components/Header';
 import { getData } from './personSelectors';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
+import { useGetPersonQuery } from '~common/services/tmdb';
 import noUserPhotoImg from '~assets/img/no-user-photo.svg';
 
 const getGender = (gender) => {
@@ -67,8 +68,14 @@ const getDataList = createSelector(getData, (data) => {
 });
 
 const PersonHeader = () => {
-  const data = useSelector(getData);
-  const dataList = useSelector(getDataList);
+  const { id } = useParams();
+
+  const { data, dataList } = useGetPersonQuery(id, {
+    selectFromResult: (result) => ({
+      data: result.data,
+      dataList: getDataList(result.data),
+    }),
+  });
 
   return (
     <Header

@@ -1,6 +1,6 @@
-import { useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 
+import { useParams } from 'react-router-dom';
 import { ifIsData, getTopItems } from '~common/utils/getData';
 
 import Section from '~components/section/Section';
@@ -12,6 +12,7 @@ import Slider from '~components/Slider';
 import { getMovieCredits, getTVCredits } from './personSelectors';
 import { ROUTE_NAMES } from '~common/constants';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
+import { useGetPersonQuery } from '~common/services/tmdb';
 import noImage from '~assets/img/no-image.svg';
 
 const sortByVoteDescending = (data) => {
@@ -79,7 +80,13 @@ const getKnownForData = createSelector(
 );
 
 const KnownFor = () => {
-  const knownForData = useSelector(getKnownForData);
+  const { id } = useParams();
+
+  const { knownForData } = useGetPersonQuery(id, {
+    selectFromResult: ({ data }) => ({
+      knownForData: getKnownForData(data),
+    }),
+  });
 
   const content = knownForData ? (
     <Slider>

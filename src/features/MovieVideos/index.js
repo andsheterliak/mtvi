@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import AllVideos from '~components/AllVideos';
 import BackToHeader from '~components/BackToHeader';
@@ -9,21 +9,20 @@ import { IMG_BASE_URL, IMG_SIZES, VIDEO_TYPES } from '~common/tmdb-config';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { ROUTE_NAMES } from '~common/constants';
 import { createGetVideosDataInstance } from '~common/selectors';
-import useMovie from '~common/services/movie/useMovie';
-import { getMovieData } from '~common/services/movie/movieSelectors';
+import { useGetMovieQuery } from '~common/services/tmdb';
 
 import noImageImg from '~assets/img/no-image.svg';
 
-const getVideos = (state) => getMovieData(state)?.videos.results;
+const getVideos = (data) => data?.videos.results;
 const getVideosData = createGetVideosDataInstance(getVideos);
 
 const MovieVideos = () => {
   useScrollToTop();
-  useMovie();
 
+  const { id } = useParams();
+  const { data } = useGetMovieQuery(id);
   const { selected, setSelected } = useSelectionBar(VIDEO_TYPES.trailer.key);
-  const videosData = useSelector(getVideosData);
-  const data = useSelector(getMovieData);
+  const videosData = getVideosData(data);
 
   const selectHandler = (e, key) => {
     setSelected(key);

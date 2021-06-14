@@ -1,26 +1,27 @@
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
 import noImageImg from '~assets/img/no-image.svg';
 import noUserPhotoImg from '~assets/img/no-user-photo.svg';
 import { ROUTE_NAMES } from '~common/constants';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { createGetCreditsDataInstance } from '~common/selectors';
+import { useGetTVShowQuery } from '~common/services/tmdb';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import { getImagePath } from '~common/utils/getData';
-import useTVShows from '~common/services/tvShow/useTVShows';
-import { getTVShowData } from '~common/services/tvShow/tvShowServices';
 
 import BackToHeader from '~components/BackToHeader';
 import Credits from '~components/Credits';
 
-const getCredits = (state) => state.tvShow.data?.aggregate_credits;
+const getCredits = (data) => data?.aggregate_credits;
 const getCreditsData = createGetCreditsDataInstance(getCredits);
 
 const TVShowCredits = () => {
   useScrollToTop();
-  useTVShows();
 
-  const data = useSelector(getTVShowData);
-  const creditsData = useSelector(getCreditsData);
+  const { id } = useParams();
+  const { data } = useGetTVShowQuery(id);
+
+  const creditsData = getCreditsData(data);
 
   let posterImg;
 

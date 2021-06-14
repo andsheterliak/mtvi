@@ -1,6 +1,3 @@
-import { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
 import {
   IMG_BASE_URL,
   IMG_SIZES,
@@ -9,7 +6,6 @@ import {
   USER_SCORE_RANGE,
 } from '~common/tmdb-config';
 import useScrollToTop from '~common/hooks/useScrollToTop';
-import { getLS, setLS } from '~common/utils/storage';
 import { ifIsData } from '~common/utils/getData';
 
 import Adjustment from '~components/Adjustment';
@@ -21,57 +17,39 @@ import MainContent from '~components/MainContent';
 import Pagination, { usePagination } from '~components/Pagination';
 import FocusableContainer, { useFocus } from '~components/FocusableContainer';
 import noImage from '~assets/img/no-image.svg';
-import { moviesActions } from './moviesSlice';
 import { MOVIES_OPTIONS_STORAGE_NAME } from './moviesConstants';
 import { ROUTE_NAMES } from '~common/constants';
+import { useGetMoviesQuery } from '~common/services/tmdb';
+import useOptions from '~common/hooks/useOptions';
 
 const Movies = ({ titleName }) => {
   useScrollToTop();
 
   const { focus, containerRef } = useFocus();
-  const dispatch = useDispatch();
   const { page, changePage } = usePagination();
 
-  const data = useSelector((state) => state.movies.data);
-  const isLoading = useSelector((state) => state.movies.isLoading);
-  const options = useSelector((state) => state.movies.options);
-  const totalPages = useSelector((state) => state.movies.totalPages);
+  const { options, setOptions } = useOptions({
+    storageOptionsName: MOVIES_OPTIONS_STORAGE_NAME,
+    defaultOptions: MOVIES_DEFAULT_OPTIONS,
+  });
 
-  const fetchDataWithNewOptions = useCallback(
-    (newOptions) => {
-      dispatch(moviesActions.saveOptions(newOptions));
-      dispatch(moviesActions.fetchData({ ...newOptions, page }));
-      setLS(MOVIES_OPTIONS_STORAGE_NAME, newOptions);
-    },
-    [dispatch, page]
-  );
+  const { data, isLoading } = useGetMoviesQuery({ options, page });
 
   const changePageHandler = (event, newPage) => {
-    if (!changePage(event, newPage)) return;
+    if (!changePage(newPage)) return;
     focus();
+  };
+
+  const changeOptions = (newOptions) => {
+    setOptions(newOptions);
+    changePage(1);
   };
 
   const isData = ifIsData(data);
 
-  useEffect(() => {
-    const startingOptions =
-      options || getLS(MOVIES_OPTIONS_STORAGE_NAME) || MOVIES_DEFAULT_OPTIONS;
-
-    if (!options) dispatch(moviesActions.saveOptions(startingOptions));
-
-    dispatch(moviesActions.fetchData({ ...startingOptions, page }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, page]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(moviesActions.resetState());
-    };
-  }, [dispatch]);
-
   const cards = isData ? (
     <Cards
-      cardsData={data}
+      cardsData={data.results}
       routeNames={{ tvShow: ROUTE_NAMES.tvShow, movie: ROUTE_NAMES.movie }}
       imgData={{
         basePath: IMG_BASE_URL,
@@ -87,16 +65,14 @@ const Movies = ({ titleName }) => {
     <MainContainer>
       <RouteHeader titleName={titleName} />
 
-      {options && (
-        <Adjustment
-          sortByOptions={SORT_MOVIES_BY_OPTIONS}
-          userScoreRange={USER_SCORE_RANGE}
-          dateTitle="Release Dates"
-          modalTitle="Adjust Movies"
-          onAcceptCallback={fetchDataWithNewOptions}
-          initialOptions={options}
-        />
-      )}
+      <Adjustment
+        sortByOptions={SORT_MOVIES_BY_OPTIONS}
+        userScoreRange={USER_SCORE_RANGE}
+        dateTitle="Release Dates"
+        modalTitle="Adjust Movies"
+        onAcceptCallback={changeOptions}
+        initialOptions={options}
+      />
 
       <FocusableContainer containerRef={containerRef}>
         <MainContent>
@@ -108,7 +84,7 @@ const Movies = ({ titleName }) => {
         <Pagination
           isLoading={isLoading}
           page={page}
-          totalPages={totalPages}
+          totalPages={data.total_pages}
           changePageHandler={changePageHandler}
         />
       )}
@@ -116,5 +92,4 @@ const Movies = ({ titleName }) => {
   );
 };
 
-export { default as moviesReducer } from './moviesSlice';
 export default Movies;

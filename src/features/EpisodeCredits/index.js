@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { ROUTE_NAMES } from '~common/constants';
 import useScrollToTop from '~common/hooks/useScrollToTop';
@@ -9,19 +9,17 @@ import BackToHeader from '~components/BackToHeader';
 import Credits from '~components/Credits';
 import { createGetCreditsDataInstance } from '~common/selectors';
 import { getImagePath } from '~common/utils/getData';
-import { getEpisodeData } from '~common/services/episode/episodeSelectors';
-import useEpisode from '~common/services/episode/useEpisode';
+import { useGetEpisodeQuery } from '~common/services/tmdb';
 
-const getCredits = (state) => getEpisodeData(state)?.credits;
+const getCredits = (data) => data?.credits;
 const getCreditsData = createGetCreditsDataInstance(getCredits);
 
 const EpisodeCredits = () => {
   useScrollToTop();
 
-  const { params } = useEpisode();
-
-  const data = useSelector(getEpisodeData);
-  const creditsData = useSelector(getCreditsData);
+  const { id, seasonNumber, episodeNumber } = useParams();
+  const { data } = useGetEpisodeQuery({ id, seasonNumber, episodeNumber });
+  const creditsData = getCreditsData(data);
 
   let stillImg;
 
@@ -49,7 +47,7 @@ const EpisodeCredits = () => {
             <BackToHeader
               title={`${data.season_number}x${data.episode_number} ${data.name}`}
               imgPath={stillImg}
-              path={`/${ROUTE_NAMES.tvShow}/${params.id}/${ROUTE_NAMES.season}/${params.seasonNumber}`}
+              path={`/${ROUTE_NAMES.tvShow}/${id}/${ROUTE_NAMES.season}/${seasonNumber}`}
               linkName="Back to Season"
             />
           }

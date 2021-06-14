@@ -9,7 +9,7 @@ const usePagination = () => {
   const pageQuery = query.get('page');
   const page = parseInt(pageQuery || `${DEFAULT_PAGE}`, 10);
 
-  const changePage = (event, newPage) => {
+  const changePage = (newPage) => {
     if (page === newPage) return false;
     newPage === 1 ? query.delete('page') : query.set('page', newPage);
     history.push(`${pathname}?${query.toString()}`);

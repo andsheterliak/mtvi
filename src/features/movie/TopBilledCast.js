@@ -1,18 +1,25 @@
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { useRouteMatch } from 'react-router';
 
 import { ROUTE_NAMES } from '~common/constants';
 import { createGetTopCastInstance } from '~common/selectors';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
+import { useGetMovieQuery } from '~common/services/tmdb';
 import TopCast from '~components/TopCast';
 import noImage from '~assets/img/no-image.svg';
 
-const getCast = (state) => state.movie.data.credits.cast;
+const getCast = (cast) => cast;
 const getTopBilledCast = createGetTopCastInstance(getCast);
 
 const TopBilledCast = () => {
   const { url } = useRouteMatch();
-  const topBilledCast = useSelector(getTopBilledCast);
+  const { id } = useParams();
+
+  const { topBilledCast } = useGetMovieQuery(id, {
+    selectFromResult: ({ data }) => ({
+      topBilledCast: getTopBilledCast(data.credits.cast),
+    }),
+  });
 
   return (
     <TopCast

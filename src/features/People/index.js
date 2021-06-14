@@ -1,9 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { ifIsData } from '~common/utils/getData';
 import { ROUTE_NAMES } from '~common/constants';
+import { useGetPeopleQuery } from '~common/services/tmdb';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 
 import FocusableContainer, { useFocus } from '~components/FocusableContainer';
@@ -14,39 +12,24 @@ import MainContent from '~components/MainContent';
 import PersonCards from './components/PersonCards';
 import Pagination, { usePagination } from '~components/Pagination';
 import noImage from '~assets/img/no-image.svg';
-import { peopleActions } from './peopleSlice';
 
 const People = ({ titleName }) => {
   useScrollToTop();
 
   const { focus, containerRef } = useFocus();
-  const dispatch = useDispatch();
   const { page, changePage } = usePagination();
-
-  const data = useSelector((state) => state.people.data);
-  const isLoading = useSelector((state) => state.people.isLoading);
-  const totalPages = useSelector((state) => state.people.totalPages);
+  const { data, isLoading } = useGetPeopleQuery({ page });
 
   const changePageHandler = (event, newPage) => {
-    if (!changePage(event, newPage)) return;
+    if (!changePage(newPage)) return;
     focus();
   };
 
   const isData = ifIsData(data);
 
-  useEffect(() => {
-    dispatch(peopleActions.fetchData({ page }));
-  }, [dispatch, page]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(peopleActions.resetState());
-    };
-  }, [dispatch]);
-
   const cards = isData ? (
     <PersonCards
-      cardsData={data}
+      cardsData={data.results}
       routeName={ROUTE_NAMES.person}
       imgData={{
         basePath: IMG_BASE_URL,
@@ -72,7 +55,7 @@ const People = ({ titleName }) => {
         <Pagination
           isLoading={isLoading}
           page={page}
-          totalPages={totalPages}
+          totalPages={data.total_pages}
           changePageHandler={changePageHandler}
         />
       )}
@@ -80,5 +63,4 @@ const People = ({ titleName }) => {
   );
 };
 
-export { default as peopleReducer } from './peopleSlice';
 export default People;

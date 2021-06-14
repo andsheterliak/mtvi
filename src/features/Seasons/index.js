@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import BackToHeader from '~components/BackToHeader';
 import MainContent from '~components/MainContent';
@@ -6,19 +6,18 @@ import Spacer from '~components/Spacer';
 import MainContainer from '~components/MainContainer';
 import noImg from '~assets/img/no-image.svg';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
-import useTVShows from '~common/services/tvShow/useTVShows';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { ROUTE_NAMES } from '~common/constants';
 import { getImagePath, ifIsData } from '~common/utils/getData';
-import { getTVShowData } from '~common/services/tvShow/tvShowServices';
+import { useGetTVShowQuery } from '~common/services/tmdb';
 import SeasonCards from '~components/SeasonCards';
 import NoContent from '~components/NoContent';
 
 const Seasons = () => {
   useScrollToTop();
-  useTVShows();
 
-  const data = useSelector(getTVShowData);
+  const { id } = useParams();
+  const { data } = useGetTVShowQuery(id);
 
   let imgPath;
   let seasonsCards;

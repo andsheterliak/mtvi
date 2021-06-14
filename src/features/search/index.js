@@ -1,5 +1,4 @@
-import { useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useMemo } from 'react';
 import { useHistory, useLocation, useRouteMatch } from 'react-router';
 import { createSelector } from '@reduxjs/toolkit';
 
@@ -14,11 +13,11 @@ import SelectionBar from '~components/SelectionBar';
 import Spacer from '~components/Spacer';
 import FocusableContainer, { useFocus } from '~components/FocusableContainer';
 import PersonCards from '~features/People/components/PersonCards';
-import { searchActions } from './searchSlice';
 import { IMG_BASE_URL, IMG_SIZES, SEARCH_PATHS } from '~common/tmdb-config';
 import { ifIsData } from '~common/utils/getData';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { ROUTE_NAMES } from '~common/constants';
+import { useGetSearchQuery } from '~common/services/tmdb';
 import noImage from '~assets/img/no-image.svg';
 
 const searchPathsToNames = {
@@ -27,7 +26,7 @@ const searchPathsToNames = {
   [SEARCH_PATHS.person]: 'People',
 };
 
-const getSearchData = (state) => state.search.data;
+const getSearchData = (data) => data;
 
 const getSelectionBarData = createSelector(getSearchData, (searchData) => {
   if (!searchData) return null;
@@ -51,7 +50,6 @@ const Search = () => {
   useScrollToTop();
 
   const location = useLocation();
-  const dispatch = useDispatch();
   const history = useHistory();
   const { url } = useRouteMatch();
 
@@ -68,11 +66,13 @@ const Search = () => {
 
   const { page, changePage } = usePagination();
 
-  const isLoading = useSelector((state) => state.search.isLoading);
-  const totalPages = useSelector(
-    (state) => state.search.data?.[searchIn].total_pages
+  const { data: searchData, isLoading } = useGetSearchQuery(
+    { page, query, searchIn },
+    { skip: !query }
   );
-  const selectionBarData = useSelector(getSelectionBarData);
+
+  const totalPages = searchData?.[searchIn].total_pages;
+  const selectionBarData = getSelectionBarData(searchData);
 
   let content;
 
@@ -118,20 +118,8 @@ const Search = () => {
     }
   }
 
-  useEffect(() => {
-    if (query) {
-      dispatch(searchActions.fetchData({ searchIn, query, page }));
-    }
-  }, [dispatch, page, query, searchIn]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(searchActions.resetState());
-    };
-  }, [dispatch]);
-
   const changePageHandler = (event, newPage) => {
-    if (!changePage(event, newPage));
+    if (!changePage(newPage));
     focus();
   };
 
@@ -180,5 +168,4 @@ const Search = () => {
   );
 };
 
-export { default as searchReducer } from './searchSlice';
 export default Search;

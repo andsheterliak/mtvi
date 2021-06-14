@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
+import { useParams } from 'react-router-dom';
 
 import { formatDataStr } from '~common/utils/date';
 import { getPath } from '~common/utils/getData';
@@ -14,6 +14,7 @@ import filterConfig from './filterConfig';
 import NoContent from '~components/NoContent';
 import { getMovieCredits, getTVCredits } from '../personSelectors';
 import { ROUTE_NAMES } from '~common/constants';
+import { useGetPersonQuery } from '~common/services/tmdb';
 
 const getCreditsState = ({ movieCredits, tvCredits }) => {
   const isMovieCast = !!movieCredits?.cast?.length;
@@ -170,7 +171,14 @@ const CreditsList = () => {
   const { filterBy, filterByHandler } = useFilter({
     initialValue: filterConfig.all.value,
   });
-  const timelineData = useSelector((state) => getTimelineData(state, searchIn));
+
+  const { id } = useParams();
+
+  const { timelineData } = useGetPersonQuery(id, {
+    selectFromResult: ({ data }) => ({
+      timelineData: getTimelineData(data, filterBy),
+    }),
+  });
 
   const content = timelineData.data ? (
     <ProjectsTimeline data={timelineData.data} />

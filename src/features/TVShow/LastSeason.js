@@ -1,11 +1,12 @@
-import { useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router';
 import { createSelector } from '@reduxjs/toolkit';
+import { useParams } from 'react-router-dom';
 
 import { ROUTE_NAMES } from '~common/constants';
 import { getImagePath, ifIsData } from '~common/utils/getData';
 import { formatDataStr } from '~common/utils/date';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
+import { useGetTVShowQuery } from '~common/services/tmdb';
 import NoContent from '~components/NoContent';
 import Section from '~components/section/Section';
 import SectionTitle from '~components/section/SectionTitle';
@@ -13,7 +14,7 @@ import SeeAllLink from '~components/SeeAllLink';
 import SeasonCard from '~components/SeasonCards/SeasonCard';
 import noImg from '~assets/img/no-image.svg';
 
-const getSeasons = (state) => state.tvShow.data.seasons;
+const getSeasons = (data) => data.seasons;
 
 const getLastReleasedSeason = createSelector(getSeasons, (seasons) => {
   if (!ifIsData(seasons)) return null;
@@ -42,9 +43,15 @@ const getLastReleasedSeason = createSelector(getSeasons, (seasons) => {
 
 const LastSeason = () => {
   const { url } = useRouteMatch();
-  const lastReleasedSeason = useSelector(getLastReleasedSeason);
-  const isLoading = useSelector((state) => state.isLoading);
-  const seasons = useSelector(getSeasons);
+  const { id } = useParams();
+
+  const { seasons, isLoading, lastReleasedSeason } = useGetTVShowQuery(id, {
+    selectFromResult: ({ data }) => ({
+      seasons: getSeasons(data),
+      lastReleasedSeason: getLastReleasedSeason(data),
+      isLoading,
+    }),
+  });
 
   let season;
 

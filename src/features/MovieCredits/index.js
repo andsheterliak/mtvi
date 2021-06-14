@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import noImageImg from '~assets/img/no-image.svg';
 import noUserPhotoImg from '~assets/img/no-user-photo.svg';
@@ -7,21 +7,21 @@ import useScrollToTop from '~common/hooks/useScrollToTop';
 import { createGetCreditsDataInstance } from '~common/selectors';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import { getImagePath } from '~common/utils/getData';
-import useMovie from '~common/services/movie/useMovie';
-import { getMovieData } from '~common/services/movie/movieSelectors';
+import { useGetMovieQuery } from '~common/services/tmdb';
 
 import BackToHeader from '~components/BackToHeader';
 import Credits from '~components/Credits';
 
-const getCredits = (state) => getMovieData(state)?.credits;
+const getCredits = (data) => data?.credits;
 const getCreditsData = createGetCreditsDataInstance(getCredits);
 
 const MovieCredits = () => {
   useScrollToTop();
-  useMovie();
 
-  const data = useSelector(getMovieData);
-  const creditsData = useSelector(getCreditsData);
+  const { id } = useParams();
+  const { data } = useGetMovieQuery(id);
+
+  const creditsData = getCreditsData(data);
 
   let posterImg;
 
