@@ -22,103 +22,87 @@ const tmdbApi = createApi({
   baseQuery: axiosBaseQuery(),
   reducerPath: 'tmdbApi',
 
-  endpoints: (builder) => ({
-    getMovies: builder.query({
-      query({ options, page }) {
-        return {
-          params: {
-            path: 'discover/movie',
-            sort_by: options.sortBy,
-            'primary_release_date.gte': options.dates.from,
-            'primary_release_date.lte': options.dates.to,
-            with_genres: getSelectedGenres(options.genres),
-            'vote_average.gte': options.userScore[0],
-            'vote_average.lte': options.userScore[1],
-            include_adult: false,
-            page,
-          },
-        };
-      },
+  endpoints: ({ query }) => ({
+    getMovies: query({
+      query: ({ options, page }) => ({
+        params: {
+          path: 'discover/movie',
+          sort_by: options.sortBy,
+          'primary_release_date.gte': options.dates.from,
+          'primary_release_date.lte': options.dates.to,
+          with_genres: getSelectedGenres(options.genres),
+          'vote_average.gte': options.userScore[0],
+          'vote_average.lte': options.userScore[1],
+          include_adult: false,
+          page,
+        },
+      }),
     }),
 
-    getTVShows: builder.query({
-      query({ options, page }) {
-        return {
-          params: {
-            path: 'discover/tv',
-            sort_by: options.sortBy,
-            'first_air_date.gte': options.dates.from,
-            'first_air_date.lte': options.dates.to,
-            with_genres: getSelectedGenres(options.genres),
-            'vote_average.gte': options.userScore[0],
-            'vote_average.lte': options.userScore[1],
-            page,
-          },
-        };
-      },
+    getTVShows: query({
+      query: ({ options, page }) => ({
+        params: {
+          path: 'discover/tv',
+          sort_by: options.sortBy,
+          'first_air_date.gte': options.dates.from,
+          'first_air_date.lte': options.dates.to,
+          with_genres: getSelectedGenres(options.genres),
+          'vote_average.gte': options.userScore[0],
+          'vote_average.lte': options.userScore[1],
+          page,
+        },
+      }),
     }),
 
-    getPeople: builder.query({
-      query({ page }) {
-        return {
-          params: { path: 'person/popular', page },
-        };
-      },
+    getPeople: query({
+      query: ({ page }) => ({
+        params: { path: 'person/popular', page },
+      }),
     }),
 
-    getMovie: builder.query({
-      query(id) {
-        return {
-          params: {
-            path: `movie/${id}`,
-            append_to_response: 'videos,credits,release_dates',
-          },
-        };
-      },
+    getMovie: query({
+      query: (id) => ({
+        params: {
+          path: `movie/${id}`,
+          append_to_response: 'videos,credits,release_dates',
+        },
+      }),
     }),
 
-    getTVShow: builder.query({
-      query(id) {
-        return {
-          params: {
-            path: `tv/${id}`,
-            append_to_response: 'videos,aggregate_credits,content_ratings',
-          },
-        };
-      },
+    getTVShow: query({
+      query: (id) => ({
+        params: {
+          path: `tv/${id}`,
+          append_to_response: 'videos,aggregate_credits,content_ratings',
+        },
+      }),
     }),
 
-    getSeason: builder.query({
-      query({ id, seasonNumber }) {
-        return {
-          params: { path: `tv/${id}/season/${seasonNumber}` },
-        };
-      },
+    getSeason: query({
+      query: ({ id, seasonNumber }) => ({
+        params: { path: `tv/${id}/season/${seasonNumber}` },
+      }),
     }),
 
-    getEpisode: builder.query({
-      query({ id, seasonNumber, episodeNumber }) {
-        return {
-          params: {
-            path: `tv/${id}/season/${seasonNumber}/episode/${episodeNumber}`,
-            append_to_response: 'credits,videos',
-          },
-        };
-      },
+    getEpisode: query({
+      query: ({ id, seasonNumber, episodeNumber }) => ({
+        params: {
+          path: `tv/${id}/season/${seasonNumber}/episode/${episodeNumber}`,
+          append_to_response: 'credits,videos',
+        },
+      }),
     }),
 
-    getPerson: builder.query({
-      query(id) {
-        return {
-          params: {
-            path: `person/${id}`,
-            append_to_response: 'movie_credits,tv_credits,external_ids',
-          },
-        };
-      },
+    getPerson: query({
+      query: (id) => ({
+        params: {
+          path: `person/${id}`,
+          append_to_response: 'movie_credits,tv_credits,external_ids',
+        },
+      }),
     }),
 
-    getSearch: builder.query({
+    getSearch: query({
       async queryFn(params) {
         try {
           const promises = Object.values(SEARCH_PATHS).map((path) => {
