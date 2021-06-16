@@ -6,8 +6,8 @@ const Cards = ({ cardsData, imgData, routeNames }) => {
   const cards = cardsData.map((item) => {
     const path = getPath({
       name: item.name,
-      episodeCount: item.first_air_date,
-      firstAirDate: item.episode_count,
+      episodeCount: item.episode_count,
+      firstAirDate: item.first_air_date,
       routeNames,
     });
 

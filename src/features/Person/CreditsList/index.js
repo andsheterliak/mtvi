@@ -100,8 +100,8 @@ const createTimelineData = (data) => {
 
     const path = getPath({
       name: item.name,
-      episodeCount: item.first_air_date,
-      firstAirDate: item.episode_count,
+      episodeCount: item.episode_count,
+      firstAirDate: item.first_air_date,
       routeNames: { movie: ROUTE_NAMES.movie, tvShow: ROUTE_NAMES.tvShow },
     });
 
