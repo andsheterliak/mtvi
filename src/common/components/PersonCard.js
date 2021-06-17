@@ -21,12 +21,12 @@ const useStyles = makeStyles((theme) => ({
   content: {
     height: '100%',
     display: 'grid',
+    gap: '10px',
     padding: theme.spacing(1.5),
   },
 
   subText: {
     alignSelf: 'end',
-    marginTop: '5px',
   },
 }));
 
@@ -39,12 +39,7 @@ const PersonCard = ({ imgPath, name, bodyContent, path }) => {
         <CardMedia component="img" alt={name} image={imgPath} />
 
         <CardContent className={classes.content}>
-          <Typography
-            color="textPrimary"
-            gutterBottom
-            variant="body1"
-            component="h2"
-          >
+          <Typography color="textPrimary" variant="body1" component="h2">
             {getHyphenOrData(name)}
           </Typography>
 

@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     display: 'grid',
     padding: theme.spacing(1.5),
+    gap: '10px',
   },
 
   subInfo: {
@@ -31,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     alignSelf: 'end',
-    marginTop: '5px',
   },
 
   media: {
@@ -55,12 +55,7 @@ const Card = ({ imgPath, title, releaseDate, voteAverage, path }) => {
         />
 
         <CardContent className={classes.content}>
-          <Typography
-            color="textPrimary"
-            gutterBottom
-            variant="body2"
-            component="h2"
-          >
+          <Typography color="textPrimary" variant="body2" component="h2">
             {getHyphenOrData(title)}
           </Typography>
 
