@@ -1,20 +1,22 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { scrollToTop } from '~common/utils/dom';
 
 const useScrollToTop = ({ triggers = [] } = {}) => {
-  const { pathname, search } = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
-    // To scroll to top when the call stack is empty and browser is ready to paint.
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        scrollToTop();
-      });
+    const unlisten = history.listen(() => {
+      scrollToTop();
     });
+
+    return () => {
+      unlisten();
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, search, ...triggers]);
+  }, [...triggers]);
 };
 
 export default useScrollToTop;
