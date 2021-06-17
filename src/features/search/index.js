@@ -1,171 +1,164 @@
-import { useMemo } from 'react';
-import { useHistory, useLocation, useRouteMatch } from 'react-router';
-import { createSelector } from '@reduxjs/toolkit';
+import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
+import { Fade, InputBase, InputLabel } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import SearchIcon from '@material-ui/icons/Search';
+import CloseIcon from '@material-ui/icons/Close';
 
-import Cards from '~components/Cards';
-import CardsGrid from '~components/grids/CardsGrid';
-import PageGrid from '~components/grids/PageGrid';
 import MainContainer from '~components/MainContainer';
-import MainContent from '~components/MainContent';
-import NoContent from '~components/NoContent';
-import Pagination, { usePagination } from '~components/Pagination';
-import SelectionBar from '~components/SelectionBar';
-import Spacer from '~components/Spacer';
-import FocusableContainer, { useFocus } from '~components/FocusableContainer';
-import PersonCards from '~features/People/components/PersonCards';
-import { IMG_BASE_URL, IMG_SIZES, SEARCH_PATHS } from '~common/tmdb-config';
-import { ifIsData } from '~common/utils/getData';
-import useScrollToTop from '~common/hooks/useScrollToTop';
+import IconBtn from '~components/IconBtn';
+import SearchItems from './components/SearchItems';
+import useDebounceEffect from './useDebounceEffect';
 import { ROUTE_NAMES } from '~common/constants';
+import { IMG_BASE_URL, IMG_SIZES, SEARCH_PATHS } from '~common/tmdb-config';
 import { useGetSearchQuery } from '~common/services/tmdb';
 import noImage from '~assets/img/no-image.svg';
+import noUserPhoto from '~assets/img/no-user-photo.svg';
 
-const searchPathsToNames = {
-  [SEARCH_PATHS.movie]: 'Movies',
-  [SEARCH_PATHS.tvShow]: 'TV Shows',
-  [SEARCH_PATHS.person]: 'People',
-};
+const useStyles = makeStyles((theme) => ({
+  root: {
+    position: 'absolute',
+    right: 0,
+    top: '110%',
+    backgroundColor: theme.palette.background.paper,
+    width: '100%',
+    boxShadow: theme.shadows[1],
+    maxHeight: '600px',
+    overflow: 'auto',
 
-const getSearchData = (data) => data;
+    [theme.breakpoints.up('sm')]: {
+      width: '500px',
+    },
+  },
 
-const getSelectionBarData = createSelector(getSearchData, (searchData) => {
-  if (!searchData) return null;
+  form: {
+    padding: `${theme.spacing(1.5)}px 0`,
+    position: 'sticky',
+    top: 0,
+    backgroundColor: theme.palette.background.paper,
+    zIndex: 1,
+    borderBottom: `1px solid ${theme.palette.divider}`,
+  },
+}));
 
-  const selectionBarData = {};
+const Search = ({ isSearchVisible, toggleSearchHandler }) => {
+  const classes = useStyles();
+  const history = useHistory();
+  const [query, setQuery] = useState('');
+  const [isReadyToFetch, setIsReadyToFetch] = useState(false);
+  const { data } = useGetSearchQuery({ query }, { skip: !isReadyToFetch });
 
-  Object.entries(searchData).forEach(([key, value]) => {
-    const name = searchPathsToNames[key];
+  useDebounceEffect({
+    effect() {
+      setIsReadyToFetch(true);
+    },
 
-    selectionBarData[key] = {
-      name,
-      amount: value.total_results,
-      data: value.results,
-    };
+    deps: [query],
+    delay: 700,
   });
 
-  return selectionBarData;
-});
+  const clearHandler = () => {
+    setIsReadyToFetch(false);
+    setQuery('');
+  };
 
-const Search = () => {
-  useScrollToTop();
+  const inputHandler = (event) => {
+    setIsReadyToFetch(false);
+    setQuery(event.target.value);
+  };
 
-  const location = useLocation();
-  const history = useHistory();
-  const { url } = useRouteMatch();
+  const submitHandler = (event) => {
+    event.preventDefault();
+    if (!data || !query) return;
 
-  const { containerRef, focus } = useFocus();
+    const searchParams = new URLSearchParams();
 
-  const { searchIn, query } = useMemo(() => {
-    const params = new URLSearchParams(location.search);
+    searchParams.set(
+      'searchIn',
+      SEARCH_PATHS[data.results?.[0].media_type] || SEARCH_PATHS.movie
+    );
+    searchParams.set('query', query);
 
-    return {
-      query: params.get('query'),
-      searchIn: params.get('searchIn'),
-    };
-  }, [location.search]);
+    history.push(`/${ROUTE_NAMES.search}?${searchParams}`);
+    toggleSearchHandler();
+  };
 
-  const { page, changePage } = usePagination();
+  const clickHandler = () => {
+    toggleSearchHandler();
+  };
 
-  const { data: searchData, isLoading } = useGetSearchQuery(
-    { page, query, searchIn },
-    { skip: !query }
-  );
+  let searchItems;
 
-  const totalPages = searchData?.[searchIn].total_pages;
-  const selectionBarData = getSelectionBarData(searchData);
-
-  let content;
-
-  if (selectionBarData) {
-    const { data } = selectionBarData[searchIn];
-
-    if (ifIsData(data)) {
-      const cards =
-        searchIn === SEARCH_PATHS.person ? (
-          <PersonCards
-            cardsData={data}
-            routeName={ROUTE_NAMES.person}
-            imgData={{
-              basePath: IMG_BASE_URL,
-              size: IMG_SIZES.profile,
-              fallback: noImage,
-            }}
-          />
-        ) : (
-          <Cards
-            cardsData={data}
-            routeNames={{
-              tvShow: ROUTE_NAMES.tvShow,
-              movie: ROUTE_NAMES.movie,
-            }}
-            imgData={{
-              basePath: IMG_BASE_URL,
-              size: IMG_SIZES.poster,
-              fallback: noImage,
-            }}
-          />
-        );
-
-      content = <CardsGrid>{cards}</CardsGrid>;
-    } else {
-      content = (
-        <NoContent
-          message={`There are no ${selectionBarData[
-            searchIn
-          ].name.toLowerCase()} that matched your query.`}
-        />
-      );
-    }
+  if (data) {
+    searchItems = (
+      <SearchItems
+        data={data.results}
+        searchPaths={SEARCH_PATHS}
+        routeNames={ROUTE_NAMES}
+        imgData={{
+          basePath: IMG_BASE_URL,
+          person: {
+            size: IMG_SIZES.poster,
+            fallback: noUserPhoto,
+          },
+          common: {
+            size: IMG_SIZES.profile,
+            fallback: noImage,
+          },
+        }}
+        clickHandler={clickHandler}
+      />
+    );
   }
 
-  const changePageHandler = (event, newPage) => {
-    if (!changePage(newPage));
-    focus();
-  };
-
-  const selectHandler = (e, searchInValue) => {
-    const params = new URLSearchParams();
-
-    params.set('searchIn', searchInValue);
-    params.set('query', query);
-    history.push(`${url}?${params}`);
-  };
-
   return (
-    <>
-      <Spacer />
-
-      {selectionBarData ? (
-        <MainContent>
+    <Fade mountOnEnter unmountOnExit in={isSearchVisible}>
+      <div className={classes.root}>
+        <form
+          className={classes.form}
+          noValidate
+          autoComplete="off"
+          spellCheck="false"
+          onSubmit={submitHandler}
+        >
           <MainContainer>
-            <PageGrid>
-              <SelectionBar
-                title="Search Results"
-                data={selectionBarData}
-                selectHandler={selectHandler}
-                selected={searchIn}
-              />
+            <InputLabel htmlFor="search"></InputLabel>
+            <InputBase
+              id="search"
+              placeholder="Search for a movie, tv show..."
+              fullWidth
+              // eslint-disable-next-line jsx-a11y/no-autofocus
+              autoFocus
+              value={query}
+              endAdornment={
+                <>
+                  <IconBtn
+                    ariaLabel="search"
+                    edge="end"
+                    icon={SearchIcon}
+                    size="sm"
+                    clickHandler={submitHandler}
+                  />
 
-              <div>
-                <FocusableContainer containerRef={containerRef}>
-                  {content}
-                </FocusableContainer>
-
-                <Pagination
-                  isLoading={isLoading}
-                  page={page}
-                  totalPages={totalPages}
-                  changePageHandler={changePageHandler}
-                />
-              </div>
-            </PageGrid>
+                  <IconBtn
+                    ariaLabel="clear search"
+                    edge="end"
+                    icon={CloseIcon}
+                    size="sm"
+                    clickHandler={clearHandler}
+                  />
+                </>
+              }
+              onChange={inputHandler}
+            />
           </MainContainer>
-        </MainContent>
-      ) : (
-        'Loading...'
-      )}
-    </>
+        </form>
+
+        {searchItems}
+      </div>
+    </Fade>
   );
 };
 
+export { default as useToggleSearch } from './useToggleSearch';
 export default Search;

@@ -249,11 +249,7 @@ export const TV_DEFAULT_OPTIONS = {
   },
 };
 
-export const SEARCH_PATHS = {
-  movie: 'movie',
-  tvShow: 'tv',
-  person: 'person',
-};
+export const SEARCH_PATHS = { movie: 'movie', tv: 'tv', person: 'person' };
 
 export const VIDEO_TYPES = {
   trailer: { key: 'Trailer', name: 'Trailers' },

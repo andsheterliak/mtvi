@@ -103,6 +103,21 @@ const tmdbApi = createApi({
     }),
 
     getSearch: query({
+      async queryFn(params, _queryApi, _extraOptions, fetchWithBQ) {
+        if (!params.query) return { data: null };
+
+        const result = await fetchWithBQ({
+          params: {
+            path: 'search/multi',
+            query: params.query,
+          },
+        });
+
+        return result.data ? { data: result.data } : { error: result.error };
+      },
+    }),
+
+    getSearchResults: query({
       async queryFn(params) {
         try {
           const promises = Object.values(SEARCH_PATHS).map((path) => {
@@ -143,6 +158,7 @@ export const {
   useGetEpisodeQuery,
   useGetPersonQuery,
   useGetSearchQuery,
+  useGetSearchResultsQuery,
 } = tmdbApi;
 
 export default tmdbApi;

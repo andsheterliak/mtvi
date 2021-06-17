@@ -14,7 +14,7 @@ import EpisodeCredits from '~features/EpisodeCredits';
 import EpisodeVideos from '~features/EpisodeVideos';
 import People from '~features/People';
 import Person from '~features/Person';
-import Search from '~features/Search';
+import SearchResults from '~features/SearchResults';
 
 const movies = {
   name: 'Movies',
@@ -99,9 +99,9 @@ const routesConfig = {
     component: Person,
     exact: true,
   },
-  search: {
+  searchResults: {
     to: `/${ROUTE_NAMES.search}`,
-    component: Search,
+    component: SearchResults,
     exact: true,
   },
 };

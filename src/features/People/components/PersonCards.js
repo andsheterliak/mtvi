@@ -1,12 +1,9 @@
-import { getImagePath } from '~common/utils/getData';
+import { getImagePath, getKnownFor } from '~common/utils/getData';
 import PersonCard from '~components/PersonCard';
 
 const PersonCards = ({ cardsData, imgData, routeName }) => {
   const cards = cardsData.map((item) => {
-    const knownFor = item.known_for
-      .map((el) => el.original_name || el.title)
-      .join(', ');
-
+    const knownFor = getKnownFor(item.known_for);
     const imgPath = getImagePath({ ...imgData, path: item.profile_path });
 
     return (

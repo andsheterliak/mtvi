@@ -10,8 +10,6 @@ import Footer from './components/Footer';
 import Spacer from '~components/Spacer';
 import RootWrapper from './components/RootWrapper';
 import Routes from './components/Routes';
-import { ROUTE_NAMES } from '~common/constants';
-import { SEARCH_PATHS } from '~common/tmdb-config';
 
 const App = () => {
   const location = useLocation();
@@ -21,12 +19,7 @@ const App = () => {
       <CssBaseline />
 
       <RootWrapper>
-        <Menu
-          searchBasePath={`/${ROUTE_NAMES.search}`}
-          locationPathname={location.pathname}
-          routes={routesConfig}
-          searchPaths={SEARCH_PATHS}
-        />
+        <Menu locationPathname={location.pathname} routes={routesConfig} />
 
         <Switch>{<Routes config={routesConfig} />}</Switch>
 

@@ -1,4 +1,4 @@
-import { AppBar, Link as MUILink, Toolbar } from '@material-ui/core';
+import { AppBar, Backdrop, Link as MUILink, Toolbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import SearchIcon from '@material-ui/icons/Search';
@@ -7,15 +7,24 @@ import { Link } from 'react-router-dom';
 
 import HideOnScroll from '~components/HideOnScroll';
 import MainContainer from '~components/MainContainer';
-import IconBtn from './IconBtn';
+import IconBtn from '~components/IconBtn';
 import Logo from './Logo';
 import Drawer, { useDrawer } from './Drawer';
-import Search, { useSearch } from './Search';
-import useSearchIn from './Search/useSearchIn';
+import Search, { useToggleSearch } from '~features/Search';
 
 const useStyles = makeStyles((theme) => ({
+  backdrop: {
+    zIndex: theme.zIndex.appBar,
+  },
+
   appBar: {
     backgroundColor: theme.palette.background.paper,
+  },
+
+  inner: {
+    [theme.breakpoints.up('sm')]: {
+      position: 'relative',
+    },
   },
 
   toolBar: {
@@ -29,73 +38,54 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Menu = ({ locationPathname, routes, searchPaths, searchBasePath }) => {
+const Menu = ({ locationPathname, routes }) => {
   const classes = useStyles();
 
-  const {
-    searchInValue,
-    isMenuFilterOpened,
-    menuFilterAnchorEl,
-    closeMenuFilterHandler,
-    openMenuFilterHandler,
-    selectMenuFilterItemHandler,
-  } = useSearchIn({ value: searchPaths.movie });
-
-  const {
-    isSearchVisible,
-    toggleSearchHandler,
-    inputSearchHandler,
-    submitSearchHandler,
-    clearSearchHandler,
-    searchValue,
-  } = useSearch({ searchBasePath, searchInValue });
-
   const { isDrawerOpened, closeDrawerHandler, openDrawerHandler } = useDrawer();
+  const { isSearchVisible, toggleSearchHandler } = useToggleSearch();
 
   return (
     <>
+      <Backdrop
+        className={classes.backdrop}
+        open={isSearchVisible}
+        onClick={toggleSearchHandler}
+      />
+
       <HideOnScroll>
         <AppBar elevation={1} className={classes.appBar} position="sticky">
           <MainContainer>
-            <Toolbar className={classes.toolBar}>
-              <IconBtn
-                ariaLabel="open drawer"
-                clickHandler={openDrawerHandler}
-                edge="start"
-                icon={MenuOpenIcon}
-              />
+            <div className={classes.inner}>
+              <Toolbar className={classes.toolBar}>
+                <IconBtn
+                  ariaLabel="open drawer"
+                  clickHandler={openDrawerHandler}
+                  edge="start"
+                  icon={MenuOpenIcon}
+                />
 
-              <MUILink
-                underline="none"
-                component={Link}
-                to={routes.default.redirectTo}
-              >
-                <Logo />
-              </MUILink>
+                <MUILink
+                  underline="none"
+                  component={Link}
+                  to={routes.default.redirectTo}
+                >
+                  <Logo />
+                </MUILink>
 
-              <IconBtn
-                ariaLabel="search"
-                clickHandler={toggleSearchHandler}
-                edge="end"
-                icon={isSearchVisible ? CloseIcon : SearchIcon}
+                <IconBtn
+                  ariaLabel="toggle search"
+                  clickHandler={toggleSearchHandler}
+                  edge="end"
+                  icon={isSearchVisible ? CloseIcon : SearchIcon}
+                />
+              </Toolbar>
+
+              <Search
+                isSearchVisible={isSearchVisible}
+                toggleSearchHandler={toggleSearchHandler}
               />
-            </Toolbar>
+            </div>
           </MainContainer>
-
-          <Search
-            isSearchVisible={isSearchVisible}
-            inputSearchHandler={inputSearchHandler}
-            submitSearchHandler={submitSearchHandler}
-            clearSearchHandler={clearSearchHandler}
-            value={searchValue}
-            searchPaths={searchPaths}
-            searchInValue={searchInValue}
-            isMenuFilterOpened={isMenuFilterOpened}
-            menuFilterAnchorEl={menuFilterAnchorEl}
-            closeMenuFilterHandler={closeMenuFilterHandler}
-            openMenuFilterHandler={openMenuFilterHandler}
-            selectMenuFilterItemHandler={selectMenuFilterItemHandler}
-          />
         </AppBar>
       </HideOnScroll>
 

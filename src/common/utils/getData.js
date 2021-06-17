@@ -66,3 +66,7 @@ export const getSelectedGenres = (genres) => {
 };
 
 export const getTopItems = (items, number = 9) => items.slice(0, number);
+
+export const getKnownFor = (knownForData) => {
+  return knownForData.map((el) => el.original_name || el.title).join(', ');
+};
