@@ -4,18 +4,17 @@ import axiosTMDB from '~common/axios-tmdb';
 import { SEARCH_PATHS } from '~common/tmdb-config';
 import { getSelectedGenres } from '~common/utils/getData';
 
-const axiosBaseQuery = ({ baseUrl = '' } = {}) => async ({
-  params,
-  method = 'get',
-}) => {
-  try {
-    const result = await axiosTMDB[method](baseUrl, { params });
-    return { data: result.data };
-  } catch (error) {
-    return {
-      error: error.response?.data,
-    };
-  }
+const axiosBaseQuery = ({ baseUrl = '' } = {}) => {
+  return async ({ params, method = 'get' }) => {
+    try {
+      const result = await axiosTMDB[method](baseUrl, { params });
+      return { data: result.data };
+    } catch (error) {
+      return {
+        error: error.response?.data,
+      };
+    }
+  };
 };
 
 const tmdbApi = createApi({

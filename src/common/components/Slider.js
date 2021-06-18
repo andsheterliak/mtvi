@@ -1,12 +1,8 @@
 import NativeSlider, { useNativeSlider } from './NativeSlider';
 
 const Slider = ({ children, padding }) => {
-  const {
-    sliderRef,
-    destroyMomentum,
-    initSliderHandler,
-    preventDragHandler,
-  } = useNativeSlider();
+  const { sliderRef, destroyMomentum, initSliderHandler, preventDragHandler } =
+    useNativeSlider();
 
   return (
     <NativeSlider
