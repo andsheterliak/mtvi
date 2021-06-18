@@ -1,6 +1,5 @@
 const sortMediaQueries = require('postcss-sort-media-queries');
 const autoprefixer = require('autoprefixer');
-const postcssNormalize = require('postcss-normalize');
 const cssnano = require('cssnano');
 
 const { isProd } = require('./webpack/helpers.conf');
@@ -11,9 +10,6 @@ const plugins = [
   }),
 
   autoprefixer(),
-  postcssNormalize({
-    forceImport: 'normalize.css'
-  }),
 ];
 
 if (isProd) {

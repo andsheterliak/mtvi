@@ -7,7 +7,7 @@ const config = {
 
       {
         bugfixes: true, // Will be set by default in next major version.
-        corejs: '3.7.0',
+        corejs: '3.14.0',
         useBuiltIns: 'usage',
       },
     ],
