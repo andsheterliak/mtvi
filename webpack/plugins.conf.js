@@ -58,6 +58,8 @@ const pluginsConf = [
   }),
 ];
 
-if (isDev) pluginsConf.push(new ReactRefreshWebpackPlugin());
+if (isDev) pluginsConf.push(new ReactRefreshWebpackPlugin({
+  overlay: false,
+}));
 
 module.exports = pluginsConf;
