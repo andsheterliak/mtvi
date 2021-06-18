@@ -3,7 +3,6 @@ import { Fab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { MovieFilter as FilterIcon } from '@material-ui/icons/';
 
-import debounce from '~common/utils/debounce';
 import HideOnScroll from '~components/HideOnScroll';
 
 const useStyles = makeStyles((theme) => {
@@ -21,9 +20,9 @@ const AdjustmentButton = ({ ariaLabel, openModalHandler }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    const debounceWindowResizeHandler = debounce(() => {
+    const debounceWindowResizeHandler = () => {
       setWindowWidth(window.innerWidth);
-    }, 50);
+    };
 
     window.addEventListener('resize', debounceWindowResizeHandler);
 
