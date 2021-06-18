@@ -8,12 +8,22 @@ const useToggleSearch = ({ isVisible = false } = {}) => {
   };
 
   useEffect(() => {
-    const widthWithoutScrollbar = document.body.clientWidth;
+    const windowResizeHandler = () => {
+      const widthWithoutScrollbar = document.documentElement.clientWidth;
 
+      document.body.style.width = isSearchVisible
+        ? `${widthWithoutScrollbar}px`
+        : 'auto';
+    };
+
+    window.addEventListener('resize', windowResizeHandler);
+
+    windowResizeHandler();
     document.body.style.overflow = isSearchVisible ? 'hidden' : 'auto';
-    document.body.style.width = isSearchVisible
-      ? `${widthWithoutScrollbar}px`
-      : 'auto';
+
+    return () => {
+      window.removeEventListener('resize', windowResizeHandler);
+    };
   }, [isSearchVisible]);
 
   return { isSearchVisible, toggleSearchHandler };
