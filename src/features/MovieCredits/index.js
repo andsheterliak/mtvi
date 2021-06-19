@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { useErrorHandler } from 'react-error-boundary';
 
 import noImageImg from '~assets/img/no-image.svg';
 import noUserPhotoImg from '~assets/img/no-user-photo.svg';
@@ -19,7 +20,9 @@ const MovieCredits = () => {
   useScrollToTop();
 
   const { id } = useParams();
-  const { data } = useGetMovieQuery(id);
+  const { data, error } = useGetMovieQuery(id);
+
+  useErrorHandler(error);
 
   const creditsData = getCreditsData(data);
 

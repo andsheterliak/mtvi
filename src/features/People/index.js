@@ -1,3 +1,5 @@
+import { useErrorHandler } from 'react-error-boundary';
+
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { ifIsData } from '~common/utils/getData';
 import { ROUTE_NAMES } from '~common/constants';
@@ -18,7 +20,9 @@ const People = ({ titleName }) => {
 
   const { focus, containerRef } = useFocus();
   const { page, changePage } = usePagination();
-  const { data, isLoading } = useGetPeopleQuery({ page });
+  const { data, isLoading, error } = useGetPeopleQuery({ page });
+
+  useErrorHandler(error);
 
   const changePageHandler = (event, newPage) => {
     if (!changePage(newPage)) return;

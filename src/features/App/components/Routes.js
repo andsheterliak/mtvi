@@ -1,7 +1,8 @@
 import { Redirect, Route } from 'react-router';
+import { Switch } from 'react-router-dom';
 
 const Routes = ({ config }) => {
-  return Object.entries(config).map(([key, data]) => {
+  const routes = Object.entries(config).map(([key, data]) => {
     const { name = null, to, component: Component, redirectTo, exact } = data;
 
     return (
@@ -10,15 +11,21 @@ const Routes = ({ config }) => {
         key={key}
         path={to}
         render={(props) => {
-          return redirectTo ? (
-            <Redirect to={redirectTo} />
-          ) : (
-            <Component {...props} titleName={name} />
-          );
+          if (redirectTo) return <Redirect to={redirectTo} />;
+
+          if (to === config.page404.to) {
+            return (
+              <Component {...props} homePath={config.default.redirectTo} />
+            );
+          }
+
+          return <Component {...props} titleName={name} />;
         }}
       />
     );
   });
+
+  return <Switch>{routes}</Switch>;
 };
 
 export default Routes;

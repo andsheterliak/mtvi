@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { useErrorHandler } from 'react-error-boundary';
 
 import useScrollToTop from '~common/hooks/useScrollToTop';
 
@@ -18,7 +19,9 @@ const TVShow = () => {
   useScrollToTop();
 
   const { id } = useParams();
-  const { data } = useGetTVShowQuery(id);
+  const { data, error } = useGetTVShowQuery(id);
+
+  useErrorHandler(error);
 
   return (
     <>

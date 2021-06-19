@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useHistory, useLocation, useRouteMatch } from 'react-router';
 import { createSelector } from '@reduxjs/toolkit';
+import { useErrorHandler } from 'react-error-boundary';
 
 import Cards from '~components/Cards';
 import CardsGrid from '~components/grids/CardsGrid';
@@ -66,10 +67,13 @@ const SearchResults = () => {
 
   const { page, changePage } = usePagination();
 
-  const { data: searchData, isLoading } = useGetSearchResultsQuery(
-    { page, query, searchIn },
-    { skip: !query }
-  );
+  const {
+    data: searchData,
+    isLoading,
+    error,
+  } = useGetSearchResultsQuery({ page, query, searchIn }, { skip: !query });
+
+  useErrorHandler(error);
 
   const totalPages = searchData?.[searchIn].total_pages;
   const selectionBarData = getSelectionBarData(searchData);

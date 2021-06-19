@@ -1,4 +1,5 @@
 import { useParams } from 'react-router';
+import { useErrorHandler } from 'react-error-boundary';
 
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { useGetPersonQuery } from '~common/services/tmdb';
@@ -17,7 +18,9 @@ const Person = () => {
   useScrollToTop();
 
   const { id } = useParams();
-  const { data } = useGetPersonQuery(id);
+  const { data, error } = useGetPersonQuery(id);
+
+  useErrorHandler(error);
 
   return (
     <>

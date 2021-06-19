@@ -1,6 +1,7 @@
-import { Switch, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import routesConfig from '~common/routesConfig';
 import { globalTheme } from '~common/theme';
@@ -10,6 +11,7 @@ import Footer from './components/Footer';
 import Spacer from '~components/Spacer';
 import RootWrapper from './components/RootWrapper';
 import Routes from './components/Routes';
+import ErrorFallback from './components/ErrorFallback';
 
 const App = () => {
   const location = useLocation();
@@ -19,13 +21,15 @@ const App = () => {
       <CssBaseline />
 
       <RootWrapper>
-        <Menu locationPathname={location.pathname} routes={routesConfig} />
+        <ErrorBoundary fallbackRender={ErrorFallback}>
+          <Menu locationPathname={location.pathname} routes={routesConfig} />
 
-        <Switch>{<Routes config={routesConfig} />}</Switch>
+          <Routes config={routesConfig} />
 
-        <Spacer />
+          <Spacer />
 
-        <Footer />
+          <Footer />
+        </ErrorBoundary>
       </RootWrapper>
     </ThemeProvider>
   );

@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { useErrorHandler } from 'react-error-boundary';
 
 import BackToHeader from '~components/BackToHeader';
 import MainContent from '~components/MainContent';
@@ -17,7 +18,9 @@ const Seasons = () => {
   useScrollToTop();
 
   const { id } = useParams();
-  const { data } = useGetTVShowQuery(id);
+  const { data, error } = useGetTVShowQuery(id);
+
+  useErrorHandler(error);
 
   let imgPath;
   let seasonsCards;

@@ -1,3 +1,5 @@
+import { useErrorHandler } from 'react-error-boundary';
+
 import {
   TV_DEFAULT_OPTIONS,
   SORT_TV_BY_OPTIONS,
@@ -35,7 +37,9 @@ const TVShows = ({ titleName }) => {
 
   useScrollToTop({ triggers: [options] });
 
-  const { data, isLoading } = useGetTVShowsQuery({ options, page });
+  const { data, isLoading, error } = useGetTVShowsQuery({ options, page });
+
+  useErrorHandler(error);
 
   const changePageHandler = (event, newPage) => {
     if (!changePage(newPage)) return;

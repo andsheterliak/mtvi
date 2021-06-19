@@ -5,13 +5,17 @@ import { SEARCH_PATHS } from '~common/tmdb-config';
 import { getSelectedGenres } from '~common/utils/getData';
 
 const axiosBaseQuery = ({ baseUrl = '' } = {}) => {
-  return async ({ params, method = 'get' }) => {
+  return async ({ params }) => {
     try {
-      const result = await axiosTMDB[method](baseUrl, { params });
+      const result = await axiosTMDB.get(baseUrl, { params });
+
       return { data: result.data };
     } catch (error) {
       return {
-        error: error.response?.data,
+        error: {
+          status: error.response?.status,
+          message: error.response?.data.message,
+        },
       };
     }
   };
@@ -140,7 +144,12 @@ const tmdbApi = createApi({
 
           return { data };
         } catch (error) {
-          return { error: error.response?.data };
+          return {
+            error: {
+              status: error.response?.status,
+              message: error.response?.data.message,
+            },
+          };
         }
       },
     }),

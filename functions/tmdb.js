@@ -7,7 +7,7 @@ const handler = async (event) => {
     return {
       statusCode: 400,
       body: JSON.stringify({
-        msg: `You cannot make ${event.httpMethod} request!`,
+        message: `You cannot make ${event.httpMethod} request.`,
       }),
     };
   }
@@ -22,22 +22,19 @@ const handler = async (event) => {
       },
     });
 
-    if (response.statusText !== 'OK') {
-      return { statusCode: response.status, body: response.statusText };
-    }
-
     return {
       statusCode: 200,
       body: JSON.stringify(response.data),
     };
   } catch (error) {
     // output to netlify function log
-    console.log(error.message);
+    console.log('--- error message:', error.message);
 
     return {
-      statusCode: 500,
-      // Could be a custom message or object i.e. JSON.stringify(err)
-      body: JSON.stringify({ msg: error.message }),
+      statusCode: error.response.status,
+      body: JSON.stringify({
+        message: error.response?.data.status_message ?? error.message,
+      }),
     };
   }
 };

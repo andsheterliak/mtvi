@@ -15,6 +15,7 @@ import EpisodeVideos from '~features/EpisodeVideos';
 import People from '~features/People';
 import Person from '~features/Person';
 import SearchResults from '~features/SearchResults';
+import Page404 from '~components/Page404';
 
 const movies = {
   name: 'Movies',
@@ -103,6 +104,10 @@ const routesConfig = {
     to: `/${ROUTE_NAMES.search}`,
     component: SearchResults,
     exact: true,
+  },
+  page404: {
+    to: '*',
+    component: Page404,
   },
 };
 

@@ -1,3 +1,5 @@
+import { useErrorHandler } from 'react-error-boundary';
+
 import {
   IMG_BASE_URL,
   IMG_SIZES,
@@ -33,7 +35,9 @@ const Movies = ({ titleName }) => {
 
   useScrollToTop({ triggers: [options] });
 
-  const { data, isLoading } = useGetMoviesQuery({ options, page });
+  const { data, isLoading, error } = useGetMoviesQuery({ options, page });
+
+  useErrorHandler(error);
 
   const changePageHandler = (event, newPage) => {
     if (!changePage(newPage)) return;

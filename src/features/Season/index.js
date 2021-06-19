@@ -1,4 +1,5 @@
 import { useParams, useRouteMatch } from 'react-router';
+import { useErrorHandler } from 'react-error-boundary';
 
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import { getImagePath } from '~common/utils/getData';
@@ -16,7 +17,9 @@ import MainContainer from '~components/MainContainer';
 const Season = () => {
   const { id, seasonNumber } = useParams();
   const { url } = useRouteMatch();
-  const { data } = useGetSeasonQuery({ id, seasonNumber });
+  const { data, error } = useGetSeasonQuery({ id, seasonNumber });
+
+  useErrorHandler(error);
 
   let imgPath;
 

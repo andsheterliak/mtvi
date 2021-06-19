@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { useErrorHandler } from 'react-error-boundary';
 
 import useScrollToTop from '~common/hooks/useScrollToTop';
 
@@ -16,7 +17,9 @@ const Movie = () => {
   useScrollToTop();
 
   const { id } = useParams();
-  const { data } = useGetMovieQuery(id);
+  const { data, error } = useGetMovieQuery(id);
+
+  useErrorHandler(error);
 
   return (
     <>

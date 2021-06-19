@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { useErrorHandler } from 'react-error-boundary';
 
 import { ROUTE_NAMES } from '~common/constants';
 import useScrollToTop from '~common/hooks/useScrollToTop';
@@ -18,8 +19,14 @@ const EpisodeCredits = () => {
   useScrollToTop();
 
   const { id, seasonNumber, episodeNumber } = useParams();
-  const { data } = useGetEpisodeQuery({ id, seasonNumber, episodeNumber });
+  const { data, error } = useGetEpisodeQuery({
+    id,
+    seasonNumber,
+    episodeNumber,
+  });
   const creditsData = getCreditsData(data);
+
+  useErrorHandler(error);
 
   let stillImg;
 

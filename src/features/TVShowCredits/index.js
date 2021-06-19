@@ -1,3 +1,4 @@
+import { useErrorHandler } from 'react-error-boundary';
 import { useParams } from 'react-router-dom';
 
 import noImageImg from '~assets/img/no-image.svg';
@@ -19,7 +20,9 @@ const TVShowCredits = () => {
   useScrollToTop();
 
   const { id } = useParams();
-  const { data } = useGetTVShowQuery(id);
+  const { data, error } = useGetTVShowQuery(id);
+
+  useErrorHandler(error);
 
   const creditsData = getCreditsData(data);
 

@@ -4,6 +4,7 @@ import { Fade, InputBase, InputLabel } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
+import { useErrorHandler } from 'react-error-boundary';
 
 import MainContainer from '~components/MainContainer';
 import IconBtn from '~components/IconBtn';
@@ -46,7 +47,13 @@ const Search = ({ isSearchVisible, toggleSearchHandler }) => {
   const history = useHistory();
   const [query, setQuery] = useState('');
   const [isReadyToFetch, setIsReadyToFetch] = useState(false);
-  const { data } = useGetSearchQuery({ query }, { skip: !isReadyToFetch });
+
+  const { data, error } = useGetSearchQuery(
+    { query },
+    { skip: !isReadyToFetch }
+  );
+
+  useErrorHandler(error);
 
   useDebounceEffect({
     effect() {
