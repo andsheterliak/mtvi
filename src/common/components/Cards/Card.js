@@ -47,12 +47,7 @@ const Card = ({ imgPath, title, releaseDate, voteAverage, path }) => {
   return (
     <MUiCard>
       <CardActionArea component={Link} to={path} className={classes.action}>
-        <CardMedia
-          component="div"
-          alt={title}
-          image={imgPath}
-          className={classes.media}
-        />
+        <CardMedia component="div" image={imgPath} className={classes.media} />
 
         <CardContent className={classes.content}>
           <Typography color="textPrimary" variant="body2" component="h2">
