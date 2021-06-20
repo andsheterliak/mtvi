@@ -7,6 +7,11 @@ const useScrollToTop = ({ triggers = [] } = {}) => {
   const history = useHistory();
 
   useEffect(() => {
+    scrollToTop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...triggers]);
+
+  useEffect(() => {
     const unlisten = history.listen(() => {
       scrollToTop();
     });
@@ -14,9 +19,7 @@ const useScrollToTop = ({ triggers = [] } = {}) => {
     return () => {
       unlisten();
     };
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [...triggers]);
+  }, [history]);
 };
 
 export default useScrollToTop;
