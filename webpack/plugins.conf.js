@@ -26,7 +26,6 @@ const pluginsConf = [
     disable: isDev,
 
     /**
-     * These settings are intended for the case in which the images are already minified before being added to the project.
      * Sometimes it is necessary to work with external unminified but optimized svg files, then they just need to be minified (remove spaces/newlines).
      */
 
