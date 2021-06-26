@@ -11,18 +11,30 @@ import VideoCards from '~components/VideoCards';
 
 import VideosGrid from './VideosGrid';
 
-const AllVideos = ({ videosData, header, selectHandler, selected }) => {
-  const videos = ifIsData(videosData[selected].data) ? (
-    <VideosGrid>
-      <VideoCards data={videosData[selected].data} />
-    </VideosGrid>
-  ) : (
-    <NoContent
-      message={`We don't have added any ${videosData[
-        selected
-      ].name.toLowerCase()}.`}
-    />
-  );
+const AllVideos = ({
+  videosData,
+  header,
+  selectHandler,
+  selected,
+  isLoading,
+  videoAmount,
+}) => {
+  const videos =
+    !isLoading && !ifIsData(videosData?.[selected].data) ? (
+      <NoContent
+        message={`We don't have added any ${videosData[
+          selected
+        ].name.toLowerCase()}.`}
+      />
+    ) : (
+      <VideosGrid>
+        <VideoCards
+          videoAmount={videoAmount}
+          isLoading={isLoading}
+          data={videosData?.[selected].data}
+        />
+      </VideosGrid>
+    );
 
   return (
     <>
@@ -35,10 +47,12 @@ const AllVideos = ({ videosData, header, selectHandler, selected }) => {
           <MainContainer>
             <PageGrid>
               <SelectionBar
+                isLoading={isLoading}
                 title="Videos"
                 data={videosData}
                 selectHandler={selectHandler}
                 selected={selected}
+                itemSkeletonAmount={7}
               />
 
               {videos}

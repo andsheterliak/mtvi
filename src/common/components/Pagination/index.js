@@ -1,4 +1,4 @@
-import { Pagination as MUIPagination } from '@material-ui/lab';
+import { Pagination as MUIPagination, Skeleton } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
@@ -6,7 +6,8 @@ export { default as usePagination } from './usePagination';
 
 const useStyles = makeStyles(() => ({
   root: {
-    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
   },
 
   pagination: {
@@ -22,16 +23,25 @@ const Pagination = ({
   page,
   totalPages,
   isLoading,
+  isDisabled,
   changePageHandler,
   isSpacing = true,
 }) => {
   const classes = useStyles();
 
-  if (totalPages < 2) return null;
+  if (!isLoading && totalPages < 2) return null;
 
   const rootClasses = classNames(classes.root, {
     [classes.spacing]: isSpacing,
   });
+
+  if (isLoading) {
+    return (
+      <div className={rootClasses}>
+        <Skeleton className={classes.pagination} width={270} height={32} />
+      </div>
+    );
+  }
 
   return (
     <div className={rootClasses}>
@@ -40,7 +50,7 @@ const Pagination = ({
         page={page}
         count={totalPages}
         siblingCount={0}
-        disabled={isLoading}
+        disabled={isDisabled}
         onChange={changePageHandler}
         size="medium"
       />

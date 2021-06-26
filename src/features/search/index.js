@@ -48,7 +48,7 @@ const Search = ({ isSearchVisible, toggleSearchHandler }) => {
   const [query, setQuery] = useState('');
   const [isReadyToFetch, setIsReadyToFetch] = useState(false);
 
-  const { data, error } = useGetSearchQuery(
+  const { data, error, isFetching } = useGetSearchQuery(
     { query },
     { skip: !isReadyToFetch }
   );
@@ -90,34 +90,6 @@ const Search = ({ isSearchVisible, toggleSearchHandler }) => {
     toggleSearchHandler();
   };
 
-  const clickHandler = () => {
-    toggleSearchHandler();
-  };
-
-  let searchItems;
-
-  if (data) {
-    searchItems = (
-      <SearchItems
-        data={data.results}
-        searchPaths={SEARCH_PATHS}
-        routeNames={ROUTE_NAMES}
-        imgData={{
-          basePath: IMG_BASE_URL,
-          person: {
-            size: IMG_SIZES.poster,
-            fallback: noUserPhoto,
-          },
-          common: {
-            size: IMG_SIZES.profile,
-            fallback: noImage,
-          },
-        }}
-        clickHandler={clickHandler}
-      />
-    );
-  }
-
   return (
     <Fade mountOnEnter unmountOnExit in={isSearchVisible}>
       <div className={classes.root}>
@@ -140,6 +112,7 @@ const Search = ({ isSearchVisible, toggleSearchHandler }) => {
               endAdornment={
                 <>
                   <IconBtn
+                    isDisabled={isFetching}
                     ariaLabel="search"
                     edge="end"
                     icon={SearchIcon}
@@ -161,7 +134,24 @@ const Search = ({ isSearchVisible, toggleSearchHandler }) => {
           </MainContainer>
         </form>
 
-        {searchItems}
+        <SearchItems
+          isLoading={isFetching}
+          data={data?.results}
+          searchPaths={SEARCH_PATHS}
+          routeNames={ROUTE_NAMES}
+          imgData={{
+            basePath: IMG_BASE_URL,
+            person: {
+              size: IMG_SIZES.poster,
+              fallback: noUserPhoto,
+            },
+            common: {
+              size: IMG_SIZES.profile,
+              fallback: noImage,
+            },
+          }}
+          clickHandler={toggleSearchHandler}
+        />
       </div>
     </Fade>
   );

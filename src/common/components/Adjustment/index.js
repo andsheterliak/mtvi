@@ -15,6 +15,7 @@ const Adjustment = ({
   modalTitle,
   onAcceptCallback,
   initialOptions,
+  isDisabled,
 }) => {
   const {
     options,
@@ -47,6 +48,7 @@ const Adjustment = ({
   return (
     <>
       <AdjustmentButton
+        isDisabled={isDisabled}
         ariaLabel={modalTitle.toLowerCase()}
         openModalHandler={openModalHandler}
       />

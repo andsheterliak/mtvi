@@ -1,8 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { useParams } from 'react-router-dom';
 
 import { formatDataStr } from '~common/utils/date';
-import { getPath } from '~common/utils/getData';
 
 import Filter, { useFilter } from '~components/Filter';
 import SelectorContainer from '~components/SelectorContainer';
@@ -14,7 +12,6 @@ import filterConfig from './filterConfig';
 import NoContent from '~components/NoContent';
 import { getMovieCredits, getTVCredits } from '../personSelectors';
 import { ROUTE_NAMES } from '~common/constants';
-import { useGetPersonQuery } from '~common/services/tmdb';
 
 const getCreditsState = ({ movieCredits, tvCredits }) => {
   const isMovieCast = !!movieCredits?.cast?.length;
@@ -91,19 +88,15 @@ const createTimelineData = (data) => {
 
   // Join all the items with the same id, (items from the API are duplicated if a person had several jobs and they differ only in those jobs).
   data.forEach((item) => {
-    const job = item.character || item.job;
-    const name = item.title || item.name;
-    const departmentName = item.department || 'Acting';
+    const isMovie = 'release_date' in item || 'title' in item;
+    const isActor = 'character' in item && !('department' in item);
+    const job = isActor ? item.character : item.job;
+    const name = isMovie ? item.title : item.name;
+    const departmentName = isActor ? 'Acting' : item.department;
     const departmentKey = departmentName.toLowerCase();
-    const dateStr = item.release_date || item.first_air_date;
+    const dateStr = isMovie ? item.release_date : item.first_air_date;
     const year = dateStr ? formatDataStr(dateStr).dateParts.year : null;
-
-    const path = getPath({
-      name: item.name,
-      episodeCount: item.episode_count,
-      firstAirDate: item.first_air_date,
-      routeNames: { movie: ROUTE_NAMES.movie, tvShow: ROUTE_NAMES.tvShow },
-    });
+    const path = isMovie ? ROUTE_NAMES.movie : ROUTE_NAMES.tvShow;
 
     // If no timeline item with the 'id', create it.
     if (!timelineData[item.id]) {
@@ -112,7 +105,7 @@ const createTimelineData = (data) => {
         name,
         year,
         dateStr,
-        path,
+        path: `/${path}`,
 
         employment: {
           [departmentKey]: {
@@ -155,7 +148,7 @@ const getTimelineData = createSelector(
       tvCredits,
     });
 
-    if (!isData) return null;
+    if (!isData) return { data: null, isNeedInFiltering: false };
 
     let data;
 
@@ -167,32 +160,21 @@ const getTimelineData = createSelector(
   }
 );
 
-const CreditsList = () => {
+const CreditsList = ({ isLoading, data }) => {
   const { filterBy, filterByHandler } = useFilter({
     initialValue: filterConfig.all.value,
   });
 
-  const { id } = useParams();
-
-  const { timelineData } = useGetPersonQuery(id, {
-    selectFromResult: ({ data }) => ({
-      timelineData: getTimelineData(data, filterBy),
-    }),
-  });
-
-  const content = timelineData.data ? (
-    <ProjectsTimeline data={timelineData.data} />
-  ) : (
-    <NoContent message="We don't have added any projects." />
-  );
+  const timelineData = getTimelineData(data, filterBy);
 
   return (
     <Section>
       <SectionTitle title="Projects" />
 
-      {timelineData.data && timelineData.isNeedInFiltering && (
+      {!isLoading && !timelineData.isNeedInFiltering ? null : (
         <SelectorContainer>
           <Filter
+            isLoading={isLoading}
             config={filterConfig}
             filterBy={filterBy}
             filterByHandler={filterByHandler}
@@ -200,7 +182,11 @@ const CreditsList = () => {
         </SelectorContainer>
       )}
 
-      {content}
+      {!isLoading && !timelineData.data ? (
+        <NoContent message="We don't have added any projects." />
+      ) : (
+        <ProjectsTimeline isLoading={isLoading} data={timelineData.data} />
+      )}
     </Section>
   );
 };

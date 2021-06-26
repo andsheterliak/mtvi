@@ -20,47 +20,37 @@ const TVShowCredits = () => {
   useScrollToTop();
 
   const { id } = useParams();
-  const { data, error } = useGetTVShowQuery(id);
+  const { data, error, isLoading } = useGetTVShowQuery(id);
 
   useErrorHandler(error);
 
   const creditsData = getCreditsData(data);
 
-  let posterImg;
-
-  if (data) {
-    posterImg = getImagePath({
-      basePath: IMG_BASE_URL,
-      path: data.poster_path,
-      size: IMG_SIZES.poster,
-      fallback: noImageImg,
-    });
-  }
-
   return (
-    <>
-      {data ? (
-        <Credits
-          credits={creditsData}
-          routeName={ROUTE_NAMES.person}
-          imgData={{
+    <Credits
+      isLoading={isLoading}
+      credits={creditsData}
+      routeName={ROUTE_NAMES.person}
+      imgData={{
+        basePath: IMG_BASE_URL,
+        size: IMG_SIZES.profileFace,
+        fallback: noUserPhotoImg,
+      }}
+      header={
+        <BackToHeader
+          isLoading={isLoading}
+          title={data?.name}
+          imgPath={getImagePath({
             basePath: IMG_BASE_URL,
-            size: IMG_SIZES.profileFace,
-            fallback: noUserPhotoImg,
-          }}
-          header={
-            <BackToHeader
-              title={data.name}
-              imgPath={posterImg}
-              path={`/${ROUTE_NAMES.tvShow}/${data.id}`}
-              linkName="Back to TV Show"
-            />
-          }
+            path: data?.poster_path,
+            size: IMG_SIZES.poster,
+            fallback: noImageImg,
+          })}
+          path={`/${ROUTE_NAMES.tvShow}/${data?.id}`}
+          linkName="Back to TV Show"
         />
-      ) : (
-        'Loading'
-      )}
-    </>
+      }
+    />
   );
 };
 

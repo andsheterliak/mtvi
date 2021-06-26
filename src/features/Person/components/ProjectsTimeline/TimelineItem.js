@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
+  Skeleton,
   TimelineConnector,
   TimelineContent,
   TimelineDot,
@@ -35,36 +36,46 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const TimelineItem = ({ path, year, name, infoListData }) => {
+const TimelineItem = ({ path, year, name, infoListData, isLoading }) => {
   const classes = useStyles();
 
   return (
     <MUITimelineItem>
       <TimelineOppositeContent className={classes.oppositeContent}>
         <Typography color="textPrimary" variant="body2">
-          {getHyphenOrData(year)}
+          {isLoading ? <Skeleton width={34} /> : getHyphenOrData(year)}
         </Typography>
       </TimelineOppositeContent>
 
       <TimelineSeparator>
-        <TimelineDot />
+        <TimelineDot variant="outlined" />
 
         <TimelineConnector />
       </TimelineSeparator>
 
       <TimelineContent className={classes.content}>
-        <MUILink
-          className={classes.link}
-          variant="body1"
-          color="textPrimary"
-          gutterBottom
-          component={Link}
-          to={path}
-        >
-          {getHyphenOrData(name)}
-        </MUILink>
+        {isLoading ? (
+          <Typography className={classes.link} variant="body1" gutterBottom>
+            <Skeleton width={220} />
+          </Typography>
+        ) : (
+          <MUILink
+            className={classes.link}
+            variant="body1"
+            color="textPrimary"
+            gutterBottom
+            component={Link}
+            to={path}
+          >
+            {getHyphenOrData(name)}
+          </MUILink>
+        )}
 
-        <InfoList dataList={infoListData} />
+        <InfoList
+          isLoading={isLoading}
+          itemSkeletonAmount={2}
+          dataList={infoListData}
+        />
       </TimelineContent>
     </MUITimelineItem>
   );

@@ -2,7 +2,15 @@ import { getImagePath } from '~common/utils/getData';
 import SeasonCard from './SeasonCard';
 import SeasonsGrid from './SeasonsGrid';
 
-const SeasonCards = ({ data, basePath, imgData }) => {
+const SeasonCards = ({ data, basePath, imgData, isLoading }) => {
+  if (isLoading) {
+    return Array(6)
+      .fill()
+      .map((_, index) => {
+        return <SeasonCard key={index} isLoading={true} />;
+      });
+  }
+
   const seasons = data.map((season) => {
     const imgPath = getImagePath({ ...imgData, path: season.poster_path });
 
@@ -22,4 +30,5 @@ const SeasonCards = ({ data, basePath, imgData }) => {
   return <SeasonsGrid>{seasons}</SeasonsGrid>;
 };
 
+export { default as SeasonCard } from './SeasonCard';
 export default SeasonCards;

@@ -1,10 +1,8 @@
-import { useParams } from 'react-router-dom';
 import { createSelector } from '@reduxjs/toolkit';
 
 import { formatDataStr, formatMinutes } from '~common/utils/date';
 import { ifIsData, getCertification, getGenres } from '~common/utils/getData';
 import { ROUTE_NAMES } from '~common/constants';
-import { useGetMovieQuery } from '~common/services/tmdb';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import Certification from '~components/header/Certification';
 import Creators from '~components/header/Creators';
@@ -25,6 +23,8 @@ const getDirectors = (crew) => {
 const getDataList = createSelector(
   (data) => data,
   (data) => {
+    if (!data) return null;
+
     let certification = getCertification(data.release_dates?.results);
 
     certification = certification && (
@@ -54,25 +54,19 @@ const getDataList = createSelector(
   }
 );
 
-const MovieHeader = () => {
-  const { id } = useParams();
-
-  const { data, dataList } = useGetMovieQuery(id, {
-    selectFromResult: (result) => ({
-      data: result.data,
-      dataList: getDataList(result.data),
-    }),
-  });
+const MovieHeader = ({ isLoading, data }) => {
+  const dataList = getDataList(data);
 
   return (
     <PageHeader
-      overview={data.overview}
-      title={data.title}
+      isLoading={isLoading}
+      overview={data?.overview}
+      title={data?.title}
       dataList={dataList}
       imgData={{
         basePath: IMG_BASE_URL,
         size: IMG_SIZES.backdrop,
-        path: data.backdrop_path,
+        path: data?.backdrop_path,
         fallback: null,
       }}
     />

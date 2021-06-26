@@ -1,6 +1,20 @@
 import SelectionItem from './SelectionItem';
 
-const SelectionItems = ({ data, selectHandler, selected }) => {
+const SelectionItems = ({
+  data,
+  selectHandler,
+  selected,
+  isLoading,
+  itemSkeletonAmount,
+}) => {
+  if (isLoading) {
+    return Array(itemSkeletonAmount)
+      .fill()
+      .map((_, index) => {
+        return <SelectionItem key={index} isLoading={true} />;
+      });
+  }
+
   return Object.entries(data).map(([key, { name, amount }]) => {
     return (
       <SelectionItem

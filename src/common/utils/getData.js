@@ -45,12 +45,6 @@ export const getHyphenOrData = (value) => {
   return ifIsData(value) ? value : hyphen;
 };
 
-export const getPath = ({ name, firstAirDate, episodeCount, routeNames }) => {
-  return name || firstAirDate || episodeCount
-    ? `/${routeNames.tvShow}`
-    : `/${routeNames.movie}`;
-};
-
 export const getImagePath = ({ basePath, size, path, fallback }) => {
   return path ? `${basePath}${size}${path}` : fallback;
 };
@@ -65,7 +59,7 @@ export const getSelectedGenres = (genres) => {
     .join(',');
 };
 
-export const getTopItems = (items, number = 9) => items.slice(0, number);
+export const getTopItems = (items = [], number = 9) => items.slice(0, number);
 
 export const getKnownFor = (knownForData) => {
   return knownForData.map((el) => el.original_name || el.title).join(', ');

@@ -6,7 +6,7 @@ import { useSelectionBar } from '~components/SelectionBar';
 
 import { IMG_BASE_URL, IMG_SIZES, VIDEO_TYPES } from '~common/tmdb-config';
 import useScrollToTop from '~common/hooks/useScrollToTop';
-import { ROUTE_NAMES } from '~common/constants';
+import { ROUTE_NAMES, TOP_VIDEO_AMOUNT } from '~common/constants';
 import { createGetVideosDataInstance } from '~common/selectors';
 import { getImagePath } from '~common/utils/getData';
 import { useGetTVShowQuery } from '~common/services/tmdb';
@@ -20,7 +20,7 @@ const TVShowVideos = () => {
   useScrollToTop();
 
   const { id } = useParams();
-  const { data } = useGetTVShowQuery(id);
+  const { data, isLoading } = useGetTVShowQuery(id);
 
   const { selected, setSelected } = useSelectionBar(VIDEO_TYPES.trailer.key);
   const videosData = getVideosData(data);
@@ -29,37 +29,28 @@ const TVShowVideos = () => {
     setSelected(key);
   };
 
-  let posterImg;
-
-  if (data) {
-    posterImg = getImagePath({
-      basePath: IMG_BASE_URL,
-      size: IMG_SIZES.poster,
-      path: data.poster_path,
-      fallback: noImageImg,
-    });
-  }
-
   return (
-    <>
-      {data ? (
-        <AllVideos
-          videosData={videosData}
-          selectHandler={selectHandler}
-          selected={selected}
-          header={
-            <BackToHeader
-              title={data.name}
-              imgPath={posterImg}
-              path={`/${ROUTE_NAMES.tvShow}/${data.id}`}
-              linkName="Back to TV Show"
-            />
-          }
+    <AllVideos
+      videosData={videosData}
+      selectHandler={selectHandler}
+      selected={selected}
+      isLoading={isLoading}
+      videoAmount={TOP_VIDEO_AMOUNT}
+      header={
+        <BackToHeader
+          isLoading={isLoading}
+          title={data?.name}
+          imgPath={getImagePath({
+            basePath: IMG_BASE_URL,
+            size: IMG_SIZES.poster,
+            path: data?.poster_path,
+            fallback: noImageImg,
+          })}
+          path={`/${ROUTE_NAMES.tvShow}/${data?.id}`}
+          linkName="Back to TV Show"
         />
-      ) : (
-        'Loading...'
-      )}
-    </>
+      }
+    />
   );
 };
 

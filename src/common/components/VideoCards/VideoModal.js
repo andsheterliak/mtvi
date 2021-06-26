@@ -2,24 +2,10 @@ import { Dialog, DialogTitle, IconButton, Typography } from '@material-ui/core';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import { innerDarkTheme } from '~common/theme';
+import AspectRatio from '~components/AspectRatio';
 
 const useStyles = makeStyles((theme) => {
   return {
-    videoBox: {
-      position: 'relative',
-      paddingBottom: '56.25%',
-      height: 0,
-      width: '100%',
-    },
-
-    iframe: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-    },
-
     header: {
       display: 'flex',
       justifyContent: 'space-between',
@@ -70,16 +56,15 @@ const VideoModal = ({ isOpened, closeModalHandler, data }) => {
           </IconButton>
         </DialogTitle>
 
-        <div className={classes.videoBox}>
+        <AspectRatio aspectRatio="16:9">
           <iframe
-            className={classes.iframe}
             src={`https://www.youtube.com/embed/${id}`}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope;"
             allowFullScreen
           ></iframe>
-        </div>
+        </AspectRatio>
       </Dialog>
     </ThemeProvider>
   );

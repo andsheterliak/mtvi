@@ -18,56 +18,48 @@ const Seasons = () => {
   useScrollToTop();
 
   const { id } = useParams();
-  const { data, error } = useGetTVShowQuery(id);
+  const { data, error, isLoading } = useGetTVShowQuery(id);
 
   useErrorHandler(error);
 
-  let imgPath;
-  let seasonsCards;
-
-  if (data) {
-    imgPath = getImagePath({
-      basePath: IMG_BASE_URL,
-      size: IMG_SIZES.profile,
-      path: data.poster_path,
-      fallback: noImg,
-    });
-
-    seasonsCards = ifIsData(data.seasons) ? (
+  const seasonsCards =
+    !isLoading && !ifIsData(data) ? (
+      <NoContent message="We don't have added any seasons." />
+    ) : (
       <SeasonCards
-        data={data.seasons}
-        basePath={`/${ROUTE_NAMES.tvShow}/${data.id}/${ROUTE_NAMES.season}`}
+        isLoading={isLoading}
+        data={data?.seasons}
+        basePath={`/${ROUTE_NAMES.tvShow}/${data?.id}/${ROUTE_NAMES.season}`}
         imgData={{
           basePath: IMG_BASE_URL,
           size: IMG_SIZES.profile,
           fallback: noImg,
         }}
       />
-    ) : (
-      <NoContent message="We don't have added any seasons." />
     );
-  }
 
   return (
     <>
       <Spacer />
 
-      {data ? (
-        <MainContent>
-          <BackToHeader
-            imgPath={imgPath}
-            linkName="Back to TV Show"
-            title={data.name}
-            path={`/${ROUTE_NAMES.tvShow}/${data.id}`}
-          />
+      <MainContent>
+        <BackToHeader
+          imgPath={getImagePath({
+            basePath: IMG_BASE_URL,
+            size: IMG_SIZES.profile,
+            path: data?.poster_path,
+            fallback: noImg,
+          })}
+          linkName="Back to TV Show"
+          title={data?.name}
+          path={`/${ROUTE_NAMES.tvShow}/${data?.id}`}
+          isLoading={isLoading}
+        />
 
-          <Spacer />
+        <Spacer />
 
-          <MainContainer>{seasonsCards}</MainContainer>
-        </MainContent>
-      ) : (
-        'Loading'
-      )}
+        <MainContainer>{seasonsCards}</MainContainer>
+      </MainContent>
     </>
   );
 };

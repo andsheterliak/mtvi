@@ -1,19 +1,17 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import { useParams } from 'react-router-dom';
 import { ifIsData, getTopItems } from '~common/utils/getData';
 
 import Section from '~components/section/Section';
 import SectionTitle from '~components/section/SectionTitle';
-import Cards from '~components/Cards';
 import CardsGridRow from '~components/grids/CardsGridRow';
 import NoContent from '~components/NoContent';
 import Slider from '~components/Slider';
 import { getMovieCredits, getTVCredits } from './personSelectors';
-import { ROUTE_NAMES } from '~common/constants';
+import { ROUTE_NAMES, TOP_ITEM_AMOUNT } from '~common/constants';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
-import { useGetPersonQuery } from '~common/services/tmdb';
 import noImage from '~assets/img/no-image.svg';
+import MixedCards from './components/MixedCards';
 
 const sortByVoteDescending = (data) => {
   const newData = [...data];
@@ -73,38 +71,35 @@ const getKnownForData = createSelector(
 
     newData = sortByVoteDescending(joinedData);
     newData = removeDuplicates(newData);
-    newData = getTopItems(newData);
+    newData = getTopItems(newData, TOP_ITEM_AMOUNT);
 
     return newData;
   }
 );
 
-const KnownFor = () => {
-  const { id } = useParams();
+const KnownFor = ({ isLoading, data }) => {
+  const knownForData = getKnownForData(data);
 
-  const { knownForData } = useGetPersonQuery(id, {
-    selectFromResult: ({ data }) => ({
-      knownForData: getKnownForData(data),
-    }),
-  });
-
-  const content = knownForData ? (
-    <Slider>
-      <CardsGridRow>
-        <Cards
-          cardsData={knownForData}
-          routeNames={{ tvShow: ROUTE_NAMES.tvShow, movie: ROUTE_NAMES.movie }}
-          imgData={{
-            basePath: IMG_BASE_URL,
-            size: IMG_SIZES.poster,
-            fallback: noImage,
-          }}
-        />
-      </CardsGridRow>
-    </Slider>
-  ) : (
-    <NoContent message="We don't have added any data for this section." />
-  );
+  const content =
+    !isLoading && !knownForData ? (
+      <NoContent message="We don't have added any data for this section." />
+    ) : (
+      <Slider>
+        <CardsGridRow>
+          <MixedCards
+            isLoading={isLoading}
+            cardsData={knownForData}
+            routeNames={ROUTE_NAMES}
+            topItemAmount={TOP_ITEM_AMOUNT}
+            imgData={{
+              basePath: IMG_BASE_URL,
+              size: IMG_SIZES.poster,
+              fallback: noImage,
+            }}
+          />
+        </CardsGridRow>
+      </Slider>
+    );
 
   return (
     <Section>

@@ -18,7 +18,7 @@ const Person = () => {
   useScrollToTop();
 
   const { id } = useParams();
-  const { data, error } = useGetPersonQuery(id);
+  const { data, error, isLoading } = useGetPersonQuery(id);
 
   useErrorHandler(error);
 
@@ -26,25 +26,21 @@ const Person = () => {
     <>
       <Spacer />
 
-      {data ? (
-        <MainContent>
-          <MainContainer>
-            <Layout>
-              <PersonHeader />
+      <MainContent>
+        <MainContainer>
+          <Layout>
+            <PersonHeader isLoading={isLoading} data={data} />
 
-              <Separator />
+            <Separator />
 
-              <KnownFor />
+            <KnownFor isLoading={isLoading} data={data} />
 
-              <Separator />
+            <Separator />
 
-              <CreditsList />
-            </Layout>
-          </MainContainer>
-        </MainContent>
-      ) : (
-        'Loading'
-      )}
+            <CreditsList isLoading={isLoading} data={data} />
+          </Layout>
+        </MainContainer>
+      </MainContent>
     </>
   );
 };

@@ -23,7 +23,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SelectionBar = ({ title, data, selectHandler, selected }) => {
+const SelectionBar = ({
+  title,
+  data,
+  selectHandler,
+  selected,
+  isLoading,
+  itemSkeletonAmount,
+}) => {
   const classes = useStyles();
 
   return (
@@ -37,6 +44,8 @@ const SelectionBar = ({ title, data, selectHandler, selected }) => {
       <Slider padding="0">
         <List component="div" className={classes.list}>
           <SelectionItems
+            isLoading={isLoading}
+            itemSkeletonAmount={itemSkeletonAmount}
             data={data}
             selectHandler={selectHandler}
             selected={selected}

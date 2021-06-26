@@ -1,4 +1,4 @@
-import { ifIsData, getTopItems } from '~common/utils/getData';
+import { ifIsData } from '~common/utils/getData';
 import NoContent from '~components/NoContent';
 import Section from '~components/section/Section';
 import SectionTitle from '~components/section/SectionTitle';
@@ -7,18 +7,21 @@ import Slider from '~components/Slider';
 import VideoCards from '~components/VideoCards';
 import VideosGridRow from './VideosGridRow';
 
-const TopVideos = ({ title, data, videosPath }) => {
-  const isData = ifIsData(data);
-
-  const content = isData ? (
-    <Slider>
-      <VideosGridRow>
-        <VideoCards data={getTopItems(data, 6)} />
-      </VideosGridRow>
-    </Slider>
-  ) : (
-    <NoContent message="We don't have added any videos." />
-  );
+const TopVideos = ({ title, data, videosPath, isLoading, videoAmount }) => {
+  const content =
+    !isLoading && !ifIsData(data) ? (
+      <NoContent message="We don't have added any videos." />
+    ) : (
+      <Slider>
+        <VideosGridRow>
+          <VideoCards
+            isLoading={isLoading}
+            data={data}
+            videoAmount={videoAmount}
+          />
+        </VideosGridRow>
+      </Slider>
+    );
 
   return (
     <Section>
@@ -26,7 +29,7 @@ const TopVideos = ({ title, data, videosPath }) => {
 
       {content}
 
-      {isData && <SeeAllLink path={videosPath}>View All Videos</SeeAllLink>}
+      <SeeAllLink path={videosPath}>View All Videos</SeeAllLink>
     </Section>
   );
 };

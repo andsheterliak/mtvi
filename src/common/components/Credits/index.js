@@ -6,16 +6,18 @@ import NoContent from '~components/NoContent';
 import Spacer from '~components/Spacer';
 import CreditSections from './CreditSections';
 
-const Credits = ({ credits, header, imgData, routeName }) => {
-  const content = ifIsData(credits) ? (
-    <CreditSections
-      data={credits}
-      imgData={imgData}
-      routeName={(imgData, routeName)}
-    />
-  ) : (
-    <NoContent message="We don't have added any credits." />
-  );
+const Credits = ({ credits, header, imgData, routeName, isLoading }) => {
+  const content =
+    !isLoading && !ifIsData(credits) ? (
+      <NoContent message="We don't have added any credits." />
+    ) : (
+      <CreditSections
+        isLoading={isLoading}
+        data={credits}
+        imgData={imgData}
+        routeName={(imgData, routeName)}
+      />
+    );
 
   return (
     <>

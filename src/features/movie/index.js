@@ -17,7 +17,7 @@ const Movie = () => {
   useScrollToTop();
 
   const { id } = useParams();
-  const { data, error } = useGetMovieQuery(id);
+  const { data, error, isLoading } = useGetMovieQuery(id);
 
   useErrorHandler(error);
 
@@ -25,25 +25,21 @@ const Movie = () => {
     <>
       <Spacer />
 
-      {data ? (
-        <MainContent>
-          <MainContainer>
-            <Layout>
-              <MovieHeader />
+      <MainContent>
+        <MainContainer>
+          <Layout>
+            <MovieHeader isLoading={isLoading} data={data} />
 
-              <Separator />
+            <Separator />
 
-              <TopBilledCast />
+            <TopBilledCast isLoading={isLoading} data={data} />
 
-              <Separator />
+            <Separator />
 
-              <MovieVideos />
-            </Layout>
-          </MainContainer>
-        </MainContent>
-      ) : (
-        'Loading'
-      )}
+            <MovieVideos isLoading={isLoading} data={data} />
+          </Layout>
+        </MainContainer>
+      </MainContent>
     </>
   );
 };

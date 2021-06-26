@@ -2,12 +2,7 @@ import { memo } from 'react';
 
 import { formatDataStr } from '~common/utils/date';
 import SearchItem from './SearchItem';
-import {
-  getImagePath,
-  getKnownFor,
-  getPath,
-  getTopItems,
-} from '~common/utils/getData';
+import { getImagePath, getKnownFor, getTopItems } from '~common/utils/getData';
 
 const SearchItems = ({
   data,
@@ -15,39 +10,46 @@ const SearchItems = ({
   routeNames,
   imgData,
   clickHandler,
+  isLoading,
 }) => {
-  const topData = getTopItems(data, 8);
+  const itemAmount = 8;
+
+  if (isLoading) {
+    return Array(itemAmount)
+      .fill()
+      .map((_, index) => {
+        return <SearchItem key={index} isLoading />;
+      });
+  }
+
+  const topData = getTopItems(data, itemAmount);
 
   return topData.map((item) => {
     const isPerson = searchPaths.person === item.media_type;
+    const isTVShow = searchPaths.tv === item.media_type;
 
     const imgPath = getImagePath({
       basePath: imgData.basePath,
       size: isPerson ? imgData.person.size : imgData.common.size,
-      path: item.poster_path || item.profile_path,
+      path: isPerson ? item.profile_path : item.poster_path,
       fallback: isPerson ? imgData.person.fallback : imgData.common.fallback,
     });
 
-    const commonPath = getPath({
-      name: item.name,
-      episodeCount: item.episode_count,
-      firstAirDate: item.first_air_date,
-      routeNames,
-    });
+    const commonPath = isTVShow ? routeNames.tvShow : routeNames.movie;
+
+    const date = formatDataStr(
+      isTVShow ? item.first_air_date : item.release_date
+    )?.dateStr;
 
     return (
       <SearchItem
         key={item.id}
-        name={item.name || item.title}
-        subInfo={
-          isPerson
-            ? getKnownFor(item.known_for)
-            : formatDataStr(item.release_date || item.first_air_date)?.dateStr
-        }
+        name={isTVShow ? item.name : item.title}
+        subInfo={isPerson ? getKnownFor(item.known_for) : date}
         path={
           isPerson
             ? `/${routeNames.person}/${item.id}`
-            : `${commonPath}/${item.id}`
+            : `/${commonPath}/${item.id}`
         }
         imgPath={imgPath}
         clickHandler={clickHandler}
@@ -58,5 +60,7 @@ const SearchItems = ({
 
 export default memo(
   SearchItems,
-  (prevProps, nextProps) => prevProps.data === nextProps.data
+  (prevProps, nextProps) =>
+    prevProps.data === nextProps.data &&
+    prevProps.isLoading === nextProps.isLoading
 );

@@ -1,5 +1,6 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Skeleton } from '@material-ui/lab';
 
 import classNames from 'classnames';
 
@@ -22,10 +23,14 @@ const useStyles = makeStyles((theme) => {
     spacing: {
       margin: `${theme.spacing(2)}px 0`,
     },
+
+    skeleton: {
+      display: 'inline-block',
+    },
   };
 });
 
-const HeaderTitle = ({ title, isSpacing = true }) => {
+const HeaderTitle = ({ title, isSpacing = true, isLoading }) => {
   const classes = useStyles();
 
   const rootClasses = classNames(classes.title, {
@@ -34,7 +39,11 @@ const HeaderTitle = ({ title, isSpacing = true }) => {
 
   return (
     <Typography color="textPrimary" component="h1" className={rootClasses}>
-      {title}
+      {isLoading ? (
+        <Skeleton className={classes.skeleton} width="80%" />
+      ) : (
+        title
+      )}
     </Typography>
   );
 };

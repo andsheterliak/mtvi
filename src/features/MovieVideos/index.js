@@ -8,7 +8,7 @@ import { useSelectionBar } from '~components/SelectionBar';
 import { getImagePath } from '~common/utils/getData';
 import { IMG_BASE_URL, IMG_SIZES, VIDEO_TYPES } from '~common/tmdb-config';
 import useScrollToTop from '~common/hooks/useScrollToTop';
-import { ROUTE_NAMES } from '~common/constants';
+import { ROUTE_NAMES, TOP_VIDEO_AMOUNT } from '~common/constants';
 import { createGetVideosDataInstance } from '~common/selectors';
 import { useGetMovieQuery } from '~common/services/tmdb';
 
@@ -21,7 +21,7 @@ const MovieVideos = () => {
   useScrollToTop();
 
   const { id } = useParams();
-  const { data, error } = useGetMovieQuery(id);
+  const { data, error, isLoading } = useGetMovieQuery(id);
   const { selected, setSelected } = useSelectionBar(VIDEO_TYPES.trailer.key);
   const videosData = getVideosData(data);
 
@@ -31,37 +31,28 @@ const MovieVideos = () => {
     setSelected(key);
   };
 
-  let posterImg;
-
-  if (data) {
-    posterImg = getImagePath({
-      basePath: IMG_BASE_URL,
-      path: data.poster_path,
-      size: IMG_SIZES.poster,
-      fallback: noImageImg,
-    });
-  }
-
   return (
-    <>
-      {data ? (
-        <AllVideos
-          videosData={videosData}
-          selectHandler={selectHandler}
-          selected={selected}
-          header={
-            <BackToHeader
-              title={data.title}
-              imgPath={posterImg}
-              path={`/${ROUTE_NAMES.movie}/${data.id}`}
-              linkName="Back to movie"
-            />
-          }
+    <AllVideos
+      videosData={videosData}
+      selectHandler={selectHandler}
+      selected={selected}
+      isLoading={isLoading}
+      videoAmount={TOP_VIDEO_AMOUNT}
+      header={
+        <BackToHeader
+          isLoading={isLoading}
+          title={data?.title}
+          imgPath={getImagePath({
+            basePath: IMG_BASE_URL,
+            path: data?.poster_path,
+            size: IMG_SIZES.poster,
+            fallback: noImageImg,
+          })}
+          path={`/${ROUTE_NAMES.movie}/${data?.id}`}
+          linkName="Back to movie"
         />
-      ) : (
-        'Loading...'
-      )}
-    </>
+      }
+    />
   );
 };
 

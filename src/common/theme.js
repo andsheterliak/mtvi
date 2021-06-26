@@ -4,13 +4,11 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const theme = {
   palette: {
     type: 'dark',
-
     primary: {
       main: grey[600],
       light: grey[500],
       dark: grey[800],
     },
-
     background: {
       paper: 'hsl(0, 0%, 11%)',
       default: 'hsl(0, 0%, 5%)',
@@ -54,6 +52,11 @@ const theme = {
     '0px 4px 15px hsla(0, 0%, 0%, 32%)',
     '0px 4px 15px hsla(0, 0%, 0%, 33%)',
   ],
+
+  aspectRatios: {
+    '2:3': '150%',
+    '16:9': '56.25%',
+  },
 };
 
 export const globalTheme = createMuiTheme(theme);

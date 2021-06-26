@@ -14,16 +14,25 @@ const TopCast = ({
   seeAllLinkName,
   imgData,
   routeName,
+  isLoading,
+  castAmount,
 }) => {
-  const content = ifIsData(data) ? (
-    <Slider>
-      <CardsGridRow>
-        <CastCards cardsData={data} routeName={routeName} imgData={imgData} />
-      </CardsGridRow>
-    </Slider>
-  ) : (
-    <NoContent message="We don't have added any cast." />
-  );
+  const content =
+    !isLoading && !ifIsData(data) ? (
+      <NoContent message="We don't have added any cast." />
+    ) : (
+      <Slider>
+        <CardsGridRow>
+          <CastCards
+            isLoading={isLoading}
+            cardsData={data}
+            routeName={routeName}
+            imgData={imgData}
+            castAmount={castAmount}
+          />
+        </CardsGridRow>
+      </Slider>
+    );
 
   return (
     <Section>

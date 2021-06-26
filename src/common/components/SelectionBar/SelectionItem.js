@@ -1,10 +1,13 @@
 import { ListItem, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Skeleton } from '@material-ui/lab';
 
 const useStyles = makeStyles(() => ({
-  name: {
+  info: {
     width: '100%',
-    display: 'flex',
+    display: 'grid',
+    gap: '10px',
+    gridAutoFlow: 'column',
     justifyContent: 'space-between',
   },
 
@@ -12,24 +15,27 @@ const useStyles = makeStyles(() => ({
     padding: '0 10px',
     borderRadius: '5px',
     backgroundColor: 'hsl(0, 0%, 60%, 15%)',
-    height: 'min-content',
-    marginLeft: '10px',
   },
 }));
 
-const SelectionItem = ({ name, amount, selectHandler, isSelected }) => {
+const SelectionItem = ({
+  name,
+  amount,
+  selectHandler,
+  isSelected,
+  isLoading,
+}) => {
   const classes = useStyles();
 
-  return (
-    <ListItem
-      button
-      component="button"
-      onClick={selectHandler}
-      selected={isSelected}
-    >
-      <Typography color="textPrimary" className={classes.name}>
-        {name}
+  const content = (
+    <Typography color="textPrimary" className={classes.info}>
+      {isLoading ? <Skeleton width={130} /> : name}
 
+      {isLoading ? (
+        <Typography component="span">
+          <Skeleton width={30} />
+        </Typography>
+      ) : (
         <Typography
           className={classes.amount}
           color="textSecondary"
@@ -37,8 +43,25 @@ const SelectionItem = ({ name, amount, selectHandler, isSelected }) => {
         >
           {amount}
         </Typography>
-      </Typography>
-    </ListItem>
+      )}
+    </Typography>
+  );
+
+  return (
+    <>
+      {isLoading ? (
+        <ListItem component="div">{content}</ListItem>
+      ) : (
+        <ListItem
+          button
+          component="button"
+          onClick={selectHandler}
+          selected={isSelected}
+        >
+          {content}
+        </ListItem>
+      )}
+    </>
   );
 };
 

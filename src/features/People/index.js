@@ -11,16 +11,17 @@ import CardsGrid from '~components/grids/CardsGrid';
 import MainContainer from '~components/MainContainer';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
-import PersonCards from './components/PersonCards';
+import NoContent from '~components/NoContent';
+import PersonCards from '~components/cards/PersonCards';
 import Pagination, { usePagination } from '~components/Pagination';
-import noImage from '~assets/img/no-image.svg';
+import noUserImage from '~assets/img/no-user-photo.svg';
 
 const People = ({ titleName }) => {
   useScrollToTop();
 
   const { focus, containerRef } = useFocus();
   const { page, changePage } = usePagination();
-  const { data, isLoading, error } = useGetPeopleQuery({ page });
+  const { data, isLoading, isFetching, error } = useGetPeopleQuery({ page });
 
   useErrorHandler(error);
 
@@ -29,40 +30,41 @@ const People = ({ titleName }) => {
     focus();
   };
 
-  const isData = ifIsData(data);
+  const isData = ifIsData(data?.results);
 
-  const cards = isData ? (
-    <PersonCards
-      cardsData={data.results}
-      routeName={ROUTE_NAMES.person}
-      imgData={{
-        basePath: IMG_BASE_URL,
-        size: IMG_SIZES.profile,
-        fallback: noImage,
-      }}
-    />
-  ) : (
-    'Loading...'
-  );
+  const cards =
+    !isFetching && !isData ? (
+      <NoContent message="No data available for this page." />
+    ) : (
+      <CardsGrid>
+        <PersonCards
+          isLoading={isFetching}
+          cardsData={data?.results}
+          routeName={ROUTE_NAMES.person}
+          imgData={{
+            basePath: IMG_BASE_URL,
+            size: IMG_SIZES.profile,
+            fallback: noUserImage,
+          }}
+        />
+      </CardsGrid>
+    );
 
   return (
     <MainContainer>
       <RouteHeader titleName={titleName} />
 
-      <FocusableContainer containerRef={containerRef}>
-        <MainContent>
-          <CardsGrid>{cards}</CardsGrid>
-        </MainContent>
-      </FocusableContainer>
+      <FocusableContainer containerRef={containerRef} />
 
-      {isData && (
-        <Pagination
-          isLoading={isLoading}
-          page={page}
-          totalPages={data.total_pages}
-          changePageHandler={changePageHandler}
-        />
-      )}
+      <MainContent>{cards}</MainContent>
+
+      <Pagination
+        isLoading={isLoading}
+        isDisabled={isFetching}
+        page={page}
+        totalPages={data?.total_pages}
+        changePageHandler={changePageHandler}
+      />
     </MainContainer>
   );
 };

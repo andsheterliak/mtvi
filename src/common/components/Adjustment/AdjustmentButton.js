@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-const AdjustmentButton = ({ ariaLabel, openModalHandler }) => {
+const AdjustmentButton = ({ ariaLabel, openModalHandler, isDisabled }) => {
   const classes = useStyles();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
@@ -35,6 +35,7 @@ const AdjustmentButton = ({ ariaLabel, openModalHandler }) => {
     <>
       <HideOnScroll direction={'up'}>
         <Fab
+          disabled={isDisabled}
           className={classes.btnWrapper}
           onClick={openModalHandler}
           aria-label={ariaLabel}

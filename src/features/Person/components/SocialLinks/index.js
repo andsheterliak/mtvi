@@ -44,14 +44,20 @@ const createSocialLinksMap = (externalIds) => {
   return socialLinksMap;
 };
 
-const SocialLinks = ({ externalIds }) => {
+const SocialLinks = ({ externalIds, isLoading }) => {
   const socialLinksMap = createSocialLinksMap(externalIds);
 
-  if (!socialLinksMap) return null;
+  if (!isLoading && !socialLinksMap) return null;
 
-  const socialLinks = socialLinksMap.map(({ key, id, href, icon: Icon }) => {
-    return <SocialLink key={key} href={href} id={id} Icon={Icon} />;
-  });
+  const socialLinks = isLoading
+    ? Array(3)
+        .fill()
+        .map((_, index) => {
+          return <SocialLink key={index} isLoading={true} />;
+        })
+    : socialLinksMap.map(({ key, id, href, icon: Icon }) => {
+        return <SocialLink key={key} href={href} id={id} Icon={Icon} />;
+      });
 
   return <SocialLinksContainer>{socialLinks}</SocialLinksContainer>;
 };

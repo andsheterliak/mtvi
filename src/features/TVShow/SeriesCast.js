@@ -1,32 +1,22 @@
 import { useRouteMatch } from 'react-router';
-import { useParams } from 'react-router-dom';
 
-import { ROUTE_NAMES } from '~common/constants';
-import { createGetTopCastInstance } from '~common/selectors';
+import { ROUTE_NAMES, TOP_ITEM_AMOUNT } from '~common/constants';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
-import { useGetTVShowQuery } from '~common/services/tmdb';
 import noImage from '~assets/img/no-image.svg';
 import TopCast from '~components/TopCast';
+import { getTopItems } from '~common/utils/getData';
 
-const getCast = (data) => data.aggregate_credits.cast;
-const getTopBilledCast = createGetTopCastInstance(getCast);
-
-const SeriesCast = () => {
+const SeriesCast = ({ isLoading, data }) => {
   const { url } = useRouteMatch();
-  const { id } = useParams();
-
-  const { topBilledCast } = useGetTVShowQuery(id, {
-    selectFromResult: ({ data }) => ({
-      topBilledCast: getTopBilledCast(data),
-    }),
-  });
 
   return (
     <TopCast
+      isLoading={isLoading}
       creditsPath={`${url}/${ROUTE_NAMES.credits}`}
       seeAllLinkName="Full Cast & Crew"
       title="Series Cast"
-      data={topBilledCast}
+      data={getTopItems(data?.aggregate_credits.cast, TOP_ITEM_AMOUNT)}
+      castAmount={TOP_ITEM_AMOUNT}
       routeName={ROUTE_NAMES.person}
       imgData={{
         basePath: IMG_BASE_URL,

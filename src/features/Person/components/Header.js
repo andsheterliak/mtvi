@@ -1,25 +1,16 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { Skeleton } from '@material-ui/lab';
 
 import { getImagePath } from '~common/utils/getData';
 import HeaderDescription from '~components/header/Description';
 import HeaderTitle from '~components/header/HeaderTitle';
 import InfoList from '~components/InfoList';
+import AspectRatio from '~components/AspectRatio';
 import SocialLinks from './SocialLinks';
 
 const useStyles = makeStyles((theme) => {
   return {
-    img: {
-      width: '100%',
-      maxWidth: '250px',
-      display: 'inline-block',
-      borderRadius: '5px',
-
-      [theme.breakpoints.up('sm')]: {
-        maxWidth: '350px',
-      },
-    },
-
-    infoBlock: {
+    root: {
       display: 'flex',
       flexDirection: 'column',
 
@@ -36,26 +27,61 @@ const useStyles = makeStyles((theme) => {
         flexDirection: 'row',
       },
     },
+
+    inner: {
+      flexGrow: 1,
+    },
+
+    imgRoot: {
+      flexShrink: 0,
+      width: '250px',
+      borderRadius: '5px',
+
+      [theme.breakpoints.up('sm')]: {
+        width: '350px',
+      },
+    },
   };
 });
 
-const Header = ({ dataList, name, biography, imgData, externalIds }) => {
+const Header = ({
+  dataList,
+  name,
+  biography,
+  imgData,
+  externalIds,
+  isLoading,
+}) => {
   const classes = useStyles();
 
   const imgPath = getImagePath(imgData);
 
   return (
-    <section className={classes.infoBlock}>
-      <img className={classes.img} alt={name} src={imgPath} />
+    <section className={classes.root}>
+      <AspectRatio rootClasses={classes.imgRoot}>
+        {isLoading ? (
+          <Skeleton variant="rect" />
+        ) : (
+          <img src={imgPath} alt={name} />
+        )}
+      </AspectRatio>
 
-      <div>
-        {name && <HeaderTitle title={name} />}
+      <div className={classes.inner}>
+        {!isLoading && !name ? null : (
+          <HeaderTitle isLoading={isLoading} title={name} />
+        )}
 
-        {biography && <HeaderDescription description={biography} />}
+        {!isLoading && !biography ? null : (
+          <HeaderDescription isLoading={isLoading} description={biography} />
+        )}
 
-        <InfoList dataList={dataList} />
+        <InfoList
+          isLoading={isLoading}
+          itemSkeletonAmount={4}
+          dataList={dataList}
+        />
 
-        <SocialLinks externalIds={externalIds} />
+        <SocialLinks isLoading={isLoading} externalIds={externalIds} />
       </div>
     </section>
   );

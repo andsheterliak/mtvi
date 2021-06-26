@@ -19,7 +19,7 @@ const EpisodeCredits = () => {
   useScrollToTop();
 
   const { id, seasonNumber, episodeNumber } = useParams();
-  const { data, error } = useGetEpisodeQuery({
+  const { data, error, isLoading } = useGetEpisodeQuery({
     id,
     seasonNumber,
     episodeNumber,
@@ -28,41 +28,32 @@ const EpisodeCredits = () => {
 
   useErrorHandler(error);
 
-  let stillImg;
-
-  if (data) {
-    stillImg = getImagePath({
-      basePath: IMG_BASE_URL,
-      path: data.still_path,
-      size: IMG_SIZES.still,
-      fallback: noImageImg,
-    });
-  }
-
   return (
-    <>
-      {data ? (
-        <Credits
-          credits={creditsData}
-          routeName={ROUTE_NAMES.person}
-          imgData={{
+    <Credits
+      isLoading={isLoading}
+      credits={creditsData}
+      routeName={ROUTE_NAMES.person}
+      imgData={{
+        basePath: IMG_BASE_URL,
+        size: IMG_SIZES.profileFace,
+        fallback: noUserPhotoImg,
+      }}
+      header={
+        <BackToHeader
+          isLoading={isLoading}
+          title={`${data?.season_number}x${data?.episode_number} ${data?.name}`}
+          imgPath={getImagePath({
             basePath: IMG_BASE_URL,
-            size: IMG_SIZES.profileFace,
-            fallback: noUserPhotoImg,
-          }}
-          header={
-            <BackToHeader
-              title={`${data.season_number}x${data.episode_number} ${data.name}`}
-              imgPath={stillImg}
-              path={`/${ROUTE_NAMES.tvShow}/${id}/${ROUTE_NAMES.season}/${seasonNumber}`}
-              linkName="Back to Season"
-            />
-          }
+            path: data?.still_path,
+            size: IMG_SIZES.still,
+            fallback: noImageImg,
+          })}
+          imgShape="wide"
+          path={`/${ROUTE_NAMES.tvShow}/${id}/${ROUTE_NAMES.season}/${seasonNumber}`}
+          linkName="Back to Season"
         />
-      ) : (
-        'Loading'
-      )}
-    </>
+      }
+    />
   );
 };
 

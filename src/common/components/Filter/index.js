@@ -1,8 +1,11 @@
 import { Input, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { Skeleton } from '@material-ui/lab';
 
 export { default as useFilter } from './useFilter';
 
-const Filter = ({ config, filterByHandler, filterBy }) => {
+const Filter = ({ config, filterByHandler, filterBy, isLoading }) => {
+  if (isLoading) return <Skeleton width={70} height={32} />;
+
   const menus = Object.values(config).map((item) => {
     return (
       <MenuItem key={item.label} value={item.value}>

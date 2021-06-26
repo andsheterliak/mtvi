@@ -12,12 +12,13 @@ import { ifIsData } from '~common/utils/getData';
 
 import Adjustment from '~components/Adjustment';
 import FocusableContainer, { useFocus } from '~components/FocusableContainer';
-import Cards from '~components/Cards';
 import MainContainer from '~components/MainContainer';
 import CardsGrid from '~components/grids/CardsGrid';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
+import NoContent from '~components/NoContent';
 import Pagination, { usePagination } from '~components/Pagination';
+import TVShowCards from '~components/cards/TVShowCards';
 import noImage from '~assets/img/no-image.svg';
 import { TV_OPTIONS_STORAGE_NAME } from './tvShowsConstants';
 import { ROUTE_NAMES } from '~common/constants';
@@ -36,9 +37,10 @@ const TVShows = ({ titleName }) => {
     defaultOptions: TV_DEFAULT_OPTIONS,
   });
 
-  useScrollToTop({ triggers: [options] });
-
-  const { data, isLoading, error } = useGetTVShowsQuery({ options, page });
+  const { data, isLoading, isFetching, error } = useGetTVShowsQuery({
+    options,
+    page,
+  });
 
   useErrorHandler(error);
 
@@ -53,21 +55,25 @@ const TVShows = ({ titleName }) => {
     scrollToTop();
   };
 
-  const isData = ifIsData(data);
+  const isData = ifIsData(data?.results);
 
-  const cards = isData ? (
-    <Cards
-      cardsData={data.results}
-      routeNames={{ tvShow: ROUTE_NAMES.tvShow, movie: ROUTE_NAMES.movie }}
-      imgData={{
-        basePath: IMG_BASE_URL,
-        size: IMG_SIZES.poster,
-        fallback: noImage,
-      }}
-    />
-  ) : (
-    'Loading...'
-  );
+  const cards =
+    !isFetching && !isData ? (
+      <NoContent message="There is no data on such TV shows." />
+    ) : (
+      <CardsGrid>
+        <TVShowCards
+          isLoading={isFetching}
+          cardsData={data?.results}
+          routeName={ROUTE_NAMES.tvShow}
+          imgData={{
+            basePath: IMG_BASE_URL,
+            size: IMG_SIZES.poster,
+            fallback: noImage,
+          }}
+        />
+      </CardsGrid>
+    );
 
   return (
     <MainContainer>
@@ -80,22 +86,20 @@ const TVShows = ({ titleName }) => {
         modalTitle="Adjust TV Shows"
         onAcceptCallback={changeOptions}
         initialOptions={options}
+        isDisabled={isFetching}
       />
 
-      <FocusableContainer containerRef={containerRef}>
-        <MainContent>
-          <CardsGrid>{cards}</CardsGrid>
-        </MainContent>
-      </FocusableContainer>
+      <FocusableContainer containerRef={containerRef} />
 
-      {isData && (
-        <Pagination
-          isLoading={isLoading}
-          page={page}
-          totalPages={data.total_pages}
-          changePageHandler={changePageHandler}
-        />
-      )}
+      <MainContent>{cards}</MainContent>
+
+      <Pagination
+        isLoading={isLoading}
+        isDisabled={isFetching}
+        page={page}
+        totalPages={data?.total_pages}
+        changePageHandler={changePageHandler}
+      />
     </MainContainer>
   );
 };

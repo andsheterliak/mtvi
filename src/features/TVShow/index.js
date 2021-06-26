@@ -19,37 +19,32 @@ const TVShow = () => {
   useScrollToTop();
 
   const { id } = useParams();
-  const { data, error } = useGetTVShowQuery(id);
+  const { data, error, isLoading } = useGetTVShowQuery(id);
 
   useErrorHandler(error);
 
   return (
     <>
       <Spacer />
+      <MainContent>
+        <MainContainer>
+          <Layout>
+            <TVShowHeader isLoading={isLoading} data={data} />
 
-      {data ? (
-        <MainContent>
-          <MainContainer>
-            <Layout>
-              <TVShowHeader />
+            <Separator />
 
-              <Separator />
+            <SeriesCast isLoading={isLoading} data={data} />
 
-              <SeriesCast />
+            <Separator />
 
-              <Separator />
+            <LastSeason isLoading={isLoading} data={data} />
 
-              <LastSeason />
+            <Separator />
 
-              <Separator />
-
-              <TVShowVideos />
-            </Layout>
-          </MainContainer>
-        </MainContent>
-      ) : (
-        'Loading'
-      )}
+            <TVShowVideos isLoading={isLoading} data={data} />
+          </Layout>
+        </MainContainer>
+      </MainContent>
     </>
   );
 };

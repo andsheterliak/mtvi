@@ -13,26 +13,25 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
+import { Skeleton } from '@material-ui/lab';
 import { getHyphenOrData } from '~common/utils/getData';
-import { formatDataStr } from '~common/utils/date';
-import Vote from '~components/Vote';
+import { CardSubInfo } from '~components/Card';
+import AspectRatio from '~components/AspectRatio';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(({ aspectRatios, spacing }) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
   },
 
   content: {
-    padding: theme.spacing(1.5),
+    padding: spacing(1.5),
     display: 'grid',
     gap: '8px',
   },
 
-  subInfo: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+  media: {
+    paddingTop: aspectRatios['16:9'],
   },
 
   actions: {
@@ -65,13 +64,20 @@ const EpisodeCard = ({
   voteAverage,
   episodeNumber,
   resourcePaths,
+  isLoading,
 }) => {
   const classes = useStyles();
   const { anchorEl, isMenuOpened, onCloseMenu, onOpenMenu } = useMenu();
 
   return (
     <Card className={classes.root}>
-      <CardMedia component="img" alt={name} image={imgPath} />
+      <AspectRatio aspectRatio="16:9">
+        {isLoading ? (
+          <Skeleton variant="rect" />
+        ) : (
+          <CardMedia alt={name} image={imgPath} />
+        )}
+      </AspectRatio>
 
       <CardContent className={classes.content}>
         <Typography
@@ -80,51 +86,65 @@ const EpisodeCard = ({
           variant="body1"
           component="h2"
         >
-          {episodeNumber}. {getHyphenOrData(name)}
+          {isLoading ? (
+            <Skeleton width="70%" />
+          ) : (
+            `${episodeNumber} / ${getHyphenOrData(name)}`
+          )}
         </Typography>
 
         <Typography variant="caption" color="textSecondary" component="p">
-          {overview}
+          {isLoading ? (
+            <>
+              <Skeleton />
+              <Skeleton />
+              <Skeleton width="80%" />
+            </>
+          ) : (
+            overview
+          )}
         </Typography>
 
-        <Typography
-          variant="caption"
-          color="textSecondary"
-          component="p"
-          className={classes.subInfo}
-        >
-          {getHyphenOrData(formatDataStr(releaseDate)?.dateStr)}
-
-          <Vote vote={voteAverage} />
-        </Typography>
+        <CardSubInfo
+          isLoading={isLoading}
+          releaseDate={releaseDate}
+          voteAverage={voteAverage}
+        />
       </CardContent>
 
       <CardActions className={classes.actions}>
-        <Button
-          aria-controls="more-resources-menu"
-          aria-haspopup="true"
-          endIcon={<KeyboardArrowDownIcon />}
-          size="small"
-          onClick={onOpenMenu}
-        >
-          More Resources
-        </Button>
+        {isLoading ? (
+          <Skeleton width={155} height={30} />
+        ) : (
+          <>
+            <Button
+              aria-controls="more-resources-menu"
+              aria-haspopup="true"
+              endIcon={<KeyboardArrowDownIcon />}
+              size="small"
+              onClick={onOpenMenu}
+              className={classes.action}
+            >
+              More Resources
+            </Button>
 
-        <Menu
-          id="more-resources-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={isMenuOpened}
-          onClose={onCloseMenu}
-        >
-          <MenuItem component={Link} to={resourcePaths.credits}>
-            Credits
-          </MenuItem>
+            <Menu
+              id="more-resources-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={isMenuOpened}
+              onClose={onCloseMenu}
+            >
+              <MenuItem component={Link} to={resourcePaths.credits}>
+                Credits
+              </MenuItem>
 
-          <MenuItem component={Link} to={resourcePaths.videos}>
-            Videos
-          </MenuItem>
-        </Menu>
+              <MenuItem component={Link} to={resourcePaths.videos}>
+                Videos
+              </MenuItem>
+            </Menu>
+          </>
+        )}
       </CardActions>
     </Card>
   );

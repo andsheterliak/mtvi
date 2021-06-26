@@ -13,13 +13,14 @@ import { ifIsData } from '~common/utils/getData';
 import Adjustment from '~components/Adjustment';
 import MainContainer from '~components/MainContainer';
 import CardsGrid from '~components/grids/CardsGrid';
-import Cards from '~components/Cards';
 import RouteHeader from '~components/RouteHeader';
 import MainContent from '~components/MainContent';
 import Pagination, { usePagination } from '~components/Pagination';
 import FocusableContainer, { useFocus } from '~components/FocusableContainer';
+import NoContent from '~components/NoContent';
 import noImage from '~assets/img/no-image.svg';
 import { MOVIES_OPTIONS_STORAGE_NAME } from './moviesConstants';
+import MovieCards from '~components/cards/MovieCards';
 import { ROUTE_NAMES } from '~common/constants';
 import { useGetMoviesQuery } from '~common/services/tmdb';
 import useOptions from '~common/hooks/useOptions';
@@ -36,9 +37,10 @@ const Movies = ({ titleName }) => {
     defaultOptions: MOVIES_DEFAULT_OPTIONS,
   });
 
-  useScrollToTop({ triggers: [options] });
-
-  const { data, isLoading, error } = useGetMoviesQuery({ options, page });
+  const { data, isLoading, isFetching, error } = useGetMoviesQuery({
+    options,
+    page,
+  });
 
   useErrorHandler(error);
 
@@ -53,21 +55,25 @@ const Movies = ({ titleName }) => {
     scrollToTop();
   };
 
-  const isData = ifIsData(data);
+  const isData = ifIsData(data?.results);
 
-  const cards = isData ? (
-    <Cards
-      cardsData={data.results}
-      routeNames={{ tvShow: ROUTE_NAMES.tvShow, movie: ROUTE_NAMES.movie }}
-      imgData={{
-        basePath: IMG_BASE_URL,
-        size: IMG_SIZES.poster,
-        fallback: noImage,
-      }}
-    />
-  ) : (
-    'Loading...'
-  );
+  const cards =
+    !isFetching && !isData ? (
+      <NoContent message="There is no data on such movies." />
+    ) : (
+      <CardsGrid>
+        <MovieCards
+          isLoading={isFetching}
+          cardsData={data?.results}
+          routeName={ROUTE_NAMES.movie}
+          imgData={{
+            basePath: IMG_BASE_URL,
+            size: IMG_SIZES.poster,
+            fallback: noImage,
+          }}
+        />
+      </CardsGrid>
+    );
 
   return (
     <MainContainer>
@@ -80,22 +86,20 @@ const Movies = ({ titleName }) => {
         modalTitle="Adjust Movies"
         onAcceptCallback={changeOptions}
         initialOptions={options}
+        isDisabled={isFetching}
       />
 
-      <FocusableContainer containerRef={containerRef}>
-        <MainContent>
-          <CardsGrid>{cards}</CardsGrid>
-        </MainContent>
-      </FocusableContainer>
+      <FocusableContainer containerRef={containerRef} />
 
-      {isData && (
-        <Pagination
-          isLoading={isLoading}
-          page={page}
-          totalPages={data.total_pages}
-          changePageHandler={changePageHandler}
-        />
-      )}
+      <MainContent>{cards}</MainContent>
+
+      <Pagination
+        isLoading={isLoading}
+        isDisabled={isFetching}
+        page={page}
+        totalPages={data?.total_pages}
+        changePageHandler={changePageHandler}
+      />
     </MainContainer>
   );
 };

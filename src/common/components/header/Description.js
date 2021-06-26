@@ -1,5 +1,6 @@
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Skeleton } from '@material-ui/lab';
 
 import classNames from 'classnames';
 
@@ -11,7 +12,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const HeaderDescription = ({ description, isSpacing = true }) => {
+const HeaderDescription = ({ description, isSpacing = true, isLoading }) => {
   const classes = useStyles();
 
   const rootClasses = classNames({
@@ -25,7 +26,16 @@ const HeaderDescription = ({ description, isSpacing = true }) => {
       variant="body1"
       className={rootClasses}
     >
-      {description}
+      {isLoading ? (
+        <>
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton width="80%" />
+        </>
+      ) : (
+        description
+      )}
     </Typography>
   );
 };

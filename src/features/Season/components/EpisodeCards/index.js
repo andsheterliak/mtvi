@@ -3,7 +3,19 @@ import { getImagePath } from '~common/utils/getData';
 import EpisodeCard from './EpisodeCard';
 import EpisodesGrid from './EpisodesGrid';
 
-const EpisodeCards = ({ data, basePath, imgData }) => {
+const EpisodeCards = ({ data, basePath, imgData, isLoading }) => {
+  if (isLoading) {
+    return (
+      <EpisodesGrid>
+        {Array(10)
+          .fill()
+          .map((_, index) => {
+            return <EpisodeCard key={index} isLoading={true} />;
+          })}
+      </EpisodesGrid>
+    );
+  }
+
   const cards = data.map((item) => {
     const imgPath = getImagePath({ ...imgData, path: item.still_path });
 

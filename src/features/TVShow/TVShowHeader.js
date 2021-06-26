@@ -1,11 +1,9 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { useParams } from 'react-router-dom';
 
 import { formatDataStr, formatMinutes } from '~common/utils/date';
 import { ifIsData, getCertification, getGenres } from '~common/utils/getData';
 import { ROUTE_NAMES } from '~common/constants';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
-import { useGetTVShowQuery } from '~common/services/tmdb';
 import Certification from '~components/header/Certification';
 import Creators from '~components/header/Creators';
 import PageHeader from '~components/PageHeader';
@@ -27,6 +25,8 @@ const getNetworks = (data) => {
 const getDataList = createSelector(
   (data) => data,
   (data) => {
+    if (!data) return null;
+
     let certification = getCertification(data.content_ratings?.results);
 
     certification = certification && (
@@ -59,28 +59,22 @@ const getDataList = createSelector(
   }
 );
 
-const TVShowHeader = () => {
-  const { id } = useParams();
-
-  const { data, dataList } = useGetTVShowQuery(id, {
-    selectFromResult: (result) => ({
-      data: result.data,
-      dataList: getDataList(result.data),
-    }),
-  });
+const TVShowHeader = ({ isLoading, data }) => {
+  const dataList = getDataList(data);
 
   return (
     <PageHeader
-      overview={data.overview}
-      title={data.name}
+      isLoading={isLoading}
+      overview={data?.overview}
+      title={data?.name}
       dataList={dataList}
       imgData={{
         basePath: IMG_BASE_URL,
         size: IMG_SIZES.backdrop,
-        path: data.backdrop_path,
+        path: data?.backdrop_path,
         fallback: null,
       }}
-    ></PageHeader>
+    />
   );
 };
 

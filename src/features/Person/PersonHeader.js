@@ -1,12 +1,10 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { useParams } from 'react-router-dom';
 
 import { formatDataStr, getAge } from '~common/utils/date';
 
 import Header from './components/Header';
 import { getData } from './personSelectors';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
-import { useGetPersonQuery } from '~common/services/tmdb';
 import noUserPhotoImg from '~assets/img/no-user-photo.svg';
 
 const getGender = (gender) => {
@@ -34,6 +32,8 @@ const getLifeDates = (birthday, deathday) => {
 };
 
 const getDataList = createSelector(getData, (data) => {
+  if (!data) return null;
+
   const dataList = [];
 
   const { birthday, deathday } = getLifeDates(data.birthday, data.deathday);
@@ -67,26 +67,20 @@ const getDataList = createSelector(getData, (data) => {
   return dataList;
 });
 
-const PersonHeader = () => {
-  const { id } = useParams();
-
-  const { data, dataList } = useGetPersonQuery(id, {
-    selectFromResult: (result) => ({
-      data: result.data,
-      dataList: getDataList(result.data),
-    }),
-  });
+const PersonHeader = ({ isLoading, data }) => {
+  const dataList = getDataList(data);
 
   return (
     <Header
+      isLoading={isLoading}
       dataList={dataList}
-      name={data.name}
-      biography={data.biography}
-      externalIds={data.external_ids}
+      name={data?.name}
+      biography={data?.biography}
+      externalIds={data?.external_ids}
       imgData={{
         basePath: IMG_BASE_URL,
         size: IMG_SIZES.profile,
-        path: data.profile_path,
+        path: data?.profile_path,
         fallback: noUserPhotoImg,
       }}
     />

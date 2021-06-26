@@ -1,32 +1,22 @@
-import { useParams } from 'react-router-dom';
 import { useRouteMatch } from 'react-router';
 
-import { ROUTE_NAMES } from '~common/constants';
-import { createGetTopCastInstance } from '~common/selectors';
+import { ROUTE_NAMES, TOP_ITEM_AMOUNT } from '~common/constants';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
-import { useGetMovieQuery } from '~common/services/tmdb';
 import TopCast from '~components/TopCast';
 import noImage from '~assets/img/no-image.svg';
+import { getTopItems } from '~common/utils/getData';
 
-const getCast = (cast) => cast;
-const getTopBilledCast = createGetTopCastInstance(getCast);
-
-const TopBilledCast = () => {
+const TopBilledCast = ({ isLoading, data }) => {
   const { url } = useRouteMatch();
-  const { id } = useParams();
-
-  const { topBilledCast } = useGetMovieQuery(id, {
-    selectFromResult: ({ data }) => ({
-      topBilledCast: getTopBilledCast(data.credits.cast),
-    }),
-  });
 
   return (
     <TopCast
+      isLoading={isLoading}
       creditsPath={`${url}/${ROUTE_NAMES.credits}`}
       seeAllLinkName="Full Cast & Crew"
       title="Top Billed Cast"
-      data={topBilledCast}
+      data={getTopItems(data?.credits.cast, TOP_ITEM_AMOUNT)}
+      castAmount={TOP_ITEM_AMOUNT}
       routeName={ROUTE_NAMES.person}
       imgData={{
         basePath: IMG_BASE_URL,

@@ -1,11 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 
 import { VIDEO_TYPES } from './tmdb-config';
-import { ifIsData, getTopItems } from './utils/getData';
-
-export const createGetTopCastInstance = (getCastSelector) => {
-  return createSelector(getCastSelector, (cast) => getTopItems(cast));
-};
+import { ifIsData } from './utils/getData';
 
 const creditNameToTitle = (name) => {
   return name

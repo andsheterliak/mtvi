@@ -1,23 +1,18 @@
 import { useRouteMatch } from 'react-router';
-import { useParams } from 'react-router-dom';
 
-import { ROUTE_NAMES } from '~common/constants';
-import { useGetMovieQuery } from '~common/services/tmdb';
-
+import { ROUTE_NAMES, TOP_VIDEO_AMOUNT } from '~common/constants';
+import { getTopItems } from '~common/utils/getData';
 import TopVideos from '~components/TopVideos';
 
-const MovieVideos = () => {
+const MovieVideos = ({ isLoading, data }) => {
   const { url } = useRouteMatch();
-  const { id } = useParams();
-
-  const { videos } = useGetMovieQuery(id, {
-    selectFromResult: ({ data }) => ({ videos: data.videos.results }),
-  });
 
   return (
     <TopVideos
+      isLoading={isLoading}
+      videoAmount={TOP_VIDEO_AMOUNT}
       title="Videos"
-      data={videos}
+      data={getTopItems(data?.videos.results, TOP_VIDEO_AMOUNT)}
       videosPath={`${url}/${ROUTE_NAMES.videos}`}
     />
   );

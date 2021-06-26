@@ -2,9 +2,17 @@ import { useState } from 'react';
 import VideoCard from './VideoCard';
 import VideoModal from './VideoModal';
 
-const VideoCards = ({ data }) => {
+const VideoCards = ({ data, isLoading, videoAmount }) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [videoData, setVideoData] = useState(null);
+
+  if (isLoading) {
+    return Array(videoAmount)
+      .fill()
+      .map((_, index) => {
+        return <VideoCard key={index} isLoading={true} />;
+      });
+  }
 
   const openModalHandler = (e, newData) => {
     setIsModalOpened(true);

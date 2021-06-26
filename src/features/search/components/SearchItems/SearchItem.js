@@ -6,11 +6,13 @@ import {
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Skeleton } from '@material-ui/lab';
 import { Link } from 'react-router-dom';
 
 import { getHyphenOrData } from '~common/utils/getData';
+import AspectRatio from '~components/AspectRatio';
 
-const useStyles = makeStyles(({ spacing }) => {
+const useStyles = makeStyles(({ spacing, aspectRatios }) => {
   const padding = spacing(1.5);
 
   return {
@@ -20,56 +22,79 @@ const useStyles = makeStyles(({ spacing }) => {
 
     action: {
       display: 'flex',
-      justifyContent: 'start',
+      alignItems: 'center',
     },
 
     mediaWrapper: {
+      flexShrink: 0,
+      width: '75px',
       padding: `${padding}px 0 ${padding}px ${padding}px`,
     },
 
     media: {
-      width: '60px',
+      height: 0,
+      paddingTop: aspectRatios['2:3'],
     },
 
     content: {
       flexGrow: 1,
       display: 'grid',
       gap: '8px',
-      padding,
+
+      // Override default padding
+      padding: `${padding}px !important`,
     },
   };
 });
 
-const SearchItem = ({ name, path, subInfo, imgPath, clickHandler }) => {
+const SearchItem = ({
+  name,
+  path,
+  subInfo,
+  imgPath,
+  clickHandler,
+  isLoading,
+}) => {
   const classes = useStyles();
+
+  const content = (
+    <>
+      <CardContent className={classes.mediaWrapper}>
+        <AspectRatio aspectRatio="2:3">
+          {isLoading ? (
+            <Skeleton variant="rect" />
+          ) : (
+            <CardMedia alt={name} component="img" image={imgPath} />
+          )}
+        </AspectRatio>
+      </CardContent>
+
+      <CardContent className={classes.content}>
+        <Typography color="textPrimary" variant="body2" component="h2">
+          {isLoading ? <Skeleton width={245} /> : getHyphenOrData(name)}
+        </Typography>
+
+        <Typography variant="caption" color="textSecondary" component="p">
+          {isLoading ? <Skeleton width={225} /> : getHyphenOrData(subInfo)}
+        </Typography>
+      </CardContent>
+    </>
+  );
 
   return (
     <Card elevation={0} className={classes.root}>
-      <CardActionArea
-        component={Link}
-        to={path}
-        className={classes.action}
-        onClick={clickHandler}
-      >
-        <CardContent className={classes.mediaWrapper}>
-          <CardMedia
-            component="img"
-            alt={name || ''}
-            image={imgPath}
-            className={classes.media}
-          />
-        </CardContent>
-
-        <CardContent className={classes.content}>
-          <Typography color="textPrimary" variant="body2" component="h2">
-            {getHyphenOrData(name)}
-          </Typography>
-
-          <Typography variant="caption" color="textSecondary" component="p">
-            {getHyphenOrData(subInfo)}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+      {isLoading ? (
+        <div className={classes.action}>{content}</div>
+      ) : (
+        <CardActionArea
+          component={Link}
+          to={path}
+          className={classes.action}
+          onClick={clickHandler}
+        >
+          {content}
+        </CardActionArea>
+      )}
     </Card>
   );
 };
