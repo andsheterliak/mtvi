@@ -23,6 +23,7 @@ import { TV_OPTIONS_STORAGE_NAME } from './tvShowsConstants';
 import { ROUTE_NAMES } from '~common/constants';
 import { useGetTVShowsQuery } from '~common/services/tmdb';
 import useOptions from '~common/hooks/useOptions';
+import { scrollToTop } from '~common/utils/dom';
 
 const TVShows = ({ titleName }) => {
   useScrollToTop();
@@ -49,6 +50,7 @@ const TVShows = ({ titleName }) => {
   const changeOptions = (newOptions) => {
     setOptions(newOptions);
     changePage(1);
+    scrollToTop();
   };
 
   const isData = ifIsData(data);

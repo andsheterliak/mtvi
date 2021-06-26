@@ -23,8 +23,11 @@ import { MOVIES_OPTIONS_STORAGE_NAME } from './moviesConstants';
 import { ROUTE_NAMES } from '~common/constants';
 import { useGetMoviesQuery } from '~common/services/tmdb';
 import useOptions from '~common/hooks/useOptions';
+import { scrollToTop } from '~common/utils/dom';
 
 const Movies = ({ titleName }) => {
+  useScrollToTop();
+
   const { focus, containerRef } = useFocus();
   const { page, changePage } = usePagination();
 
@@ -47,6 +50,7 @@ const Movies = ({ titleName }) => {
   const changeOptions = (newOptions) => {
     setOptions(newOptions);
     changePage(1);
+    scrollToTop();
   };
 
   const isData = ifIsData(data);
