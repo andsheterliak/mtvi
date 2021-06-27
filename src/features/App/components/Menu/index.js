@@ -42,14 +42,15 @@ const Menu = ({ locationPathname, routes }) => {
   const classes = useStyles();
 
   const { isDrawerOpened, closeDrawerHandler, openDrawerHandler } = useDrawer();
-  const { isSearchVisible, toggleSearchHandler } = useToggleSearch();
+  const { isSearchVisible, toggleSearchHandler, closeSearchHandler } =
+    useToggleSearch();
 
   return (
     <>
       <Backdrop
         className={classes.backdrop}
         open={isSearchVisible}
-        onClick={toggleSearchHandler}
+        onClick={closeSearchHandler}
       />
 
       <HideOnScroll>
@@ -82,7 +83,7 @@ const Menu = ({ locationPathname, routes }) => {
 
               <Search
                 isSearchVisible={isSearchVisible}
-                toggleSearchHandler={toggleSearchHandler}
+                closeSearchHandler={closeSearchHandler}
               />
             </div>
           </MainContainer>

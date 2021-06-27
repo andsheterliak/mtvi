@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
-import { Fade, InputBase, InputLabel } from '@material-ui/core';
+import { Box, Fade, InputBase, InputLabel } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Search = ({ isSearchVisible, toggleSearchHandler }) => {
+const Search = ({ isSearchVisible, closeSearchHandler }) => {
   const classes = useStyles();
   const history = useHistory();
   const [query, setQuery] = useState('');
@@ -87,12 +87,12 @@ const Search = ({ isSearchVisible, toggleSearchHandler }) => {
     searchParams.set('query', query);
 
     history.push(`/${ROUTE_NAMES.search}?${searchParams}`);
-    toggleSearchHandler();
+    closeSearchHandler(event);
   };
 
   return (
     <Fade mountOnEnter unmountOnExit in={isSearchVisible}>
-      <div className={classes.root}>
+      <Box onKeyDown={closeSearchHandler} className={classes.root}>
         <form
           className={classes.form}
           noValidate
@@ -150,9 +150,9 @@ const Search = ({ isSearchVisible, toggleSearchHandler }) => {
               fallback: noImage,
             },
           }}
-          clickHandler={toggleSearchHandler}
+          clickHandler={closeSearchHandler}
         />
-      </div>
+      </Box>
     </Fade>
   );
 };

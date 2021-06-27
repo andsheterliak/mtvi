@@ -7,6 +7,15 @@ const useToggleSearch = ({ isVisible = false } = {}) => {
     setIsSearchVisible((prevIsSearchVisible) => !prevIsSearchVisible);
   };
 
+  const closeSearchHandler = (event) => {
+    if (event.type === 'keydown') {
+      if (event.key === 'Escape') setIsSearchVisible(false);
+      return;
+    }
+
+    setIsSearchVisible(false);
+  };
+
   useEffect(() => {
     const windowResizeHandler = () => {
       const widthWithoutScrollbar = document.documentElement.clientWidth;
@@ -26,7 +35,11 @@ const useToggleSearch = ({ isVisible = false } = {}) => {
     };
   }, [isSearchVisible]);
 
-  return { isSearchVisible, toggleSearchHandler };
+  return {
+    isSearchVisible,
+    toggleSearchHandler,
+    closeSearchHandler,
+  };
 };
 
 export default useToggleSearch;
