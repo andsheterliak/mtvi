@@ -21,7 +21,7 @@ const App = () => {
       <CssBaseline />
 
       <RootWrapper>
-        <ErrorBoundary fallbackRender={ErrorFallback}>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
           <Menu locationPathname={location.pathname} routes={routesConfig} />
 
           <Routes config={routesConfig} />
