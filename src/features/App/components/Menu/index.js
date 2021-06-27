@@ -11,30 +11,37 @@ import IconBtn from '~components/IconBtn';
 import Logo from './Logo';
 import Drawer, { useDrawer } from './Drawer';
 import Search, { useToggleSearch } from '~features/Search';
+import Links from './Links';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(({ breakpoints, zIndex, palette, spacing }) => ({
   backdrop: {
-    zIndex: theme.zIndex.appBar,
+    zIndex: zIndex.appBar,
   },
 
   appBar: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: palette.background.paper,
   },
 
   inner: {
-    [theme.breakpoints.up('sm')]: {
+    [breakpoints.up('sm')]: {
       position: 'relative',
     },
   },
 
-  toolBar: {
-    '& >:first-child': {
-      marginRight: theme.spacing(2),
-    },
+  openDrawerBtn: {
+    marginRight: spacing(2),
 
-    '& >:last-child': {
-      marginLeft: 'auto',
+    [breakpoints.up('sm')]: {
+      display: 'none',
     },
+  },
+
+  logo: {
+    marginRight: 'auto',
+  },
+
+  searchIcon: {
+    marginLeft: spacing(3),
   },
 }));
 
@@ -59,6 +66,7 @@ const Menu = ({ locationPathname, routes }) => {
             <div className={classes.inner}>
               <Toolbar className={classes.toolBar}>
                 <IconBtn
+                  rootProps={{ className: classes.openDrawerBtn }}
                   ariaLabel="open drawer"
                   clickHandler={openDrawerHandler}
                   edge="start"
@@ -66,6 +74,7 @@ const Menu = ({ locationPathname, routes }) => {
                 />
 
                 <MUILink
+                  className={classes.logo}
                   underline="none"
                   component={Link}
                   to={routes.default.redirectTo}
@@ -73,7 +82,10 @@ const Menu = ({ locationPathname, routes }) => {
                   <Logo />
                 </MUILink>
 
+                <Links locationPathname={locationPathname} routes={routes} />
+
                 <IconBtn
+                  rootProps={{ className: classes.searchIcon }}
                   ariaLabel="toggle search"
                   clickHandler={toggleSearchHandler}
                   edge="end"

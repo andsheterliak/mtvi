@@ -22,6 +22,7 @@ const IconBtn = ({
   edge,
   size = 'lg',
   isDisabled,
+  rootProps = {},
 }) => {
   const sizes = {
     sm: '1.5rem',
@@ -38,6 +39,8 @@ const IconBtn = ({
       aria-label={ariaLabel}
       onClick={clickHandler}
       disabled={isDisabled}
+      className={classes.root}
+      {...rootProps}
     >
       <Icon className={classes.icon} />
     </IconButton>

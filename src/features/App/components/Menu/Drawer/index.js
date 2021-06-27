@@ -14,6 +14,11 @@ const useStyles = makeStyles({
     maxWidth: '250px',
     width: '80%',
   },
+
+  list: {
+    display: 'grid',
+    gap: 4,
+  },
 });
 
 const Drawer = ({ isOpened, closeDrawerHandler, routes, locationPathname }) => {
@@ -45,6 +50,7 @@ const Drawer = ({ isOpened, closeDrawerHandler, routes, locationPathname }) => {
       onClose={closeDrawerHandler}
     >
       <List
+        className={classes.list}
         component="nav"
         aria-label="main navigation"
         onClick={closeDrawerHandler}
