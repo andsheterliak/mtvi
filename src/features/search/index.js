@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     width: '100%',
     boxShadow: theme.shadows[1],
-    maxHeight: '600px',
+    maxHeight: 'calc(100vh - 210%)',
     overflow: 'auto',
 
     [theme.breakpoints.up('sm')]: {
