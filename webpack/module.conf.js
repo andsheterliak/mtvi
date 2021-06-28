@@ -96,7 +96,6 @@ const moduleConf = {
 
     {
       test: /\.(ttf|eot|woff2?)$/,
-      include: paths.src,
       loader: 'file-loader',
 
       options: {
