@@ -6,6 +6,7 @@ const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyPlugin = require('copy-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const { isDev, paths, isProd } = require('./helpers.conf');
 
@@ -55,6 +56,8 @@ const pluginsConf = [
   new DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
   }),
+
+  new BundleAnalyzerPlugin(),
 ];
 
 if (isDev) pluginsConf.push(new ReactRefreshWebpackPlugin({
