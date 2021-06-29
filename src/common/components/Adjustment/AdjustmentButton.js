@@ -42,6 +42,7 @@ const AdjustmentButton = ({ ariaLabel, openModalHandler, isDisabled }) => {
           style={{
             left: `${windowWidth - 100}px`, // To avoid shifting when scrollbar is hidden.
           }}
+          color="primary"
         >
           <FilterIcon fontSize="large" />
         </Fab>

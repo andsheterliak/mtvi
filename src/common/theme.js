@@ -1,17 +1,45 @@
-import { grey } from '@material-ui/core/colors';
+import { useEffect, useState } from 'react';
+import { red } from '@material-ui/core/colors';
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const theme = {
+import { getLS, setLS } from './utils/storage';
+
+const primary = {
+  main: red[700],
+  light: red[600],
+  dark: red[800],
+};
+
+const baseTheme = {
   palette: {
-    type: 'dark',
-    primary: {
-      main: grey[600],
-      light: grey[500],
-      dark: grey[800],
+    primary,
+  },
+
+  overrides: {
+    MuiToggleButton: {
+      root: {
+        '&$selected': {
+          color: 'white',
+          backgroundColor: primary.main,
+
+          '&:hover': {
+            backgroundColor: primary.light,
+          },
+        },
+      },
     },
-    background: {
-      paper: 'hsl(0, 0%, 11%)',
-      default: 'hsl(0, 0%, 5%)',
+
+    MuiListItem: {
+      root: {
+        '&$selected': {
+          color: 'white',
+          backgroundColor: primary.main,
+
+          '&:hover': {
+            backgroundColor: primary.light,
+          },
+        },
+      },
     },
   },
 
@@ -23,6 +51,10 @@ const theme = {
       lg: 1280,
       xl: 1400,
     },
+  },
+
+  extraBreakpoints: {
+    sx: 800,
   },
 
   shadows: [
@@ -59,13 +91,49 @@ const theme = {
   },
 };
 
-export const globalTheme = createMuiTheme(theme);
-
-export const innerDarkTheme = createMuiTheme({
-  ...theme,
+const lightTheme = createMuiTheme({
+  ...baseTheme,
 
   palette: {
-    ...theme.palette,
-    type: 'dark',
+    ...baseTheme.palette,
+
+    background: {
+      paper: 'hsl(0, 0%, 99%)',
+      default: 'hsl(0, 0%, 97%)',
+    },
   },
 });
+
+export const darkTheme = createMuiTheme({
+  ...baseTheme,
+
+  palette: {
+    ...baseTheme.palette,
+    type: 'dark',
+
+    background: {
+      paper: 'hsl(224, 9%, 9%)',
+      default: 'hsl(224, 9%, 6%)',
+    },
+  },
+});
+
+export const useToggleTheme = () => {
+  const [isDarkTheme, setIsDarkTheme] = useState(
+    () => getLS('isDarkTheme') ?? true
+  );
+
+  const toggleThemeHandler = () => {
+    setIsDarkTheme((prevIsDarkTheme) => !prevIsDarkTheme);
+  };
+
+  useEffect(() => {
+    setLS('isDarkTheme', isDarkTheme);
+  }, [isDarkTheme]);
+
+  return {
+    toggleThemeHandler,
+    theme: isDarkTheme ? darkTheme : lightTheme,
+    isDarkTheme,
+  };
+};

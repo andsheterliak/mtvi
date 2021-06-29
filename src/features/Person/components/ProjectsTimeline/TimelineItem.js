@@ -48,7 +48,7 @@ const TimelineItem = ({ path, year, name, infoListData, isLoading }) => {
       </TimelineOppositeContent>
 
       <TimelineSeparator>
-        <TimelineDot variant="outlined" />
+        <TimelineDot color="primary" />
 
         <TimelineConnector />
       </TimelineSeparator>

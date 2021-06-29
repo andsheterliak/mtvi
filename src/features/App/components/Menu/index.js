@@ -1,51 +1,69 @@
-import { AppBar, Backdrop, Link as MUILink, Toolbar } from '@material-ui/core';
+import {
+  AppBar,
+  Backdrop,
+  IconButton,
+  Link as MUILink,
+  Toolbar,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
+import Brightness3Icon from '@material-ui/icons/Brightness3';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
+
 import { Link } from 'react-router-dom';
 
 import HideOnScroll from '~components/HideOnScroll';
 import MainContainer from '~components/MainContainer';
-import IconBtn from '~components/IconBtn';
 import Logo from './Logo';
 import Drawer, { useDrawer } from './Drawer';
 import Search, { useToggleSearch } from '~features/Search';
-import Links from './Links';
+import ToolbarLinks from './ToolbarLinks';
 
-const useStyles = makeStyles(({ breakpoints, zIndex, palette, spacing }) => ({
-  backdrop: {
-    zIndex: zIndex.appBar,
-  },
-
-  appBar: {
-    backgroundColor: palette.background.paper,
-  },
-
-  inner: {
-    [breakpoints.up('sm')]: {
-      position: 'relative',
+const useStyles = makeStyles(
+  ({ breakpoints, extraBreakpoints, zIndex, palette, spacing }) => ({
+    backdrop: {
+      zIndex: zIndex.appBar,
     },
-  },
 
-  openDrawerBtn: {
-    marginRight: spacing(2),
-
-    [breakpoints.up('sm')]: {
-      display: 'none',
+    appBar: {
+      backgroundColor: palette.background.paper,
     },
-  },
 
-  logo: {
-    marginRight: 'auto',
-  },
+    inner: {
+      [breakpoints.up('sm')]: {
+        position: 'relative',
+      },
+    },
 
-  searchIcon: {
-    marginLeft: spacing(3),
-  },
-}));
+    openDrawerBtn: {
+      marginRight: spacing(2),
 
-const Menu = ({ locationPathname, routes }) => {
+      [breakpoints.up(extraBreakpoints.sx)]: {
+        display: 'none',
+      },
+    },
+
+    logo: {
+      marginRight: 'auto',
+    },
+
+    icons: {
+      marginLeft: spacing(5),
+      display: 'grid',
+      gridAutoFlow: 'column',
+      gap: 12,
+    },
+  })
+);
+
+const Menu = ({
+  locationPathname,
+  routes,
+  toggleThemeHandler,
+  isDarkTheme,
+}) => {
   const classes = useStyles();
 
   const { isDrawerOpened, closeDrawerHandler, openDrawerHandler } = useDrawer();
@@ -65,13 +83,14 @@ const Menu = ({ locationPathname, routes }) => {
           <MainContainer>
             <div className={classes.inner}>
               <Toolbar className={classes.toolBar}>
-                <IconBtn
-                  rootProps={{ className: classes.openDrawerBtn }}
-                  ariaLabel="open drawer"
-                  clickHandler={openDrawerHandler}
+                <IconButton
+                  className={classes.openDrawerBtn}
                   edge="start"
-                  icon={MenuOpenIcon}
-                />
+                  aria-label="open drawer"
+                  onClick={openDrawerHandler}
+                >
+                  <MenuOpenIcon />
+                </IconButton>
 
                 <MUILink
                   className={classes.logo}
@@ -82,15 +101,28 @@ const Menu = ({ locationPathname, routes }) => {
                   <Logo />
                 </MUILink>
 
-                <Links locationPathname={locationPathname} routes={routes} />
-
-                <IconBtn
-                  rootProps={{ className: classes.searchIcon }}
-                  ariaLabel="toggle search"
-                  clickHandler={toggleSearchHandler}
-                  edge="end"
-                  icon={isSearchVisible ? CloseIcon : SearchIcon}
+                <ToolbarLinks
+                  locationPathname={locationPathname}
+                  routes={routes}
                 />
+
+                <div className={classes.icons}>
+                  <IconButton
+                    edge="end"
+                    aria-label="toggle search"
+                    onClick={toggleSearchHandler}
+                  >
+                    {isSearchVisible ? <CloseIcon /> : <SearchIcon />}
+                  </IconButton>
+
+                  <IconButton
+                    edge="end"
+                    aria-label="toggle theme"
+                    onClick={toggleThemeHandler}
+                  >
+                    {isDarkTheme ? <WbSunnyIcon /> : <Brightness3Icon />}
+                  </IconButton>
+                </div>
               </Toolbar>
 
               <Search

@@ -4,7 +4,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import routesConfig from '~common/routesConfig';
-import { globalTheme } from '~common/theme';
+import { useToggleTheme } from '~common/theme';
 
 import Menu from '~features/App/components/Menu';
 import Footer from './components/Footer';
@@ -15,14 +15,20 @@ import ErrorFallback from './components/ErrorFallback';
 
 const App = () => {
   const location = useLocation();
+  const { theme, isDarkTheme, toggleThemeHandler } = useToggleTheme();
 
   return (
-    <ThemeProvider theme={globalTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
 
       <RootWrapper>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
-          <Menu locationPathname={location.pathname} routes={routesConfig} />
+          <Menu
+            locationPathname={location.pathname}
+            routes={routesConfig}
+            toggleThemeHandler={toggleThemeHandler}
+            isDarkTheme={isDarkTheme}
+          />
 
           <Routes config={routesConfig} />
 

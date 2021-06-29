@@ -5,7 +5,7 @@ import { ToggleButton } from '@material-ui/lab';
 import OptionContainer from './OptionContainer';
 import OptionTitle from './OptionTitle';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(({ spacing }) => ({
   chipItems: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   chipItem: {
-    margin: theme.spacing(0.5),
+    margin: spacing(0.5),
   },
 
   chip: {

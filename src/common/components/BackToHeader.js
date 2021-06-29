@@ -104,7 +104,7 @@ const BackToHeader = ({
                 to={path}
                 variant="text"
                 size="small"
-                startIcon={<ArrowBackIcon fontSize="small" />}
+                startIcon={<ArrowBackIcon color="primary" fontSize="small" />}
               >
                 {linkName}
               </Button>

@@ -1,11 +1,6 @@
-import {
-  Drawer as MUIDrawer,
-  List,
-  ListItem,
-  ListItemText,
-} from '@material-ui/core';
+import { Drawer as MUIDrawer, List } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import Links from '../Links';
 
 export { default as useDrawer } from './useDrawer';
 
@@ -24,25 +19,6 @@ const useStyles = makeStyles({
 const Drawer = ({ isOpened, closeDrawerHandler, routes, locationPathname }) => {
   const classes = useStyles();
 
-  const links = [routes.movies, routes.tvShows, routes.people].map(
-    ({ name, to }) => {
-      return (
-        <ListItem
-          button
-          selected={locationPathname === to}
-          component={Link}
-          to={to}
-          key={name}
-        >
-          <ListItemText
-            primaryTypographyProps={{ color: 'textPrimary' }}
-            primary={name}
-          />
-        </ListItem>
-      );
-    }
-  );
-
   return (
     <MUIDrawer
       PaperProps={{ className: classes.drawer }}
@@ -56,7 +32,11 @@ const Drawer = ({ isOpened, closeDrawerHandler, routes, locationPathname }) => {
         onClick={closeDrawerHandler}
         onKeyDown={closeDrawerHandler}
       >
-        {links}
+        <Links
+          routes={routes}
+          locationPathname={locationPathname}
+          listItemProps={{ className: classes.link }}
+        />
       </List>
     </MUIDrawer>
   );

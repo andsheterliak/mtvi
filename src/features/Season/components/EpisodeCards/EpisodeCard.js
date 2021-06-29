@@ -120,7 +120,7 @@ const EpisodeCard = ({
             <Button
               aria-controls="more-resources-menu"
               aria-haspopup="true"
-              endIcon={<KeyboardArrowDownIcon />}
+              endIcon={<KeyboardArrowDownIcon color="primary" />}
               size="small"
               onClick={onOpenMenu}
               className={classes.action}

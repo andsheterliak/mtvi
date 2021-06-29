@@ -2,7 +2,7 @@ import { ListItem, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Skeleton } from '@material-ui/lab';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(({ palette }) => ({
   info: {
     width: '100%',
     display: 'grid',
@@ -14,7 +14,8 @@ const useStyles = makeStyles(() => ({
   amount: {
     padding: '0 10px',
     borderRadius: '5px',
-    backgroundColor: 'hsl(0, 0%, 60%, 15%)',
+    backgroundColor:
+      palette.type === 'dark' ? 'hsl(0, 0%, 30%, 15%)' : 'hsl(0, 0%, 80%, 15%)',
   },
 }));
 
@@ -28,7 +29,10 @@ const SelectionItem = ({
   const classes = useStyles();
 
   const content = (
-    <Typography color="textPrimary" className={classes.info}>
+    <Typography
+      color={isSelected ? 'inherit' : 'textPrimary'}
+      className={classes.info}
+    >
       {isLoading ? <Skeleton width={130} /> : name}
 
       {isLoading ? (
@@ -38,7 +42,7 @@ const SelectionItem = ({
       ) : (
         <Typography
           className={classes.amount}
-          color="textSecondary"
+          color={isSelected ? 'inherit' : 'textSecondary'}
           component="span"
         >
           {amount}

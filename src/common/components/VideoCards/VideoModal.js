@@ -1,7 +1,7 @@
 import { Dialog, DialogTitle, IconButton, Typography } from '@material-ui/core';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import { innerDarkTheme } from '~common/theme';
+import { darkTheme } from '~common/theme';
 import AspectRatio from '~components/AspectRatio';
 
 const useStyles = makeStyles((theme) => {
@@ -33,7 +33,7 @@ const VideoModal = ({ isOpened, closeModalHandler, data }) => {
   const { id, name } = data;
 
   return (
-    <ThemeProvider theme={innerDarkTheme}>
+    <ThemeProvider theme={darkTheme}>
       <Dialog
         onClose={closeModalHandler}
         open={isOpened}

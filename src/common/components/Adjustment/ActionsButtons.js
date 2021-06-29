@@ -11,7 +11,7 @@ const ActionsButtons = ({ cancelHandler, acceptHandler, isReadyToAccept }) => {
         onClick={acceptHandler}
         disabled={!isReadyToAccept}
         size="large"
-        color="default"
+        color="primary"
       >
         Apply
       </Button>

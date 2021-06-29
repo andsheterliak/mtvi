@@ -53,6 +53,7 @@ const Pagination = ({
         disabled={isDisabled}
         onChange={changePageHandler}
         size="medium"
+        color="primary"
       />
     </div>
   );

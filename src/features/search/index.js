@@ -1,13 +1,18 @@
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
-import { Box, Fade, InputBase, InputLabel } from '@material-ui/core';
+import {
+  Box,
+  Fade,
+  IconButton,
+  InputBase,
+  InputLabel,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
 import { useErrorHandler } from 'react-error-boundary';
 
 import MainContainer from '~components/MainContainer';
-import IconBtn from '~components/IconBtn';
 import SearchItems from './components/SearchItems';
 import useDebounceEffect from './useDebounceEffect';
 import { ROUTE_NAMES } from '~common/constants';
@@ -111,22 +116,23 @@ const Search = ({ isSearchVisible, closeSearchHandler }) => {
               value={query}
               endAdornment={
                 <>
-                  <IconBtn
-                    isDisabled={isFetching}
-                    ariaLabel="search"
+                  <IconButton
+                    disabled={isFetching}
                     edge="end"
-                    icon={SearchIcon}
-                    size="sm"
-                    clickHandler={submitHandler}
-                  />
+                    aria-label="search"
+                    onClick={submitHandler}
+                  >
+                    <SearchIcon fontSize="small" />
+                  </IconButton>
 
-                  <IconBtn
-                    ariaLabel="clear search"
+                  <IconButton
+                    disabled={isFetching}
                     edge="end"
-                    icon={CloseIcon}
-                    size="sm"
-                    clickHandler={clearHandler}
-                  />
+                    aria-label="clear search"
+                    onClick={clearHandler}
+                  >
+                    <CloseIcon fontSize="small" />
+                  </IconButton>
                 </>
               }
               onChange={inputHandler}
