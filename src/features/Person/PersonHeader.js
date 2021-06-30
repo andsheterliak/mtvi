@@ -15,9 +15,10 @@ const getGender = (gender) => {
 
 const getLifeDates = (birthday, deathday) => {
   if (deathday) {
-    const { dateStr, dateParts } = formatDataStr(deathday);
+    const { dateParts } = formatDataStr(birthday);
+    const { dateObj, dateStr: deathDateStr } = formatDataStr(deathday);
 
-    deathday = `${dateStr} (${getAge(dateParts)} years old)`;
+    deathday = `${deathDateStr} (${getAge(dateParts, dateObj)} years old)`;
   }
 
   if (birthday) {
