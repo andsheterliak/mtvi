@@ -79,7 +79,7 @@ const PersonHeader = ({ isLoading, data }) => {
       externalIds={data?.external_ids}
       imgData={{
         basePath: IMG_BASE_URL,
-        size: IMG_SIZES.profile,
+        size: IMG_SIZES.profile.h632,
         path: data?.profile_path,
         fallback: noUserPhotoImg,
       }}

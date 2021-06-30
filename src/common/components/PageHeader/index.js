@@ -41,12 +41,19 @@ const PageHeader = ({ title, overview, dataList, imgData, isLoading }) => {
   const imgPath = getImagePath(imgData);
 
   const img =
-    !isLoading && !imgPath ? null : (
+    !isLoading && !imgData.path ? null : (
       <AspectRatio aspectRatio="16:9" rootClasses={classes.imgRoot}>
         {isLoading ? (
           <Skeleton variant="rect" />
         ) : (
-          <img src={imgPath} alt="" className={classes.img} />
+          <img
+            srcSet={`
+              ${imgPath.w780} 780w,
+              ${imgPath.w1280} 1280w,
+            `}
+            alt=""
+            className={classes.img}
+          />
         )}
       </AspectRatio>
     );

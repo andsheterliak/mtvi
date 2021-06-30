@@ -46,6 +46,14 @@ export const getHyphenOrData = (value) => {
 };
 
 export const getImagePath = ({ basePath, size, path, fallback }) => {
+  if (typeof size === 'object') {
+    return Object.values(size).reduce((acc, sizeValue) => {
+      acc[sizeValue] = path ? `${basePath}${sizeValue}${path}` : fallback;
+
+      return acc;
+    }, {});
+  }
+
   return path ? `${basePath}${size}${path}` : fallback;
 };
 

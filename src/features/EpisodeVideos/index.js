@@ -49,7 +49,7 @@ const EpisodeVideos = () => {
           imgPath={getImagePath({
             basePath: IMG_BASE_URL,
             path: data?.still_path,
-            size: IMG_SIZES.still,
+            size: IMG_SIZES.still.w300,
             fallback: noImageImg,
           })}
           imgShape="wide"

@@ -93,7 +93,7 @@ const KnownFor = ({ isLoading, data }) => {
             topItemAmount={TOP_ITEM_AMOUNT}
             imgData={{
               basePath: IMG_BASE_URL,
-              size: IMG_SIZES.poster,
+              size: IMG_SIZES.poster.w342,
               fallback: noImage,
             }}
           />

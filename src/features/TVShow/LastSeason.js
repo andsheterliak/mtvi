@@ -57,7 +57,7 @@ const LastSeason = ({ isLoading, data }) => {
         overview={lastReleasedSeason?.overview}
         imgPath={getImagePath({
           basePath: IMG_BASE_URL,
-          size: IMG_SIZES.poster,
+          size: IMG_SIZES.poster.w342,
           path: lastReleasedSeason?.poster_path,
           fallback: noImg,
         })}

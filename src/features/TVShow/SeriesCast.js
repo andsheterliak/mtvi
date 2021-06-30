@@ -20,7 +20,7 @@ const SeriesCast = ({ isLoading, data }) => {
       routeName={ROUTE_NAMES.person}
       imgData={{
         basePath: IMG_BASE_URL,
-        size: IMG_SIZES.profile,
+        size: IMG_SIZES.profile.h632,
         fallback: noImage,
       }}
     />

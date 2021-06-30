@@ -140,7 +140,7 @@ const SearchResults = () => {
           routeName={ROUTE_NAMES.person}
           imgData={{
             basePath: IMG_BASE_URL,
-            size: IMG_SIZES.profile,
+            size: IMG_SIZES.profile.h632,
             fallback: noUserImage,
           }}
         />
@@ -153,7 +153,7 @@ const SearchResults = () => {
           routeName={ROUTE_NAMES.movie}
           imgData={{
             basePath: IMG_BASE_URL,
-            size: IMG_SIZES.poster,
+            size: IMG_SIZES.poster.w342,
             fallback: noImage,
           }}
         />
@@ -166,7 +166,7 @@ const SearchResults = () => {
           routeName={ROUTE_NAMES.tvShow}
           imgData={{
             basePath: IMG_BASE_URL,
-            size: IMG_SIZES.poster,
+            size: IMG_SIZES.poster.w342,
             fallback: noImage,
           }}
         />

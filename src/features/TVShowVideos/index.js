@@ -48,7 +48,7 @@ const TVShowVideos = () => {
           title={data?.name}
           imgPath={getImagePath({
             basePath: IMG_BASE_URL,
-            size: IMG_SIZES.poster,
+            size: IMG_SIZES.poster.w154,
             path: data?.poster_path,
             fallback: noImageImg,
           })}

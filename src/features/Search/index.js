@@ -153,11 +153,11 @@ const Search = ({ isSearchVisible, closeSearchHandler }) => {
           imgData={{
             basePath: IMG_BASE_URL,
             person: {
-              size: IMG_SIZES.poster,
+              size: IMG_SIZES.profile.w185,
               fallback: noUserPhoto,
             },
             common: {
-              size: IMG_SIZES.profile,
+              size: IMG_SIZES.poster.w92,
               fallback: noImage,
             },
           }}

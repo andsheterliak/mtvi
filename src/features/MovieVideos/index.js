@@ -47,7 +47,7 @@ const MovieVideos = () => {
           imgPath={getImagePath({
             basePath: IMG_BASE_URL,
             path: data?.poster_path,
-            size: IMG_SIZES.poster,
+            size: IMG_SIZES.poster.w154,
             fallback: noImageImg,
           })}
           path={`/${ROUTE_NAMES.movie}/${data?.id}`}

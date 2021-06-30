@@ -34,7 +34,7 @@ const Seasons = () => {
         basePath={`/${ROUTE_NAMES.tvShow}/${data?.id}/${ROUTE_NAMES.season}`}
         imgData={{
           basePath: IMG_BASE_URL,
-          size: IMG_SIZES.profile,
+          size: IMG_SIZES.poster.w342,
           fallback: noImg,
         }}
       />
@@ -48,7 +48,7 @@ const Seasons = () => {
         <BackToHeader
           imgPath={getImagePath({
             basePath: IMG_BASE_URL,
-            size: IMG_SIZES.profile,
+            size: IMG_SIZES.poster.w154,
             path: data?.poster_path,
             fallback: noImg,
           })}

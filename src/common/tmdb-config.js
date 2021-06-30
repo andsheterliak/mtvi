@@ -1,12 +1,24 @@
 export const IMG_BASE_URL = 'https://image.tmdb.org/t/p/';
 
 export const IMG_SIZES = {
-  poster: 'w500',
-  backdrop: 'w1280',
-  profile: 'h632',
+  poster: {
+    w92: 'w92',
+    w154: 'w154',
+    w342: 'w342',
+  },
+  backdrop: {
+    w780: 'w780',
+    w1280: 'w1280',
+  },
+  profile: {
+    w185: 'w185',
+    h632: 'h632',
+  },
   profileFace: 'w90_and_h90_face',
-  logo: 'w154', // Company logos (Netflix...)
-  still: 'w500', // TV Show Episode img
+  still: {
+    w300: 'w300',
+    w500: 'w500',
+  }, // TV Show Episode img
 };
 
 export const SORT_MOVIES_BY_OPTIONS = {
