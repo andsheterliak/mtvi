@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Button, CardMedia, Paper, Typography } from '@material-ui/core';
+import { Button, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
@@ -80,7 +80,7 @@ const BackToHeader = ({
             {isLoading ? (
               <Skeleton variant="rect" />
             ) : (
-              <CardMedia image={imgPath} />
+              <img alt={title} src={imgPath} />
             )}
           </AspectRatio>
 
