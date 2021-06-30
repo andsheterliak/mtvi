@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { useErrorHandler } from 'react-error-boundary';
 
 import AllVideos from '~components/AllVideos';
 import BackToHeader from '~components/BackToHeader';
@@ -20,7 +21,9 @@ const TVShowVideos = () => {
   useScrollToTop();
 
   const { id } = useParams();
-  const { data, isLoading } = useGetTVShowQuery(id);
+  const { data, isLoading, error } = useGetTVShowQuery(id);
+
+  useErrorHandler(error);
 
   const { selected, setSelected } = useSelectionBar(VIDEO_TYPES.trailer.key);
   const videosData = getVideosData(data);
