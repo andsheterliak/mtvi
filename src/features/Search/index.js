@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     backgroundColor: theme.palette.background.paper,
     zIndex: 1,
-    borderBottom: `1px solid ${theme.palette.divider}`,
+    borderBottom: `5px solid ${theme.palette.primary.main}`,
   },
 }));
 
