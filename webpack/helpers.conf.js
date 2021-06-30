@@ -10,7 +10,7 @@ const dirNames = {
   styles: 'styles',
   assets: 'assets',
   img: 'img',
-  favicon: 'favicon', 
+  favicon: 'favicon',
   fonts: 'fonts',
   features: 'features',
   components: 'components',
@@ -41,6 +41,11 @@ const paths = {
   favicon: {
     from: `${dirNames.assets}/favicon/`, // Base dir depends on 'context' property.
     to: `${dirNames.assets}/favicon/`, // Base dir depends on 'output.path' property.
+  },
+
+  robots: {
+    from: `${dirNames.assets}/robots.txt`, // Base dir depends on 'context' property.
+    to: `robots.txt`, // Base dir depends on 'output.path' property.
   },
 
   pages: {

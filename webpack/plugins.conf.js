@@ -44,7 +44,7 @@ const pluginsConf = [
   }),
 
   new CopyPlugin({
-    patterns: [paths.favicon],
+    patterns: [paths.favicon, paths.robots],
   }),
 
   new ESLintPlugin({
