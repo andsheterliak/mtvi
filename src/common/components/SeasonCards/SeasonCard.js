@@ -2,7 +2,6 @@ import {
   Card,
   CardActionArea,
   CardContent,
-  CardMedia,
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -77,7 +76,7 @@ const SeasonCard = ({
         {isLoading ? (
           <Skeleton variant="rect" />
         ) : (
-          <CardMedia component="img" alt={name || ''} image={imgPath} />
+          <img alt={name || ''} data-src={imgPath} />
         )}
       </AspectRatio>
 

@@ -11,6 +11,7 @@ import useScrollToTop from '~common/hooks/useScrollToTop';
 import { ROUTE_NAMES } from '~common/constants';
 import { getImagePath, ifIsData } from '~common/utils/getData';
 import { useGetTVShowQuery } from '~common/services/tmdb';
+import useLazyImages from '~common/hooks/useLazyImages';
 import SeasonCards from '~components/SeasonCards';
 import NoContent from '~components/NoContent';
 
@@ -21,6 +22,7 @@ const Seasons = () => {
   const { data, error, isLoading } = useGetTVShowQuery(id);
 
   useErrorHandler(error);
+  useLazyImages({ isLoading });
 
   const seasonsCards =
     !isLoading && !ifIsData(data) ? (

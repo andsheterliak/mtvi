@@ -11,6 +11,7 @@ import useScrollToTop from '~common/hooks/useScrollToTop';
 import { ROUTE_NAMES, TOP_VIDEO_AMOUNT } from '~common/constants';
 import { createGetVideosDataInstance } from '~common/selectors';
 import { useGetMovieQuery } from '~common/services/tmdb';
+import useLazyImages from '~common/hooks/useLazyImages';
 
 import noImageImg from '~assets/img/no-image.svg';
 
@@ -26,6 +27,7 @@ const MovieVideos = () => {
   const videosData = getVideosData(data);
 
   useErrorHandler(error);
+  useLazyImages({ isLoading, triggers: [selected] });
 
   const selectHandler = (e, key) => {
     setSelected(key);

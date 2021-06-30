@@ -6,6 +6,7 @@ import useScrollToTop from '~common/hooks/useScrollToTop';
 import Spacer from '~common/components/Spacer';
 import MainContent from '~common/components/MainContent';
 import { useGetTVShowQuery } from '~common/services/tmdb';
+import useLazyImages from '~common/hooks/useLazyImages';
 import TVShowHeader from './TVShowHeader';
 
 import SeriesCast from './SeriesCast';
@@ -22,6 +23,7 @@ const TVShow = () => {
   const { data, error, isLoading } = useGetTVShowQuery(id);
 
   useErrorHandler(error);
+  useLazyImages({ isLoading });
 
   return (
     <>

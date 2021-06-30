@@ -3,6 +3,7 @@ import { useErrorHandler } from 'react-error-boundary';
 
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { useGetPersonQuery } from '~common/services/tmdb';
+import useLazyImages from '~common/hooks/useLazyImages';
 
 import MainContainer from '~components/MainContainer';
 import Layout from '~components/Layout';
@@ -21,6 +22,7 @@ const Person = () => {
   const { data, error, isLoading } = useGetPersonQuery(id);
 
   useErrorHandler(error);
+  useLazyImages({ isLoading });
 
   return (
     <>

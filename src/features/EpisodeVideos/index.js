@@ -10,6 +10,7 @@ import { ROUTE_NAMES, TOP_VIDEO_AMOUNT } from '~common/constants';
 import { createGetVideosDataInstance } from '~common/selectors';
 import { getImagePath } from '~common/utils/getData';
 import { useGetEpisodeQuery } from '~common/services/tmdb';
+import useLazyImages from '~common/hooks/useLazyImages';
 import noImageImg from '~assets/img/no-image-wide.svg';
 
 const getVideos = (data) => data?.videos.results;
@@ -28,6 +29,7 @@ const EpisodeVideos = () => {
   const videosData = getVideosData(data);
 
   useErrorHandler(error);
+  useLazyImages({ isLoading, triggers: [selected] });
 
   const selectHandler = (e, key) => {
     setSelected(key);

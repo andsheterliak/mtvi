@@ -25,6 +25,7 @@ import { ROUTE_NAMES } from '~common/constants';
 import { useGetTVShowsQuery } from '~common/services/tmdb';
 import useOptions from '~common/hooks/useOptions';
 import { scrollToTop } from '~common/utils/dom';
+import useLazyImages from '~common/hooks/useLazyImages';
 
 const TVShows = ({ titleName }) => {
   useScrollToTop();
@@ -43,6 +44,7 @@ const TVShows = ({ titleName }) => {
   });
 
   useErrorHandler(error);
+  useLazyImages({ isLoading: isFetching, triggers: [page] });
 
   const changePageHandler = (event, newPage) => {
     if (!changePage(newPage)) return;

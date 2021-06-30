@@ -20,6 +20,7 @@ import { IMG_BASE_URL, IMG_SIZES, SEARCH_PATHS } from '~common/tmdb-config';
 import { useGetSearchQuery } from '~common/services/tmdb';
 import noImage from '~assets/img/no-image.svg';
 import noUserPhoto from '~assets/img/no-user-photo.svg';
+import useLazyImages from '~common/hooks/useLazyImages';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,12 +54,16 @@ const Search = ({ isSearchVisible, closeSearchHandler }) => {
   const [query, setQuery] = useState('');
   const [isReadyToFetch, setIsReadyToFetch] = useState(false);
 
-  const { data, error, isFetching } = useGetSearchQuery(
+  const { data, error, isFetching, isSuccess } = useGetSearchQuery(
     { query },
     { skip: !isReadyToFetch }
   );
 
   useErrorHandler(error);
+  useLazyImages({
+    isLoading: isFetching,
+    triggers: [isSuccess, isSearchVisible],
+  });
 
   useDebounceEffect({
     effect() {

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import noImageImg from '~assets/img/no-image.svg';
 import noUserPhotoImg from '~assets/img/no-user-photo.svg';
 import { ROUTE_NAMES } from '~common/constants';
+import useLazyImages from '~common/hooks/useLazyImages';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { createGetCreditsDataInstance } from '~common/selectors';
 import { useGetTVShowQuery } from '~common/services/tmdb';
@@ -23,6 +24,7 @@ const TVShowCredits = () => {
   const { data, error, isLoading } = useGetTVShowQuery(id);
 
   useErrorHandler(error);
+  useLazyImages({ isLoading });
 
   const creditsData = getCreditsData(data);
 

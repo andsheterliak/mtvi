@@ -2,7 +2,6 @@ import {
   Card,
   CardActionArea,
   CardContent,
-  CardMedia,
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,6 +9,7 @@ import { Skeleton } from '@material-ui/lab';
 import { Link } from 'react-router-dom';
 
 import { getHyphenOrData } from '~common/utils/getData';
+import AspectRatio from '~components/AspectRatio';
 
 const useStyles = makeStyles(() => ({
   action: {
@@ -19,9 +19,8 @@ const useStyles = makeStyles(() => ({
     height: '100%',
   },
 
-  img: {
+  imgWrapper: {
     width: '100px',
-    height: '100px',
     borderRadius: '50%',
     flexShrink: 0,
   },
@@ -39,16 +38,13 @@ const CreditCard = ({ imgPath, name, info, path, isLoading }) => {
 
   const content = (
     <>
-      {isLoading ? (
-        <Skeleton variant="rect" className={classes.img} />
-      ) : (
-        <CardMedia
-          className={classes.img}
-          component="img"
-          alt={name ?? ''}
-          image={imgPath}
-        />
-      )}
+      <AspectRatio aspectRatio="1:1" imgWrapperClasses={classes.imgWrapper}>
+        {isLoading ? (
+          <Skeleton variant="rect" />
+        ) : (
+          <img alt={name ?? ''} data-src={imgPath} />
+        )}
+      </AspectRatio>
 
       <CardContent className={classes.content}>
         <Typography component="p" color="textPrimary" variant="body1">

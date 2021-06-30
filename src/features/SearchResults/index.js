@@ -20,6 +20,7 @@ import { ifIsData } from '~common/utils/getData';
 import useScrollToTop from '~common/hooks/useScrollToTop';
 import { ROUTE_NAMES } from '~common/constants';
 import { useGetSearchResultsQuery } from '~common/services/tmdb';
+import useLazyImages from '~common/hooks/useLazyImages';
 import noImage from '~assets/img/no-image.svg';
 import noUserImage from '~assets/img/no-user-photo.svg';
 
@@ -97,6 +98,10 @@ const SearchResults = () => {
   );
 
   useErrorHandler(error);
+  useLazyImages({
+    isLoading: isFetching,
+    triggers: [searchIn, page],
+  });
 
   const changePageHandler = (event, newPage) => {
     if (!changePage(newPage));

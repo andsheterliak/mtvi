@@ -39,7 +39,7 @@ const Card = ({ imgPath, title, path, subData, isLoading }) => {
         {isLoading ? (
           <Skeleton variant="rect" />
         ) : (
-          <img alt={title} src={imgPath} />
+          <img alt={title} data-src={imgPath} />
         )}
       </AspectRatio>
 

@@ -3,7 +3,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   Menu,
   MenuItem,
   Typography,
@@ -75,7 +74,7 @@ const EpisodeCard = ({
         {isLoading ? (
           <Skeleton variant="rect" />
         ) : (
-          <CardMedia alt={name} image={imgPath} />
+          <img alt={name} data-src={imgPath} />
         )}
       </AspectRatio>
 

@@ -11,6 +11,7 @@ import { ROUTE_NAMES, TOP_VIDEO_AMOUNT } from '~common/constants';
 import { createGetVideosDataInstance } from '~common/selectors';
 import { getImagePath } from '~common/utils/getData';
 import { useGetTVShowQuery } from '~common/services/tmdb';
+import useLazyImages from '~common/hooks/useLazyImages';
 
 import noImageImg from '~assets/img/no-image.svg';
 
@@ -27,6 +28,8 @@ const TVShowVideos = () => {
 
   const { selected, setSelected } = useSelectionBar(VIDEO_TYPES.trailer.key);
   const videosData = getVideosData(data);
+
+  useLazyImages({ isLoading, triggers: [selected] });
 
   const selectHandler = (e, key) => {
     setSelected(key);

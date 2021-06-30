@@ -9,6 +9,7 @@ import { createGetCreditsDataInstance } from '~common/selectors';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
 import { getImagePath } from '~common/utils/getData';
 import { useGetMovieQuery } from '~common/services/tmdb';
+import useLazyImages from '~common/hooks/useLazyImages';
 
 import BackToHeader from '~components/BackToHeader';
 import Credits from '~components/Credits';
@@ -23,6 +24,7 @@ const MovieCredits = () => {
   const { data, error, isLoading } = useGetMovieQuery(id);
 
   useErrorHandler(error);
+  useLazyImages({ isLoading });
 
   const creditsData = getCreditsData(data);
 

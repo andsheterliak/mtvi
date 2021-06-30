@@ -2,7 +2,6 @@ import {
   Card,
   CardActionArea,
   CardContent,
-  CardMedia,
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -64,7 +63,7 @@ const SearchItem = ({
           {isLoading ? (
             <Skeleton variant="rect" />
           ) : (
-            <CardMedia alt={name} component="img" image={imgPath} />
+            <img alt={name} data-src={imgPath} />
           )}
         </AspectRatio>
       </CardContent>

@@ -12,6 +12,7 @@ import MovieHeader from './MovieHeader';
 import TopBilledCast from './TopBilledCast';
 import MovieVideos from './MovieVideos';
 import { useGetMovieQuery } from '~common/services/tmdb';
+import useLazyImages from '~common/hooks/useLazyImages';
 
 const Movie = () => {
   useScrollToTop();
@@ -20,6 +21,7 @@ const Movie = () => {
   const { data, error, isLoading } = useGetMovieQuery(id);
 
   useErrorHandler(error);
+  useLazyImages({ isLoading });
 
   return (
     <>

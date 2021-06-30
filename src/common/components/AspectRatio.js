@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => {
         height: '100%',
         borderRadius: 'inherit',
         maxHeight: 'inherit',
+        objectFit: 'cover',
       },
     },
   };

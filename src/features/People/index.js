@@ -5,6 +5,7 @@ import { ifIsData } from '~common/utils/getData';
 import { ROUTE_NAMES } from '~common/constants';
 import { useGetPeopleQuery } from '~common/services/tmdb';
 import { IMG_BASE_URL, IMG_SIZES } from '~common/tmdb-config';
+import useLazyImages from '~common/hooks/useLazyImages';
 
 import FocusableContainer, { useFocus } from '~components/FocusableContainer';
 import CardsGrid from '~components/grids/CardsGrid';
@@ -24,6 +25,7 @@ const People = ({ titleName }) => {
   const { data, isLoading, isFetching, error } = useGetPeopleQuery({ page });
 
   useErrorHandler(error);
+  useLazyImages({ isLoading: isFetching, triggers: [page] });
 
   const changePageHandler = (event, newPage) => {
     if (!changePage(newPage)) return;

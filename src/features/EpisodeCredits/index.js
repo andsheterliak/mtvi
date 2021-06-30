@@ -11,6 +11,7 @@ import Credits from '~components/Credits';
 import { createGetCreditsDataInstance } from '~common/selectors';
 import { getImagePath } from '~common/utils/getData';
 import { useGetEpisodeQuery } from '~common/services/tmdb';
+import useLazyImages from '~common/hooks/useLazyImages';
 
 const getCredits = (data) => data?.credits;
 const getCreditsData = createGetCreditsDataInstance(getCredits);
@@ -27,6 +28,7 @@ const EpisodeCredits = () => {
   const creditsData = getCreditsData(data);
 
   useErrorHandler(error);
+  useLazyImages({ isLoading });
 
   return (
     <Credits

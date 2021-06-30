@@ -17,3 +17,12 @@
 *::-webkit-scrollbar-thumb {
   background-color: hsl(0, 0%, 68%);
 }
+
+[data-src] {
+  opacity: 0;
+  transition: opacity 0.3s 0.3s ease-out;
+}
+
+[data-src].is-visible {
+  opacity: 1;
+}

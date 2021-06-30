@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardMedia } from '@material-ui/core';
+import { Card, CardActionArea } from '@material-ui/core';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import { makeStyles } from '@material-ui/core/styles';
 import { Skeleton } from '@material-ui/lab';
@@ -44,12 +44,7 @@ const VideoCard = ({ id, name, openModalHandler, isLoading }) => {
           }}
         >
           <AspectRatio aspectRatio="16:9">
-            <CardMedia
-              component="img"
-              image={imgPath}
-              alt={name}
-              title={name}
-            />
+            <img data-src={imgPath} alt={name} title={name} />
           </AspectRatio>
 
           <div className={classes.playBtn}>

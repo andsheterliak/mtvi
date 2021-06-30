@@ -11,6 +11,7 @@ import noWideImg from '~assets/img/no-image-wide.svg';
 import { ROUTE_NAMES } from '~common/constants';
 import { useGetSeasonQuery } from '~common/services/tmdb';
 import useScrollToTop from '~common/hooks/useScrollToTop';
+import useLazyImages from '~common/hooks/useLazyImages';
 import EpisodeCards from './components/EpisodeCards';
 import Layout from '~components/Layout';
 import MainContainer from '~components/MainContainer';
@@ -23,6 +24,7 @@ const Season = () => {
   const { data, error, isLoading } = useGetSeasonQuery({ id, seasonNumber });
 
   useErrorHandler(error);
+  useLazyImages({ isLoading });
 
   return (
     <>
