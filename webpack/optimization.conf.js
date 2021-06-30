@@ -8,28 +8,35 @@ const optimizationConf = {
     chunks: 'all', // Include all types of chunks async (dynamic imports) and initial (node_modules).
 
     // Disable names for chunks, example: polyfills~app.7d473b584b576a22c8ee.js --> 1.7d473b584b576a22c8ee.js.
-    name: false,
+    // name: false,
 
     /**
      * To configure chunks groups.
      *  To exclude specific module it is necessary to 'group' closing slash "[\\/]node_modules[\\/](?!module[\\/])", or multiple modules "[\\/]node_modules[\\/](?!(module|module2)[\\/])".
      */
-    // cacheGroups: {
-    //   // Disable default groups.
-    //   default: false,
-    // //  vendors: false,
+    cacheGroups: {
+      // Disable default groups.
+      default: false,
+      //  vendors: false,
 
-    //   polyfills: {
-    //     test: /[\\/]node_modules[\\/](core-js|regenerator-runtime)[\\/]/,
-    //     priority: 10,
-    //     enforce: true,
-    //   },
+      react: {
+        test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+        priority: 10,
+        enforce: true,
+      },
 
-    //   vendors: {
-    //     test: /[\\/]node_modules[\\/]/,
-    //     enforce: true,
-    //   },
-    // },
+      polyfills: {
+        test: /[\\/]node_modules[\\/](core-js|regenerator-runtime)[\\/]/,
+        priority: 10,
+        enforce: true,
+      },
+
+      vendors: {
+        test: /[\\/]node_modules[\\/]/,
+        maxSize: 1024 * 300, // Split vendors if maxSize (in bytes) is reached, (maxSize is only a hint and could be violated when modules are bigger than maxSize or splitting would violate minSize).
+        enforce: true,
+      },
+    },
   },
 
   // Set source map for TerserPlugin only if you want to enable it for production (default: false), also change devtool.
