@@ -145,24 +145,26 @@ const Search = ({ isSearchVisible, closeSearchHandler }) => {
           </MainContainer>
         </form>
 
-        <SearchItems
-          isLoading={isFetching}
-          data={data?.results}
-          searchPaths={SEARCH_PATHS}
-          routeNames={ROUTE_NAMES}
-          imgData={{
-            basePath: IMG_BASE_URL,
-            person: {
-              size: IMG_SIZES.profile.w185,
-              fallback: noUserPhoto,
-            },
-            common: {
-              size: IMG_SIZES.poster.w92,
-              fallback: noImage,
-            },
-          }}
-          clickHandler={closeSearchHandler}
-        />
+        {query && (
+          <SearchItems
+            isLoading={isFetching}
+            data={data?.results}
+            searchPaths={SEARCH_PATHS}
+            routeNames={ROUTE_NAMES}
+            imgData={{
+              basePath: IMG_BASE_URL,
+              person: {
+                size: IMG_SIZES.profile.w185,
+                fallback: noUserPhoto,
+              },
+              common: {
+                size: IMG_SIZES.poster.w92,
+                fallback: noImage,
+              },
+            }}
+            clickHandler={closeSearchHandler}
+          />
+        )}
       </Box>
     </Fade>
   );

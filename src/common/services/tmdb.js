@@ -107,9 +107,7 @@ const tmdbApi = createApi({
 
     getSearch: query({
       async queryFn(params, _queryApi, _extraOptions, fetchWithBQ) {
-        if (!params.query) {
-          return { data: null, isFetching: false, isLoading: false };
-        }
+        if (!params.query) return { data: null };
 
         const result = await fetchWithBQ({
           params: {
