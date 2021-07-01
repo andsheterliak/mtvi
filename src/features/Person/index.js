@@ -22,7 +22,7 @@ const Person = () => {
   const { data, error, isLoading } = useGetPersonQuery(id);
 
   useErrorHandler(error);
-  useLazyImages({ isLoading });
+  useLazyImages({ isLoading, triggers: [data] });
 
   return (
     <>
