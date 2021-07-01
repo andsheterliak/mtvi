@@ -44,7 +44,7 @@ const TVShows = ({ titleName }) => {
   });
 
   useErrorHandler(error);
-  useLazyImages({ isLoading: isFetching, triggers: [page] });
+  useLazyImages({ isLoading: isFetching, triggers: [data] });
 
   const changePageHandler = (event, newPage) => {
     if (!changePage(newPage)) return;
