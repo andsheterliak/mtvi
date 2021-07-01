@@ -44,7 +44,7 @@ const SearchItems = ({
     return (
       <SearchItem
         key={item.id}
-        name={isTVShow ? item.name : item.title}
+        name={isTVShow || isPerson ? item.name : item.title}
         subInfo={isPerson ? getKnownFor(item.known_for) : date}
         path={
           isPerson
