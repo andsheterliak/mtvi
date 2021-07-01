@@ -21,7 +21,7 @@ const Movie = () => {
   const { data, error, isLoading } = useGetMovieQuery(id);
 
   useErrorHandler(error);
-  useLazyImages({ isLoading });
+  useLazyImages({ isLoading, triggers: [data] });
 
   return (
     <>

@@ -23,7 +23,7 @@ const TVShow = () => {
   const { data, error, isLoading } = useGetTVShowQuery(id);
 
   useErrorHandler(error);
-  useLazyImages({ isLoading });
+  useLazyImages({ isLoading, triggers: [data] });
 
   return (
     <>
