@@ -1,4 +1,5 @@
 const TerserPlugin = require('terser-webpack-plugin');
+const { isProd } = require('./helpers.conf');
 
 const optimizationConf = {
   moduleIds: 'hashed', // performance: fix hashing
@@ -33,7 +34,7 @@ const optimizationConf = {
 
       vendors: {
         test: /[\\/]node_modules[\\/]/,
-        maxSize: 1024 * 300, // Split vendors if maxSize (in bytes) is reached, (maxSize is only a hint and could be violated when modules are bigger than maxSize or splitting would violate minSize).
+        maxSize: isProd ? 1024 * 300 : 0, // Split vendors if maxSize (in bytes) is reached, (maxSize is only a hint and could be violated when modules are bigger than maxSize or splitting would violate minSize).
         enforce: true,
       },
     },
