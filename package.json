@@ -1,6 +1,7 @@
 {
   "name": "mtvi",
   "description": "Movie/TV Info app based on TMDB API",
+  "homepage": "https://github.com/andsheterliak/mtvi",
   "author": "andsheterliak",
   "private": true,
   "license": "MIT",
