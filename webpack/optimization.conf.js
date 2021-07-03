@@ -12,8 +12,7 @@ const optimizationConf = {
     // name: false,
 
     /**
-     * To configure chunks groups.
-     *  To exclude specific module it is necessary to 'group' closing slash "[\\/]node_modules[\\/](?!module[\\/])", or multiple modules "[\\/]node_modules[\\/](?!(module|module2)[\\/])".
+     * To exclude specific module it is necessary to 'group' closing slash "[\\/]node_modules[\\/](?!module[\\/])", or multiple modules "[\\/]node_modules[\\/](?!(module|module2)[\\/])".
      */
     cacheGroups: {
       // Disable default groups.
