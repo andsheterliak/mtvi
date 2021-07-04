@@ -51,6 +51,12 @@ const TVShows = ({ titleName }) => {
     focus();
   };
 
+  const setDefault = () => {
+    setOptions(TV_DEFAULT_OPTIONS);
+    changePage(1);
+    scrollToTop();
+  };
+
   const changeOptions = (newOptions) => {
     setOptions(newOptions);
     changePage(1);
@@ -88,6 +94,8 @@ const TVShows = ({ titleName }) => {
         modalTitle="Adjust TV Shows"
         onAcceptCallback={changeOptions}
         initialOptions={options}
+        defaultOptions={TV_DEFAULT_OPTIONS}
+        onSetDefault={setDefault}
         isDisabled={isFetching}
       />
 

@@ -15,6 +15,8 @@ const Adjustment = ({
   modalTitle,
   onAcceptCallback,
   initialOptions,
+  defaultOptions,
+  onSetDefault,
   isDisabled,
 }) => {
   const {
@@ -27,7 +29,8 @@ const Adjustment = ({
     toggleGenreHandler,
     changeUserScoreHandler,
     acceptOptions,
-  } = useOptions(initialOptions);
+    setDefaultOptions,
+  } = useOptions(initialOptions, defaultOptions);
   const { isModalOpened, setIsModalOpened } = useModal(false);
 
   const openModalHandler = () => {
@@ -36,6 +39,12 @@ const Adjustment = ({
 
   const closeModalHandler = () => {
     resetOptions();
+    setIsModalOpened(false);
+  };
+
+  const setDefaultHandler = () => {
+    setDefaultOptions();
+    onSetDefault();
     setIsModalOpened(false);
   };
 
@@ -88,6 +97,7 @@ const Adjustment = ({
         actions={
           <ActionsButtons
             isReadyToAccept={isReadyToAccept}
+            setDefaultHandler={setDefaultHandler}
             cancelHandler={closeModalHandler}
             acceptHandler={acceptHandler}
           />

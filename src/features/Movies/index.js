@@ -51,6 +51,12 @@ const Movies = ({ titleName }) => {
     focus();
   };
 
+  const setDefault = () => {
+    setOptions(MOVIES_DEFAULT_OPTIONS);
+    changePage(1);
+    scrollToTop();
+  };
+
   const changeOptions = (newOptions) => {
     setOptions(newOptions);
     changePage(1);
@@ -87,7 +93,9 @@ const Movies = ({ titleName }) => {
         dateTitle="Release Dates"
         modalTitle="Adjust Movies"
         onAcceptCallback={changeOptions}
+        onSetDefault={setDefault}
         initialOptions={options}
+        defaultOptions={MOVIES_DEFAULT_OPTIONS}
         isDisabled={isFetching}
       />
 

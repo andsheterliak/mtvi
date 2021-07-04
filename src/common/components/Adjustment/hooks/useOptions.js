@@ -52,6 +52,10 @@ const slice = createSlice({
       if (state.isOptionsValid) state.isReadyToAccept = true;
     },
 
+    setDefaultOptions(state, { payload }) {
+      return initState(payload.defaultOptions);
+    },
+
     acceptOptions(state) {
       state.isReadyToAccept = false;
     },
@@ -64,7 +68,7 @@ const slice = createSlice({
 
 const { reducer, actions } = slice;
 
-const useOptions = (initialOptions) => {
+const useOptions = (initialOptions, defaultOptions) => {
   const [state, dispatch] = useReducer(reducer, initialOptions, initState);
 
   const resetOptions = () => {
@@ -109,6 +113,10 @@ const useOptions = (initialOptions) => {
     dispatch(actions.acceptOptions());
   };
 
+  const setDefaultOptions = () => {
+    dispatch(actions.setDefaultOptions({ defaultOptions }));
+  };
+
   return {
     options: state.options,
     isReadyToAccept: state.isReadyToAccept,
@@ -119,6 +127,7 @@ const useOptions = (initialOptions) => {
     toggleGenreHandler,
     changeUserScoreHandler,
     acceptOptions,
+    setDefaultOptions,
   };
 };
 
