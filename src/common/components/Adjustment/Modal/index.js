@@ -3,31 +3,34 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  useMediaQuery,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 export { default as useModal } from './useModal';
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles(({ palette }) => {
   return {
     title: {
-      color: theme.palette.text.primary,
+      color: palette.text.primary,
     },
   };
 });
 
 const Modal = ({ closeModalHandler, isOpened, title, content, actions }) => {
   const classes = useStyles();
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down(460));
 
   const label = `adjustment-title`;
 
   return (
     <Dialog
+      fullScreen={fullScreen}
+      maxWidth={'xs'}
       onClose={closeModalHandler}
       open={isOpened}
       aria-labelledby={label}
-      fullWidth
-      maxWidth={'xs'}
     >
       <DialogTitle className={classes.title} id={label}>
         {title}
