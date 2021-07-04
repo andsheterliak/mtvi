@@ -92,7 +92,7 @@ const Movies = ({ titleName }) => {
         userScoreRange={USER_SCORE_RANGE}
         dateTitle="Release Dates"
         modalTitle="Adjust Movies"
-        onAcceptCallback={changeOptions}
+        onAccept={changeOptions}
         onSetDefault={setDefault}
         initialOptions={options}
         defaultOptions={MOVIES_DEFAULT_OPTIONS}

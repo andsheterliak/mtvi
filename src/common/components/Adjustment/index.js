@@ -13,7 +13,7 @@ const Adjustment = ({
   userScoreRange,
   dateTitle,
   modalTitle,
-  onAcceptCallback,
+  onAccept,
   initialOptions,
   defaultOptions,
   onSetDefault,
@@ -49,7 +49,7 @@ const Adjustment = ({
   };
 
   const acceptHandler = () => {
-    onAcceptCallback(options);
+    onAccept(options);
     acceptOptions();
     setIsModalOpened(false);
   };

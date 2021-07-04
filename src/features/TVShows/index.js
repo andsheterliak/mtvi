@@ -92,7 +92,7 @@ const TVShows = ({ titleName }) => {
         userScoreRange={USER_SCORE_RANGE}
         dateTitle="Air Dates"
         modalTitle="Adjust TV Shows"
-        onAcceptCallback={changeOptions}
+        onAccept={changeOptions}
         initialOptions={options}
         defaultOptions={TV_DEFAULT_OPTIONS}
         onSetDefault={setDefault}
