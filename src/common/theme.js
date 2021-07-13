@@ -92,32 +92,31 @@ const baseTheme = {
   },
 };
 
-const lightTheme = createMuiTheme({
-  ...baseTheme,
-
-  palette: {
-    ...baseTheme.palette,
-
-    background: {
-      paper: 'hsl(0, 0%, 99%)',
-      default: 'hsl(0, 0%, 97%)',
+const lightTheme = createMuiTheme(
+  {
+    palette: {
+      background: {
+        paper: 'hsl(0, 0%, 99%)',
+        default: 'hsl(0, 0%, 97%)',
+      },
     },
   },
-});
+  baseTheme
+);
 
-export const darkTheme = createMuiTheme({
-  ...baseTheme,
+export const darkTheme = createMuiTheme(
+  {
+    palette: {
+      type: 'dark',
 
-  palette: {
-    ...baseTheme.palette,
-    type: 'dark',
-
-    background: {
-      paper: 'hsl(224, 9%, 9%)',
-      default: 'hsl(224, 9%, 6%)',
+      background: {
+        paper: 'hsl(224, 9%, 9%)',
+        default: 'hsl(224, 9%, 6%)',
+      },
     },
   },
-});
+  baseTheme
+);
 
 export const useToggleTheme = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(
