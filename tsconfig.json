@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./", // Relative to tsconfig.json
+    /**
+     * 'paths' Relative to "baseUrl".
+     * To get the shortest path when using auto-import, 'paths' should be ordered from furthest to shortest.
+     */
+    "paths": {
+      "~components/*": [
+        "src/common/components/*"
+      ],
+      "~common/*": [
+        "src/common/*"
+      ],
+      "~assets/*": [
+        "src/assets/*"
+      ],
+      "~features/*": [
+        "src/features/*"
+      ],
+      "~/*": [
+        "src/*"
+      ],
+    },
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "module": "esnext",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "src/**/*"
+  ],
+}

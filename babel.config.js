@@ -20,6 +20,8 @@ const config = {
         runtime: 'automatic', // To use new JSX transform.
       },
     ],
+
+    '@babel/preset-typescript',
   ],
 
   plugins: [],

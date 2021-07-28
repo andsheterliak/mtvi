@@ -47,7 +47,7 @@ const pluginsConf = [
   }),
 
   new ESLintPlugin({
-    extensions: ['js', 'jsx'],
+    extensions: ['js', 'jsx', 'ts', 'tsx'],
     fix: true,
     failOnError: false,
   }),
@@ -57,8 +57,11 @@ const pluginsConf = [
   }),
 ];
 
-if (isDev) pluginsConf.push(new ReactRefreshWebpackPlugin({
-  overlay: false,
-}));
+if (isDev)
+  pluginsConf.push(
+    new ReactRefreshWebpackPlugin({
+      overlay: false,
+    })
+  );
 
 module.exports = pluginsConf;

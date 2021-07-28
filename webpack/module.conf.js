@@ -41,7 +41,7 @@ const moduleConf = {
     // JS
 
     {
-      test: /\.jsx?$/,
+      test: /\.(ts|js)x?$/,
       include: paths.src,
       exclude: /node_modules/,
       loader: 'babel-loader',

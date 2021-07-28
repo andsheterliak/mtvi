@@ -1,11 +1,14 @@
 {
   // --- eslint
   "[javascript]": {
-    // Disable editor's format on save.
     "editor.formatOnSave": false,
   },
-  // Disable default editor validation to enable eslint validation.
-  "javascript.validate.enable": false,
+  "[typescript]": {
+    "editor.formatOnSave": false,
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": false,
+  },
   // --- cSpell plugin
   // Include words to the dictionary.
   "cSpell.words": [
