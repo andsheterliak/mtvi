@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import axiosTMDB from '~common/axios-tmdb';
+import axiosTMDB from '~common/lib/axios-tmdb';
 import { SEARCH_PATHS } from '~common/tmdb-config';
 import { getSelectedGenres } from '~common/utils/getData';
 
