@@ -70,7 +70,7 @@ export const createGetCreditsDataInstance = (getCreditsSelector) => {
       if (savedDepartment[id]) {
         const savedItem = savedDepartment[id];
 
-        savedItem.info += savedItem.info ? `, ${info}` : info;
+        savedItem.info += savedItem.info && info ? `, ${info}` : info;
 
         return;
       }

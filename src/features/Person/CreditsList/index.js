@@ -125,7 +125,7 @@ const createTimelineData = (data) => {
       const itemDepartment = itemEmployment[departmentKey];
 
       // If is a 'value', append new value from the current item. If no 'value', just add it.
-      itemDepartment.value += itemDepartment.value ? `, ${job}` : job;
+      itemDepartment.value += itemDepartment.value && job ? `, ${job}` : job;
 
       return;
     }
