@@ -9,7 +9,7 @@ import {
 } from '~/components';
 import { ROUTE_NAMES } from '~/constants';
 import { formatDataStr } from '~/utils';
-import { ProjectsTimeline } from '../components/ProjectsTimeline';
+import { ProjectsTimeline } from './ProjectsTimeline';
 import { getMovieCredits, getTVCredits } from '../personSelectors';
 import { filterConfig } from './filterConfig';
 

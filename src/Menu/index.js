@@ -13,9 +13,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import { Link } from 'react-router-dom';
 import { HideOnScroll, MainContainer } from '~/components';
-import { Search, useToggleSearch } from '~/features/Search';
+import { routesConfig } from '~/routes';
 import { Drawer, useDrawer } from './Drawer';
 import { Logo } from './Logo';
+import { Search, useToggleSearch } from './Search';
 import { ToolbarLinks } from './ToolbarLinks';
 
 const useStyles = makeStyles(
@@ -55,12 +56,7 @@ const useStyles = makeStyles(
   })
 );
 
-export const Menu = ({
-  locationPathname,
-  routes,
-  toggleThemeHandler,
-  isDarkTheme,
-}) => {
+export const Menu = ({ toggleThemeHandler, isDarkTheme }) => {
   const classes = useStyles();
 
   const { isDrawerOpened, closeDrawerHandler, openDrawerHandler } = useDrawer();
@@ -93,15 +89,12 @@ export const Menu = ({
                   className={classes.logo}
                   underline="none"
                   component={Link}
-                  to={routes.default.redirectTo}
+                  to={routesConfig.default.redirectTo}
                 >
                   <Logo />
                 </MUILink>
 
-                <ToolbarLinks
-                  locationPathname={locationPathname}
-                  routes={routes}
-                />
+                <ToolbarLinks />
 
                 <div className={classes.icons}>
                   <IconButton
@@ -132,8 +125,6 @@ export const Menu = ({
       </HideOnScroll>
 
       <Drawer
-        locationPathname={locationPathname}
-        routes={routes}
         isOpened={isDrawerOpened}
         closeDrawerHandler={closeDrawerHandler}
       />

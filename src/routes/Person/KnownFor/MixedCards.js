@@ -1,15 +1,12 @@
+import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
+import noImage from '~/assets/img/no-image.svg';
 import { Card, CardSubInfo } from '~/components';
+import { ROUTE_NAMES, TOP_ITEM_AMOUNT } from '~/constants';
 import { getImagePath } from '~/utils';
 
-export const MixedCards = ({
-  cardsData,
-  imgData,
-  routeNames,
-  isLoading,
-  topItemAmount,
-}) => {
+export const MixedCards = ({ cardsData, isLoading }) => {
   if (isLoading)
-    return Array(topItemAmount)
+    return Array(TOP_ITEM_AMOUNT)
       .fill()
       .map((_, index) => {
         return (
@@ -22,12 +19,17 @@ export const MixedCards = ({
       });
 
   return cardsData.map((item) => {
-    const imgPath = getImagePath({ ...imgData, path: item.poster_path });
+    const imgPath = getImagePath({
+      basePath: IMG_BASE_URL,
+      size: IMG_SIZES.poster.w342,
+      fallback: noImage,
+      path: item.poster_path,
+    });
 
     return 'release_date' in item || 'title' in item ? (
       <Card
         key={item.id}
-        path={`/${routeNames.movie}/${item.id}`}
+        path={`/${ROUTE_NAMES.movie}/${item.id}`}
         imgPath={imgPath}
         title={item.title}
         subData={
@@ -40,7 +42,7 @@ export const MixedCards = ({
     ) : (
       <Card
         key={item.id}
-        path={`/${routeNames.tvShow}/${item.id}`}
+        path={`/${ROUTE_NAMES.tvShow}/${item.id}`}
         imgPath={imgPath}
         title={item.name}
         subData={

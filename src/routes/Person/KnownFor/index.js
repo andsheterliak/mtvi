@@ -1,5 +1,4 @@
 import { createSelector } from '@reduxjs/toolkit';
-import noImage from '~/assets/img/no-image.svg';
 import {
   CardsGridRow,
   NoContent,
@@ -7,11 +6,10 @@ import {
   SectionTitle,
   Slider,
 } from '~/components';
-import { ROUTE_NAMES, TOP_ITEM_AMOUNT } from '~/constants';
-import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
+import { TOP_ITEM_AMOUNT } from '~/constants';
 import { getTopItems, ifIsData } from '~/utils';
-import { MixedCards } from './components/MixedCards';
-import { getMovieCredits, getTVCredits } from './personSelectors';
+import { getMovieCredits, getTVCredits } from '../personSelectors';
+import { MixedCards } from './MixedCards';
 
 const sortByVoteDescending = (data) => {
   const newData = [...data];
@@ -86,17 +84,7 @@ export const KnownFor = ({ isLoading, data }) => {
     ) : (
       <Slider>
         <CardsGridRow>
-          <MixedCards
-            isLoading={isLoading}
-            cardsData={knownForData}
-            routeNames={ROUTE_NAMES}
-            topItemAmount={TOP_ITEM_AMOUNT}
-            imgData={{
-              basePath: IMG_BASE_URL,
-              size: IMG_SIZES.poster.w342,
-              fallback: noImage,
-            }}
-          />
+          <MixedCards isLoading={isLoading} cardsData={knownForData} />
         </CardsGridRow>
       </Slider>
     );

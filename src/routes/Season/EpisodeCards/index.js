@@ -1,9 +1,14 @@
+import { useRouteMatch } from 'react-router-dom';
+import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
+import noWideImg from '~/assets/img/no-image-wide.svg';
 import { ROUTE_NAMES } from '~/constants';
 import { getImagePath } from '~/utils';
 import { EpisodeCard } from './EpisodeCard';
 import { EpisodesGrid } from './EpisodesGrid';
 
-export const EpisodeCards = ({ data, basePath, imgData, isLoading }) => {
+export const EpisodeCards = ({ data, isLoading }) => {
+  const { url } = useRouteMatch();
+
   if (isLoading) {
     return (
       <EpisodesGrid>
@@ -17,7 +22,12 @@ export const EpisodeCards = ({ data, basePath, imgData, isLoading }) => {
   }
 
   const cards = data.map((item) => {
-    const imgPath = getImagePath({ ...imgData, path: item.still_path });
+    const imgPath = getImagePath({
+      basePath: IMG_BASE_URL,
+      size: IMG_SIZES.still.w500,
+      fallback: noWideImg,
+      path: item.still_path,
+    });
 
     return (
       <EpisodeCard
@@ -29,8 +39,8 @@ export const EpisodeCards = ({ data, basePath, imgData, isLoading }) => {
         voteAverage={item.vote_average}
         episodeNumber={item.episode_number}
         resourcePaths={{
-          credits: `${basePath}/${ROUTE_NAMES.episode}/${item.episode_number}/${ROUTE_NAMES.credits}`,
-          videos: `${basePath}/${ROUTE_NAMES.episode}/${item.episode_number}/${ROUTE_NAMES.videos}`,
+          credits: `${url}/${ROUTE_NAMES.episode}/${item.episode_number}/${ROUTE_NAMES.credits}`,
+          videos: `${url}/${ROUTE_NAMES.episode}/${item.episode_number}/${ROUTE_NAMES.videos}`,
         }}
       />
     );

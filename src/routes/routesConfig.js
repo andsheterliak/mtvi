@@ -1,20 +1,20 @@
 import { ROUTE_NAMES } from '~/constants';
-import { EpisodeCredits } from '~/screens/EpisodeCredits';
-import { EpisodeVideos } from '~/screens/EpisodeVideos';
-import { Movie } from '~/screens/Movie';
-import { MovieCredits } from '~/screens/MovieCredits';
-import { Movies } from '~/screens/Movies';
-import { MovieVideos } from '~/screens/MovieVideos';
-import { Page404 } from '~/screens/Page404';
-import { People } from '~/screens/People';
-import { Person } from '~/screens/Person';
-import { SearchResults } from '~/screens/SearchResults';
-import { Season } from '~/screens/Season';
-import { Seasons } from '~/screens/Seasons';
-import { TVShow } from '~/screens/TVShow';
-import { TVShowCredits } from '~/screens/TVShowCredits';
-import { TVShows } from '~/screens/TVShows';
-import { TVShowVideos } from '~/screens/TVShowVideos';
+import { EpisodeCredits } from './EpisodeCredits';
+import { EpisodeVideos } from './EpisodeVideos';
+import { Movie } from './Movie';
+import { MovieCredits } from './MovieCredits';
+import { Movies } from './Movies';
+import { MovieVideos } from './MovieVideos';
+import { Page404 } from './Page404';
+import { People } from './People';
+import { Person } from './Person';
+import { SearchResults } from './SearchResults';
+import { Season } from './Season';
+import { Seasons } from './Seasons';
+import { TVShow } from './TVShow';
+import { TVShowCredits } from './TVShowCredits';
+import { TVShows } from './TVShows';
+import { TVShowVideos } from './TVShowVideos';
 
 const movies = {
   name: 'Movies',

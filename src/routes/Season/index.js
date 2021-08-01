@@ -1,7 +1,6 @@
 import { useErrorHandler } from 'react-error-boundary';
-import { useParams, useRouteMatch } from 'react-router';
+import { useParams } from 'react-router';
 import { IMG_BASE_URL, IMG_SIZES, useGetSeasonQuery } from '~/api/tmdb';
-import noWideImg from '~/assets/img/no-image-wide.svg';
 import noImg from '~/assets/img/no-image.svg';
 import {
   BackToHeader,
@@ -13,13 +12,12 @@ import {
 import { ROUTE_NAMES } from '~/constants';
 import { useLazyImages, useScrollToTop } from '~/hooks';
 import { getImagePath } from '~/utils';
-import { EpisodeCards } from './components/EpisodeCards';
+import { EpisodeCards } from './EpisodeCards';
 
 export const Season = () => {
   useScrollToTop();
 
   const { id, seasonNumber } = useParams();
-  const { url } = useRouteMatch();
   const { data, error, isLoading } = useGetSeasonQuery({ id, seasonNumber });
 
   useErrorHandler(error);
@@ -45,16 +43,7 @@ export const Season = () => {
 
         <MainContainer>
           <MainContent>
-            <EpisodeCards
-              isLoading={isLoading}
-              data={data?.episodes}
-              basePath={url}
-              imgData={{
-                basePath: IMG_BASE_URL,
-                size: IMG_SIZES.still.w500,
-                fallback: noWideImg,
-              }}
-            />
+            <EpisodeCards isLoading={isLoading} data={data?.episodes} />
           </MainContent>
         </MainContainer>
       </Layout>

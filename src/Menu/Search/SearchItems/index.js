@@ -1,15 +1,12 @@
 import { memo } from 'react';
+import { IMG_BASE_URL, IMG_SIZES, SEARCH_PATHS } from '~/api/tmdb';
+import noImage from '~/assets/img/no-image.svg';
+import noUserPhoto from '~/assets/img/no-user-photo.svg';
+import { ROUTE_NAMES } from '~/constants';
 import { formatDataStr, getImagePath, getKnownFor, getTopItems } from '~/utils';
 import { SearchItem } from './SearchItem';
 
-const SearchItemsComponent = ({
-  data,
-  searchPaths,
-  routeNames,
-  imgData,
-  clickHandler,
-  isLoading,
-}) => {
+const SearchItemsComponent = ({ data, clickHandler, isLoading }) => {
   const itemAmount = 8;
 
   if (isLoading) {
@@ -23,17 +20,17 @@ const SearchItemsComponent = ({
   const topData = getTopItems(data, itemAmount);
 
   return topData.map((item) => {
-    const isPerson = searchPaths.person === item.media_type;
-    const isTVShow = searchPaths.tv === item.media_type;
+    const isPerson = SEARCH_PATHS.person === item.media_type;
+    const isTVShow = SEARCH_PATHS.tv === item.media_type;
 
     const imgPath = getImagePath({
-      basePath: imgData.basePath,
-      size: isPerson ? imgData.person.size : imgData.common.size,
+      basePath: IMG_BASE_URL,
+      size: isPerson ? IMG_SIZES.profile.w185 : IMG_SIZES.poster.w92,
       path: isPerson ? item.profile_path : item.poster_path,
-      fallback: isPerson ? imgData.person.fallback : imgData.common.fallback,
+      fallback: isPerson ? noUserPhoto : noImage,
     });
 
-    const commonPath = isTVShow ? routeNames.tvShow : routeNames.movie;
+    const commonPath = isTVShow ? ROUTE_NAMES.tvShow : ROUTE_NAMES.movie;
 
     const date = formatDataStr(
       isTVShow ? item.first_air_date : item.release_date
@@ -46,7 +43,7 @@ const SearchItemsComponent = ({
         subInfo={isPerson ? getKnownFor(item.known_for) : date}
         path={
           isPerson
-            ? `/${routeNames.person}/${item.id}`
+            ? `/${ROUTE_NAMES.person}/${item.id}`
             : `/${commonPath}/${item.id}`
         }
         imgPath={imgPath}

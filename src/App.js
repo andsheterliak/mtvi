@@ -1,18 +1,15 @@
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { ErrorBoundary } from 'react-error-boundary';
-import { useLocation } from 'react-router-dom';
 import { Spacer } from '~/components';
-import { routesConfig } from '~/routesConfig';
+import { Routes } from '~/routes';
 import { useToggleTheme } from '~/theme';
-import { ErrorFallback } from './components/ErrorFallback';
-import { Footer } from './components/Footer';
-import { Menu } from './components/Menu';
-import { RootWrapper } from './components/RootWrapper';
-import { Routes } from './components/Routes';
+import { ErrorFallback } from '~/ErrorFallback';
+import { Footer } from '~/Footer';
+import { Menu } from '~/Menu';
+import { RootWrapper } from '~/RootWrapper';
 
 const App = () => {
-  const location = useLocation();
   const { theme, isDarkTheme, toggleThemeHandler } = useToggleTheme();
 
   return (
@@ -22,13 +19,11 @@ const App = () => {
       <RootWrapper>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <Menu
-            locationPathname={location.pathname}
-            routes={routesConfig}
             toggleThemeHandler={toggleThemeHandler}
             isDarkTheme={isDarkTheme}
           />
 
-          <Routes config={routesConfig} />
+          <Routes />
 
           <Spacer />
 

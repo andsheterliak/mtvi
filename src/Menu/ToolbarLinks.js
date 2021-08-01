@@ -20,16 +20,12 @@ const useStyles = makeStyles(({ breakpoints, extraBreakpoints }) => {
   };
 });
 
-export const ToolbarLinks = ({ routes, locationPathname }) => {
+export const ToolbarLinks = () => {
   const classes = useStyles();
 
   return (
     <List className={classes.list} component="nav" aria-label="main navigation">
-      <Links
-        routes={routes}
-        locationPathname={locationPathname}
-        listItemProps={{ className: classes.link }}
-      />
+      <Links listItemProps={{ className: classes.link }} />
     </List>
   );
 };

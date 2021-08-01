@@ -16,12 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const Drawer = ({
-  isOpened,
-  closeDrawerHandler,
-  routes,
-  locationPathname,
-}) => {
+export const Drawer = ({ isOpened, closeDrawerHandler }) => {
   const classes = useStyles();
 
   return (
@@ -37,11 +32,7 @@ export const Drawer = ({
         onClick={closeDrawerHandler}
         onKeyDown={closeDrawerHandler}
       >
-        <Links
-          routes={routes}
-          locationPathname={locationPathname}
-          listItemProps={{ className: classes.link }}
-        />
+        <Links listItemProps={{ className: classes.link }} />
       </List>
     </MUIDrawer>
   );
