@@ -8,7 +8,7 @@ import {
   Slider,
 } from '~/components';
 import { ROUTE_NAMES, TOP_ITEM_AMOUNT } from '~/constants';
-import { IMG_BASE_URL, IMG_SIZES } from '~/tmdb-config';
+import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
 import { getTopItems, ifIsData } from '~/utils';
 import { MixedCards } from './components/MixedCards';
 import { getMovieCredits, getTVCredits } from './personSelectors';

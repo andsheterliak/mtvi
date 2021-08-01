@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import noUserPhotoImg from '~/assets/img/no-user-photo.svg';
-import { IMG_BASE_URL, IMG_SIZES } from '~/tmdb-config';
+import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
 import { formatDataStr, getAge } from '~/utils';
 import { Header } from './components/Header';
 import { getData } from './personSelectors';

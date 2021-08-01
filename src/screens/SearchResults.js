@@ -2,6 +2,12 @@ import { createSelector } from '@reduxjs/toolkit';
 import { useMemo, useRef } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 import { useHistory, useLocation, useRouteMatch } from 'react-router';
+import {
+  IMG_BASE_URL,
+  IMG_SIZES,
+  SEARCH_PATHS,
+  useGetSearchResultsQuery,
+} from '~/api/tmdb';
 import noImage from '~/assets/img/no-image.svg';
 import noUserImage from '~/assets/img/no-user-photo.svg';
 import {
@@ -22,8 +28,6 @@ import {
 } from '~/components';
 import { ROUTE_NAMES } from '~/constants';
 import { useLazyImages, useScrollToTop } from '~/hooks';
-import { useGetSearchResultsQuery } from '~/services/tmdb';
-import { IMG_BASE_URL, IMG_SIZES, SEARCH_PATHS } from '~/tmdb-config';
 import { ifIsData } from '~/utils';
 
 const searchPathsToNames = {

@@ -1,13 +1,12 @@
 import { useErrorHandler } from 'react-error-boundary';
 import { useParams } from 'react-router-dom';
+import { IMG_BASE_URL, IMG_SIZES, useGetEpisodeQuery } from '~/api/tmdb';
 import noImageImg from '~/assets/img/no-image-wide.svg';
 import noUserPhotoImg from '~/assets/img/no-user-photo.svg';
 import { BackToHeader, Credits } from '~/components';
 import { ROUTE_NAMES } from '~/constants';
 import { useLazyImages, useScrollToTop } from '~/hooks';
 import { createGetCreditsDataInstance } from '~/selectors';
-import { useGetEpisodeQuery } from '~/services/tmdb';
-import { IMG_BASE_URL, IMG_SIZES } from '~/tmdb-config';
 import { getImagePath } from '~/utils';
 
 const getCredits = (data) => data?.credits;

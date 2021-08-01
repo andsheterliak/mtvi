@@ -1,5 +1,6 @@
 import { useErrorHandler } from 'react-error-boundary';
 import { useParams } from 'react-router';
+import { useGetPersonQuery } from '~/api/tmdb';
 import {
   Layout,
   MainContainer,
@@ -8,7 +9,6 @@ import {
   Spacer,
 } from '~/components';
 import { useLazyImages, useScrollToTop } from '~/hooks';
-import { useGetPersonQuery } from '~/services/tmdb';
 import { CreditsList } from './CreditsList';
 import { KnownFor } from './KnownFor';
 import { PersonHeader } from './PersonHeader';

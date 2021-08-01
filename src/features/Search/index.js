@@ -11,13 +11,17 @@ import SearchIcon from '@material-ui/icons/Search';
 import { useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 import { useHistory } from 'react-router-dom';
+import {
+  IMG_BASE_URL,
+  IMG_SIZES,
+  SEARCH_PATHS,
+  useGetSearchQuery,
+} from '~/api/tmdb';
 import noImage from '~/assets/img/no-image.svg';
 import noUserPhoto from '~/assets/img/no-user-photo.svg';
 import { MainContainer } from '~/components';
 import { ROUTE_NAMES } from '~/constants';
 import { useLazyImages } from '~/hooks';
-import { useGetSearchQuery } from '~/services/tmdb';
-import { IMG_BASE_URL, IMG_SIZES, SEARCH_PATHS } from '~/tmdb-config';
 import { SearchItems } from './components/SearchItems';
 import { useDebounceEffect } from './useDebounceEffect';
 

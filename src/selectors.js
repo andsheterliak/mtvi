@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { VIDEO_TYPES } from './tmdb-config';
+import { VIDEO_TYPES } from '~/api/tmdb';
 import { ifIsData } from './utils';
 
 const creditNameToTitle = (name) => {

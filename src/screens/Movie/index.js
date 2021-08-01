@@ -1,5 +1,6 @@
 import { useErrorHandler } from 'react-error-boundary';
 import { useParams } from 'react-router-dom';
+import { useGetMovieQuery } from '~/api/tmdb';
 import {
   Layout,
   MainContainer,
@@ -8,7 +9,6 @@ import {
   Spacer,
 } from '~/components';
 import { useLazyImages, useScrollToTop } from '~/hooks';
-import { useGetMovieQuery } from '~/services/tmdb';
 import { MovieHeader } from './MovieHeader';
 import { MovieVideos } from './MovieVideos';
 import { TopBilledCast } from './TopBilledCast';

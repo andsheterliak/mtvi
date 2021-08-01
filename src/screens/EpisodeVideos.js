@@ -1,12 +1,16 @@
 import { useErrorHandler } from 'react-error-boundary';
 import { useParams } from 'react-router-dom';
+import {
+  IMG_BASE_URL,
+  IMG_SIZES,
+  useGetEpisodeQuery,
+  VIDEO_TYPES,
+} from '~/api/tmdb';
 import noImageImg from '~/assets/img/no-image-wide.svg';
 import { AllVideos, BackToHeader, useSelectionBar } from '~/components';
 import { ROUTE_NAMES, TOP_VIDEO_AMOUNT } from '~/constants';
 import { useLazyImages, useScrollToTop } from '~/hooks';
 import { createGetVideosDataInstance } from '~/selectors';
-import { useGetEpisodeQuery } from '~/services/tmdb';
-import { IMG_BASE_URL, IMG_SIZES, VIDEO_TYPES } from '~/tmdb-config';
 import { getImagePath } from '~/utils';
 
 const getVideos = (data) => data?.videos.results;

@@ -9,7 +9,7 @@ import {
   SeeAllLink,
 } from '~/components';
 import { ROUTE_NAMES } from '~/constants';
-import { IMG_BASE_URL, IMG_SIZES } from '~/tmdb-config';
+import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
 import { formatDataStr, getImagePath, ifIsData } from '~/utils';
 
 const getSeasons = (data) => data?.seasons;

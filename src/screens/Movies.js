@@ -1,4 +1,12 @@
 import { useErrorHandler } from 'react-error-boundary';
+import {
+  IMG_BASE_URL,
+  IMG_SIZES,
+  MOVIES_DEFAULT_OPTIONS,
+  SORT_MOVIES_BY_OPTIONS,
+  useGetMoviesQuery,
+  USER_SCORE_RANGE,
+} from '~/api/tmdb';
 import noImage from '~/assets/img/no-image.svg';
 import {
   Adjustment,
@@ -15,14 +23,6 @@ import {
 } from '~/components';
 import { ROUTE_NAMES } from '~/constants';
 import { useLazyImages, useOptions, useScrollToTop } from '~/hooks';
-import { useGetMoviesQuery } from '~/services/tmdb';
-import {
-  IMG_BASE_URL,
-  IMG_SIZES,
-  MOVIES_DEFAULT_OPTIONS,
-  SORT_MOVIES_BY_OPTIONS,
-  USER_SCORE_RANGE,
-} from '~/tmdb-config';
 import { ifIsData, scrollToTop } from '~/utils';
 
 const MOVIES_OPTIONS_STORAGE_NAME = 'moviesOptions';

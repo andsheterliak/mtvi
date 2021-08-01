@@ -2,7 +2,7 @@ import { useRouteMatch } from 'react-router';
 import noImage from '~/assets/img/no-image.svg';
 import { TopCast } from '~/components';
 import { ROUTE_NAMES, TOP_ITEM_AMOUNT } from '~/constants';
-import { IMG_BASE_URL, IMG_SIZES } from '~/tmdb-config';
+import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
 import { getTopItems } from '~/utils';
 
 export const TopBilledCast = ({ isLoading, data }) => {

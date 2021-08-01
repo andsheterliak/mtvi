@@ -1,5 +1,6 @@
 import { useErrorHandler } from 'react-error-boundary';
 import { useParams, useRouteMatch } from 'react-router';
+import { IMG_BASE_URL, IMG_SIZES, useGetSeasonQuery } from '~/api/tmdb';
 import noWideImg from '~/assets/img/no-image-wide.svg';
 import noImg from '~/assets/img/no-image.svg';
 import {
@@ -11,8 +12,6 @@ import {
 } from '~/components';
 import { ROUTE_NAMES } from '~/constants';
 import { useLazyImages, useScrollToTop } from '~/hooks';
-import { useGetSeasonQuery } from '~/services/tmdb';
-import { IMG_BASE_URL, IMG_SIZES } from '~/tmdb-config';
 import { getImagePath } from '~/utils';
 import { EpisodeCards } from './components/EpisodeCards';
 

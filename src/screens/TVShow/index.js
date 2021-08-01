@@ -1,5 +1,6 @@
 import { useErrorHandler } from 'react-error-boundary';
 import { useParams } from 'react-router-dom';
+import { useGetTVShowQuery } from '~/api/tmdb';
 import {
   Layout,
   MainContainer,
@@ -8,7 +9,6 @@ import {
   Spacer,
 } from '~/components';
 import { useLazyImages, useScrollToTop } from '~/hooks';
-import { useGetTVShowQuery } from '~/services/tmdb';
 import { LastSeason } from './LastSeason';
 import { SeriesCast } from './SeriesCast';
 import { TVShowHeader } from './TVShowHeader';

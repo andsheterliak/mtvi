@@ -1,5 +1,6 @@
 import { useErrorHandler } from 'react-error-boundary';
 import { useParams } from 'react-router-dom';
+import { IMG_BASE_URL, IMG_SIZES, useGetTVShowQuery } from '~/api/tmdb';
 import noImg from '~/assets/img/no-image.svg';
 import {
   BackToHeader,
@@ -11,8 +12,6 @@ import {
 } from '~/components';
 import { ROUTE_NAMES } from '~/constants';
 import { useLazyImages, useScrollToTop } from '~/hooks';
-import { useGetTVShowQuery } from '~/services/tmdb';
-import { IMG_BASE_URL, IMG_SIZES } from '~/tmdb-config';
 import { getImagePath, ifIsData } from '~/utils';
 
 export const Seasons = () => {

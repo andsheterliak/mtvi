@@ -1,4 +1,5 @@
 import { useErrorHandler } from 'react-error-boundary';
+import { IMG_BASE_URL, IMG_SIZES, useGetPeopleQuery } from '~/api/tmdb';
 import noUserImage from '~/assets/img/no-user-photo.svg';
 import {
   CardsGrid,
@@ -14,8 +15,6 @@ import {
 } from '~/components';
 import { ROUTE_NAMES } from '~/constants';
 import { useLazyImages, useScrollToTop } from '~/hooks';
-import { useGetPeopleQuery } from '~/services/tmdb';
-import { IMG_BASE_URL, IMG_SIZES } from '~/tmdb-config';
 import { ifIsData } from '~/utils';
 
 export const People = ({ titleName }) => {

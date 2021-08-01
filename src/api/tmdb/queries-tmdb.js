@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { axiosTMDB } from '~/lib/axios-tmdb';
-import { SEARCH_PATHS } from '~/tmdb-config';
 import { getSelectedGenres } from '~/utils';
+import { axiosTMDB } from './axios-tmdb';
+import { SEARCH_PATHS } from './config-tmdb';
 
 const axiosBaseQuery = ({ baseUrl = '' } = {}) => {
   return async ({ params }) => {

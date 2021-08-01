@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { Certification, Creators, PageHeader } from '~/components';
 import { ROUTE_NAMES } from '~/constants';
-import { IMG_BASE_URL, IMG_SIZES } from '~/tmdb-config';
+import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
 import {
   formatDataStr,
   formatMinutes,
