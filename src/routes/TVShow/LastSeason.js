@@ -7,10 +7,10 @@ import {
   Section,
   SectionTitle,
   SeeAllLink,
-} from '~/components';
-import { ROUTE_NAMES } from '~/constants';
+} from '~/shared/components';
+import { ROUTE_NAMES } from '~/shared/constants';
 import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
-import { formatDataStr, getImagePath, ifIsData } from '~/utils';
+import { formatDataStr, getImagePath, ifIsData } from '~/shared/utils';
 
 const getSeasons = (data) => data?.seasons;
 

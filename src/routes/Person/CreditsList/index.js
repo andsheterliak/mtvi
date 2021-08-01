@@ -6,9 +6,9 @@ import {
   SectionTitle,
   SelectorContainer,
   useFilter,
-} from '~/components';
-import { ROUTE_NAMES } from '~/constants';
-import { formatDataStr } from '~/utils';
+} from '~/shared/components';
+import { ROUTE_NAMES } from '~/shared/constants';
+import { formatDataStr } from '~/shared/utils';
 import { ProjectsTimeline } from './ProjectsTimeline';
 import { getMovieCredits, getTVCredits } from '../personSelectors';
 import { filterConfig } from './filterConfig';

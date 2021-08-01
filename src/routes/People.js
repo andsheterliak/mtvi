@@ -12,10 +12,10 @@ import {
   RouteHeader,
   useFocus,
   usePagination,
-} from '~/components';
-import { ROUTE_NAMES } from '~/constants';
-import { useLazyImages, useScrollToTop } from '~/hooks';
-import { ifIsData } from '~/utils';
+} from '~/shared/components';
+import { ROUTE_NAMES } from '~/shared/constants';
+import { useLazyImages, useScrollToTop } from '~/shared/hooks';
+import { ifIsData } from '~/shared/utils';
 
 export const People = ({ titleName }) => {
   useScrollToTop();

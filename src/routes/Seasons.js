@@ -9,10 +9,10 @@ import {
   NoContent,
   SeasonCards,
   Spacer,
-} from '~/components';
-import { ROUTE_NAMES } from '~/constants';
-import { useLazyImages, useScrollToTop } from '~/hooks';
-import { getImagePath, ifIsData } from '~/utils';
+} from '~/shared/components';
+import { ROUTE_NAMES } from '~/shared/constants';
+import { useLazyImages, useScrollToTop } from '~/shared/hooks';
+import { getImagePath, ifIsData } from '~/shared/utils';
 
 export const Seasons = () => {
   useScrollToTop();

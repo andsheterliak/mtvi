@@ -8,10 +8,10 @@ import {
   MainContainer,
   MainContent,
   Spacer,
-} from '~/components';
-import { ROUTE_NAMES } from '~/constants';
-import { useLazyImages, useScrollToTop } from '~/hooks';
-import { getImagePath } from '~/utils';
+} from '~/shared/components';
+import { ROUTE_NAMES } from '~/shared/constants';
+import { useLazyImages, useScrollToTop } from '~/shared/hooks';
+import { getImagePath } from '~/shared/utils';
 import { EpisodeCards } from './EpisodeCards';
 
 export const Season = () => {

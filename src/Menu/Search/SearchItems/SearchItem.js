@@ -7,8 +7,8 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Skeleton } from '@material-ui/lab';
 import { Link } from 'react-router-dom';
-import { AspectRatio } from '~/components';
-import { getHyphenOrData } from '~/utils';
+import { AspectRatio } from '~/shared/components';
+import { getHyphenOrData } from '~/shared/utils';
 
 const useStyles = makeStyles(({ spacing, aspectRatios }) => {
   const padding = spacing(1.5);

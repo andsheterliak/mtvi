@@ -2,7 +2,7 @@ import { Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
 import { Link } from 'react-router-dom';
-import { MainContainer, Spacer } from '~/components';
+import { MainContainer, Spacer } from '~/shared/components';
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -3,8 +3,13 @@ import { Skeleton } from '@material-ui/lab';
 import { createSelector } from '@reduxjs/toolkit';
 import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
 import noUserPhotoImg from '~/assets/img/no-user-photo.svg';
-import { AspectRatio, Description, HeaderTitle, InfoList } from '~/components';
-import { formatDataStr, getAge, getImagePath } from '~/utils';
+import {
+  AspectRatio,
+  Description,
+  HeaderTitle,
+  InfoList,
+} from '~/shared/components';
+import { formatDataStr, getAge, getImagePath } from '~/shared/utils';
 import { getData } from '../personSelectors';
 import { SocialLinks } from './SocialLinks';
 

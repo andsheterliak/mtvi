@@ -20,10 +20,10 @@ import {
   RouteHeader,
   useFocus,
   usePagination,
-} from '~/components';
-import { ROUTE_NAMES } from '~/constants';
-import { useLazyImages, useOptions, useScrollToTop } from '~/hooks';
-import { ifIsData, scrollToTop } from '~/utils';
+} from '~/shared/components';
+import { ROUTE_NAMES } from '~/shared/constants';
+import { useLazyImages, useOptions, useScrollToTop } from '~/shared/hooks';
+import { ifIsData, scrollToTop } from '~/shared/utils';
 
 const MOVIES_OPTIONS_STORAGE_NAME = 'moviesOptions';
 

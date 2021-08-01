@@ -2,8 +2,13 @@ import { memo } from 'react';
 import { IMG_BASE_URL, IMG_SIZES, SEARCH_PATHS } from '~/api/tmdb';
 import noImage from '~/assets/img/no-image.svg';
 import noUserPhoto from '~/assets/img/no-user-photo.svg';
-import { ROUTE_NAMES } from '~/constants';
-import { formatDataStr, getImagePath, getKnownFor, getTopItems } from '~/utils';
+import { ROUTE_NAMES } from '~/shared/constants';
+import {
+  formatDataStr,
+  getImagePath,
+  getKnownFor,
+  getTopItems,
+} from '~/shared/utils';
 import { SearchItem } from './SearchItem';
 
 const SearchItemsComponent = ({ data, clickHandler, isLoading }) => {

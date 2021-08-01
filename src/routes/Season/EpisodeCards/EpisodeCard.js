@@ -12,8 +12,8 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { Skeleton } from '@material-ui/lab';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AspectRatio, CardSubInfo } from '~/components';
-import { getHyphenOrData } from '~/utils';
+import { AspectRatio, CardSubInfo } from '~/shared/components';
+import { getHyphenOrData } from '~/shared/utils';
 
 const useStyles = makeStyles(({ aspectRatios, spacing }) => ({
   root: {

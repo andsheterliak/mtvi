@@ -1,8 +1,8 @@
 import { useRouteMatch } from 'react-router-dom';
 import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
 import noWideImg from '~/assets/img/no-image-wide.svg';
-import { ROUTE_NAMES } from '~/constants';
-import { getImagePath } from '~/utils';
+import { ROUTE_NAMES } from '~/shared/constants';
+import { getImagePath } from '~/shared/utils';
 import { EpisodeCard } from './EpisodeCard';
 import { EpisodesGrid } from './EpisodesGrid';
 

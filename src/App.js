@@ -1,7 +1,7 @@
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { ErrorBoundary } from 'react-error-boundary';
-import { Spacer } from '~/components';
+import { Spacer } from '~/shared/components';
 import { Routes } from '~/routes';
 import { useToggleTheme } from '~/theme';
 import { ErrorFallback } from '~/ErrorFallback';

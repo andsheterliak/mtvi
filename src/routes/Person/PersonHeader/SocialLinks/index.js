@@ -1,7 +1,7 @@
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import { ifIsData } from '~/utils';
+import { ifIsData } from '~/shared/utils';
 import { SocialLink } from './SocialLink';
 import { SocialLinksContainer } from './SocialLinksContainer';
 

@@ -12,9 +12,9 @@ import { useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 import { useHistory } from 'react-router-dom';
 import { SEARCH_PATHS, useGetSearchQuery } from '~/api/tmdb';
-import { MainContainer } from '~/components';
-import { ROUTE_NAMES } from '~/constants';
-import { useLazyImages } from '~/hooks';
+import { MainContainer } from '~/shared/components';
+import { ROUTE_NAMES } from '~/shared/constants';
+import { useLazyImages } from '~/shared/hooks';
 import { SearchItems } from './SearchItems';
 import { useDebounceEffect } from './useDebounceEffect';
 

@@ -1,7 +1,7 @@
 import { red } from '@material-ui/core/colors';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { useEffect, useState } from 'react';
-import { getLS, setLS } from './utils';
+import { getLS, setLS } from './shared/utils';
 
 const primary = {
   main: red[700],

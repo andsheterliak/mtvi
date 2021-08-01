@@ -7,11 +7,11 @@ import {
   VIDEO_TYPES,
 } from '~/api/tmdb';
 import noImageImg from '~/assets/img/no-image.svg';
-import { AllVideos, BackToHeader, useSelectionBar } from '~/components';
-import { ROUTE_NAMES, TOP_VIDEO_AMOUNT } from '~/constants';
-import { useLazyImages, useScrollToTop } from '~/hooks';
-import { createGetVideosDataInstance } from '~/selectors';
-import { getImagePath } from '~/utils';
+import { AllVideos, BackToHeader, useSelectionBar } from '~/shared/components';
+import { ROUTE_NAMES, TOP_VIDEO_AMOUNT } from '~/shared/constants';
+import { useLazyImages, useScrollToTop } from '~/shared/hooks';
+import { createGetVideosDataInstance } from '~/shared/selectors';
+import { getImagePath } from '~/shared/utils';
 
 const getVideos = (data) => data?.videos.results;
 const getVideosData = createGetVideosDataInstance(getVideos);

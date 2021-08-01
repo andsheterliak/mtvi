@@ -5,9 +5,9 @@ import {
   Section,
   SectionTitle,
   Slider,
-} from '~/components';
-import { TOP_ITEM_AMOUNT } from '~/constants';
-import { getTopItems, ifIsData } from '~/utils';
+} from '~/shared/components';
+import { TOP_ITEM_AMOUNT } from '~/shared/constants';
+import { getTopItems, ifIsData } from '~/shared/utils';
 import { getMovieCredits, getTVCredits } from '../personSelectors';
 import { MixedCards } from './MixedCards';
 

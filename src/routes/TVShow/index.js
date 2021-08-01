@@ -7,8 +7,8 @@ import {
   MainContent,
   Separator,
   Spacer,
-} from '~/components';
-import { useLazyImages, useScrollToTop } from '~/hooks';
+} from '~/shared/components';
+import { useLazyImages, useScrollToTop } from '~/shared/hooks';
 import { LastSeason } from './LastSeason';
 import { SeriesCast } from './SeriesCast';
 import { TVShowHeader } from './TVShowHeader';

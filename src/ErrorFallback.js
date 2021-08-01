@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { MainContainer, Spacer } from '~/components';
+import { MainContainer, Spacer } from '~/shared/components';
 
 const useStyles = makeStyles((theme) => ({
   root: {

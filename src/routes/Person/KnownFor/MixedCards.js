@@ -1,8 +1,8 @@
 import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
 import noImage from '~/assets/img/no-image.svg';
-import { Card, CardSubInfo } from '~/components';
-import { ROUTE_NAMES, TOP_ITEM_AMOUNT } from '~/constants';
-import { getImagePath } from '~/utils';
+import { Card, CardSubInfo } from '~/shared/components';
+import { ROUTE_NAMES, TOP_ITEM_AMOUNT } from '~/shared/constants';
+import { getImagePath } from '~/shared/utils';
 
 export const MixedCards = ({ cardsData, isLoading }) => {
   if (isLoading)

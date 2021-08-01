@@ -12,7 +12,7 @@ import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import SearchIcon from '@material-ui/icons/Search';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import { Link } from 'react-router-dom';
-import { HideOnScroll, MainContainer } from '~/components';
+import { HideOnScroll, MainContainer } from '~/shared/components';
 import { routesConfig } from '~/routes';
 import { Drawer, useDrawer } from './Drawer';
 import { Logo } from './Logo';

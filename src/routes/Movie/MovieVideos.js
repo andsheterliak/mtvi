@@ -1,7 +1,7 @@
 import { useRouteMatch } from 'react-router';
-import { TopVideos } from '~/components';
-import { ROUTE_NAMES, TOP_VIDEO_AMOUNT } from '~/constants';
-import { getTopItems } from '~/utils';
+import { TopVideos } from '~/shared/components';
+import { ROUTE_NAMES, TOP_VIDEO_AMOUNT } from '~/shared/constants';
+import { getTopItems } from '~/shared/utils';
 
 export const MovieVideos = ({ isLoading, data }) => {
   const { url } = useRouteMatch();

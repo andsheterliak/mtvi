@@ -1,4 +1,4 @@
-import { ROUTE_NAMES } from '~/constants';
+import { ROUTE_NAMES } from '~/shared/constants';
 import { EpisodeCredits } from './EpisodeCredits';
 import { EpisodeVideos } from './EpisodeVideos';
 import { Movie } from './Movie';

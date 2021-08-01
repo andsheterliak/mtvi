@@ -10,8 +10,8 @@ import {
   TimelineSeparator,
 } from '@material-ui/lab';
 import { Link } from 'react-router-dom';
-import { InfoList } from '~/components';
-import { getHyphenOrData } from '~/utils';
+import { InfoList } from '~/shared/components';
+import { getHyphenOrData } from '~/shared/utils';
 
 const useStyles = makeStyles(() => {
   const padding = 4;

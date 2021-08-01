@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom';
 import { IMG_BASE_URL, IMG_SIZES, useGetTVShowQuery } from '~/api/tmdb';
 import noImageImg from '~/assets/img/no-image.svg';
 import noUserPhotoImg from '~/assets/img/no-user-photo.svg';
-import { BackToHeader, Credits } from '~/components';
-import { ROUTE_NAMES } from '~/constants';
-import { useLazyImages, useScrollToTop } from '~/hooks';
-import { createGetCreditsDataInstance } from '~/selectors';
-import { getImagePath } from '~/utils';
+import { BackToHeader, Credits } from '~/shared/components';
+import { ROUTE_NAMES } from '~/shared/constants';
+import { useLazyImages, useScrollToTop } from '~/shared/hooks';
+import { createGetCreditsDataInstance } from '~/shared/selectors';
+import { getImagePath } from '~/shared/utils';
 
 const getCredits = (data) => data?.aggregate_credits;
 const getCreditsData = createGetCreditsDataInstance(getCredits);

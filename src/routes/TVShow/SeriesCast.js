@@ -1,9 +1,9 @@
 import { useRouteMatch } from 'react-router';
 import noImage from '~/assets/img/no-image.svg';
-import { TopCast } from '~/components';
-import { ROUTE_NAMES, TOP_ITEM_AMOUNT } from '~/constants';
+import { TopCast } from '~/shared/components';
+import { ROUTE_NAMES, TOP_ITEM_AMOUNT } from '~/shared/constants';
 import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
-import { getTopItems } from '~/utils';
+import { getTopItems } from '~/shared/utils';
 
 export const SeriesCast = ({ isLoading, data }) => {
   const { url } = useRouteMatch();

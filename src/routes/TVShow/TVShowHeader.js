@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { Certification, Creators, PageHeader } from '~/components';
-import { ROUTE_NAMES } from '~/constants';
+import { Certification, Creators, PageHeader } from '~/shared/components';
+import { ROUTE_NAMES } from '~/shared/constants';
 import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
 import {
   formatDataStr,
@@ -8,7 +8,7 @@ import {
   getCertification,
   getGenres,
   ifIsData,
-} from '~/utils';
+} from '~/shared/utils';
 
 const getCreatedBy = (data) => {
   if (!ifIsData(data)) return null;
