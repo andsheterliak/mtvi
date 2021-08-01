@@ -1,10 +1,8 @@
 import { memo } from 'react';
+import { formatDataStr, getImagePath, getKnownFor, getTopItems } from '~/utils';
+import { SearchItem } from './SearchItem';
 
-import { formatDataStr } from '~common/utils/date';
-import SearchItem from './SearchItem';
-import { getImagePath, getKnownFor, getTopItems } from '~common/utils/getData';
-
-const SearchItems = ({
+const SearchItemsComponent = ({
   data,
   searchPaths,
   routeNames,
@@ -58,8 +56,8 @@ const SearchItems = ({
   });
 };
 
-export default memo(
-  SearchItems,
+export const SearchItems = memo(
+  SearchItemsComponent,
   (prevProps, nextProps) =>
     prevProps.data === nextProps.data &&
     prevProps.isLoading === nextProps.isLoading

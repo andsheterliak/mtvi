@@ -12,9 +12,6 @@ const dirNames = {
   img: 'img',
   favicon: 'favicon',
   fonts: 'fonts',
-  features: 'features',
-  components: 'components',
-  common: 'common',
 };
 
 const paths = {

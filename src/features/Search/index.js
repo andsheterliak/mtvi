@@ -1,5 +1,3 @@
-import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
 import {
   Box,
   Fade,
@@ -8,19 +6,20 @@ import {
   InputLabel,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
+import SearchIcon from '@material-ui/icons/Search';
+import { useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
-
-import MainContainer from '~components/MainContainer';
-import SearchItems from './components/SearchItems';
-import useDebounceEffect from './useDebounceEffect';
-import { ROUTE_NAMES } from '~common/constants';
-import { IMG_BASE_URL, IMG_SIZES, SEARCH_PATHS } from '~common/tmdb-config';
-import { useGetSearchQuery } from '~common/services/tmdb';
-import noImage from '~assets/img/no-image.svg';
-import noUserPhoto from '~assets/img/no-user-photo.svg';
-import useLazyImages from '~common/hooks/useLazyImages';
+import { useHistory } from 'react-router-dom';
+import noImage from '~/assets/img/no-image.svg';
+import noUserPhoto from '~/assets/img/no-user-photo.svg';
+import { MainContainer } from '~/components';
+import { ROUTE_NAMES } from '~/constants';
+import { useLazyImages } from '~/hooks';
+import { useGetSearchQuery } from '~/services/tmdb';
+import { IMG_BASE_URL, IMG_SIZES, SEARCH_PATHS } from '~/tmdb-config';
+import { SearchItems } from './components/SearchItems';
+import { useDebounceEffect } from './useDebounceEffect';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Search = ({ isSearchVisible, closeSearchHandler }) => {
+export const Search = ({ isSearchVisible, closeSearchHandler }) => {
   const classes = useStyles();
   const history = useHistory();
   const [query, setQuery] = useState('');
@@ -170,5 +169,4 @@ const Search = ({ isSearchVisible, closeSearchHandler }) => {
   );
 };
 
-export { default as useToggleSearch } from './useToggleSearch';
-export default Search;
+export { useToggleSearch } from './useToggleSearch';

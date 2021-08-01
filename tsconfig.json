@@ -6,18 +6,6 @@
      * To get the shortest path when using auto-import, 'paths' should be ordered from furthest to shortest.
      */
     "paths": {
-      "~components/*": [
-        "src/common/components/*"
-      ],
-      "~common/*": [
-        "src/common/*"
-      ],
-      "~assets/*": [
-        "src/assets/*"
-      ],
-      "~features/*": [
-        "src/features/*"
-      ],
       "~/*": [
         "src/*"
       ],

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useToggleSearch = ({ isVisible = false } = {}) => {
+export const useToggleSearch = ({ isVisible = false } = {}) => {
   const [isSearchVisible, setIsSearchVisible] = useState(isVisible);
 
   const toggleSearchHandler = () => {
@@ -41,5 +41,3 @@ const useToggleSearch = ({ isVisible = false } = {}) => {
     closeSearchHandler,
   };
 };
-
-export default useToggleSearch;

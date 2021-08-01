@@ -7,9 +7,8 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Skeleton } from '@material-ui/lab';
 import { Link } from 'react-router-dom';
-
-import { getHyphenOrData } from '~common/utils/getData';
-import AspectRatio from '~components/AspectRatio';
+import { AspectRatio } from '~/components';
+import { getHyphenOrData } from '~/utils';
 
 const useStyles = makeStyles(({ spacing, aspectRatios }) => {
   const padding = spacing(1.5);
@@ -46,7 +45,7 @@ const useStyles = makeStyles(({ spacing, aspectRatios }) => {
   };
 });
 
-const SearchItem = ({
+export const SearchItem = ({
   name,
   path,
   subInfo,
@@ -97,5 +96,3 @@ const SearchItem = ({
     </Card>
   );
 };
-
-export default SearchItem;

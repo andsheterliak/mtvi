@@ -1,0 +1,46 @@
+import { useErrorHandler } from 'react-error-boundary';
+import { useParams } from 'react-router';
+import {
+  Layout,
+  MainContainer,
+  MainContent,
+  Separator,
+  Spacer,
+} from '~/components';
+import { useLazyImages, useScrollToTop } from '~/hooks';
+import { useGetPersonQuery } from '~/services/tmdb';
+import { CreditsList } from './CreditsList';
+import { KnownFor } from './KnownFor';
+import { PersonHeader } from './PersonHeader';
+
+export const Person = () => {
+  useScrollToTop();
+
+  const { id } = useParams();
+  const { data, error, isLoading } = useGetPersonQuery(id);
+
+  useErrorHandler(error);
+  useLazyImages({ isLoading, triggers: [data] });
+
+  return (
+    <>
+      <Spacer />
+
+      <MainContent>
+        <MainContainer>
+          <Layout>
+            <PersonHeader isLoading={isLoading} data={data} />
+
+            <Separator />
+
+            <KnownFor isLoading={isLoading} data={data} />
+
+            <Separator />
+
+            <CreditsList isLoading={isLoading} data={data} />
+          </Layout>
+        </MainContainer>
+      </MainContent>
+    </>
+  );
+};
