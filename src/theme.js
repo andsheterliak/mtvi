@@ -1,5 +1,5 @@
 import { red } from '@material-ui/core/colors';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import { useEffect, useState } from 'react';
 import { getLS, setLS } from './shared/utils';
 
@@ -91,7 +91,7 @@ const baseTheme = {
   },
 };
 
-const lightTheme = createMuiTheme(
+const lightTheme = createTheme(
   {
     palette: {
       background: {
@@ -103,7 +103,7 @@ const lightTheme = createMuiTheme(
   baseTheme
 );
 
-export const darkTheme = createMuiTheme(
+export const darkTheme = createTheme(
   {
     palette: {
       type: 'dark',
