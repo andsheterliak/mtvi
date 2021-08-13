@@ -16,6 +16,7 @@
       "esnext"
     ],
     "module": "esnext",
+    "target": "esnext",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
