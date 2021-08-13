@@ -106,6 +106,7 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-unused-expressions': noUnusedExpressions,
+        'no-useless-constructor': 'off', // Disable to add support for 'Parameter Properties' (shorthand for constructor parameters).
       },
     },
   ],
