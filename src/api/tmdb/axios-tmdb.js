@@ -4,7 +4,7 @@ import localforage from 'localforage';
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
 const HOUR = MINUTE * 60;
-const maxAge = HOUR * 24;
+const maxAge = HOUR * (process.env.NODE_ENV === 'production' ? 6 : 24);
 
 const configure = () => {
   const forageStore = localforage.createInstance({
