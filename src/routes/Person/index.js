@@ -29,15 +29,15 @@ export const Person = () => {
       <MainContent>
         <MainContainer>
           <Layout>
-            <PersonHeader isLoading={isLoading} data={data} />
+            <PersonHeader />
 
             <Separator />
 
-            <KnownFor isLoading={isLoading} data={data} />
+            <KnownFor />
 
             <Separator />
 
-            <CreditsList isLoading={isLoading} data={data} />
+            <CreditsList />
           </Layout>
         </MainContainer>
       </MainContent>

@@ -1,32 +1,28 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
+import { useQuery } from 'react-query';
 import { getSelectedGenres } from '~/shared/utils';
 import { axiosTMDB } from './axios-tmdb';
 import { SEARCH_PATHS } from './config-tmdb';
 
-const axiosBaseQuery = ({ baseUrl = '' } = {}) => {
-  return async ({ params }) => {
-    try {
-      const result = await axiosTMDB.get(baseUrl, { params });
+const getReturn = (queryData) => {
+  return {
+    ...queryData,
 
-      return { data: result.data };
-    } catch (error) {
-      return {
-        error: {
-          status: error.response?.status,
-          message: error.response?.data.message,
-        },
-      };
-    }
+    error: queryData.error
+      ? {
+          status: queryData.error.response?.status,
+          message:
+            queryData.error.response?.data.message ?? queryData.error.message,
+        }
+      : null,
   };
 };
 
-export const tmdbApi = createApi({
-  baseQuery: axiosBaseQuery(),
-  reducerPath: 'tmdbApi',
-
-  endpoints: ({ query }) => ({
-    getMovies: query({
-      query: ({ options, page }) => ({
+export const useGetMoviesQuery = ({ options, page }) => {
+  const queryData = useQuery(
+    ['movies', { page, options }],
+    async () => {
+      const response = await axiosTMDB({
+        method: 'get',
         params: {
           path: 'discover/movie',
           sort_by: options.sortBy,
@@ -38,11 +34,22 @@ export const tmdbApi = createApi({
           include_adult: false,
           page,
         },
-      }),
-    }),
+      });
 
-    getTVShows: query({
-      query: ({ options, page }) => ({
+      return response.data;
+    },
+    { keepPreviousData: true }
+  );
+
+  return getReturn(queryData);
+};
+
+export const useGetTVShowsQuery = ({ options, page }) => {
+  const queryData = useQuery(
+    ['tvShows', { page, options }],
+    async () => {
+      const response = await axiosTMDB({
+        method: 'get',
         params: {
           path: 'discover/tv',
           sort_by: options.sortBy,
@@ -53,117 +60,158 @@ export const tmdbApi = createApi({
           'vote_average.lte': options.userScore[1],
           page,
         },
-      }),
-    }),
+      });
 
-    getPeople: query({
-      query: ({ page }) => ({
+      return response.data;
+    },
+    { keepPreviousData: true }
+  );
+
+  return getReturn(queryData);
+};
+
+export const useGetPeopleQuery = ({ page }) => {
+  const queryData = useQuery(
+    ['people', { page }],
+    async () => {
+      const response = await axiosTMDB({
+        method: 'get',
         params: { path: 'person/popular', page },
-      }),
-    }),
+      });
 
-    getMovie: query({
-      query: (id) => ({
-        params: {
-          path: `movie/${id}`,
-          append_to_response: 'videos,credits,release_dates',
-        },
-      }),
-    }),
+      return response.data;
+    },
+    { keepPreviousData: true }
+  );
 
-    getTVShow: query({
-      query: (id) => ({
-        params: {
-          path: `tv/${id}`,
-          append_to_response: 'videos,aggregate_credits,content_ratings',
-        },
-      }),
-    }),
+  return getReturn(queryData);
+};
 
-    getSeason: query({
-      query: ({ id, seasonNumber }) => ({
-        params: { path: `tv/${id}/season/${seasonNumber}` },
-      }),
-    }),
+export const useGetMovieQuery = (id) => {
+  const queryData = useQuery(['movie', { id }], async () => {
+    const response = await axiosTMDB({
+      method: 'get',
+      params: {
+        path: `movie/${id}`,
+        append_to_response: 'videos,credits,release_dates',
+      },
+    });
 
-    getEpisode: query({
-      query: ({ id, seasonNumber, episodeNumber }) => ({
+    return response.data;
+  });
+
+  return getReturn(queryData);
+};
+
+export const useGetTVShowQuery = (id) => {
+  const queryData = useQuery(['tvShow', { id }], async () => {
+    const response = await axiosTMDB({
+      method: 'get',
+      params: {
+        path: `tv/${id}`,
+        append_to_response: 'videos,aggregate_credits,content_ratings',
+      },
+    });
+
+    return response.data;
+  });
+
+  return getReturn(queryData);
+};
+
+export const useGetSeasonQuery = ({ id, seasonNumber }) => {
+  const queryData = useQuery(['season', { id, seasonNumber }], async () => {
+    const response = await axiosTMDB({
+      method: 'get',
+      params: { path: `tv/${id}/season/${seasonNumber}` },
+    });
+
+    return response.data;
+  });
+
+  return getReturn(queryData);
+};
+
+export const useGetEpisodeQuery = ({ id, seasonNumber, episodeNumber }) => {
+  const queryData = useQuery(
+    ['episode', { id, seasonNumber, episodeNumber }],
+    async () => {
+      const response = await axiosTMDB({
+        method: 'get',
         params: {
           path: `tv/${id}/season/${seasonNumber}/episode/${episodeNumber}`,
           append_to_response: 'credits,videos',
         },
-      }),
-    }),
+      });
 
-    getPerson: query({
-      query: (id) => ({
-        params: {
-          path: `person/${id}`,
-          append_to_response: 'movie_credits,tv_credits,external_ids',
-        },
-      }),
-    }),
+      return response.data;
+    }
+  );
 
-    getSearch: query({
-      async queryFn(params, _queryApi, _extraOptions, fetchWithBQ) {
-        if (!params.query) return { data: null };
+  return getReturn(queryData);
+};
 
-        const result = await fetchWithBQ({
+export const useGetPersonQuery = (id) => {
+  const queryData = useQuery(['person', { id }], async () => {
+    const response = await axiosTMDB({
+      method: 'get',
+      params: {
+        path: `person/${id}`,
+        append_to_response: 'movie_credits,tv_credits,external_ids',
+      },
+    });
+
+    return response.data;
+  });
+
+  return getReturn(queryData);
+};
+
+export const useGetSearchQuery = (query) => {
+  const queryData = useQuery(
+    ['search', { query }],
+    async () => {
+      const response = await axiosTMDB({
+        method: 'get',
+        params: { path: 'search/multi', query },
+      });
+
+      return response.data;
+    },
+    { enabled: false, keepPreviousData: true }
+  );
+
+  return getReturn(queryData);
+};
+
+export const useGetSearchResultsQuery = ({ query, page, searchIn }) => {
+  const queryData = useQuery(
+    ['searchResults', { query, page }],
+    async () => {
+      const promises = Object.values(SEARCH_PATHS).map((path) => {
+        return axiosTMDB({
+          method: 'get',
           params: {
-            path: 'search/multi',
-            query: params.query,
+            path: `search/${path}`,
+            query,
+            page: searchIn === path ? page : 1,
           },
         });
+      });
 
-        return result.data ? { data: result.data } : { error: result.error };
-      },
-    }),
+      const response = await Promise.all(promises);
 
-    getSearchResults: query({
-      async queryFn(params) {
-        try {
-          const promises = Object.values(SEARCH_PATHS).map((path) => {
-            return axiosTMDB.get('', {
-              params: {
-                path: `search/${path}`,
-                query: params.query,
-                page: params.searchIn === path ? params.page : 1,
-              },
-            });
-          });
+      const data = response.reduce((acc, item) => {
+        const key = item.config.params.path.split('/')[1]; // Example: '/path' --> 'path'
 
-          const response = await Promise.all(promises);
+        acc[key] = item.data;
+        return acc;
+      }, {});
 
-          const data = response.reduce((acc, item) => {
-            const key = item.config.params.path.split('/')[1]; // Example: '/path' --> 'path'
+      return data;
+    },
+    { keepPreviousData: true }
+  );
 
-            acc[key] = { ...item.data };
-            return acc;
-          }, {});
-
-          return { data };
-        } catch (error) {
-          return {
-            error: {
-              status: error.response?.status,
-              message: error.response?.data.message,
-            },
-          };
-        }
-      },
-    }),
-  }),
-});
-
-export const {
-  useGetMoviesQuery,
-  useGetTVShowsQuery,
-  useGetPeopleQuery,
-  useGetMovieQuery,
-  useGetTVShowQuery,
-  useGetSeasonQuery,
-  useGetEpisodeQuery,
-  useGetPersonQuery,
-  useGetSearchQuery,
-  useGetSearchResultsQuery,
-} = tmdbApi;
+  return getReturn(queryData);
+};

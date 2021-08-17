@@ -1,36 +1,58 @@
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { ErrorBoundary } from 'react-error-boundary';
-import { Spacer } from '~/shared/components';
-import { Routes } from '~/routes';
-import { useToggleTheme } from '~/theme';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { ErrorFallback } from '~/ErrorFallback';
 import { Footer } from '~/Footer';
 import { Menu } from '~/Menu';
 import { RootWrapper } from '~/RootWrapper';
+import { Routes } from '~/routes';
+import { Spacer } from '~/shared/components';
+import { useToggleTheme } from '~/theme';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime:
+        process.env.NODE_ENV === 'production' ? 1000 * 60 : 1000 * 60 * 5,
+      retry: process.env.NODE_ENV === 'production' ? 3 : false,
+      refetchOnWindowFocus: process.env.NODE_ENV === 'production',
+    },
+  },
+});
 
 const App = () => {
   const { theme, isDarkTheme, toggleThemeHandler } = useToggleTheme();
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
 
-      <RootWrapper>
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-          <Menu
-            toggleThemeHandler={toggleThemeHandler}
-            isDarkTheme={isDarkTheme}
-          />
+        <RootWrapper>
+          <ErrorBoundary
+            onReset={() => {
+              queryClient.clear();
+            }}
+            FallbackComponent={ErrorFallback}
+          >
+            <Menu
+              toggleThemeHandler={toggleThemeHandler}
+              isDarkTheme={isDarkTheme}
+            />
 
-          <Routes />
+            <Routes />
 
-          <Spacer />
+            <Spacer />
 
-          <Footer />
-        </ErrorBoundary>
-      </RootWrapper>
-    </ThemeProvider>
+            <Footer />
+          </ErrorBoundary>
+        </RootWrapper>
+
+        <ReactQueryDevtools initialIsOpen={false} />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 };
 

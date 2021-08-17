@@ -1,4 +1,5 @@
-import { createSelector } from '@reduxjs/toolkit';
+import { useParams } from 'react-router-dom';
+import { useGetPersonQuery } from '~/api/tmdb';
 import {
   Filter,
   NoContent,
@@ -9,9 +10,8 @@ import {
 } from '~/shared/components';
 import { ROUTE_NAMES } from '~/shared/constants';
 import { formatDataStr } from '~/shared/utils';
-import { ProjectsTimeline } from './ProjectsTimeline';
-import { getMovieCredits, getTVCredits } from '../personSelectors';
 import { filterConfig } from './filterConfig';
+import { ProjectsTimeline } from './ProjectsTimeline';
 
 const getCreditsState = ({ movieCredits, tvCredits }) => {
   const isMovieCast = !!movieCredits?.cast?.length;
@@ -140,32 +140,36 @@ const createTimelineData = (data) => {
   return Object.values(timelineData);
 };
 
-const getTimelineData = createSelector(
-  [getMovieCredits, getTVCredits, (_, filterBy) => filterBy],
-  (movieCredits, tvCredits, filterBy) => {
-    const { isData, isNeedInFiltering } = getCreditsState({
-      movieCredits,
-      tvCredits,
-    });
+const getTimelineData = ({ movieCredits, tvCredits, filterBy }) => {
+  const { isData, isNeedInFiltering } = getCreditsState({
+    movieCredits,
+    tvCredits,
+  });
 
-    if (!isData) return { data: null, isNeedInFiltering: false };
+  if (!isData) return { data: null, isNeedInFiltering: false };
 
-    let data;
+  let data;
 
-    data = filterData({ movieCredits, tvCredits, filterBy });
-    data = createTimelineData(data);
-    data = sortByDateDescending(data);
+  data = filterData({ movieCredits, tvCredits, filterBy });
+  data = createTimelineData(data);
+  data = sortByDateDescending(data);
 
-    return { data, isNeedInFiltering };
-  }
-);
+  return { data, isNeedInFiltering };
+};
 
-export const CreditsList = ({ isLoading, data }) => {
+export const CreditsList = () => {
+  const { id } = useParams();
+  const { data, isLoading } = useGetPersonQuery(id);
+
   const { filterBy, filterByHandler } = useFilter({
     initialValue: filterConfig.all.value,
   });
 
-  const timelineData = getTimelineData(data, filterBy);
+  const timelineData = getTimelineData({
+    movieCredits: data?.movie_credits,
+    tvCredits: data?.tv_credits,
+    filterBy,
+  });
 
   return (
     <Section>

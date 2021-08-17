@@ -29,15 +29,15 @@ export const Movie = () => {
       <MainContent>
         <MainContainer>
           <Layout>
-            <MovieHeader isLoading={isLoading} data={data} />
+            <MovieHeader />
 
             <Separator />
 
-            <TopBilledCast isLoading={isLoading} data={data} />
+            <TopBilledCast />
 
             <Separator />
 
-            <MovieVideos isLoading={isLoading} data={data} />
+            <MovieVideos />
           </Layout>
         </MainContainer>
       </MainContent>

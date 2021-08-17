@@ -1,12 +1,15 @@
 import { useRouteMatch } from 'react-router';
+import { useParams } from 'react-router-dom';
+import { IMG_BASE_URL, IMG_SIZES, useGetMovieQuery } from '~/api/tmdb';
 import noImage from '~/assets/img/no-image.svg';
 import { TopCast } from '~/shared/components';
 import { ROUTE_NAMES, TOP_ITEM_AMOUNT } from '~/shared/constants';
-import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
 import { getTopItems } from '~/shared/utils';
 
-export const TopBilledCast = ({ isLoading, data }) => {
+export const TopBilledCast = () => {
   const { url } = useRouteMatch();
+  const { id } = useParams();
+  const { data, isLoading } = useGetMovieQuery(id);
 
   return (
     <TopCast

@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { Skeleton } from '@material-ui/lab';
-import { createSelector } from '@reduxjs/toolkit';
-import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
+import { useParams } from 'react-router-dom';
+import { IMG_BASE_URL, IMG_SIZES, useGetPersonQuery } from '~/api/tmdb';
 import noUserPhotoImg from '~/assets/img/no-user-photo.svg';
 import {
   AspectRatio,
@@ -10,7 +10,6 @@ import {
   InfoList,
 } from '~/shared/components';
 import { formatDataStr, getAge, getImagePath } from '~/shared/utils';
-import { getData } from '../personSelectors';
 import { SocialLinks } from './SocialLinks';
 
 const useStyles = makeStyles((theme) => {
@@ -74,7 +73,7 @@ const getLifeDates = (birthday, deathday) => {
   return { birthday, deathday };
 };
 
-const getDataList = createSelector(getData, (data) => {
+const getDataList = (data) => {
   if (!data) return null;
 
   const dataList = [];
@@ -108,11 +107,12 @@ const getDataList = createSelector(getData, (data) => {
   });
 
   return dataList;
-});
+};
 
-export const PersonHeader = ({ isLoading, data }) => {
+export const PersonHeader = () => {
   const classes = useStyles();
-  const dataList = getDataList(data);
+  const { id } = useParams();
+  const { data, isLoading } = useGetPersonQuery(id);
 
   return (
     <section className={classes.root}>
@@ -144,7 +144,7 @@ export const PersonHeader = ({ isLoading, data }) => {
         <InfoList
           isLoading={isLoading}
           itemSkeletonAmount={4}
-          dataList={dataList}
+          dataList={getDataList(data)}
         />
 
         <SocialLinks isLoading={isLoading} externalIds={data?.external_ids} />

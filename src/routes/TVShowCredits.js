@@ -6,11 +6,8 @@ import noUserPhotoImg from '~/assets/img/no-user-photo.svg';
 import { BackToHeader, Credits } from '~/shared/components';
 import { ROUTE_NAMES } from '~/shared/constants';
 import { useLazyImages, useScrollToTop } from '~/shared/hooks';
-import { createGetCreditsDataInstance } from '~/shared/selectors';
+import { getCreditsData } from '~/shared/selectors';
 import { getImagePath } from '~/shared/utils';
-
-const getCredits = (data) => data?.aggregate_credits;
-const getCreditsData = createGetCreditsDataInstance(getCredits);
 
 export const TVShowCredits = () => {
   useScrollToTop();
@@ -21,12 +18,10 @@ export const TVShowCredits = () => {
   useErrorHandler(error);
   useLazyImages({ isLoading });
 
-  const creditsData = getCreditsData(data);
-
   return (
     <Credits
       isLoading={isLoading}
-      credits={creditsData}
+      credits={getCreditsData(data?.aggregate_credits)}
       routeName={ROUTE_NAMES.person}
       imgData={{
         basePath: IMG_BASE_URL,

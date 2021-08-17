@@ -29,19 +29,19 @@ export const TVShow = () => {
       <MainContent>
         <MainContainer>
           <Layout>
-            <TVShowHeader isLoading={isLoading} data={data} />
+            <TVShowHeader />
 
             <Separator />
 
-            <SeriesCast isLoading={isLoading} data={data} />
+            <SeriesCast />
 
             <Separator />
 
-            <LastSeason isLoading={isLoading} data={data} />
+            <LastSeason />
 
             <Separator />
 
-            <TVShowVideos isLoading={isLoading} data={data} />
+            <TVShowVideos />
           </Layout>
         </MainContainer>
       </MainContent>

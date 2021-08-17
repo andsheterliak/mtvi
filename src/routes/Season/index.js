@@ -43,7 +43,7 @@ export const Season = () => {
 
         <MainContainer>
           <MainContent>
-            <EpisodeCards isLoading={isLoading} data={data?.episodes} />
+            <EpisodeCards />
           </MainContent>
         </MainContainer>
       </Layout>

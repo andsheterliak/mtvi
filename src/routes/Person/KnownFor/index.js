@@ -1,4 +1,5 @@
-import { createSelector } from '@reduxjs/toolkit';
+import { useParams } from 'react-router-dom';
+import { useGetPersonQuery } from '~/api/tmdb';
 import {
   CardsGridRow,
   NoContent,
@@ -8,7 +9,6 @@ import {
 } from '~/shared/components';
 import { TOP_ITEM_AMOUNT } from '~/shared/constants';
 import { getTopItems, ifIsData } from '~/shared/utils';
-import { getMovieCredits, getTVCredits } from '../personSelectors';
 import { MixedCards } from './MixedCards';
 
 const sortByVoteDescending = (data) => {
@@ -58,25 +58,26 @@ const joinData = ({ movieCredits, tvCredits }) => {
   return newData;
 };
 
-const getKnownForData = createSelector(
-  [getMovieCredits, getTVCredits],
-  (movieCredits, tvCredits) => {
-    const joinedData = joinData({ movieCredits, tvCredits });
+const getKnownForData = (movieCredits, tvCredits) => {
+  if (!movieCredits && !tvCredits) return null;
 
-    if (!ifIsData(joinedData)) return null;
+  const joinedData = joinData({ movieCredits, tvCredits });
 
-    let newData;
+  if (!ifIsData(joinedData)) return null;
 
-    newData = sortByVoteDescending(joinedData);
-    newData = removeDuplicates(newData);
-    newData = getTopItems(newData, TOP_ITEM_AMOUNT);
+  let newData;
 
-    return newData;
-  }
-);
+  newData = sortByVoteDescending(joinedData);
+  newData = removeDuplicates(newData);
+  newData = getTopItems(newData, TOP_ITEM_AMOUNT);
 
-export const KnownFor = ({ isLoading, data }) => {
-  const knownForData = getKnownForData(data);
+  return newData;
+};
+
+export const KnownFor = () => {
+  const { id } = useParams();
+  const { data, isLoading } = useGetPersonQuery(id);
+  const knownForData = getKnownForData(data?.movie_credits, data?.tv_credits);
 
   const content =
     !isLoading && !knownForData ? (

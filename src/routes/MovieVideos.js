@@ -10,11 +10,8 @@ import noImageImg from '~/assets/img/no-image.svg';
 import { AllVideos, BackToHeader, useSelectionBar } from '~/shared/components';
 import { ROUTE_NAMES, TOP_VIDEO_AMOUNT } from '~/shared/constants';
 import { useLazyImages, useScrollToTop } from '~/shared/hooks';
-import { createGetVideosDataInstance } from '~/shared/selectors';
+import { getVideosData } from '~/shared/selectors';
 import { getImagePath } from '~/shared/utils';
-
-const getVideos = (data) => data?.videos.results;
-const getVideosData = createGetVideosDataInstance(getVideos);
 
 export const MovieVideos = () => {
   useScrollToTop();
@@ -22,7 +19,6 @@ export const MovieVideos = () => {
   const { id } = useParams();
   const { data, error, isLoading } = useGetMovieQuery(id);
   const { selected, setSelected } = useSelectionBar(VIDEO_TYPES.trailer.key);
-  const videosData = getVideosData(data);
 
   useErrorHandler(error);
   useLazyImages({ isLoading, triggers: [selected] });
@@ -33,7 +29,7 @@ export const MovieVideos = () => {
 
   return (
     <AllVideos
-      videosData={videosData}
+      videosData={getVideosData(data?.videos.results)}
       selectHandler={selectHandler}
       selected={selected}
       isLoading={isLoading}

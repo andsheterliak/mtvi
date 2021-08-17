@@ -1,5 +1,3 @@
-import { createSelector } from '@reduxjs/toolkit';
-import { useMemo, useRef } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 import { useHistory, useLocation, useRouteMatch } from 'react-router';
 import {
@@ -36,51 +34,33 @@ const searchPathsToNames = {
   [SEARCH_PATHS.person]: 'People',
 };
 
-const getSelectionBarData = createSelector(
-  (data) => data,
-  (searchData) => {
-    if (!ifIsData(searchData)) return null;
+const getSelectionBarData = (searchData) => {
+  if (!ifIsData(searchData)) return null;
 
-    const selectionBarData = {};
+  const selectionBarData = {};
 
-    Object.entries(searchData).forEach(([key, value]) => {
-      const name = searchPathsToNames[key];
+  Object.entries(searchData).forEach(([key, value]) => {
+    const name = searchPathsToNames[key];
 
-      selectionBarData[key] = {
-        name,
-        amount: value.total_results,
-        data: value.results,
-      };
-    });
-
-    return selectionBarData;
-  }
-);
-
-const useSearchResultsParams = () => {
-  const location = useLocation();
-  const prevSearchRef = useRef({ query: null, page: null });
-
-  const { searchIn, query, isSearchChanged } = useMemo(() => {
-    const params = new URLSearchParams(location.search);
-    const currentQuery = params.get('query');
-    const currantPage = params.get('page');
-
-    // To skip re-render on searchIn.
-    const isChanged =
-      prevSearchRef.current.query !== currentQuery ||
-      prevSearchRef.current.page !== currantPage;
-
-    prevSearchRef.current = { query: currentQuery, page: currantPage };
-
-    return {
-      query: currentQuery,
-      isSearchChanged: isChanged,
-      searchIn: params.get('searchIn'),
+    selectionBarData[key] = {
+      name,
+      amount: value.total_results,
+      data: value.results,
     };
-  }, [location.search]);
+  });
 
-  return { searchIn, query, isSearchChanged };
+  return selectionBarData;
+};
+
+const useSearchParams = () => {
+  const location = useLocation();
+
+  const params = new URLSearchParams(location.search);
+
+  return {
+    query: params.get('query'),
+    searchIn: params.get('searchIn'),
+  };
 };
 
 export const SearchResults = () => {
@@ -90,7 +70,7 @@ export const SearchResults = () => {
   const { url } = useRouteMatch();
   const { containerRef, focus } = useFocus();
 
-  const { isSearchChanged, query, searchIn } = useSearchResultsParams();
+  const { query, searchIn } = useSearchParams();
   const { page, changePage } = usePagination();
 
   const {
@@ -98,10 +78,7 @@ export const SearchResults = () => {
     isLoading,
     error,
     isFetching,
-  } = useGetSearchResultsQuery(
-    { page, query, searchIn },
-    { skip: !query || !isSearchChanged }
-  );
+  } = useGetSearchResultsQuery({ page, query, searchIn });
 
   useErrorHandler(error);
   useLazyImages({
@@ -110,11 +87,11 @@ export const SearchResults = () => {
   });
 
   const changePageHandler = (event, newPage) => {
-    if (!changePage(newPage));
+    if (!changePage(newPage)) return;
     focus();
   };
 
-  const selectHandler = (e, searchInValue) => {
+  const selectHandler = (event, searchInValue) => {
     const params = new URLSearchParams();
 
     params.set('searchIn', searchInValue);
@@ -138,7 +115,7 @@ export const SearchResults = () => {
   } else {
     const data = selectionBarData?.[searchIn].data;
 
-    const searchInToCardsToMap = {
+    const searchInToCardsMap = {
       [SEARCH_PATHS.person]: (
         <PersonCards
           isLoading={isFetching}
@@ -179,7 +156,7 @@ export const SearchResults = () => {
       ),
     };
 
-    content = <CardsGrid>{searchInToCardsToMap[searchIn]}</CardsGrid>;
+    content = <CardsGrid>{searchInToCardsMap[searchIn]}</CardsGrid>;
   }
 
   return (

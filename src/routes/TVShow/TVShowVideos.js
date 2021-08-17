@@ -1,10 +1,14 @@
 import { useRouteMatch } from 'react-router';
+import { useParams } from 'react-router-dom';
+import { useGetTVShowQuery } from '~/api/tmdb';
 import { TopVideos } from '~/shared/components';
 import { ROUTE_NAMES, TOP_VIDEO_AMOUNT } from '~/shared/constants';
 import { getTopItems } from '~/shared/utils';
 
-export const TVShowVideos = ({ isLoading, data }) => {
+export const TVShowVideos = () => {
   const { url } = useRouteMatch();
+  const { id } = useParams();
+  const { data, isLoading } = useGetTVShowQuery(id);
 
   return (
     <TopVideos

@@ -48,22 +48,19 @@ export const Search = ({ isSearchVisible, closeSearchHandler }) => {
   const classes = useStyles();
   const history = useHistory();
   const [query, setQuery] = useState('');
-  const [isReadyToFetch, setIsReadyToFetch] = useState(false);
 
-  const { data, error, isFetching, isSuccess } = useGetSearchQuery(
-    { query },
-    { skip: !isReadyToFetch }
-  );
+  const { data, error, isFetching, refetch, isIdle, isPreviousData } =
+    useGetSearchQuery(query);
 
   useErrorHandler(error);
   useLazyImages({
     isLoading: isFetching,
-    triggers: [isSuccess, isSearchVisible],
+    triggers: [isSearchVisible, data, isPreviousData],
   });
 
   useDebounceEffect({
     effect() {
-      setIsReadyToFetch(true);
+      if (query && (isIdle || isPreviousData)) refetch();
     },
 
     deps: [query],
@@ -71,12 +68,10 @@ export const Search = ({ isSearchVisible, closeSearchHandler }) => {
   });
 
   const clearHandler = () => {
-    setIsReadyToFetch(false);
     setQuery('');
   };
 
   const inputHandler = (event) => {
-    setIsReadyToFetch(false);
     setQuery(event.target.value);
   };
 

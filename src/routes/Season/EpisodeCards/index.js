@@ -1,13 +1,15 @@
-import { useRouteMatch } from 'react-router-dom';
-import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
+import { useParams, useRouteMatch } from 'react-router-dom';
+import { IMG_BASE_URL, IMG_SIZES, useGetSeasonQuery } from '~/api/tmdb';
 import noWideImg from '~/assets/img/no-image-wide.svg';
 import { ROUTE_NAMES } from '~/shared/constants';
 import { getImagePath } from '~/shared/utils';
 import { EpisodeCard } from './EpisodeCard';
 import { EpisodesGrid } from './EpisodesGrid';
 
-export const EpisodeCards = ({ data, isLoading }) => {
+export const EpisodeCards = () => {
   const { url } = useRouteMatch();
+  const { id, seasonNumber } = useParams();
+  const { data, isLoading } = useGetSeasonQuery({ id, seasonNumber });
 
   if (isLoading) {
     return (
@@ -21,7 +23,7 @@ export const EpisodeCards = ({ data, isLoading }) => {
     );
   }
 
-  const cards = data.map((item) => {
+  const cards = data?.episodes.map((item) => {
     const imgPath = getImagePath({
       basePath: IMG_BASE_URL,
       size: IMG_SIZES.still.w500,

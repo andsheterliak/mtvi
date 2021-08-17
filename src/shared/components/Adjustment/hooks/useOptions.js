@@ -1,6 +1,31 @@
-import { createSlice } from '@reduxjs/toolkit';
+import produce from 'immer';
 import { useCallback, useReducer } from 'react';
 import { formatDateToAPI } from '~/shared/utils';
+
+const ACTION_TYPES = {
+  validateDate: 'validateDate',
+  toggleGenres: 'toggleGenres',
+  sortBy: 'sortBy',
+  setDateFrom: 'setDateFrom',
+  setDateTo: 'setDateTo',
+  changeUserScore: 'changeUserScore',
+  setDefaultOptions: 'setDefaultOptions',
+  acceptOptions: 'acceptOptions',
+  resetOptions: 'resetOptions',
+};
+
+const actions = Object.values(ACTION_TYPES).reduce(
+  (actionTypes, actionType) => {
+    return {
+      ...actionTypes,
+
+      [actionType](payload) {
+        return { type: actionType, payload };
+      },
+    };
+  },
+  {}
+);
 
 const initState = (initialOptions) => {
   return {
@@ -10,11 +35,10 @@ const initState = (initialOptions) => {
   };
 };
 
-const slice = createSlice({
-  name: 'options',
-
-  reducers: {
-    validateDate(state, { payload }) {
+// eslint-disable-next-line consistent-return
+const reducer = produce((state, { payload, type }) => {
+  switch (type) {
+    case ACTION_TYPES.validateDate:
       if (payload.date?.toString() === 'Invalid Date') {
         state.isOptionsValid = false;
         state.isReadyToAccept = false;
@@ -22,50 +46,49 @@ const slice = createSlice({
         state.isOptionsValid = true;
         state.isReadyToAccept = true;
       }
-    },
+      break;
 
-    toggleGenres(state, { payload }) {
+    case ACTION_TYPES.toggleGenres:
       state.options.genres.forEach((item) => {
         if (item.id !== payload.id) return;
         item.isSelected = !item.isSelected;
       });
 
       if (state.isOptionsValid) state.isReadyToAccept = true;
-    },
+      break;
 
-    sortBy(state, { payload }) {
+    case ACTION_TYPES.sortBy:
       state.options.sortBy = payload.value;
       if (state.isOptionsValid) state.isReadyToAccept = true;
-    },
+      break;
 
-    setDateFrom(state, { payload }) {
+    case ACTION_TYPES.setDateFrom:
       state.options.dates.from = formatDateToAPI(payload.date);
-    },
+      break;
 
-    setDateTo(state, { payload }) {
+    case ACTION_TYPES.setDateTo:
       state.options.dates.to = formatDateToAPI(payload.date);
-    },
+      break;
 
-    changeUserScore(state, { payload }) {
+    case ACTION_TYPES.changeUserScore:
       state.options.userScore = payload.value;
       if (state.isOptionsValid) state.isReadyToAccept = true;
-    },
+      break;
 
-    setDefaultOptions(state, { payload }) {
+    case ACTION_TYPES.setDefaultOptions:
       return initState(payload.defaultOptions);
-    },
 
-    acceptOptions(state) {
+    case ACTION_TYPES.acceptOptions:
       state.isReadyToAccept = false;
-    },
+      break;
 
-    resetOptions(state, { payload }) {
+    case ACTION_TYPES.resetOptions:
       return initState(payload.initialOptions);
-    },
-  },
-});
 
-const { reducer, actions } = slice;
+    default:
+      break;
+  }
+});
 
 export const useOptions = (initialOptions, defaultOptions) => {
   const [state, dispatch] = useReducer(reducer, initialOptions, initState);
