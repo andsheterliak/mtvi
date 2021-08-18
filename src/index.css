@@ -26,8 +26,3 @@
 [data-src].is-visible {
   opacity: 1;
 }
-
-/* Embla Carousel */
-.is-dragging {
-  cursor: grab;
-}
