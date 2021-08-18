@@ -1,7 +1,7 @@
 import { ActionsButtons } from './ActionsButtons';
 import { AdjustmentButton } from './AdjustmentButton';
 import { GenresOption } from './GenresOption';
-import { useOptions } from './hooks/useOptions';
+import { useOptions } from './useOptions';
 import { Modal, useModal } from './Modal';
 import { ReleaseDatesOption } from './ReleaseDatesOption';
 import { SortResultsByOption } from './SortResultsByOption';
