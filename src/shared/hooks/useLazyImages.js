@@ -1,25 +1,29 @@
 import { useEffect } from 'react';
 
-export const useLazyImages = ({
-  dataSetName = 'data-src',
-  isLoading,
-  triggers = [],
-} = {}) => {
+const showImage = (image) => {
+  requestAnimationFrame(() => {
+    if (image.complete) {
+      image.classList.add('is-visible');
+    } else {
+      showImage(image);
+    }
+  });
+};
+
+const intersectionHandler = (target) => {
+  const { src } = target.dataset;
+
+  if (src) {
+    target.src = src;
+    showImage(target);
+  } else {
+    showImage(target);
+  }
+};
+
+export const useLazyImages = ({ isLoading, triggers = [] } = {}) => {
   useEffect(() => {
     if (isLoading) return null;
-
-    const targets = document.querySelectorAll(`[${dataSetName}]`);
-
-    const intersectionHandler = (target) => {
-      const { src } = target.dataset;
-
-      if (!src) return;
-      target.src = src;
-
-      requestAnimationFrame(() => {
-        target.classList.add('is-visible');
-      });
-    };
 
     const intObserver = new IntersectionObserver(
       (entries) => {
@@ -38,13 +42,13 @@ export const useLazyImages = ({
       { rootMargin: '200px' }
     );
 
-    targets?.forEach((target) => {
-      intObserver.observe(target);
+    document.querySelectorAll('img')?.forEach((img) => {
+      intObserver.observe(img);
     });
 
     return () => {
       intObserver.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataSetName, isLoading, ...triggers]);
+  }, [isLoading, ...triggers]);
 };
