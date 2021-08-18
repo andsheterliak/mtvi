@@ -14,7 +14,6 @@ export * from './InfoList';
 export * from './Layout';
 export * from './MainContainer';
 export * from './MainContent';
-export * from './NativeSlider';
 export * from './NoContent';
 export * from './PageHeader';
 export * from './Pagination';
