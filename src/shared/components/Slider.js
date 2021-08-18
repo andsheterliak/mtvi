@@ -17,10 +17,8 @@ export const Slider = ({ children, padding = '10px' }) => {
   const classes = useStyles({ padding });
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    dragFree: true,
-    align: 'start',
     containScroll: 'trimSnaps',
-    speed: 15,
+    speed: 25,
   });
 
   const scrollHandler = () => {
