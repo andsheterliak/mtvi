@@ -20,7 +20,7 @@ export const TopCast = ({
     !isLoading && !ifIsData(data) ? (
       <NoContent message="We don't have added any cast." />
     ) : (
-      <Slider>
+      <Slider isLoading={isLoading}>
         <CardsGridRow>
           <CastCards
             isLoading={isLoading}

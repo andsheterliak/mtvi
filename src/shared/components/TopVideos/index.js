@@ -17,7 +17,7 @@ export const TopVideos = ({
     !isLoading && !ifIsData(data) ? (
       <NoContent message="We don't have added any videos." />
     ) : (
-      <Slider>
+      <Slider isLoading={isLoading}>
         <VideosGridRow>
           <VideoCards
             isLoading={isLoading}

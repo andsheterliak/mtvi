@@ -39,7 +39,7 @@ export const SelectionBar = ({
         className={classes.title}
       />
 
-      <Slider padding="0">
+      <Slider padding="0" isLoading={isLoading}>
         <List component="div" className={classes.list}>
           <SelectionItems
             isLoading={isLoading}

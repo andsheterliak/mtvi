@@ -83,7 +83,7 @@ export const KnownFor = () => {
     !isLoading && !knownForData ? (
       <NoContent message="We don't have added any data for this section." />
     ) : (
-      <Slider>
+      <Slider isLoading={isLoading}>
         <CardsGridRow>
           <MixedCards isLoading={isLoading} cardsData={knownForData} />
         </CardsGridRow>

@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const Slider = ({ children, padding = '10px' }) => {
+export const Slider = ({ children, padding = '10px', isLoading }) => {
   const classes = useStyles({ padding });
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -39,10 +39,8 @@ export const Slider = ({ children, padding = '10px' }) => {
   });
 
   useEffect(() => {
-    return () => {
-      emblaApi?.destroy();
-    };
-  }, [emblaApi]);
+    if (!isLoading) emblaApi?.reInit();
+  }, [emblaApi, isLoading]);
 
   return (
     <div ref={emblaRef} className={classes.slider}>
