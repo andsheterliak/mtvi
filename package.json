@@ -79,6 +79,7 @@
     "classnames": "^2.3.1",
     "core-js": "^3.14.0",
     "date-fns": "^2.22.1",
+    "embla-carousel": "^4.5.3",
     "immer": "^9.0.5",
     "localforage": "^1.9.0",
     "react": "^17.0.2",
