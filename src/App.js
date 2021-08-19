@@ -14,8 +14,7 @@ import { useToggleTheme } from '~/theme';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime:
-        process.env.NODE_ENV === 'production' ? 1000 * 60 : 1000 * 60 * 5,
+      staleTime: 1000 * 60,
       retry: process.env.NODE_ENV === 'production' ? 3 : false,
       refetchOnWindowFocus: process.env.NODE_ENV === 'production',
     },
