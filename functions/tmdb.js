@@ -42,9 +42,7 @@ const handler = async (event) => {
       headers,
 
       body: JSON.stringify({
-        message: error.response
-          ? error.response.data.status_message
-          : error.message,
+        message: error.response?.data.status_message ?? error.message,
       }),
     };
   }
