@@ -2,10 +2,16 @@ const axios = require('axios');
 
 const API_BASE_URL = 'https://api.themoviedb.org/3';
 
+const headers = {
+  'Content-Type': 'application/json',
+};
+
 const handler = async (event) => {
   if (event.httpMethod !== 'GET') {
     return {
       statusCode: 400,
+      headers,
+
       body: JSON.stringify({
         message: `You cannot make ${event.httpMethod} request.`,
       }),
@@ -25,6 +31,7 @@ const handler = async (event) => {
     return {
       statusCode: 200,
       body: JSON.stringify(response.data),
+      headers,
     };
   } catch (error) {
     // output to netlify function log
@@ -32,6 +39,8 @@ const handler = async (event) => {
 
     return {
       statusCode: error.response.status,
+      headers,
+
       body: JSON.stringify({
         message: error.response
           ? error.response.data.status_message
