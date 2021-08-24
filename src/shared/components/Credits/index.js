@@ -15,7 +15,7 @@ export const Credits = ({ credits, header, imgData, routeName, isLoading }) => {
         isLoading={isLoading}
         data={credits}
         imgData={imgData}
-        routeName={(imgData, routeName)}
+        routeName={routeName}
       />
     );
 
