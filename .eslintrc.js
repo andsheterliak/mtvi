@@ -137,7 +137,7 @@ module.exports = {
 
       rules: {
         ...baseRules,
-        'no-unused-expressions': noUnusedExpressions,
+        '@babel/no-unused-expressions': noUnusedExpressions,
         'global-require': 'off', // Is deprecated
         'node/no-unpublished-require': 'off',
       },
