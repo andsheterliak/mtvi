@@ -2,45 +2,51 @@ const TerserPlugin = require('terser-webpack-plugin');
 const { isProd } = require('./helpers.conf');
 
 const optimizationConf = {
-  moduleIds: 'hashed', // performance: fix hashing
-  // runtimeChunk: true, // Keep the runtime chunk separated to enable long term caching. (Useful if there is more than one entry).
+  // runtimeChunk: true, // Adds an additional chunk containing only the webpack runtime to each entrypoint. (Useful if there is more than one entrypoint).
 
-  splitChunks: {
-    chunks: 'all', // Include all types of chunks async (dynamic imports) and initial (node_modules).
+  splitChunks: isProd
+    ? {
+        chunks: 'all', // Include all types of chunks async (dynamic imports) and initial (node_modules).
 
-    // Disable names for chunks, example: polyfills~app.7d473b584b576a22c8ee.js --> 1.7d473b584b576a22c8ee.js.
-    // name: false,
+        /**
+         * Works in tandem with 'maxSize' for cache group, even with 'enforce: true,' parameter.
+         * Takes a number in bytes before min+gz.
+         * If a cache group does not have the 'enforce: true' parameter, this cache group will become a chunk only if the modules passing the 'test' are larger than 'minSize'.
+         */
+        minSize: 1024 * 30,
 
-    /**
-     * To exclude specific module it is necessary to 'group' closing slash "[\\/]node_modules[\\/](?!module[\\/])", or multiple modules "[\\/]node_modules[\\/](?!(module|module2)[\\/])".
-     */
-    cacheGroups: {
-      // Disable default groups.
-      default: false,
-      //  vendors: false,
+        /**
+         * To exclude specific module it is necessary to 'group' closing slash "[\\/]node_modules[\\/](?!module[\\/])", or multiple modules "[\\/]node_modules[\\/](?!(module|module2)[\\/])".
+         */
+        cacheGroups: {
+          // Disable default groups.
+          default: false,
+          defaultVendors: false,
 
-      react: {
-        test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-        priority: 10,
-        enforce: true,
-      },
+          react: {
+            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+            name: 'react',
+            priority: 10,
+            enforce: true,
+          },
 
-      polyfills: {
-        test: /[\\/]node_modules[\\/](core-js|regenerator-runtime)[\\/]/,
-        priority: 10,
-        enforce: true,
-      },
+          polyfills: {
+            test: /[\\/]node_modules[\\/](core-js|regenerator-runtime)[\\/]/,
+            name: 'polyfills',
+            priority: 10,
+            enforce: true,
+          },
 
-      vendors: {
-        test: /[\\/]node_modules[\\/]/,
-        maxSize: isProd ? 1024 * 300 : 0, // Split vendors if maxSize (in bytes) is reached, (maxSize is only a hint and could be violated when modules are bigger than maxSize or splitting would violate minSize).
-        enforce: true,
-      },
-    },
-  },
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            enforce: true,
+            maxSize: 1024 * 300, // Split the 'vendors' if 'maxSize' (in bytes before min+gz) is reached, ('maxSize' is only a hint and could be violated when modules are bigger than 'maxSize' or splitting would violate 'minSize').
+          },
+        },
+      }
+    : undefined,
 
-  // Set source map for TerserPlugin only if you want to enable it for production (default: false), also change devtool.
-  // sourceMap: true.
   minimizer: [new TerserPlugin()],
 };
 

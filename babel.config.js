@@ -1,4 +1,4 @@
-const { isDev } = require('./webpack/helpers.conf');
+const { isDev } = require('./webpack/helpers.conf'); // Or use function which returns api object to get env - https://babeljs.io/docs/en/config-files#config-function-api.
 
 const config = {
   presets: [
@@ -7,8 +7,9 @@ const config = {
 
       {
         bugfixes: true, // Will be set by default in next major version.
-        corejs: '3.14.0',
-        useBuiltIns: 'usage',
+
+        corejs: '3.16.2',
+        useBuiltIns: 'usage', // To include polyfills which are used in the project.
       },
     ],
 

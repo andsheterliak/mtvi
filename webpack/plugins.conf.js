@@ -1,25 +1,21 @@
 const { DefinePlugin } = require('webpack');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const ESLintPlugin = require('eslint-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
 
-const { isDev, paths, isProd } = require('./helpers.conf');
+const { isDev, paths } = require('./helpers.conf');
 
 const pluginsConf = [
-  new CleanWebpackPlugin(),
-
   new HtmlWebpackPlugin({
-    filename: paths.pages.index.filename,
-    template: paths.pages.index.template,
+    template: paths.pages.input,
   }),
 
   // Must be after HtmlWebpackPlugin
   new MiniCssExtractPlugin({
-    filename: paths.styles.outputFilename,
+    filename: paths.styles.output,
   }),
 
   new ImageminPlugin({
@@ -42,14 +38,12 @@ const pluginsConf = [
     },
   }),
 
-  new CopyPlugin({
-    patterns: [paths.favicon, paths.robots],
-  }),
-
   new ESLintPlugin({
     extensions: ['js', 'jsx', 'ts', 'tsx'],
-    fix: true,
-    failOnError: false,
+  }),
+
+  new CopyPlugin({
+    patterns: [{ from: paths.robots.input, to: paths.robots.output }],
   }),
 
   new DefinePlugin({

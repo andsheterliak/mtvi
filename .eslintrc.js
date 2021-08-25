@@ -9,12 +9,10 @@ const settings = {
 const env = {
   browser: true,
   es2021: true,
-  node: true,
 };
 
 const parserOptions = {
   sourceType: 'module',
-  requireConfigFile: false,
 
   ecmaFeatures: {
     jsx: true,
@@ -26,7 +24,7 @@ const noUnusedExpressions = [
   { allowTernary: true, allowShortCircuit: true },
 ];
 
-const rules = {
+const baseRules = {
   'no-console': 'off',
   'no-param-reassign': 'off',
   'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0, maxBOF: 0 }],
@@ -40,6 +38,10 @@ const rules = {
   'class-methods-use-this': 'off',
   'no-use-before-define': ['error', { functions: false }],
   'no-unused-expressions': 'off', // Disable the rule to enable for a specific parser later.
+};
+
+const clientRules = {
+  ...baseRules,
   'react/prop-types': 'off',
   // To use new JSX transform.
   'react/jsx-uses-react': 'off',
@@ -60,7 +62,7 @@ const getExtends = (...extraExtends) => {
 module.exports = {
   overrides: [
     {
-      files: '**/*.js',
+      files: './src/**/*.js',
       parser: '@babel/eslint-parser',
       env,
       settings,
@@ -69,13 +71,13 @@ module.exports = {
       plugins: ['@babel'],
 
       rules: {
-        ...rules,
+        ...clientRules,
         '@babel/no-unused-expressions': noUnusedExpressions,
       },
     },
 
     {
-      files: '**/*.{tsx,ts}',
+      files: './src/**/*.{ts,tsx}',
       parser: '@typescript-eslint/parser',
       settings,
       env,
@@ -92,7 +94,7 @@ module.exports = {
       ),
 
       rules: {
-        ...rules,
+        ...clientRules,
         'import/extensions': [
           'error',
           'ignorePackages',
@@ -107,6 +109,37 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-unused-expressions': noUnusedExpressions,
         'no-useless-constructor': 'off', // Disable to add support for 'Parameter Properties' (shorthand for constructor parameters).
+      },
+    },
+
+    // Simple config for nodejs files like webpack and netlify functions.
+    {
+      files: '**/*.js',
+      excludedFiles: './src/**/*.js',
+      parser: '@babel/eslint-parser',
+
+      env: {
+        es2021: true,
+        node: true,
+      },
+
+      parserOptions: {
+        sourceType: 'module',
+      },
+
+      extends: [
+        'airbnb-base',
+        'plugin:node/recommended',
+        'plugin:prettier/recommended', // Must be last to override other formatting rules.]
+      ],
+
+      plugins: ['@babel'],
+
+      rules: {
+        ...baseRules,
+        'no-unused-expressions': noUnusedExpressions,
+        'global-require': 'off', // Is deprecated
+        'node/no-unpublished-require': 'off',
       },
     },
   ],

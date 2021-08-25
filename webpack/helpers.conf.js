@@ -10,7 +10,6 @@ const dirNames = {
   styles: 'styles',
   assets: 'assets',
   img: 'img',
-  favicon: 'favicon',
   fonts: 'fonts',
 };
 
@@ -19,57 +18,43 @@ const paths = {
   dist: path.resolve(__dirname, `../${dirNames.dist}`),
   publicPath: '/',
 
-  img: {
-    // Base dir depends on 'output.path' property.
-    output: {
-      filename: isDev ? '[name].[ext]' : `[name].[contenthash].[ext]`,
-      folder: isDev ? '' : `${dirNames.assets}/${dirNames.img}`,
+  scripts: {
+    input: {
+      app: './index.js', // Base dir depends on 'context' property.
     },
-  },
 
-  fonts: {
     // Base dir depends on 'output.path' property.
-    output: {
-      filename: isDev ? '[name].[ext]' : `[name].[contenthash].[ext]`,
-      folder: isDev ? '' : `${dirNames.assets}/${dirNames.fonts}`,
-    },
-  },
-
-  favicon: {
-    from: `${dirNames.assets}/favicon/`, // Base dir depends on 'context' property.
-    to: `${dirNames.assets}/favicon/`, // Base dir depends on 'output.path' property.
-  },
-
-  robots: {
-    from: `${dirNames.assets}/robots.txt`, // Base dir depends on 'context' property.
-    to: `robots.txt`, // Base dir depends on 'output.path' property.
+    output: isDev ? '[name].js' : `${dirNames.scripts}/[name].[contenthash].js`,
   },
 
   pages: {
-    index: {
-      filename: 'index.html',
-      template: `index.html`, // Base dir depends on 'context' property.
-    },
+    input: 'index.html', // Base dir depends on 'context' property.
   },
 
   styles: {
     // Base dir depends on 'output.path' property.
-    outputFilename: isDev
+    output: isDev
       ? '[name].css'
       : `${dirNames.styles}/[name].[contenthash].css`,
   },
 
-  scripts: {
-    entries: {
-      app: `./index.js`, // Base dir depends on 'context' property.
-    },
+  img: {
+    // Base dir depends on 'output.path' property.
+    output: isDev
+      ? '[name][ext]'
+      : `${dirNames.assets}/${dirNames.img}/[name].[contenthash][ext]`,
+  },
 
-    output: {
-      // Base dir depends on 'output.path' property.
-      filename: isDev
-        ? '[name].js'
-        : `${dirNames.scripts}/[name].[contenthash].js`,
-    },
+  fonts: {
+    // Base dir depends on 'output.path' property.
+    output: isDev
+      ? '[name][ext]'
+      : `${dirNames.assets}/${dirNames.fonts}/[name].[contenthash][ext]`,
+  },
+
+  robots: {
+    input: `${dirNames.assets}/robots.txt`, // Base dir depends on 'context' property.
+    output: `robots.txt`, // Base dir depends on 'output.path' property.
   },
 };
 

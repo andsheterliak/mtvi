@@ -1,5 +1,5 @@
 {
-  // --- eslint
+  // --- eslint | START
   "[javascript]": {
     "editor.formatOnSave": false,
   },
@@ -11,6 +11,9 @@
   },
   "[typescriptreact]": {
     "editor.formatOnSave": false,
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
   },
   // --- cSpell plugin
   // Include words to the dictionary.

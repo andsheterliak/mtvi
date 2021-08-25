@@ -1,5 +1,5 @@
 const { isDev } = require('./helpers.conf');
 
-const devtoolConf = isDev ? 'cheap-module-eval-source-map' : false;
+const devtoolConf = isDev ? 'eval-source-map' : false;
 
 module.exports = devtoolConf;

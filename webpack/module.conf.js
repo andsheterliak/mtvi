@@ -9,10 +9,6 @@ const styleLoaders = {
 
   cssLoader: {
     loader: 'css-loader',
-
-    options: {
-      sourceMap: true,
-    },
   },
 
   cssLoaderModules: {
@@ -22,17 +18,11 @@ const styleLoaders = {
       modules: {
         localIdentName: '[name]__[local]--[hash:base64:5]',
       },
-
-      sourceMap: true,
     },
   },
 
   postCSSLoader: {
     loader: 'postcss-loader',
-
-    options: {
-      sourceMap: true,
-    },
   },
 };
 
@@ -60,6 +50,8 @@ const moduleConf = {
       ],
     },
 
+    // CSS Modules
+
     {
       test: /\.module\.css$/,
       include: paths.src,
@@ -76,7 +68,16 @@ const moduleConf = {
     {
       test: /\.html$/,
       include: paths.src,
-      loader: 'html-loader',
+
+      use: [
+        {
+          loader: 'html-loader',
+
+          options: {
+            minimize: false, // HtmlWebpackPlugin will minify html files.
+          },
+        },
+      ],
     },
 
     // Img
@@ -84,11 +85,10 @@ const moduleConf = {
     {
       test: /\.(png|jpe?g|gif|svg)$/,
       include: paths.src,
-      loader: 'file-loader',
+      type: 'asset/resource',
 
-      options: {
-        name: paths.img.output.filename,
-        outputPath: paths.img.output.folder,
+      generator: {
+        filename: paths.img.output,
       },
     },
 
@@ -96,11 +96,11 @@ const moduleConf = {
 
     {
       test: /\.(ttf|eot|woff2?)$/,
-      loader: 'file-loader',
+      include: paths.src,
+      type: 'asset/resource',
 
-      options: {
-        name: paths.fonts.output.filename,
-        outputPath: paths.fonts.output.folder,
+      generator: {
+        filename: paths.fonts.output,
       },
     },
   ],
