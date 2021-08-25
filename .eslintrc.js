@@ -1,3 +1,5 @@
+const { dirNames } = require('./webpack/helpers.conf');
+
 const settings = {
   react: {
     version: 'detect', // Automatically detect the react version, will be set by default in the next major version.
@@ -62,7 +64,7 @@ const getExtends = (...extraExtends) => {
 module.exports = {
   overrides: [
     {
-      files: './src/**/*.js',
+      files: `./${dirNames.src}/**/*.js`,
       parser: '@babel/eslint-parser',
       env,
       settings,
@@ -77,7 +79,7 @@ module.exports = {
     },
 
     {
-      files: './src/**/*.{ts,tsx}',
+      files: `./${dirNames.src}/**/*.{ts,tsx}`,
       parser: '@typescript-eslint/parser',
       settings,
       env,
@@ -115,7 +117,7 @@ module.exports = {
     // Simple config for nodejs files like webpack and netlify functions.
     {
       files: '**/*.js',
-      excludedFiles: './src/**/*.js',
+      excludedFiles: `./${dirNames.src}/**/*.js`,
       parser: '@babel/eslint-parser',
 
       env: {
