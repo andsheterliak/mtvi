@@ -40,6 +40,7 @@ const pluginsConf = [
 
   new ESLintPlugin({
     extensions: ['js', 'jsx', 'ts', 'tsx'],
+    failOnError: false,
   }),
 
   new CopyPlugin({
