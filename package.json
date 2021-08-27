@@ -6,7 +6,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "netlify:dev": "netlify dev",
+    "netlify:start": "netlify dev",
     "netlify:preview": "netlify deploy",
     "netlify:deploy": "netlify deploy -p",
     "start": "cross-env NODE_ENV=development webpack serve",
