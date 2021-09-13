@@ -13,7 +13,8 @@
     "build": "cross-env NODE_ENV=production webpack",
     "build:stats": "cross-env NODE_ENV=production webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json ./dist/",
     "stats:start": "webpack-bundle-analyzer stats.json ./dist/",
-    "eslint": "eslint ./"
+    "eslint": "eslint ./",
+    "eslint:fix": "eslint ./ --fix"
   },
   "sideEffects": [
     "**/*.css",
