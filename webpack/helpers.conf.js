@@ -6,11 +6,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const dirNames = {
   src: 'src',
   dist: 'dist',
-  scripts: 'scripts',
-  styles: 'styles',
   assets: 'assets',
-  img: 'img',
-  fonts: 'fonts',
 };
 
 const paths = {
@@ -24,7 +20,7 @@ const paths = {
     },
 
     // Base dir depends on 'output.path' property.
-    output: isDev ? '[name].js' : `${dirNames.scripts}/[name].[contenthash].js`,
+    output: isDev ? '[name].js' : '[name].[contenthash].js',
   },
 
   pages: {
@@ -33,19 +29,17 @@ const paths = {
 
   styles: {
     // Base dir depends on 'output.path' property.
-    output: isDev ? '[name].css' : `${dirNames.styles}/[name].[contenthash].css`,
+    output: isDev ? '[name].css' : '[name].[contenthash].css',
   },
 
   img: {
     // Base dir depends on 'output.path' property.
-    output: isDev ? '[name][ext]' : `${dirNames.assets}/${dirNames.img}/[name].[contenthash][ext]`,
+    output: isDev ? '[name][ext]' : '[name].[contenthash][ext]',
   },
 
   fonts: {
     // Base dir depends on 'output.path' property.
-    output: isDev
-      ? '[name][ext]'
-      : `${dirNames.assets}/${dirNames.fonts}/[name].[contenthash][ext]`,
+    output: isDev ? '[name][ext]' : '[name].[contenthash][ext]',
   },
 
   robots: {
