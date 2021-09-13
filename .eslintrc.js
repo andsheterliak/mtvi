@@ -21,10 +21,7 @@ const parserOptions = {
   },
 };
 
-const noUnusedExpressions = [
-  'error',
-  { allowTernary: true, allowShortCircuit: true },
-];
+const noUnusedExpressions = ['error', { allowTernary: true, allowShortCircuit: true }];
 
 const baseRules = {
   'no-console': 'off',
@@ -109,16 +106,14 @@ const clientRules = {
   'react/react-in-jsx-scope': 'off',
 };
 
-const getExtends = (...extraExtends) => {
-  return [
-    'airbnb-base',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:jsx-a11y/recommended',
-    ...extraExtends,
-    'plugin:prettier/recommended', // Must be last to override other formatting rules.
-  ];
-};
+const getExtends = (...extraExtends) => [
+  'airbnb-base',
+  'plugin:react/recommended',
+  'plugin:react-hooks/recommended',
+  'plugin:jsx-a11y/recommended',
+  ...extraExtends,
+  'plugin:prettier/recommended', // Must be last to override other formatting rules.
+];
 
 module.exports = {
   overrides: [
@@ -156,9 +151,11 @@ module.exports = {
 
       rules: {
         ...clientRules,
+
         'import/extensions': [
           'error',
           'ignorePackages',
+
           {
             js: 'never',
             jsx: 'never',
@@ -166,10 +163,12 @@ module.exports = {
             tsx: 'never',
           },
         ],
+
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-unused-expressions': noUnusedExpressions,
         'no-useless-constructor': 'off', // Disable to add support for 'Parameter Properties' (shorthand for constructor parameters).
+        '@typescript-eslint/restrict-template-expressions': 'off',
       },
     },
 

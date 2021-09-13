@@ -11,10 +11,7 @@ const handler = async (event) => {
     return {
       statusCode: 400,
       headers,
-
-      body: JSON.stringify({
-        message: `You cannot make ${event.httpMethod} request.`,
-      }),
+      body: `You cannot make ${event.httpMethod} request.`,
     };
   }
 
@@ -40,10 +37,7 @@ const handler = async (event) => {
     return {
       statusCode: error.response.status,
       headers,
-
-      body: JSON.stringify({
-        message: error.response?.data.status_message ?? error.message,
-      }),
+      body: error.response?.data.status_message ?? error.message,
     };
   }
 };

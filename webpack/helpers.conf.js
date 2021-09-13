@@ -20,7 +20,7 @@ const paths = {
 
   scripts: {
     input: {
-      app: './index.js', // Base dir depends on 'context' property.
+      app: './index.tsx', // Base dir depends on 'context' property.
     },
 
     // Base dir depends on 'output.path' property.
@@ -33,16 +33,12 @@ const paths = {
 
   styles: {
     // Base dir depends on 'output.path' property.
-    output: isDev
-      ? '[name].css'
-      : `${dirNames.styles}/[name].[contenthash].css`,
+    output: isDev ? '[name].css' : `${dirNames.styles}/[name].[contenthash].css`,
   },
 
   img: {
     // Base dir depends on 'output.path' property.
-    output: isDev
-      ? '[name][ext]'
-      : `${dirNames.assets}/${dirNames.img}/[name].[contenthash][ext]`,
+    output: isDev ? '[name][ext]' : `${dirNames.assets}/${dirNames.img}/[name].[contenthash][ext]`,
   },
 
   fonts: {

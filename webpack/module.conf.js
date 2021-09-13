@@ -42,12 +42,7 @@ const moduleConf = {
     {
       test: /\.css$/,
       exclude: /\.module\.css$/,
-
-      use: [
-        styleLoaders.styleLoader,
-        styleLoaders.cssLoader,
-        styleLoaders.postCSSLoader,
-      ],
+      use: [styleLoaders.styleLoader, styleLoaders.cssLoader, styleLoaders.postCSSLoader],
     },
 
     // CSS Modules
@@ -55,12 +50,7 @@ const moduleConf = {
     {
       test: /\.module\.css$/,
       include: paths.src,
-
-      use: [
-        styleLoaders.styleLoader,
-        styleLoaders.cssLoaderModules,
-        styleLoaders.postCSSLoader,
-      ],
+      use: [styleLoaders.styleLoader, styleLoaders.cssLoaderModules, styleLoaders.postCSSLoader],
     },
 
     // HTML
