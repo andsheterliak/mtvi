@@ -37,6 +37,13 @@ const optimizationConf = {
             enforce: true,
           },
 
+          'material-ui': {
+            test: /[\\/]node_modules[\\/]@material-ui[\\/]/,
+            name: 'material-ui',
+            priority: 10,
+            enforce: true,
+          },
+
           vendors: {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
