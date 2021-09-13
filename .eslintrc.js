@@ -40,6 +40,65 @@ const baseRules = {
   'class-methods-use-this': 'off',
   'no-use-before-define': ['error', { functions: false }],
   'no-unused-expressions': 'off', // Disable the rule to enable for a specific parser later.
+
+  // Does not work with typescript yet.
+  'padding-line-between-statements': [
+    'error',
+    {
+      blankLine: 'always',
+      prev: ['singleline-const', 'singleline-let', 'singleline-var'],
+      next: '*',
+    },
+
+    {
+      blankLine: 'always',
+      prev: '*',
+      next: ['singleline-const', 'singleline-let', 'singleline-var'],
+    },
+
+    {
+      blankLine: 'any',
+      prev: ['singleline-const', 'singleline-let', 'singleline-var'],
+      next: ['singleline-const', 'singleline-let', 'singleline-var'],
+    },
+
+    {
+      blankLine: 'always',
+
+      prev: [
+        'multiline-const',
+        'multiline-let',
+        'multiline-var',
+        'multiline-expression',
+        'multiline-block-like',
+        'class',
+      ],
+
+      next: '*',
+    },
+
+    {
+      blankLine: 'always',
+      prev: '*',
+
+      next: [
+        'multiline-const',
+        'multiline-let',
+        'multiline-var',
+        'multiline-expression',
+        'multiline-block-like',
+        'class',
+      ],
+    },
+
+    // There is no 'multiline-export' option for more precise customization.
+    { blankLine: 'always', prev: '*', next: 'export' },
+    { blankLine: 'always', prev: 'export', next: '*' },
+    { blankLine: 'any', prev: 'export', next: 'export' },
+
+    { blankLine: 'always', prev: ['case', 'default'], next: '*' },
+    { blankLine: 'always', prev: '*', next: 'return' },
+  ],
 };
 
 const clientRules = {
