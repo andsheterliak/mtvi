@@ -5,6 +5,7 @@ import { Skeleton } from '@material-ui/lab';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Name } from '~/api/tmdb';
+import { LAZY_IMG_CLASS_NAME } from '../constants';
 import { IsLoading, Path } from '../types';
 import { CustomImagePath } from '../utils';
 import { AspectRatio } from './AspectRatio';
@@ -88,7 +89,11 @@ export const BackToHeader = ({
             aspectRatio={imgShape === 'tall' ? '2:3' : '16:9'}
             rootClasses={imgWrapperClassNames}
           >
-            {isLoading ? <Skeleton variant="rect" /> : <img alt={title} src={imgPath} />}
+            {isLoading ? (
+              <Skeleton variant="rect" />
+            ) : (
+              <img className={LAZY_IMG_CLASS_NAME} alt={title} src={imgPath} />
+            )}
           </AspectRatio>
 
           <div className={classes.body}>

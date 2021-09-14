@@ -5,7 +5,7 @@ import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { Name } from '~/api/tmdb';
 import { AspectRatio } from '~/shared/components/AspectRatio';
-import { FALLBACK_VALUE } from '~/shared/constants';
+import { FALLBACK_VALUE, LAZY_IMG_CLASS_NAME } from '~/shared/constants';
 import { IsLoading, Path } from '~/shared/types';
 import { CustomImagePath } from '~/shared/utils';
 
@@ -42,7 +42,11 @@ export const Card = ({ imgPath, title, path, subData, isLoading }: Props) => {
   const cardInner = (
     <>
       <AspectRatio>
-        {isLoading ? <Skeleton variant="rect" /> : <img alt={title} data-src={imgPath} />}
+        {isLoading ? (
+          <Skeleton variant="rect" />
+        ) : (
+          <img className={LAZY_IMG_CLASS_NAME} alt={title} data-src={imgPath} />
+        )}
       </AspectRatio>
 
       <CardContent className={classes.content}>

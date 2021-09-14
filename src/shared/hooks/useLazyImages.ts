@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
+import { LAZY_IMG_CLASS_NAME } from '~/shared/constants';
 
 const showImage = (image: HTMLImageElement) => {
   requestAnimationFrame(() => {
     if (image.complete) {
-      image.classList.add('is-visible');
+      image.style.opacity = '1';
     } else {
       showImage(image);
     }
@@ -48,7 +49,7 @@ export const useLazyImages = ({ isLoading, triggers = [] }: Props) => {
       { rootMargin: '200px' }
     );
 
-    document.querySelectorAll('img')?.forEach((img) => {
+    document.querySelectorAll(`.${LAZY_IMG_CLASS_NAME}`).forEach((img) => {
       intObserver.observe(img);
     });
 

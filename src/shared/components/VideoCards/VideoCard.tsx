@@ -4,6 +4,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import { Skeleton } from '@material-ui/lab';
 import { Video } from '~/api/tmdb';
 import { AspectRatio } from '~/shared/components/AspectRatio';
+import { LAZY_IMG_CLASS_NAME } from '~/shared/constants';
 import { IsLoading } from '~/shared/types';
 import { VideoData } from './types';
 
@@ -54,7 +55,7 @@ export const VideoCard = ({ id, name, openModalHandler, isLoading }: Props) => {
           }}
         >
           <AspectRatio aspectRatio="16:9">
-            <img data-src={imgPath} alt={name} title={name} />
+            <img className={LAZY_IMG_CLASS_NAME} data-src={imgPath} alt={name} title={name} />
           </AspectRatio>
 
           <div className={classes.playBtn}>

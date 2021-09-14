@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { IMG_BASE_URL, IMG_SIZES, SeasonItem } from '~/api/tmdb';
 import noImg from '~/assets/img/no-image.svg';
 import { AspectRatio } from '~/shared/components/AspectRatio';
-import { FALLBACK_VALUE } from '~/shared/constants';
+import { FALLBACK_VALUE, LAZY_IMG_CLASS_NAME } from '~/shared/constants';
 import { IsLoading, Path } from '~/shared/types';
 import { formatDateStr, getImagePath } from '~/shared/utils';
 
@@ -83,7 +83,11 @@ export const SeasonCard = ({
   const content = (
     <CardContent className={classes.content}>
       <AspectRatio rootClasses={classes.imgWrapper}>
-        {isLoading ? <Skeleton variant="rect" /> : <img alt={name || ''} data-src={imgPath} />}
+        {isLoading ? (
+          <Skeleton variant="rect" />
+        ) : (
+          <img className={LAZY_IMG_CLASS_NAME} alt={name || ''} data-src={imgPath} />
+        )}
       </AspectRatio>
 
       <div className={classes.textContent}>

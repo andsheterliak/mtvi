@@ -5,6 +5,7 @@ import { ImagePath, IMG_BASE_URL, IMG_SIZES, Name, Overview } from '~/api/tmdb';
 import noImageImg from '~/assets/img/no-image-wide.svg';
 import { IsLoading } from '~/shared/types';
 import { getImagePath } from '~/shared/utils';
+import { LAZY_IMG_CLASS_NAME } from '../constants';
 import { AspectRatio } from './AspectRatio';
 import { Description, HeaderTitle } from './header';
 import { DataList, InfoList } from './InfoList';
@@ -65,7 +66,7 @@ export const PageHeader = ({ title, overview, dataList, imagePath, isLoading }: 
               ${imgPath.w1280} 1280w,
             `}
           alt=""
-          className={classNames({ [classes.img]: imagePath })}
+          className={classNames(LAZY_IMG_CLASS_NAME, { [classes.img]: imagePath })}
         />
       )}
     </AspectRatio>

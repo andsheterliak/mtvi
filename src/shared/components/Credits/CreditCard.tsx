@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Skeleton } from '@material-ui/lab';
 import { Link } from 'react-router-dom';
 import { AspectRatio } from '~/shared/components/AspectRatio';
-import { FALLBACK_VALUE } from '~/shared/constants';
+import { FALLBACK_VALUE, LAZY_IMG_CLASS_NAME } from '~/shared/constants';
 import { IsLoading, Path } from '~/shared/types';
 import { CustomImagePath } from '~/shared/utils';
 import { CustomCredit } from './utils';
@@ -44,7 +44,11 @@ export const CreditCard = ({ imgPath, name, info, path, isLoading }: Props) => {
   const content = (
     <>
       <AspectRatio aspectRatio="1:1" imgWrapperClasses={classes.imgWrapper}>
-        {isLoading ? <Skeleton variant="rect" /> : <img alt={name ?? ''} data-src={imgPath} />}
+        {isLoading ? (
+          <Skeleton variant="rect" />
+        ) : (
+          <img className={LAZY_IMG_CLASS_NAME} alt={name ?? ''} data-src={imgPath} />
+        )}
       </AspectRatio>
 
       <CardContent className={classes.content}>

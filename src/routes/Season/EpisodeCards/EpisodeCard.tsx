@@ -14,7 +14,7 @@ import { MouseEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SeasonEpisode } from '~/api/tmdb';
 import { AspectRatio, CardSubInfo } from '~/shared/components';
-import { FALLBACK_VALUE } from '~/shared/constants';
+import { FALLBACK_VALUE, LAZY_IMG_CLASS_NAME } from '~/shared/constants';
 import { IsLoading, Path } from '~/shared/types';
 import { CustomImagePath } from '~/shared/utils';
 
@@ -85,7 +85,11 @@ export const EpisodeCard = ({
   return (
     <Card className={classes.root}>
       <AspectRatio aspectRatio="16:9">
-        {isLoading ? <Skeleton variant="rect" /> : <img alt={name} data-src={imgPath} />}
+        {isLoading ? (
+          <Skeleton variant="rect" />
+        ) : (
+          <img className={LAZY_IMG_CLASS_NAME} alt={name} data-src={imgPath} />
+        )}
       </AspectRatio>
 
       <CardContent className={classes.content}>

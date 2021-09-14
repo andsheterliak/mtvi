@@ -4,7 +4,7 @@ import { Skeleton } from '@material-ui/lab';
 import { Link } from 'react-router-dom';
 import { Name } from '~/api/tmdb';
 import { AspectRatio } from '~/shared/components';
-import { FALLBACK_VALUE } from '~/shared/constants';
+import { FALLBACK_VALUE, LAZY_IMG_CLASS_NAME } from '~/shared/constants';
 import { IsLoading, Path } from '~/shared/types';
 import { CloseSearchHandler } from '../search-types';
 
@@ -59,7 +59,11 @@ export const SearchItem = ({ name, path, subInfo, imgPath, clickHandler, isLoadi
     <>
       <CardContent className={classes.mediaWrapper}>
         <AspectRatio aspectRatio="2:3">
-          {isLoading ? <Skeleton variant="rect" /> : <img alt={name} data-src={imgPath} />}
+          {isLoading ? (
+            <Skeleton variant="rect" />
+          ) : (
+            <img className={LAZY_IMG_CLASS_NAME} alt={name} data-src={imgPath} />
+          )}
         </AspectRatio>
       </CardContent>
 

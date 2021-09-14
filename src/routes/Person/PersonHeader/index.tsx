@@ -5,6 +5,7 @@ import { IMG_BASE_URL, IMG_SIZES, Person, PersonLifeDates, useGetPersonQuery } f
 import noUserPhotoImg from '~/assets/img/no-user-photo.svg';
 import { IdParam } from '~/routes/types';
 import { AspectRatio, DataList, Description, HeaderTitle, InfoList } from '~/shared/components';
+import { LAZY_IMG_CLASS_NAME } from '~/shared/constants';
 import { formatDateStr, getImagePath } from '~/shared/utils';
 import { SocialLinks } from './SocialLinks';
 
@@ -150,6 +151,7 @@ export const PersonHeader = () => {
           <Skeleton variant="rect" />
         ) : (
           <img
+            className={LAZY_IMG_CLASS_NAME}
             src={getImagePath({
               basePath: IMG_BASE_URL,
               size: IMG_SIZES.profile.h632,
