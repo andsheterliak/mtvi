@@ -21,8 +21,7 @@
     "**/*.scss"
   ],
   "engines": {
-    "node": ">=14.0.0 <15.0.0",
-    "npm": ">=6.0.0 <7.0.0"
+    "node": "^14.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
