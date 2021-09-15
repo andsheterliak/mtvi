@@ -9,7 +9,7 @@ import { Menu } from '~/Menu';
 import { RootWrapper } from '~/RootWrapper';
 import { Routes } from '~/routes';
 import { Spacer } from '~/shared/components';
-import { useToggleTheme } from '~/theme';
+import { useToggleTheme } from '~/shared/theme';
 
 const queryClient = new QueryClient({
   defaultOptions: {

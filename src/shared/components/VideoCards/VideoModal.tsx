@@ -2,7 +2,7 @@ import { Dialog, DialogProps, DialogTitle, IconButton, Typography } from '@mater
 import { createStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import { AspectRatio } from '~/shared/components/AspectRatio';
-import { darkTheme } from '~/theme';
+import { darkTheme } from '~/shared/theme';
 import { VideoData } from './types';
 
 const useStyles = makeStyles(({ palette, typography, breakpoints }) => {

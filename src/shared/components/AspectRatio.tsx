@@ -1,7 +1,7 @@
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import { ReactNode } from 'react';
-import { AspectRatiosKeys } from '~/theme';
+import { AspectRatiosKeys } from '~/shared/theme';
 
 const useStyles = makeStyles(({ aspectRatios }) => {
   return createStyles({

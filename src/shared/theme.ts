@@ -5,7 +5,7 @@ import {
   ThemeOptions as ThemeOptionsTypes,
 } from '@material-ui/core/styles';
 import type {} from '@material-ui/lab/themeAugmentation';
-import { useStorage } from './shared/hooks';
+import { useStorage } from './hooks';
 
 declare module '@material-ui/core/styles/createBreakpoints' {
   interface BreakpointOverrides {
