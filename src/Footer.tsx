@@ -20,7 +20,7 @@ export const Footer = () => {
   const classes = useStyles();
 
   return (
-    <Paper square>
+    <Paper square component="footer">
       <MainContainer className={classes.container}>
         <SvgIcon viewBox="0 0 273.42 35.52" titleAccess="TMDB logo" className={classes.logo}>
           <defs>
