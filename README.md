@@ -97,6 +97,7 @@ Node.js versions are specified in several places:
 
 ## Possible Enhancements
 
+- Create a home page.
 - Internationalization.
 - Authentication with [TMDB](https://developers.themoviedb.org/3/authentication/how-do-i-generate-a-session-id) (to be able to rate movies / series, ect.).
 - Write tests (not a big project, but with the above enhancements and for practice it could be worth it).
