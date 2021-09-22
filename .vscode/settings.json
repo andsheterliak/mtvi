@@ -21,4 +21,6 @@
     "TMDB",
     "mtvi"
   ],
+  // Use 'typescript' version from 'node_modules' for vscode.
+  "typescript.tsdk": "node_modules\\typescript\\lib",
 }
