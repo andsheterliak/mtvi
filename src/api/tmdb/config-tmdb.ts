@@ -301,7 +301,7 @@ export const VIDEO_TYPES = createVideoTypes({
   teaser: { key: 'Teaser', name: 'Teasers' },
   clip: { key: 'Clip', name: 'Clips' },
   behindTheScenes: { key: 'Behind the Scenes', name: 'Behind the Scenes' },
-  blooper: { key: 'Blooper', name: 'Bloopers' },
+  blooper: { key: 'Bloopers', name: 'Bloopers' },
   featurette: { key: 'Featurette', name: 'Featurettes' },
   openingCredits: { key: 'Opening Credits', name: 'Opening Credits' },
 });
