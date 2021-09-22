@@ -119,30 +119,44 @@ export const SearchResults = () => {
       />
     );
   } else {
-    const searchInToCardsMap = {
-      [SEARCH_PATHS.movie]: (
-        <MovieCards
-          isLoading={SearchResultsQuery.isFetching}
-          cardsData={selectionBarData?.movie.data}
-        />
-      ),
+    let cards;
 
-      [SEARCH_PATHS.tv]: (
-        <TVShowCards
-          isLoading={SearchResultsQuery.isFetching}
-          cardsData={selectionBarData?.tv.data}
-        />
-      ),
+    switch (searchIn) {
+      case SEARCH_PATHS.movie:
+        cards = (
+          <MovieCards
+            isLoading={SearchResultsQuery.isFetching}
+            cardsData={selectionBarData?.movie.data}
+          />
+        );
 
-      [SEARCH_PATHS.person]: (
-        <PersonCards
-          isLoading={SearchResultsQuery.isFetching}
-          cardsData={selectionBarData?.person.data}
-        />
-      ),
-    };
+        break;
 
-    content = <CardsGrid>{searchInToCardsMap[searchIn]}</CardsGrid>;
+      case SEARCH_PATHS.tv:
+        cards = (
+          <TVShowCards
+            isLoading={SearchResultsQuery.isFetching}
+            cardsData={selectionBarData?.tv.data}
+          />
+        );
+
+        break;
+
+      case SEARCH_PATHS.person:
+        cards = (
+          <PersonCards
+            isLoading={SearchResultsQuery.isFetching}
+            cardsData={selectionBarData?.person.data}
+          />
+        );
+
+        break;
+
+      default:
+        break;
+    }
+
+    content = <CardsGrid>{cards}</CardsGrid>;
   }
 
   return (
