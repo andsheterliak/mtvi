@@ -1,10 +1,10 @@
 export type Selected = string;
 export type SelectHandler = (key: Selected) => void;
 
-export type SelectionBarItem<Data = unknown> = {
+export type SelectionDataItem<Data = unknown> = {
   name: string;
   amount: number;
   data: Data;
 };
 
-export type SelectionBarData = Record<string, SelectionBarItem>;
+export type SelectionData = Record<string, SelectionDataItem>;

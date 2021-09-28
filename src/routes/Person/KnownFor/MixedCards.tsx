@@ -1,3 +1,4 @@
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import { IMG_BASE_URL, IMG_SIZES } from '~/api/tmdb';
 import noImage from '~/assets/img/no-image.svg';
 import { Card, CardSubInfo } from '~/shared/components';
@@ -51,5 +52,5 @@ export const MixedCards = ({ cardsData, isLoading }: Props) => {
     );
   });
 
-  return <>{items}</>;
+  return <>{isLoading ? items : <RovingTabIndexProvider>{items}</RovingTabIndexProvider>}</>;
 };

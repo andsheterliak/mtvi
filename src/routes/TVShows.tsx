@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import {
   Options,
   Page,
@@ -74,7 +75,16 @@ export const TVShows = ({ titleName }: TVShowsProps) => {
       <NoContent message="There is no data on such TV shows." />
     ) : (
       <CardsGrid>
-        <TVShowCards isLoading={tvShowsQuery.isFetching} cardsData={tvShowsQuery.data?.results} />
+        {tvShowsQuery.isFetching ? (
+          <TVShowCards isLoading={tvShowsQuery.isFetching} cardsData={tvShowsQuery.data?.results} />
+        ) : (
+          <RovingTabIndexProvider options={{ loopAround: true }}>
+            <TVShowCards
+              isLoading={tvShowsQuery.isFetching}
+              cardsData={tvShowsQuery.data?.results}
+            />
+          </RovingTabIndexProvider>
+        )}
       </CardsGrid>
     );
 

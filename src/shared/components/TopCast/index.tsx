@@ -1,3 +1,4 @@
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import { Cast, TVShowCast } from '~/api/tmdb';
 import { CardsGridRow } from '~/shared/components/grids';
 import { NoContent } from '~/shared/components/NoContent';
@@ -27,11 +28,13 @@ export const TopCast = ({
   isLoading,
   castAmount,
 }: Props) => {
+  const ariaLabelledby = 'topCast';
+
   const content =
     !isLoading && (!data || data.length === 0) ? (
       <NoContent message="We don't have added any cast." />
     ) : (
-      <Slider isLoading={isLoading}>
+      <Slider ariaLabelledby={ariaLabelledby}>
         <CardsGridRow>
           <CastCards
             isLoading={isLoading}
@@ -45,9 +48,9 @@ export const TopCast = ({
 
   return (
     <Section>
-      <SectionTitle title={title} />
+      <SectionTitle id={ariaLabelledby} title={title} />
 
-      {content}
+      {isLoading ? content : <RovingTabIndexProvider>{content}</RovingTabIndexProvider>}
 
       <SeeAllLink path={creditsPath}>{seeAllLinkName}</SeeAllLink>
     </Section>

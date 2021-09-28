@@ -1,22 +1,18 @@
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import { Videos, VideoTypeKeys, VIDEO_TYPES } from '~/api/tmdb';
-import { PageGrid } from '~/shared/components/grids';
-import { Layout } from '~/shared/components/Layout';
-import { MainContainer } from '~/shared/components/MainContainer';
-import { MainContent } from '~/shared/components/MainContent';
-import { NoContent } from '~/shared/components/NoContent';
-import {
-  Selected,
-  SelectHandler,
-  SelectionBar,
-  SelectionBarItem,
-} from '~/shared/components/SelectionBar';
-import { Spacer } from '~/shared/components/Spacer';
-import { VideoCards } from '~/shared/components/VideoCards';
 import { ItemAmount } from '~/shared/constants';
 import { IsLoading } from '~/shared/types';
+import { PageGrid } from '../grids';
+import { Layout } from '../Layout';
+import { MainContainer } from '../MainContainer';
+import { MainContent } from '../MainContent';
+import { NoContent } from '../NoContent';
+import { Selected, SelectHandler, Selection, SelectionDataItem } from '../Selection';
+import { Spacer } from '../Spacer';
+import { VideoCards } from '../VideoCards';
 import { VideosGrid } from './VideosGrid';
 
-type VideosDataItem = SelectionBarItem<Videos>;
+type VideosDataItem = SelectionDataItem<Videos>;
 type VideosData = Record<typeof VIDEO_TYPES[VideoTypeKeys]['key'], VideosDataItem>;
 
 const getVideosData = (videos: Videos | undefined) => {
@@ -68,7 +64,13 @@ export const AllVideos = ({
       <NoContent message={`We don't have added any ${selectedItem.name.toLowerCase()}.`} />
     ) : (
       <VideosGrid>
-        <VideoCards videoAmount={videoAmount} isLoading={isLoading} data={selectedItem?.data} />
+        {isLoading ? (
+          <VideoCards videoAmount={videoAmount} isLoading={isLoading} data={selectedItem?.data} />
+        ) : (
+          <RovingTabIndexProvider options={{ loopAround: true }}>
+            <VideoCards videoAmount={videoAmount} isLoading={isLoading} data={selectedItem?.data} />
+          </RovingTabIndexProvider>
+        )}
       </VideosGrid>
     );
 
@@ -82,16 +84,15 @@ export const AllVideos = ({
         <MainContent>
           <MainContainer>
             <PageGrid>
-              <SelectionBar
+              <Selection
                 isLoading={isLoading}
-                title="Videos"
+                title="Video Types"
                 data={videosData}
                 selectHandler={selectHandler}
                 selected={selected}
                 itemSkeletonAmount={7}
+                tabPanelElement={videos}
               />
-
-              {videos}
             </PageGrid>
           </MainContainer>
         </MainContent>

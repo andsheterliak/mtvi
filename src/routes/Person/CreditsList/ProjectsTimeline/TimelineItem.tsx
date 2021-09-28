@@ -12,6 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 import { InfoList } from '~/shared/components';
 import { FALLBACK_VALUE } from '~/shared/constants';
+import { useRovingTabindex } from '~/shared/hooks';
 import { IsLoading } from '~/shared/types';
 import { TimelineEmploymentItem, TimelineItem as TimelineDataItem } from '../types';
 
@@ -47,6 +48,7 @@ type Props = Partial<{
 
 export const TimelineItem = ({ path, year, name, infoListData, isLoading }: Props) => {
   const classes = useStyles();
+  const rovingTabindex = useRovingTabindex<HTMLAnchorElement>();
 
   return (
     <MUITimelineItem>
@@ -69,6 +71,7 @@ export const TimelineItem = ({ path, year, name, infoListData, isLoading }: Prop
           </Typography>
         ) : (
           <MUILink
+            {...rovingTabindex}
             className={classes.link}
             variant="body1"
             color="textPrimary"

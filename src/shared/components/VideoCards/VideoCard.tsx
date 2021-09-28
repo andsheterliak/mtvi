@@ -5,6 +5,7 @@ import { Skeleton } from '@material-ui/lab';
 import { Video } from '~/api/tmdb';
 import { AspectRatio } from '~/shared/components/AspectRatio';
 import { LAZY_IMG_CLASS_NAME } from '~/shared/constants';
+import { useRovingTabindex } from '~/shared/hooks';
 import { IsLoading } from '~/shared/types';
 import { VideoData } from './types';
 
@@ -41,6 +42,7 @@ type Props = Partial<{
 export const VideoCard = ({ id, name, openModalHandler, isLoading }: Props) => {
   const classes = useStyles();
   const imgPath = getYouTubeImgPath(id);
+  const rovingTabindex = useRovingTabindex<HTMLButtonElement>();
 
   return (
     <Card elevation={isLoading ? 0 : 1}>
@@ -50,7 +52,11 @@ export const VideoCard = ({ id, name, openModalHandler, isLoading }: Props) => {
         </AspectRatio>
       ) : (
         <CardActionArea
+          ref={rovingTabindex.ref}
+          tabIndex={rovingTabindex.tabIndex}
+          onKeyDown={rovingTabindex.onKeyDown}
           onClick={() => {
+            rovingTabindex.onClick();
             openModalHandler!({ id: id!, name: name! });
           }}
         >

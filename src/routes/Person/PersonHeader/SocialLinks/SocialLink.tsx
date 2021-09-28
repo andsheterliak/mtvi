@@ -32,10 +32,11 @@ type Props = Partial<{
   isLoading: IsLoading;
   href: SocialLinkItem['href'];
   id: SocialLinkItem['id'];
+  label: SocialLinkItem['label'];
   Icon: SocialLinkItem['icon'];
 }>;
 
-export const SocialLink = ({ href, id, Icon, isLoading }: Props) => {
+export const SocialLink = ({ href, id, label, Icon, isLoading }: Props) => {
   const classes = useStyles();
 
   if (isLoading) {
@@ -45,6 +46,7 @@ export const SocialLink = ({ href, id, Icon, isLoading }: Props) => {
   return (
     <Link
       href={`${href}${id}`}
+      aria-label={label}
       underline="none"
       target="_blank"
       rel="noopener"

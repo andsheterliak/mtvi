@@ -4,6 +4,7 @@ import { Skeleton } from '@material-ui/lab';
 import { Link } from 'react-router-dom';
 import { AspectRatio } from '~/shared/components/AspectRatio';
 import { FALLBACK_VALUE, LAZY_IMG_CLASS_NAME } from '~/shared/constants';
+import { useRovingTabindex } from '~/shared/hooks';
 import { IsLoading, Path } from '~/shared/types';
 import { CustomImagePath } from '~/shared/utils';
 import { CustomCredit } from './utils';
@@ -40,6 +41,7 @@ type Props = Partial<{
 
 export const CreditCard = ({ imgPath, name, info, path, isLoading }: Props) => {
   const classes = useStyles();
+  const rovingTabindex = useRovingTabindex<HTMLAnchorElement>();
 
   const content = (
     <>
@@ -52,7 +54,7 @@ export const CreditCard = ({ imgPath, name, info, path, isLoading }: Props) => {
       </AspectRatio>
 
       <CardContent className={classes.content}>
-        <Typography component="p" color="textPrimary" variant="body1">
+        <Typography component="h4" color="textPrimary" variant="body1">
           {isLoading ? <Skeleton width="80%" /> : name || FALLBACK_VALUE}
         </Typography>
 
@@ -68,7 +70,13 @@ export const CreditCard = ({ imgPath, name, info, path, isLoading }: Props) => {
       {isLoading ? (
         <div className={classes.action}>{content}</div>
       ) : (
-        <CardActionArea component={Link} to={path!} className={classes.action}>
+        <CardActionArea
+          {...rovingTabindex}
+          component={Link}
+          role="link"
+          to={path!}
+          className={classes.action}
+        >
           {content}
         </CardActionArea>
       )}

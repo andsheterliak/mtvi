@@ -15,9 +15,16 @@ type Props = Partial<{
   title: string;
   isSubtitle: boolean;
   isSpacing: IsSpacing;
+  id: string;
 }>;
 
-export const SectionTitle = ({ title, isSubtitle = false, isSpacing = true, isLoading }: Props) => {
+export const SectionTitle = ({
+  title,
+  isSubtitle = false,
+  isSpacing = true,
+  isLoading,
+  id,
+}: Props) => {
   const classes = useStyles();
 
   const rootClasses = classNames({
@@ -26,6 +33,7 @@ export const SectionTitle = ({ title, isSubtitle = false, isSpacing = true, isLo
 
   return (
     <Typography
+      id={id}
       color="textPrimary"
       className={rootClasses}
       variant={isSubtitle ? 'h6' : 'h5'}

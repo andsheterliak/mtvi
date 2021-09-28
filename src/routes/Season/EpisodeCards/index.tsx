@@ -1,4 +1,5 @@
 import { useRouteMatch } from 'react-router-dom';
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import { IMG_BASE_URL, IMG_SIZES, Season } from '~/api/tmdb';
 import noWideImg from '~/assets/img/no-image-wide.svg';
 import { ROUTE_NAMES } from '~/shared/constants';
@@ -50,5 +51,13 @@ export const EpisodeCards = ({ data, isLoading }: Props) => {
     );
   });
 
-  return <EpisodesGrid>{items}</EpisodesGrid>;
+  return (
+    <EpisodesGrid>
+      {isLoading ? (
+        items
+      ) : (
+        <RovingTabIndexProvider options={{ loopAround: true }}>{items}</RovingTabIndexProvider>
+      )}
+    </EpisodesGrid>
+  );
 };

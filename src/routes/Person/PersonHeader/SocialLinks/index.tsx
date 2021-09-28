@@ -16,6 +16,7 @@ const createSocialLinksMap = (externalIds: Person['external_ids'] | undefined) =
     socialLinksMap.push({
       id: externalIds.facebook_id,
       href: 'https://www.facebook.com/',
+      label: 'facebook',
       icon: FacebookIcon,
     });
   }
@@ -24,6 +25,7 @@ const createSocialLinksMap = (externalIds: Person['external_ids'] | undefined) =
     socialLinksMap.push({
       id: externalIds.instagram_id,
       href: 'https://www.instagram.com/',
+      label: 'instagram',
       icon: InstagramIcon,
     });
   }
@@ -32,6 +34,7 @@ const createSocialLinksMap = (externalIds: Person['external_ids'] | undefined) =
     socialLinksMap.push({
       id: externalIds.twitter_id,
       href: 'https://twitter.com/',
+      label: 'twitter',
       icon: TwitterIcon,
     });
   }
@@ -55,8 +58,8 @@ export const SocialLinks = ({ externalIds, isLoading }: Props) => {
         .map((_, index) => {
           return <SocialLink key={index} isLoading={true} />;
         })
-    : socialLinksMap!.map(({ id, href, icon: Icon }) => {
-        return <SocialLink key={href} href={href} id={id} Icon={Icon} />;
+    : socialLinksMap!.map(({ id, href, label, icon: Icon }) => {
+        return <SocialLink key={href} href={href} id={id} label={label} Icon={Icon} />;
       });
 
   return <SocialLinksContainer>{socialLinks}</SocialLinksContainer>;

@@ -1,3 +1,4 @@
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import { SeasonItem } from '~/api/tmdb';
 import { IsLoading, Path } from '~/shared/types';
 import { SeasonCard } from './SeasonCard';
@@ -36,5 +37,15 @@ export const SeasonCards = ({ data, basePath, isLoading }: Props) => {
     );
   });
 
-  return <SeasonsGrid>{seasons}</SeasonsGrid>;
+  return (
+    <SeasonsGrid>
+      {isLoading ? (
+        seasons
+      ) : (
+        <RovingTabIndexProvider options={{ direction: 'vertical', loopAround: true }}>
+          {seasons}
+        </RovingTabIndexProvider>
+      )}
+    </SeasonsGrid>
+  );
 };

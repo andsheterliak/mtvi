@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import { Name } from '~/api/tmdb';
 import { AspectRatio } from '~/shared/components';
 import { FALLBACK_VALUE, LAZY_IMG_CLASS_NAME } from '~/shared/constants';
+import { useRovingTabindex } from '~/shared/hooks';
 import { IsLoading, Path } from '~/shared/types';
-import { CloseSearchHandler } from '../search-types';
+import { CloseSearchHandler, CloseSearchEvent } from '../search-types';
 
 const useStyles = makeStyles(({ spacing, aspectRatios }) => {
   const padding = spacing(1.5);
@@ -54,6 +55,7 @@ type Props = Partial<{
 
 export const SearchItem = ({ name, path, subInfo, imgPath, clickHandler, isLoading }: Props) => {
   const classes = useStyles();
+  const rovingTabindex = useRovingTabindex<HTMLAnchorElement>();
 
   const content = (
     <>
@@ -87,8 +89,15 @@ export const SearchItem = ({ name, path, subInfo, imgPath, clickHandler, isLoadi
         <CardActionArea
           component={Link}
           to={path!}
+          role="link"
           className={classes.action}
-          onClick={clickHandler}
+          ref={rovingTabindex.ref}
+          tabIndex={rovingTabindex.tabIndex}
+          onKeyDown={rovingTabindex.onKeyDown}
+          onClick={(event: CloseSearchEvent) => {
+            rovingTabindex.onClick();
+            clickHandler!(event);
+          }}
         >
           {content}
         </CardActionArea>

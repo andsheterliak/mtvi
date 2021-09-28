@@ -1,4 +1,5 @@
-import { Section, SectionTitle } from '~/shared/components/section';
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
+import { Section, SectionTitle } from '../section';
 import { RouteName } from '~/shared/constants';
 import { IsLoading } from '~/shared/types';
 import { CreditCards } from './CreditCards';
@@ -26,7 +27,13 @@ export const CreditSection = ({
       <SectionTitle isSubtitle={isSubsection} title={creditsName} isLoading={isLoading} />
 
       <CreditsGrid>
-        <CreditCards isLoading={isLoading} data={creditsData} routeName={routeName} />
+        {isLoading ? (
+          <CreditCards isLoading={isLoading} data={creditsData} routeName={routeName} />
+        ) : (
+          <RovingTabIndexProvider options={{ loopAround: true }}>
+            {<CreditCards isLoading={isLoading} data={creditsData} routeName={routeName} />}
+          </RovingTabIndexProvider>
+        )}
       </CreditsGrid>
     </Section>
   );

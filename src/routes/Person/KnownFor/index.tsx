@@ -77,11 +77,13 @@ export const KnownFor = () => {
     personQuery.data?.tv_credits
   );
 
+  const ariaLabelledby = 'knownFor';
+
   const content =
     !personQuery.isLoading && !knownForData ? (
       <NoContent message="We don't have added any data for this section." />
     ) : (
-      <Slider isLoading={personQuery.isLoading}>
+      <Slider ariaLabelledby={ariaLabelledby}>
         <CardsGridRow>
           <MixedCards isLoading={personQuery.isLoading} cardsData={knownForData} />
         </CardsGridRow>

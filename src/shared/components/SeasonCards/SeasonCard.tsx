@@ -6,6 +6,7 @@ import { IMG_BASE_URL, IMG_SIZES, SeasonItem } from '~/api/tmdb';
 import noImg from '~/assets/img/no-image.svg';
 import { AspectRatio } from '~/shared/components/AspectRatio';
 import { FALLBACK_VALUE, LAZY_IMG_CLASS_NAME } from '~/shared/constants';
+import { useRovingTabindex } from '~/shared/hooks';
 import { IsLoading, Path } from '~/shared/types';
 import { formatDateStr, getImagePath } from '~/shared/utils';
 
@@ -72,6 +73,7 @@ export const SeasonCard = ({
 }: Props) => {
   const classes = useStyles();
   const date = formatDateStr(releaseDate)?.dateStr || FALLBACK_VALUE;
+  const rovingTabindex = useRovingTabindex<HTMLAnchorElement>();
 
   const imgPath = getImagePath({
     basePath: IMG_BASE_URL,
@@ -120,7 +122,13 @@ export const SeasonCard = ({
       {isLoading ? (
         <div className={classes.action}>{content}</div>
       ) : (
-        <CardActionArea component={Link} to={path!} className={classes.action}>
+        <CardActionArea
+          {...rovingTabindex}
+          component={Link}
+          role="link"
+          to={path!}
+          className={classes.action}
+        >
           {content}
         </CardActionArea>
       )}

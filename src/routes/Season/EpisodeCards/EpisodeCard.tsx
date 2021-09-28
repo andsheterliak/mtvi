@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 import { SeasonEpisode } from '~/api/tmdb';
 import { AspectRatio, CardSubInfo } from '~/shared/components';
 import { FALLBACK_VALUE, LAZY_IMG_CLASS_NAME } from '~/shared/constants';
+import { useRovingTabindex } from '~/shared/hooks';
 import { IsLoading, Path } from '~/shared/types';
 import { CustomImagePath } from '~/shared/utils';
 
@@ -81,6 +82,7 @@ export const EpisodeCard = ({
 }: Props) => {
   const classes = useStyles();
   const { anchorEl, isMenuOpened, onCloseMenu, onOpenMenu } = useMenu();
+  const rovingTabindex = useRovingTabindex<HTMLButtonElement>();
 
   return (
     <Card className={classes.root}>
@@ -122,7 +124,13 @@ export const EpisodeCard = ({
               aria-haspopup="true"
               endIcon={<KeyboardArrowDownIcon color="primary" />}
               size="small"
-              onClick={onOpenMenu}
+              ref={rovingTabindex.ref}
+              tabIndex={rovingTabindex.tabIndex}
+              onKeyDown={rovingTabindex.onKeyDown}
+              onClick={(event) => {
+                rovingTabindex.onClick();
+                onOpenMenu(event);
+              }}
             >
               More Resources
             </Button>

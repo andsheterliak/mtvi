@@ -1,4 +1,5 @@
 import { useErrorHandler } from 'react-error-boundary';
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import {
   MOVIES_DEFAULT_OPTIONS,
   Options,
@@ -70,7 +71,13 @@ export const Movies = ({ titleName }: MoviesProps) => {
       <NoContent message="There is no data on such movies." />
     ) : (
       <CardsGrid>
-        <MovieCards isLoading={moviesQuery.isFetching} cardsData={moviesQuery.data?.results} />
+        {moviesQuery.isFetching ? (
+          <MovieCards isLoading={moviesQuery.isFetching} cardsData={moviesQuery.data?.results} />
+        ) : (
+          <RovingTabIndexProvider options={{ loopAround: true }}>
+            <MovieCards isLoading={moviesQuery.isFetching} cardsData={moviesQuery.data?.results} />
+          </RovingTabIndexProvider>
+        )}
       </CardsGrid>
     );
 

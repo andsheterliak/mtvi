@@ -16,10 +16,12 @@ export const Links = ({ listItemProps }: Props) => {
       return (
         <ListItem
           button
+          role="link"
           selected={isSelected}
           component={Link}
           to={to}
           key={name}
+          aria-current={isSelected && 'date'}
           {...listItemProps}
         >
           <ListItemText

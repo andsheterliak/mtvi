@@ -1,5 +1,6 @@
 import { Input, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { memo } from 'react';
+import { VisuallyHidden } from '~/shared/components/VisuallyHidden';
 import { OptionContainer } from './OptionContainer';
 import { OptionTitle } from './OptionTitle';
 import { SortByEvent, SortByOptions, SortByValue } from './types';
@@ -23,7 +24,11 @@ export const SortResultsByOptionComponent = ({ sortByOptions, sortBy, sortByHand
     <OptionContainer>
       <OptionTitle>Sort Results By</OptionTitle>
 
-      <InputLabel htmlFor="sort-results-by" id="sort-results-by-label"></InputLabel>
+      <VisuallyHidden>
+        <InputLabel htmlFor="sort-results-by" id="sort-results-by-label">
+          Sort Results By
+        </InputLabel>
+      </VisuallyHidden>
 
       <Select
         fullWidth

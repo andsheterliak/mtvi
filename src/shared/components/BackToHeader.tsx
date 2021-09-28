@@ -108,6 +108,7 @@ export const BackToHeader = ({
             ) : (
               <Button
                 className={classes.link}
+                role="link"
                 component={Link}
                 to={path}
                 variant="text"

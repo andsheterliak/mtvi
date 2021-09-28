@@ -1,4 +1,4 @@
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ReactNode } from 'react';
 
 const useStyles = makeStyles(({ breakpoints }) => {
@@ -16,7 +16,11 @@ const useStyles = makeStyles(({ breakpoints }) => {
   });
 });
 
-export const CardsGrid = ({ children }: { children: ReactNode }) => {
+type Props = {
+  children: ReactNode;
+};
+
+export const CardsGrid = ({ children }: Props) => {
   const classes = useStyles();
 
   return <div className={classes.grid}>{children}</div>;

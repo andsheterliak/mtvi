@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import { IMG_BASE_URL, IMG_SIZES, SearchData, SEARCH_PATHS } from '~/api/tmdb';
 import noImage from '~/assets/img/no-image.svg';
 import noUserPhoto from '~/assets/img/no-user-photo.svg';
@@ -62,7 +63,13 @@ const SearchItemsComponent = ({ data, clickHandler, isLoading }: Props) => {
     );
   });
 
-  return <>{items}</>;
+  return (
+    <>
+      <RovingTabIndexProvider options={{ direction: 'vertical', loopAround: true }}>
+        {items}
+      </RovingTabIndexProvider>
+    </>
+  );
 };
 
 export const SearchItems = memo(

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Name } from '~/api/tmdb';
 import { AspectRatio } from '~/shared/components/AspectRatio';
 import { FALLBACK_VALUE, LAZY_IMG_CLASS_NAME } from '~/shared/constants';
+import { useRovingTabindex } from '~/shared/hooks';
 import { IsLoading, Path } from '~/shared/types';
 import { CustomImagePath } from '~/shared/utils';
 
@@ -38,6 +39,7 @@ type Props = {
 
 export const Card = ({ imgPath, title, path, subData, isLoading }: Props) => {
   const classes = useCardStyles();
+  const rovingTabindex = useRovingTabindex<HTMLAnchorElement>();
 
   const cardInner = (
     <>
@@ -64,7 +66,13 @@ export const Card = ({ imgPath, title, path, subData, isLoading }: Props) => {
       {isLoading ? (
         <div className={classes.action}>{cardInner}</div>
       ) : (
-        <CardActionArea component={Link} to={path ?? ''} className={classes.action}>
+        <CardActionArea
+          {...rovingTabindex}
+          component={Link}
+          role="link"
+          to={path ?? ''}
+          className={classes.action}
+        >
           {cardInner}
         </CardActionArea>
       )}

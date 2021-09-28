@@ -1,3 +1,4 @@
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import { Videos } from '~/api/tmdb';
 import { NoContent } from '~/shared/components/NoContent';
 import { Section, SectionTitle } from '~/shared/components/section';
@@ -17,11 +18,13 @@ type Props = {
 };
 
 export const TopVideos = ({ title, data, videosPath, isLoading, videoAmount }: Props) => {
+  const ariaLabelledby = 'topVideos';
+
   const content =
     !isLoading && (!data || data.length === 0) ? (
       <NoContent message="We don't have added any videos." />
     ) : (
-      <Slider isLoading={isLoading}>
+      <Slider ariaLabelledby={ariaLabelledby}>
         <VideosGridRow>
           <VideoCards isLoading={isLoading} data={data} videoAmount={videoAmount} />
         </VideosGridRow>
@@ -30,9 +33,9 @@ export const TopVideos = ({ title, data, videosPath, isLoading, videoAmount }: P
 
   return (
     <Section>
-      <SectionTitle title={title} />
+      <SectionTitle id={ariaLabelledby} title={title} />
 
-      {content}
+      {isLoading ? content : <RovingTabIndexProvider>{content}</RovingTabIndexProvider>}
 
       <SeeAllLink path={videosPath}>View All Videos</SeeAllLink>
     </Section>

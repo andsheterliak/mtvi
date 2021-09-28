@@ -32,7 +32,6 @@ This project was created to learn how to build SPA (single page application) wit
 - [React Query](https://github.com/tannerlinsley/react-query)
 - [Axios](https://github.com/axios/axios) + [localForage](https://github.com/localForage/localForage)
 - [Material-UI](https://github.com/mui-org/material-ui)
-- [Embla Carousel](https://github.com/davidcetinkaya/embla-carousel)
 
 ## Development
 

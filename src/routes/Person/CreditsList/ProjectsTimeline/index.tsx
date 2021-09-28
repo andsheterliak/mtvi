@@ -1,3 +1,4 @@
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import { IsLoading } from '~/shared/types';
 import { TimelineItems } from '../types';
 import { TimelineContainer } from './TimelineContainer';
@@ -29,5 +30,15 @@ export const ProjectsTimeline = ({ data, isLoading }: Props) => {
         );
       });
 
-  return <TimelineContainer>{timelineItems}</TimelineContainer>;
+  return (
+    <TimelineContainer>
+      {isLoading ? (
+        timelineItems
+      ) : (
+        <RovingTabIndexProvider options={{ loopAround: true, direction: 'vertical' }}>
+          {timelineItems}
+        </RovingTabIndexProvider>
+      )}
+    </TimelineContainer>
+  );
 };

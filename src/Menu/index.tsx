@@ -7,7 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import { Link } from 'react-router-dom';
 import { linksConfig } from '~/routes';
-import { HideOnScroll, MainContainer } from '~/shared/components';
+import { MainContainer } from '~/shared/components';
 import { Drawer, useDrawer } from './Drawer';
 import { Logo } from './Logo';
 import { Search, useToggleSearch } from './Search';
@@ -64,47 +64,45 @@ export const Menu = ({ toggleThemeHandler, isDarkTheme }: Props) => {
     <>
       <Backdrop className={classes.backdrop} open={isSearchVisible} onClick={closeSearchHandler} />
 
-      <HideOnScroll>
-        <AppBar elevation={1} className={classes.appBar} position="sticky">
-          <MainContainer>
-            <div className={classes.inner}>
-              <Toolbar>
-                <IconButton
-                  className={classes.openDrawerBtn}
-                  edge="start"
-                  aria-label="open drawer"
-                  onClick={openDrawerHandler}
-                >
-                  <MenuOpenIcon />
+      <AppBar elevation={1} className={classes.appBar} position="relative">
+        <MainContainer>
+          <div className={classes.inner}>
+            <Toolbar>
+              <IconButton
+                className={classes.openDrawerBtn}
+                edge="start"
+                aria-label="open drawer"
+                onClick={openDrawerHandler}
+              >
+                <MenuOpenIcon />
+              </IconButton>
+
+              <MUILink
+                className={classes.logo}
+                underline="none"
+                component={Link}
+                to={linksConfig.home.to}
+              >
+                <Logo />
+              </MUILink>
+
+              <ToolbarLinks />
+
+              <div className={classes.icons}>
+                <IconButton edge="end" aria-label="toggle search" onClick={toggleSearchHandler}>
+                  {isSearchVisible ? <CloseIcon /> : <SearchIcon />}
                 </IconButton>
 
-                <MUILink
-                  className={classes.logo}
-                  underline="none"
-                  component={Link}
-                  to={linksConfig.home.to}
-                >
-                  <Logo />
-                </MUILink>
+                <IconButton edge="end" aria-label="toggle theme" onClick={toggleThemeHandler}>
+                  {isDarkTheme ? <WbSunnyIcon /> : <Brightness3Icon />}
+                </IconButton>
+              </div>
+            </Toolbar>
 
-                <ToolbarLinks />
-
-                <div className={classes.icons}>
-                  <IconButton edge="end" aria-label="toggle search" onClick={toggleSearchHandler}>
-                    {isSearchVisible ? <CloseIcon /> : <SearchIcon />}
-                  </IconButton>
-
-                  <IconButton edge="end" aria-label="toggle theme" onClick={toggleThemeHandler}>
-                    {isDarkTheme ? <WbSunnyIcon /> : <Brightness3Icon />}
-                  </IconButton>
-                </div>
-              </Toolbar>
-
-              <Search isSearchVisible={isSearchVisible} closeSearchHandler={closeSearchHandler} />
-            </div>
-          </MainContainer>
-        </AppBar>
-      </HideOnScroll>
+            <Search isSearchVisible={isSearchVisible} closeSearchHandler={closeSearchHandler} />
+          </div>
+        </MainContainer>
+      </AppBar>
 
       <Drawer isOpened={isDrawerOpened} closeDrawerHandler={closeDrawerHandler} />
     </>

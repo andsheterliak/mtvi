@@ -2,7 +2,7 @@ import { useErrorHandler } from 'react-error-boundary';
 import { useParams } from 'react-router-dom';
 import { IMG_BASE_URL, IMG_SIZES, useGetEpisodeQuery, VIDEO_TYPES } from '~/api/tmdb';
 import noImageImg from '~/assets/img/no-image-wide.svg';
-import { AllVideos, BackToHeader, Selected, useSelectionBar } from '~/shared/components';
+import { AllVideos, BackToHeader, Selected, useSelection } from '~/shared/components';
 import { ROUTE_NAMES, TOP_VIDEO_AMOUNT } from '~/shared/constants';
 import { useLazyImages, useScrollToTop } from '~/shared/hooks';
 import { getImagePath } from '~/shared/utils';
@@ -21,7 +21,7 @@ export const EpisodeVideos = () => {
     episodeNumber,
   });
 
-  const { selected, setSelected } = useSelectionBar(VIDEO_TYPES.trailer.key);
+  const { selected, setSelected } = useSelection(VIDEO_TYPES.trailer.key);
 
   useErrorHandler(episodeQuery.error);
   useLazyImages({ isLoading: episodeQuery.isLoading, triggers: [selected] });

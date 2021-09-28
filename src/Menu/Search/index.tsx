@@ -6,7 +6,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 import { useHistory } from 'react-router-dom';
 import { SEARCH_PATHS, useGetSearchQuery } from '~/api/tmdb';
-import { MainContainer } from '~/shared/components';
+import { MainContainer, VisuallyHidden } from '~/shared/components';
 import { ROUTE_NAMES } from '~/shared/constants';
 import { useLazyImages } from '~/shared/hooks';
 import { CloseSearchHandler } from './search-types';
@@ -32,8 +32,6 @@ const useStyles = makeStyles(({ palette, shadows, breakpoints, spacing }) =>
 
     form: {
       padding: `${spacing(1.5)}px 0`,
-      position: 'sticky',
-      top: 0,
       backgroundColor: palette.background.paper,
       zIndex: 1,
       borderBottom: `5px solid ${palette.primary.main}`,
@@ -106,7 +104,9 @@ export const Search = ({ isSearchVisible, closeSearchHandler }: Props) => {
           onSubmit={submitHandler}
         >
           <MainContainer>
-            <InputLabel htmlFor="search"></InputLabel>
+            <VisuallyHidden>
+              <InputLabel htmlFor="search">Search for a movie, tv show or person.</InputLabel>
+            </VisuallyHidden>
 
             <InputBase
               id="search"

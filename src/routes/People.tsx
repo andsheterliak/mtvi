@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import { Page, useGetPeopleQuery } from '~/api/tmdb';
 import {
   CardsGrid,
@@ -42,7 +43,13 @@ export const People = ({ titleName }: PeopleProps) => {
       <NoContent message="No data available for this page." />
     ) : (
       <CardsGrid>
-        <PersonCards isLoading={peopleQuery.isFetching} cardsData={peopleQuery.data?.results} />
+        {peopleQuery.isFetching ? (
+          <PersonCards isLoading={peopleQuery.isFetching} cardsData={peopleQuery.data?.results} />
+        ) : (
+          <RovingTabIndexProvider options={{ loopAround: true }}>
+            <PersonCards isLoading={peopleQuery.isFetching} cardsData={peopleQuery.data?.results} />
+          </RovingTabIndexProvider>
+        )}
       </CardsGrid>
     );
 

@@ -1,5 +1,6 @@
 import { useErrorHandler } from 'react-error-boundary';
 import { useHistory, useLocation, useRouteMatch } from 'react-router';
+import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import {
   MediaTypesKeys,
   MovieItems,
@@ -21,8 +22,8 @@ import {
   Pagination,
   PersonCards,
   SelectHandler,
-  SelectionBar,
-  SelectionBarItem,
+  Selection,
+  SelectionDataItem,
   Spacer,
   TVShowCards,
   useFocus,
@@ -36,22 +37,22 @@ const searchPathsToNames = {
   [SEARCH_PATHS.person]: 'People',
 };
 
-const getSelectionBarData = (searchData: SearchResultsData | undefined) => {
+const getSelectionData = (searchData: SearchResultsData | undefined) => {
   if (!searchData) return null;
 
-  const movie: SelectionBarItem<MovieItems> = {
+  const movie: SelectionDataItem<MovieItems> = {
     name: searchPathsToNames.movie,
     amount: searchData.movie.total_results,
     data: searchData.movie.results,
   };
 
-  const tv: SelectionBarItem<TVShowItems> = {
+  const tv: SelectionDataItem<TVShowItems> = {
     name: searchPathsToNames.tv,
     amount: searchData.tv.total_results,
     data: searchData.tv.results,
   };
 
-  const person: SelectionBarItem<PersonItems> = {
+  const person: SelectionDataItem<PersonItems> = {
     name: searchPathsToNames.person,
     amount: searchData.person.total_results,
     data: searchData.person.results,
@@ -80,12 +81,12 @@ export const SearchResults = () => {
 
   const { query, searchIn } = useSearchParams();
   const { page, changePage } = usePagination();
-  const SearchResultsQuery = useGetSearchResultsQuery({ page, query, searchIn });
+  const searchResultsQuery = useGetSearchResultsQuery({ page, query, searchIn });
 
-  useErrorHandler(SearchResultsQuery.error);
+  useErrorHandler(searchResultsQuery.error);
 
   useLazyImages({
-    isLoading: SearchResultsQuery.isFetching,
+    isLoading: searchResultsQuery.isFetching,
     triggers: [searchIn, page],
   });
 
@@ -102,13 +103,13 @@ export const SearchResults = () => {
     history.push(`${url}?${params}`);
   };
 
-  const totalPages = SearchResultsQuery.data?.[searchIn].total_pages;
-  const selectionBarData = getSelectionBarData(SearchResultsQuery.data);
+  const totalPages = searchResultsQuery.data?.[searchIn].total_pages;
+  const selectionBarData = getSelectionData(searchResultsQuery.data);
 
   let content;
 
   if (
-    !SearchResultsQuery.isFetching &&
+    !searchResultsQuery.isFetching &&
     (!selectionBarData || selectionBarData[searchIn].data.length === 0)
   ) {
     content = (
@@ -125,7 +126,7 @@ export const SearchResults = () => {
       case SEARCH_PATHS.movie:
         cards = (
           <MovieCards
-            isLoading={SearchResultsQuery.isFetching}
+            isLoading={searchResultsQuery.isFetching}
             cardsData={selectionBarData?.movie.data}
           />
         );
@@ -135,7 +136,7 @@ export const SearchResults = () => {
       case SEARCH_PATHS.tv:
         cards = (
           <TVShowCards
-            isLoading={SearchResultsQuery.isFetching}
+            isLoading={searchResultsQuery.isFetching}
             cardsData={selectionBarData?.tv.data}
           />
         );
@@ -145,7 +146,7 @@ export const SearchResults = () => {
       case SEARCH_PATHS.person:
         cards = (
           <PersonCards
-            isLoading={SearchResultsQuery.isFetching}
+            isLoading={searchResultsQuery.isFetching}
             cardsData={selectionBarData?.person.data}
           />
         );
@@ -156,7 +157,15 @@ export const SearchResults = () => {
         break;
     }
 
-    content = <CardsGrid>{cards}</CardsGrid>;
+    content = (
+      <CardsGrid>
+        {searchResultsQuery.isFetching ? (
+          cards
+        ) : (
+          <RovingTabIndexProvider options={{ loopAround: true }}>{cards}</RovingTabIndexProvider>
+        )}
+      </CardsGrid>
+    );
   }
 
   return (
@@ -166,28 +175,29 @@ export const SearchResults = () => {
       <MainContent>
         <MainContainer>
           <PageGrid>
-            <SelectionBar
+            <Selection
               itemSkeletonAmount={Object.keys(searchPathsToNames).length}
-              isLoading={SearchResultsQuery.isFetching}
+              isLoading={searchResultsQuery.isFetching}
               title="Search Results"
               data={selectionBarData}
               selectHandler={selectHandler}
               selected={searchIn}
+              tabPanelElement={
+                <>
+                  <FocusableContainer containerRef={containerRef} />
+
+                  {content}
+
+                  <Pagination
+                    isLoading={searchResultsQuery.isLoading}
+                    isDisabled={searchResultsQuery.isFetching}
+                    page={page}
+                    totalPages={totalPages}
+                    changePageHandler={changePageHandler}
+                  />
+                </>
+              }
             />
-
-            <div>
-              <FocusableContainer containerRef={containerRef} />
-
-              {content}
-
-              <Pagination
-                isLoading={SearchResultsQuery.isLoading}
-                isDisabled={SearchResultsQuery.isFetching}
-                page={page}
-                totalPages={totalPages}
-                changePageHandler={changePageHandler}
-              />
-            </div>
           </PageGrid>
         </MainContainer>
       </MainContent>
