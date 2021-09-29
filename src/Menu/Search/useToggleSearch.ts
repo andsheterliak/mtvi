@@ -10,7 +10,7 @@ export const useToggleSearch = (isVisible = false) => {
 
   const closeSearchHandler = (event: CloseSearchEvent) => {
     if (event.type === 'keydown') {
-      if ('key' in event && event.key === 'Escape') setIsSearchVisible(false);
+      if ('code' in event && event.code === 'Escape') setIsSearchVisible(false);
 
       return;
     }

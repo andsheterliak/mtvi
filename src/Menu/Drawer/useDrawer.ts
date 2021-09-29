@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { DrawerEvent } from './drawer-types';
 
 const ifIsTabOrShiftKey = (event: DrawerEvent) => {
-  if (event instanceof KeyboardEvent && (event.key === 'Tab' || event.key === 'Shift')) {
+  if (event instanceof KeyboardEvent && (event.code === 'Tab' || event.code === '"ShiftLeft"')) {
     return true;
   }
 
