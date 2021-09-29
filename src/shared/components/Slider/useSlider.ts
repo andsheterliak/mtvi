@@ -144,7 +144,7 @@ export const useSlider = ({ momentumDowngrade = 0.9, isMomentum = true }: UseSli
   const initMomentum = () => {
     const state = stateRef.current;
 
-    const TIME_PASSED_THRESHOLD = 1;
+    const TIME_PASSED_THRESHOLD = 25;
     const timePassedFromLastSwipe = Date.now() - state.lastSwipeTime;
 
     if (timePassedFromLastSwipe > TIME_PASSED_THRESHOLD) return;
