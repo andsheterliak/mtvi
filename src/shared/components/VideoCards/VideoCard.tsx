@@ -15,11 +15,18 @@ const getYouTubeImgPath = (id: Video['key'] | undefined) => {
 
 const useStyles = makeStyles(({ palette }) => {
   return createStyles({
+    cardActionArea: {
+      '&:hover $playBtn, &:focus $playBtn': {
+        backgroundColor: 'hsla(0, 100%, 40%, 0.7)',
+      },
+    },
+
     playBtn: {
       position: 'absolute',
       left: '50%',
       top: '50%',
       transform: 'translate(-50%, -50%)',
+      transition: 'background-color 0.2s ease-in-out',
       padding: '10px',
       backgroundColor: 'hsla(0, 0%, 0%, 0.7)',
       color: palette.common.white,
@@ -52,6 +59,7 @@ export const VideoCard = ({ id, name, openModalHandler, isLoading }: Props) => {
         </AspectRatio>
       ) : (
         <CardActionArea
+          className={classes.cardActionArea}
           ref={rovingTabindex.ref}
           tabIndex={rovingTabindex.tabIndex}
           onKeyDown={rovingTabindex.onKeyDown}
