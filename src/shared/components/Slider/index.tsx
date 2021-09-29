@@ -17,6 +17,17 @@ const useStyles = makeStyles(() => ({
       return padding;
     },
   },
+
+  isTabbing: {
+    scrollBehavior: 'smooth',
+    scrollSnapType: 'both mandatory',
+    scrollPadding: 'var(--scroll-padding, 0px)',
+
+    // Grid element.
+    '& $container >:first-child': {
+      scrollSnapAlign: 'center',
+    },
+  },
 }));
 
 type Props = {
@@ -26,8 +37,12 @@ type Props = {
 };
 
 export const Slider = ({ children, padding = '10px 12px 20px', ariaLabelledby }: Props) => {
-  const { sliderRef, destroyMomentum, initSliderHandler, preventDragHandler } = useSlider();
   const classes = useStyles({ padding });
+
+  const { sliderRef, destroyMomentum, initSliderHandler, preventDragHandler, tabbingHandler } =
+    useSlider({
+      isTabbingClassName: classes.isTabbing,
+    });
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
@@ -37,6 +52,7 @@ export const Slider = ({ children, padding = '10px 12px 20px', ariaLabelledby }:
       onMouseDown={initSliderHandler}
       onWheel={destroyMomentum}
       onDragStart={preventDragHandler}
+      onKeyDown={tabbingHandler}
       className={classes.slider}
     >
       <div className={classes.container}>{children}</div>

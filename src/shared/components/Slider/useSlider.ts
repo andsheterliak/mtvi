@@ -1,4 +1,4 @@
-import { MouseEvent as ReactMouseEvent, useEffect, useRef } from 'react';
+import { KeyboardEvent, MouseEvent as ReactMouseEvent, useEffect, useRef } from 'react';
 
 type ClientPosition = number;
 type HowFarIsScrolled = number;
@@ -35,9 +35,14 @@ const ifIsForward = (value: number) => Math.sign(value) === -1;
 type UseSliderProps = {
   momentumDowngrade?: number;
   isMomentum?: boolean;
+  isTabbingClassName: string;
 };
 
-export const useSlider = ({ momentumDowngrade = 0.9, isMomentum = true }: UseSliderProps = {}) => {
+export const useSlider = ({
+  momentumDowngrade = 0.9,
+  isMomentum = true,
+  isTabbingClassName,
+}: UseSliderProps) => {
   const sliderRef = useRef<HTMLDivElement>(null!);
   const sliderInnerRef = useRef<HTMLDivElement>(null!);
 
@@ -219,6 +224,10 @@ export const useSlider = ({ momentumDowngrade = 0.9, isMomentum = true }: UseSli
 
     destroyMomentum();
 
+    if (slider.classList.contains(isTabbingClassName)) {
+      slider.classList.remove(isTabbingClassName);
+    }
+
     // Get the current scroll positions from start (top, left) of the slider element.
     state.startPositions.scrollLeft = slider.scrollLeft;
     state.startPositions.scrollTop = slider.scrollTop;
@@ -235,12 +244,35 @@ export const useSlider = ({ momentumDowngrade = 0.9, isMomentum = true }: UseSli
     event.preventDefault();
   };
 
+  const tabbingHandler = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (
+      event.code !== 'Tab' &&
+      event.code !== 'ArrowDown' &&
+      event.code !== 'ArrowUp' &&
+      event.code !== 'ArrowLeft' &&
+      event.code !== 'ArrowRight'
+    ) {
+      return;
+    }
+
+    const slider = sliderRef.current;
+
+    if (slider.classList.contains(isTabbingClassName)) return;
+    slider.classList.add(isTabbingClassName);
+  };
+
   useEffect(() => {
     const slider = sliderRef.current;
 
     sliderInnerRef.current = slider.querySelector(
       ':scope >:first-child >:first-child'
     ) as HTMLDivElement; // Grid element.
+
+    // Trigger 'Scroll Snap' if an element is not fully visible.
+    slider.setAttribute(
+      'style',
+      `--scroll-padding: ${(sliderInnerRef.current.firstElementChild as HTMLElement).offsetWidth}px`
+    );
 
     return () => {
       destroyMomentum();
@@ -252,5 +284,6 @@ export const useSlider = ({ momentumDowngrade = 0.9, isMomentum = true }: UseSli
     initSliderHandler,
     destroyMomentum,
     preventDragHandler,
+    tabbingHandler,
   };
 };
