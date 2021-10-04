@@ -1,4 +1,5 @@
 import { useErrorHandler } from 'react-error-boundary';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import { IMG_BASE_URL, IMG_SIZES, useGetMovieQuery, VIDEO_TYPES } from '~/api/tmdb';
 import noImageImg from '~/assets/img/no-image.svg';
@@ -23,26 +24,35 @@ export const MovieVideos = () => {
   };
 
   return (
-    <AllVideos
-      data={movieQuery.data?.videos.results}
-      selectHandler={selectHandler}
-      selected={selected}
-      isLoading={movieQuery.isLoading}
-      videoAmount={TOP_VIDEO_AMOUNT}
-      header={
-        <BackToHeader
-          isLoading={movieQuery.isLoading}
-          title={movieQuery.data?.title}
-          imgPath={getImagePath({
-            basePath: IMG_BASE_URL,
-            path: movieQuery.data?.poster_path,
-            size: IMG_SIZES.poster.w154,
-            fallback: noImageImg,
-          })}
-          path={`/${ROUTE_NAMES.movie}/${movieQuery.data?.id}`}
-          linkName="Back to movie"
-        />
-      }
-    />
+    <>
+      {movieQuery.isLoading ? null : (
+        <Helmet>
+          <title>MTvI | {movieQuery.data!.title} | Videos</title>
+          <meta name="keywords" content={`${movieQuery.data!.title}, videos`} />
+        </Helmet>
+      )}
+
+      <AllVideos
+        data={movieQuery.data?.videos.results}
+        selectHandler={selectHandler}
+        selected={selected}
+        isLoading={movieQuery.isLoading}
+        videoAmount={TOP_VIDEO_AMOUNT}
+        header={
+          <BackToHeader
+            isLoading={movieQuery.isLoading}
+            title={movieQuery.data?.title}
+            imgPath={getImagePath({
+              basePath: IMG_BASE_URL,
+              path: movieQuery.data?.poster_path,
+              size: IMG_SIZES.poster.w154,
+              fallback: noImageImg,
+            })}
+            path={`/${ROUTE_NAMES.movie}/${movieQuery.data?.id}`}
+            linkName="Back to movie"
+          />
+        }
+      />
+    </>
   );
 };

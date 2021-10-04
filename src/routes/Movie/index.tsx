@@ -1,4 +1,5 @@
 import { useErrorHandler } from 'react-error-boundary';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import { useGetMovieQuery } from '~/api/tmdb';
 import { Layout, MainContainer, MainContent, Separator, Spacer } from '~/shared/components';
@@ -19,6 +20,13 @@ export const Movie = () => {
 
   return (
     <>
+      {movieQuery.isLoading ? null : (
+        <Helmet>
+          <title>MTvI | {movieQuery.data!.title}</title>
+          <meta name="keywords" content={movieQuery.data!.title} />
+        </Helmet>
+      )}
+
       <Spacer />
 
       <MainContent>

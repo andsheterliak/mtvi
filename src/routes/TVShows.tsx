@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
+import { Helmet } from 'react-helmet';
 import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import {
   Options,
@@ -89,32 +90,39 @@ export const TVShows = ({ titleName }: TVShowsProps) => {
     );
 
   return (
-    <MainContainer>
-      <RouteHeader titleName={titleName} />
+    <>
+      <Helmet>
+        <title>MTvI | {titleName}</title>
+        <meta name="keywords" content={titleName} />
+      </Helmet>
 
-      <Adjustment
-        sortByOptions={SORT_TV_BY_OPTIONS}
-        userScoreRange={USER_SCORE_RANGE}
-        dateTitle="Air Dates"
-        modalTitle="Adjust TV Shows"
-        onAccept={changeOptions}
-        onSetDefault={setDefault}
-        initialOptions={options}
-        defaultOptions={TV_DEFAULT_OPTIONS}
-        isDisabled={tvShowsQuery.isFetching}
-      />
+      <MainContainer>
+        <RouteHeader titleName={titleName} />
 
-      <FocusableContainer containerRef={containerRef} />
+        <Adjustment
+          sortByOptions={SORT_TV_BY_OPTIONS}
+          userScoreRange={USER_SCORE_RANGE}
+          dateTitle="Air Dates"
+          modalTitle="Adjust TV Shows"
+          onAccept={changeOptions}
+          onSetDefault={setDefault}
+          initialOptions={options}
+          defaultOptions={TV_DEFAULT_OPTIONS}
+          isDisabled={tvShowsQuery.isFetching}
+        />
 
-      <MainContent>{cards}</MainContent>
+        <FocusableContainer containerRef={containerRef} />
 
-      <Pagination
-        isLoading={tvShowsQuery.isLoading}
-        isDisabled={tvShowsQuery.isFetching}
-        page={page}
-        totalPages={tvShowsQuery.data?.total_pages}
-        changePageHandler={changePageHandler}
-      />
-    </MainContainer>
+        <MainContent>{cards}</MainContent>
+
+        <Pagination
+          isLoading={tvShowsQuery.isLoading}
+          isDisabled={tvShowsQuery.isFetching}
+          page={page}
+          totalPages={tvShowsQuery.data?.total_pages}
+          changePageHandler={changePageHandler}
+        />
+      </MainContainer>
+    </>
   );
 };

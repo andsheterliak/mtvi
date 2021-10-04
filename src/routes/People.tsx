@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
+import { Helmet } from 'react-helmet';
 import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import { Page, useGetPeopleQuery } from '~/api/tmdb';
 import {
@@ -54,20 +55,27 @@ export const People = ({ titleName }: PeopleProps) => {
     );
 
   return (
-    <MainContainer>
-      <RouteHeader titleName={titleName} />
+    <>
+      <Helmet>
+        <title>MTvI | {titleName}</title>
+        <meta name="keywords" content={titleName} />
+      </Helmet>
 
-      <FocusableContainer containerRef={containerRef} />
+      <MainContainer>
+        <RouteHeader titleName={titleName} />
 
-      <MainContent>{cards}</MainContent>
+        <FocusableContainer containerRef={containerRef} />
 
-      <Pagination
-        isLoading={peopleQuery.isLoading}
-        isDisabled={peopleQuery.isFetching}
-        page={page}
-        totalPages={peopleQuery.data?.total_pages}
-        changePageHandler={changePageHandler}
-      />
-    </MainContainer>
+        <MainContent>{cards}</MainContent>
+
+        <Pagination
+          isLoading={peopleQuery.isLoading}
+          isDisabled={peopleQuery.isFetching}
+          page={page}
+          totalPages={peopleQuery.data?.total_pages}
+          changePageHandler={changePageHandler}
+        />
+      </MainContainer>
+    </>
   );
 };

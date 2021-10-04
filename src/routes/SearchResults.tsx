@@ -1,4 +1,5 @@
 import { useErrorHandler } from 'react-error-boundary';
+import { Helmet } from 'react-helmet';
 import { useHistory, useLocation, useRouteMatch } from 'react-router';
 import { RovingTabIndexProvider } from 'react-roving-tabindex';
 import {
@@ -170,6 +171,16 @@ export const SearchResults = () => {
 
   return (
     <>
+      {searchResultsQuery.isLoading ? null : (
+        <Helmet>
+          <title>
+            MTvI | Search Results - {query} | Search In - {searchIn}
+          </title>
+
+          <meta name="keywords" content={`search, ${query}, ${searchIn}`} />
+        </Helmet>
+      )}
+
       <Spacer />
 
       <MainContent>

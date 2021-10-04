@@ -1,4 +1,5 @@
 import { useErrorHandler } from 'react-error-boundary';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import { IMG_BASE_URL, IMG_SIZES, useGetTVShowQuery } from '~/api/tmdb';
 import noImg from '~/assets/img/no-image.svg';
@@ -37,6 +38,13 @@ export const Seasons = () => {
 
   return (
     <>
+      {tvShowQuery.isLoading ? null : (
+        <Helmet>
+          <title>MTvI | {tvShowQuery.data!.name} | Seasons</title>
+          <meta name="keywords" content={`${tvShowQuery.data!.name}, seasons`} />
+        </Helmet>
+      )}
+
       <Spacer />
 
       <MainContent>

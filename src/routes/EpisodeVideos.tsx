@@ -1,4 +1,5 @@
 import { useErrorHandler } from 'react-error-boundary';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import { IMG_BASE_URL, IMG_SIZES, useGetEpisodeQuery, VIDEO_TYPES } from '~/api/tmdb';
 import noImageImg from '~/assets/img/no-image-wide.svg';
@@ -31,27 +32,36 @@ export const EpisodeVideos = () => {
   };
 
   return (
-    <AllVideos
-      isLoading={episodeQuery.isLoading}
-      data={episodeQuery.data?.videos.results}
-      selectHandler={selectHandler}
-      selected={selected}
-      videoAmount={TOP_VIDEO_AMOUNT}
-      header={
-        <BackToHeader
-          isLoading={episodeQuery.isLoading}
-          title={`${episodeQuery.data?.season_number}x${episodeQuery.data?.episode_number} ${episodeQuery.data?.name}`}
-          imgPath={getImagePath({
-            basePath: IMG_BASE_URL,
-            path: episodeQuery.data?.still_path,
-            size: IMG_SIZES.still.w300,
-            fallback: noImageImg,
-          })}
-          imgShape="wide"
-          path={`/${ROUTE_NAMES.tvShow}/${id}/${ROUTE_NAMES.season}/${seasonNumber}`}
-          linkName="Back to Season"
-        />
-      }
-    />
+    <>
+      {episodeQuery.isLoading ? null : (
+        <Helmet>
+          <title>MTvI | {episodeQuery.data!.name} | Videos</title>
+          <meta name="keywords" content={`${episodeQuery.data!.name}, videos`} />
+        </Helmet>
+      )}
+
+      <AllVideos
+        isLoading={episodeQuery.isLoading}
+        data={episodeQuery.data?.videos.results}
+        selectHandler={selectHandler}
+        selected={selected}
+        videoAmount={TOP_VIDEO_AMOUNT}
+        header={
+          <BackToHeader
+            isLoading={episodeQuery.isLoading}
+            title={`${episodeQuery.data?.season_number}x${episodeQuery.data?.episode_number} ${episodeQuery.data?.name}`}
+            imgPath={getImagePath({
+              basePath: IMG_BASE_URL,
+              path: episodeQuery.data?.still_path,
+              size: IMG_SIZES.still.w300,
+              fallback: noImageImg,
+            })}
+            imgShape="wide"
+            path={`/${ROUTE_NAMES.tvShow}/${id}/${ROUTE_NAMES.season}/${seasonNumber}`}
+            linkName="Back to Season"
+          />
+        }
+      />
+    </>
   );
 };

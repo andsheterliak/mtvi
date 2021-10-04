@@ -1,4 +1,5 @@
 import { useErrorHandler } from 'react-error-boundary';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import { IMG_BASE_URL, IMG_SIZES, useGetTVShowQuery, VIDEO_TYPES } from '~/api/tmdb';
 import noImageImg from '~/assets/img/no-image.svg';
@@ -25,26 +26,35 @@ export const TVShowVideos = () => {
   };
 
   return (
-    <AllVideos
-      data={tvShowQuery.data?.videos.results}
-      selectHandler={selectHandler}
-      selected={selected}
-      isLoading={tvShowQuery.isLoading}
-      videoAmount={TOP_VIDEO_AMOUNT}
-      header={
-        <BackToHeader
-          isLoading={tvShowQuery.isLoading}
-          title={tvShowQuery.data?.name}
-          imgPath={getImagePath({
-            basePath: IMG_BASE_URL,
-            size: IMG_SIZES.poster.w154,
-            path: tvShowQuery.data?.poster_path,
-            fallback: noImageImg,
-          })}
-          path={`/${ROUTE_NAMES.tvShow}/${tvShowQuery.data?.id}`}
-          linkName="Back to TV Show"
-        />
-      }
-    />
+    <>
+      {tvShowQuery.isLoading ? null : (
+        <Helmet>
+          <title>MTvI | {tvShowQuery.data!.name} | Videos</title>
+          <meta name="keywords" content={`${tvShowQuery.data!.name}, videos`} />
+        </Helmet>
+      )}
+
+      <AllVideos
+        data={tvShowQuery.data?.videos.results}
+        selectHandler={selectHandler}
+        selected={selected}
+        isLoading={tvShowQuery.isLoading}
+        videoAmount={TOP_VIDEO_AMOUNT}
+        header={
+          <BackToHeader
+            isLoading={tvShowQuery.isLoading}
+            title={tvShowQuery.data?.name}
+            imgPath={getImagePath({
+              basePath: IMG_BASE_URL,
+              size: IMG_SIZES.poster.w154,
+              path: tvShowQuery.data?.poster_path,
+              fallback: noImageImg,
+            })}
+            path={`/${ROUTE_NAMES.tvShow}/${tvShowQuery.data?.id}`}
+            linkName="Back to TV Show"
+          />
+        }
+      />
+    </>
   );
 };

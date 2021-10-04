@@ -1,4 +1,5 @@
 import { useErrorHandler } from 'react-error-boundary';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router';
 import { useGetPersonQuery } from '~/api/tmdb';
 import { Layout, MainContainer, MainContent, Separator, Spacer } from '~/shared/components';
@@ -19,6 +20,13 @@ export const Person = () => {
 
   return (
     <>
+      {personQuery.isLoading ? null : (
+        <Helmet>
+          <title>MTvI | {personQuery.data!.name}</title>
+          <meta name="keywords" content={personQuery.data!.name} />
+        </Helmet>
+      )}
+
       <Spacer />
 
       <MainContent>

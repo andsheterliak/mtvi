@@ -1,4 +1,5 @@
 import { useErrorHandler } from 'react-error-boundary';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 import { useGetTVShowQuery } from '~/api/tmdb';
 import { Layout, MainContainer, MainContent, Separator, Spacer } from '~/shared/components';
@@ -20,6 +21,13 @@ export const TVShow = () => {
 
   return (
     <>
+      {tvShowQuery.isLoading ? null : (
+        <Helmet>
+          <title>MTvI | {tvShowQuery.data!.name}</title>
+          <meta name="keywords" content={tvShowQuery.data!.name} />
+        </Helmet>
+      )}
+
       <Spacer />
 
       <MainContent>

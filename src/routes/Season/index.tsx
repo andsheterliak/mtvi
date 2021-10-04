@@ -1,4 +1,5 @@
 import { useErrorHandler } from 'react-error-boundary';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router';
 import { IMG_BASE_URL, IMG_SIZES, useGetSeasonQuery } from '~/api/tmdb';
 import noImg from '~/assets/img/no-image.svg';
@@ -20,6 +21,13 @@ export const Season = () => {
 
   return (
     <>
+      {seasonQuery.isLoading ? null : (
+        <Helmet>
+          <title>MTvI | {seasonQuery.data!.name}</title>
+          <meta name="keywords" content={seasonQuery.data!.name} />
+        </Helmet>
+      )}
+
       <Spacer />
 
       <Layout>

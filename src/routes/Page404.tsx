@@ -1,6 +1,7 @@
 import { Button, Typography } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { MainContainer, Spacer } from '~/shared/components';
 
@@ -41,6 +42,11 @@ export const Page404 = ({ homePath }: Page404Props) => {
 
   return (
     <>
+      <Helmet>
+        <title>MTvI | 404</title>
+        <meta name="keywords" content="404, page not found" />
+      </Helmet>
+
       <Spacer />
 
       <div className={classes.root}>
