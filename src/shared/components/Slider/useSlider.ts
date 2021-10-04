@@ -248,6 +248,5 @@ export const useSlider = ({
     initSliderHandler,
     destroyMomentum,
     preventDragHandler,
-    tabbingHandler,
   };
 };
