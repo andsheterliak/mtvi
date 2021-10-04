@@ -1,88 +1,69 @@
-import { KeyboardEvent, MouseEvent as ReactMouseEvent, useEffect, useRef } from 'react';
+import { MouseEvent as ReactMouseEvent, useCallback, useEffect, useRef } from 'react';
 
-type ClientPosition = number;
-type HowFarIsScrolled = number;
 type ScrollPosition = number;
 type IsForward = boolean;
-type Momentum = number;
+type IsHorizontal = boolean;
 
 type State = {
   momentumID: number;
   lastSwipeTime: number;
   isInteractionDisabled: boolean;
 
-  startPositions: {
-    scrollTop: ScrollPosition;
-    scrollLeft: ScrollPosition;
-    clientX: ClientPosition;
-    clientY: ClientPosition;
+  initialPositions: {
+    scrollStart: ScrollPosition;
+    pointerPosition: number;
   };
 
-  momentum: { x: Momentum; y: Momentum };
-  directions: { isXForward: IsForward; isYForward: IsForward };
+  momentum: number;
+  isForward: IsForward;
 };
-
-const calcHowFar = (clientPosition: ClientPosition, prevClientPosition: ClientPosition) => {
-  return clientPosition - prevClientPosition;
-};
-
-const calcVelocity = (scroll: ScrollPosition, prevScroll: ScrollPosition) => {
-  return scroll - prevScroll;
-};
-
-const ifIsForward = (value: number) => Math.sign(value) === -1;
 
 type UseSliderProps = {
   momentumDowngrade?: number;
   isMomentum?: boolean;
+  isHorizontal?: IsHorizontal;
   isTabbingClassName: string;
 };
 
 export const useSlider = ({
   momentumDowngrade = 0.9,
   isMomentum = true,
+  isHorizontal = true,
   isTabbingClassName,
 }: UseSliderProps) => {
   const sliderRef = useRef<HTMLDivElement>(null!);
-  const sliderInnerRef = useRef<HTMLDivElement>(null!);
+  const containerWithElementsRef = useRef<HTMLDivElement>(null!);
 
   const stateRef = useRef<State>({
     momentumID: 0,
     lastSwipeTime: 0,
     isInteractionDisabled: false,
 
-    startPositions: {
-      scrollTop: 0,
-      scrollLeft: 0,
-      clientX: 0,
-      clientY: 0,
+    initialPositions: {
+      scrollStart: 0,
+      pointerPosition: 0,
     },
 
-    momentum: { x: 0, y: 0 },
-    directions: { isXForward: false, isYForward: false },
+    momentum: 0,
+    isForward: false,
   });
 
-  const disableInteraction = ({
-    howFarX,
-    howFarY,
-  }: {
-    howFarX: HowFarIsScrolled;
-    howFarY: HowFarIsScrolled;
-  }) => {
+  const disableInteraction = ({ howFar }: { howFar: number }) => {
     const state = stateRef.current;
+    const containerWithElements = containerWithElementsRef.current;
 
-    if (state.isInteractionDisabled) return;
-    if (howFarX === 0 && howFarY === 0) return;
+    if (state.isInteractionDisabled || howFar === 0) return;
 
-    sliderInnerRef.current.style.pointerEvents = 'none';
+    containerWithElements.style.pointerEvents = 'none';
     state.isInteractionDisabled = true;
   };
 
   const enableInteraction = () => {
     const state = stateRef.current;
+    const containerWithElements = containerWithElementsRef.current;
 
     if (state.isInteractionDisabled) {
-      sliderInnerRef.current.style.pointerEvents = '';
+      containerWithElements.style.pointerEvents = '';
       state.isInteractionDisabled = false;
     }
   };
@@ -93,14 +74,13 @@ export const useSlider = ({
     cancelAnimationFrame(state.momentumID);
   };
 
-  const getEdgeInfo = ({ isHorizontal }: { isHorizontal: boolean }) => {
+  const getEdgeInfo = ({ isHorizontal: isSliderHorizontal }: { isHorizontal: IsHorizontal }) => {
     const state = stateRef.current;
     const slider = sliderRef.current;
 
-    const isForward = isHorizontal ? state.directions.isXForward : state.directions.isYForward;
     const edges = { isStart: false, isEnd: false };
 
-    const values = isHorizontal
+    const values = isSliderHorizontal
       ? {
           scrollStart: slider.scrollLeft,
           scrollSize: slider.scrollWidth,
@@ -115,34 +95,25 @@ export const useSlider = ({
     edges.isStart = values.scrollStart === 0;
     edges.isEnd = values.scrollStart + values.clientSize >= values.scrollSize;
 
-    const isEdge = (edges.isStart && !isForward) || (edges.isEnd && isForward);
+    const isEdge = (edges.isStart && !state.isForward) || (edges.isEnd && state.isForward);
     const isScrollable = !(edges.isStart && edges.isEnd);
 
-    return { edges, isEdge, isScrollable };
+    return { isEdge, edges, isScrollable };
   };
 
   const runMomentum = () => {
     const slider = sliderRef.current;
     const state = stateRef.current;
 
-    const tickScrollX = state.momentum.x;
-    const tickScrollY = state.momentum.y;
+    const tickScroll = state.momentum;
 
-    slider.scrollLeft += tickScrollX;
-    slider.scrollTop += tickScrollY;
+    slider[isHorizontal ? 'scrollLeft' : 'scrollTop'] += tickScroll;
+    state.momentum *= momentumDowngrade;
 
-    state.momentum.x *= momentumDowngrade;
-    state.momentum.y *= momentumDowngrade;
+    const edgeInfo = getEdgeInfo({ isHorizontal });
+    const isLimit = Math.abs(tickScroll) < 1.5;
 
-    const xEdgeInfo = getEdgeInfo({ isHorizontal: true });
-    const yEdgeInfo = getEdgeInfo({ isHorizontal: false });
-
-    const isXLimit = Math.abs(tickScrollX) < 1.5;
-    const isYLimit = Math.abs(tickScrollY) < 1.5;
-
-    const isEdge = xEdgeInfo.isEdge && yEdgeInfo.isEdge;
-
-    if (isEdge || (isXLimit && isYLimit)) return;
+    if (edgeInfo.isEdge || isLimit) return;
     state.momentumID = requestAnimationFrame(runMomentum);
   };
 
@@ -157,69 +128,59 @@ export const useSlider = ({
   };
 
   const setMomentumData = ({
-    prevScrollLeft,
-    prevScrollTop,
-    isXForward,
-    isYForward,
+    prevScrollStart,
+    isForward,
   }: {
-    prevScrollLeft: ScrollPosition;
-    prevScrollTop: ScrollPosition;
-    isXForward: IsForward;
-    isYForward: IsForward;
+    prevScrollStart: ScrollPosition;
+    isForward: IsForward;
   }) => {
     const state = stateRef.current;
     const slider = sliderRef.current;
 
-    const velocityX = calcVelocity(slider.scrollLeft, prevScrollLeft);
-    const velocityY = calcVelocity(slider.scrollTop, prevScrollTop);
+    const scrollStart = isHorizontal ? slider.scrollLeft : slider.scrollTop;
+    const momentum = scrollStart - prevScrollStart;
 
-    state.directions.isXForward = isXForward;
-    state.directions.isYForward = isYForward;
-
-    state.momentum.x = velocityX;
-    state.momentum.y = velocityY;
-
+    state.momentum = momentum;
     state.lastSwipeTime = Date.now();
+    state.isForward = isForward;
   };
 
   const moveSliderHandler = (event: MouseEvent) => {
     const state = stateRef.current;
     const slider = sliderRef.current;
 
-    const howFarX = calcHowFar(event.clientX, state.startPositions.clientX);
-    const howFarY = calcHowFar(event.clientY, state.startPositions.clientY);
+    const pointerPosition = isHorizontal ? event.clientX : event.clientY;
+    const howFar = pointerPosition - state.initialPositions.pointerPosition;
+    const isForward = Math.sign(howFar) === -1;
+    const prevScrollStart = isHorizontal ? slider.scrollLeft : slider.scrollTop;
 
-    const isXForward = ifIsForward(howFarX);
-    const isYForward = ifIsForward(howFarY);
+    slider[isHorizontal ? 'scrollLeft' : 'scrollTop'] = state.initialPositions.scrollStart - howFar;
 
-    const prevScrollLeft = slider.scrollLeft;
-    const prevScrollTop = slider.scrollTop;
+    disableInteraction({ howFar });
 
-    slider.scrollLeft = state.startPositions.scrollLeft - howFarX;
-    slider.scrollTop = state.startPositions.scrollTop - howFarY;
-
-    disableInteraction({ howFarX, howFarY });
-
-    if (!isMomentum) return;
-
-    setMomentumData({
-      prevScrollLeft,
-      prevScrollTop,
-      isXForward,
-      isYForward,
-    });
+    if (isMomentum) setMomentumData({ prevScrollStart, isForward });
   };
 
   const stopSliderHandler = () => {
     enableInteraction();
     if (isMomentum) initMomentum();
 
-    document.removeEventListener('mousemove', moveSliderHandler);
-    document.removeEventListener('mouseup', stopSliderHandler);
+    document.removeEventListener('mousemove', moveSliderHandler, false);
+    document.removeEventListener('mouseup', stopSliderHandler, false);
+  };
+
+  const setInitialPositions = ({ event }: { event: ReactMouseEvent<HTMLDivElement> }) => {
+    const slider = sliderRef.current;
+    const state = stateRef.current;
+
+    // Get the current scroll positions from start (top, left) of the slider element.
+    state.initialPositions.scrollStart = isHorizontal ? slider.scrollLeft : slider.scrollTop;
+
+    // Get the current mouse (x, y) positions relative to viewport (visible area).
+    state.initialPositions.pointerPosition = isHorizontal ? event.clientX : event.clientY;
   };
 
   const initSliderHandler = (event: ReactMouseEvent<HTMLDivElement>) => {
-    const state = stateRef.current;
     const slider = sliderRef.current;
 
     destroyMomentum();
@@ -228,56 +189,59 @@ export const useSlider = ({
       slider.classList.remove(isTabbingClassName);
     }
 
-    // Get the current scroll positions from start (top, left) of the slider element.
-    state.startPositions.scrollLeft = slider.scrollLeft;
-    state.startPositions.scrollTop = slider.scrollTop;
+    setInitialPositions({ event });
 
-    // Get the current mouse (x, y) positions (relative to window edges).
-    state.startPositions.clientX = event.clientX;
-    state.startPositions.clientY = event.clientY;
-
-    document.addEventListener('mousemove', moveSliderHandler);
-    document.addEventListener('mouseup', stopSliderHandler);
+    document.addEventListener('mousemove', moveSliderHandler, false);
+    document.addEventListener('mouseup', stopSliderHandler, false);
   };
 
   const preventDragHandler = (event: ReactMouseEvent<HTMLDivElement>) => {
     event.preventDefault();
   };
 
-  const tabbingHandler = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (
-      event.code !== 'Tab' &&
-      event.code !== 'ArrowDown' &&
-      event.code !== 'ArrowUp' &&
-      event.code !== 'ArrowLeft' &&
-      event.code !== 'ArrowRight'
-    ) {
-      return;
-    }
+  const tabbingHandler = useCallback(
+    (event: KeyboardEvent) => {
+      if (
+        event.code !== 'Tab' &&
+        event.code !== 'ArrowDown' &&
+        event.code !== 'ArrowUp' &&
+        event.code !== 'ArrowLeft' &&
+        event.code !== 'ArrowRight'
+      ) {
+        return;
+      }
 
-    const slider = sliderRef.current;
+      const slider = sliderRef.current;
 
-    if (slider.classList.contains(isTabbingClassName)) return;
-    slider.classList.add(isTabbingClassName);
-  };
+      if (slider.classList.contains(isTabbingClassName)) return;
+      slider.classList.add(isTabbingClassName);
+    },
+    [isTabbingClassName]
+  );
 
   useEffect(() => {
     const slider = sliderRef.current;
 
-    sliderInnerRef.current = slider.querySelector(
-      ':scope >:first-child >:first-child'
+    containerWithElementsRef.current = slider.querySelector(
+      ':scope >:first-child'
     ) as HTMLDivElement; // Grid element.
 
+    document.addEventListener('keydown', tabbingHandler, false);
+
+    const slide = containerWithElementsRef.current.firstElementChild as HTMLElement;
+
+    const scrollPadding = isHorizontal
+      ? `0 ${slide.offsetWidth}px 0 ${slide.offsetWidth}px`
+      : `${slide.offsetHeight}px 0 ${slide.offsetHeight}px 0`;
+
     // Trigger 'Scroll Snap' if an element is not fully visible.
-    slider.setAttribute(
-      'style',
-      `--scroll-padding: ${(sliderInnerRef.current.firstElementChild as HTMLElement).offsetWidth}px`
-    );
+    slider.setAttribute('style', `--scroll-padding: ${scrollPadding}`);
 
     return () => {
       destroyMomentum();
+      document.removeEventListener('keydown', tabbingHandler, false);
     };
-  }, []);
+  }, [isHorizontal, tabbingHandler]);
 
   return {
     sliderRef,

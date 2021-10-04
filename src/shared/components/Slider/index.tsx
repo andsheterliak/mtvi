@@ -8,11 +8,9 @@ const useStyles = makeStyles(() => ({
   slider: {
     overflow: 'auto',
     userSelect: 'none',
-    // To expand 'container' to set paddings properly.
+    // To expand 'container' to set padding properly.
     display: 'grid',
-  },
 
-  container: {
     padding({ padding }: { padding: Padding }) {
       return padding;
     },
@@ -23,8 +21,8 @@ const useStyles = makeStyles(() => ({
     scrollSnapType: 'both mandatory',
     scrollPadding: 'var(--scroll-padding, 0px)',
 
-    // Grid element.
-    '& $container >:first-child': {
+    // For each grid element.
+    '& >:first-child > *': {
       scrollSnapAlign: 'center',
     },
   },
@@ -39,10 +37,9 @@ type Props = {
 export const Slider = ({ children, padding = '10px 12px 20px', ariaLabelledby }: Props) => {
   const classes = useStyles({ padding });
 
-  const { sliderRef, destroyMomentum, initSliderHandler, preventDragHandler, tabbingHandler } =
-    useSlider({
-      isTabbingClassName: classes.isTabbing,
-    });
+  const { sliderRef, destroyMomentum, initSliderHandler, preventDragHandler } = useSlider({
+    isTabbingClassName: classes.isTabbing,
+  });
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
@@ -52,10 +49,9 @@ export const Slider = ({ children, padding = '10px 12px 20px', ariaLabelledby }:
       onMouseDown={initSliderHandler}
       onWheel={destroyMomentum}
       onDragStart={preventDragHandler}
-      onKeyDown={tabbingHandler}
       className={classes.slider}
     >
-      <div className={classes.container}>{children}</div>
+      {children}
     </div>
   );
 };
