@@ -60,6 +60,7 @@ type Props = Partial<{
   path: Path;
   releaseDate: SeasonItem['air_date'];
   episodeCount: SeasonItem['episode_count'];
+  isRovingIndex: boolean;
 }>;
 
 export const SeasonCard = ({
@@ -70,10 +71,13 @@ export const SeasonCard = ({
   name,
   overview,
   isLoading,
+  isRovingIndex = true,
 }: Props) => {
   const classes = useStyles();
   const date = formatDateStr(releaseDate)?.dateStr || FALLBACK_VALUE;
   const rovingTabindex = useRovingTabindex<HTMLAnchorElement>();
+
+  const rovingIndex = isRovingIndex ? rovingTabindex : null;
 
   const imgPath = getImagePath({
     basePath: IMG_BASE_URL,
@@ -123,7 +127,7 @@ export const SeasonCard = ({
         <div className={classes.action}>{content}</div>
       ) : (
         <CardActionArea
-          {...rovingTabindex}
+          {...rovingIndex}
           component={Link}
           role="link"
           to={path!}

@@ -50,6 +50,7 @@ export const LastSeason = () => {
         name={lastReleasedSeason?.name}
         overview={lastReleasedSeason?.overview}
         posterPath={lastReleasedSeason?.poster_path}
+        isRovingIndex={false}
       />
     );
 
