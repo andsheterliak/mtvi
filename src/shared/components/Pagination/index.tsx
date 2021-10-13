@@ -42,7 +42,7 @@ export const Pagination = ({
 }: Props) => {
   const classes = useStyles();
 
-  if (!isLoading && totalPages && totalPages < 2) return null;
+  if (!isLoading && (!totalPages || totalPages < 2)) return null;
 
   const rootClasses = classNames(classes.root, {
     [classes.spacing]: isSpacing,
