@@ -1,5 +1,5 @@
 import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
-import produce from 'immer';
+import { produce } from 'immer';
 import { useCallback, useReducer } from 'react';
 import { Genre, Options } from '~/api/tmdb';
 import { SortByEvent, SortByValue, UserScoreEvent, UserScoreValue } from './types';
@@ -47,65 +47,60 @@ const initState = (initialOptions: Options) => {
   };
 };
 
-const reducer = produce(
-  (
-    state: ReturnType<typeof initState>,
-    action: ActionType // eslint-disable-next-line consistent-return
-  ) => {
-    switch (action.type) {
-      case 'validateDate':
-        if (action.payload.date?.toString() === 'Invalid Date') {
-          state.isOptionsValid = false;
-          state.isReadyToAccept = false;
-        } else {
-          state.isOptionsValid = true;
-          state.isReadyToAccept = true;
-        }
-
-        break;
-
-      case 'setDateFrom':
-        state.options.dates.from = formatDateToAPI(action.payload.date);
-        break;
-
-      case 'setDateTo':
-        state.options.dates.to = formatDateToAPI(action.payload.date);
-        break;
-
-      case 'sortBy':
-        state.options.sortBy = action.payload.value;
-        if (state.isOptionsValid) state.isReadyToAccept = true;
-        break;
-
-      case 'toggleGenres':
-        state.options.genres.forEach((item) => {
-          if (item.id !== action.payload.id) return;
-          item.isSelected = !item.isSelected;
-        });
-
-        if (state.isOptionsValid) state.isReadyToAccept = true;
-        break;
-
-      case 'changeUserScore':
-        state.options.userScore = action.payload.value;
-        if (state.isOptionsValid) state.isReadyToAccept = true;
-        break;
-
-      case 'setDefaultOptions':
-        return initState(action.payload.defaultOptions);
-
-      case 'acceptOptions':
+const reducer = produce((state: ReturnType<typeof initState>, action: ActionType) => {
+  switch (action.type) {
+    case 'validateDate':
+      if (action.payload.date?.toString() === 'Invalid Date') {
+        state.isOptionsValid = false;
         state.isReadyToAccept = false;
-        break;
+      } else {
+        state.isOptionsValid = true;
+        state.isReadyToAccept = true;
+      }
 
-      case 'resetOptions':
-        return initState(action.payload.initialOptions);
+      break;
 
-      default:
-        break;
-    }
+    case 'setDateFrom':
+      state.options.dates.from = formatDateToAPI(action.payload.date);
+      break;
+
+    case 'setDateTo':
+      state.options.dates.to = formatDateToAPI(action.payload.date);
+      break;
+
+    case 'sortBy':
+      state.options.sortBy = action.payload.value;
+      if (state.isOptionsValid) state.isReadyToAccept = true;
+      break;
+
+    case 'toggleGenres':
+      state.options.genres.forEach((item) => {
+        if (item.id !== action.payload.id) return;
+        item.isSelected = !item.isSelected;
+      });
+
+      if (state.isOptionsValid) state.isReadyToAccept = true;
+      break;
+
+    case 'changeUserScore':
+      state.options.userScore = action.payload.value;
+      if (state.isOptionsValid) state.isReadyToAccept = true;
+      break;
+
+    case 'setDefaultOptions':
+      return initState(action.payload.defaultOptions);
+
+    case 'acceptOptions':
+      state.isReadyToAccept = false;
+      break;
+
+    case 'resetOptions':
+      return initState(action.payload.initialOptions);
+
+    default:
+      break;
   }
-);
+});
 
 export const useOptions = (initialOptions: Options, defaultOptions: Options) => {
   const [state, dispatch] = useReducer(reducer, initialOptions, initState);

@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-
 import * as Common from './common-types';
 
 type VoteCount = number;

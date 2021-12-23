@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-
 export type ImagePath = string | null;
 export type Page = number;
 export type Id = number;
