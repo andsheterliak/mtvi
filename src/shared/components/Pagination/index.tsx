@@ -61,7 +61,7 @@ export const Pagination = ({
       <MUIPagination
         className={classes.pagination}
         page={page}
-        count={totalPages}
+        count={typeof totalPages !== 'undefined' && totalPages > 500 ? 500 : totalPages}
         siblingCount={0}
         disabled={isDisabled}
         onChange={changePageHandler}
