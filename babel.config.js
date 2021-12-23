@@ -8,7 +8,7 @@ const config = {
       {
         bugfixes: true, // Will be set by default in next major version.
 
-        corejs: '3.18.1',
+        corejs: '3.20.1',
         useBuiltIns: 'usage', // To include polyfills which are used in the project.
       },
     ],
