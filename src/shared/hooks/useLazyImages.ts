@@ -2,23 +2,20 @@ import { useEffect } from 'react';
 import { LAZY_IMG_CLASS_NAME } from '~/shared/constants';
 
 const showImage = (image: HTMLImageElement) => {
-  requestAnimationFrame(() => {
-    if (image.complete) {
-      image.style.opacity = '1';
-    } else {
-      showImage(image);
-    }
-  });
+  image.style.opacity = '1';
 };
 
 const intersectionHandler = (target: HTMLImageElement) => {
   const { src } = target.dataset;
 
-  if (src) {
-    target.src = src;
+  if (src) target.src = src;
+
+  if (target.complete) {
     showImage(target);
   } else {
-    showImage(target);
+    target.addEventListener('load', () => {
+      showImage(target);
+    });
   }
 };
 
@@ -34,12 +31,7 @@ export const useLazyImages = ({ isLoading, triggers = [] }: Props) => {
     const intObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (
-            !entry.isIntersecting &&
-            typeof entry.isIntersecting !== 'undefined' // Some browsers did not implement 'isIntersecting' prop.
-          ) {
-            return;
-          }
+          if (!entry.isIntersecting) return;
 
           intersectionHandler(entry.target as HTMLImageElement);
           intObserver.unobserve(entry.target);
