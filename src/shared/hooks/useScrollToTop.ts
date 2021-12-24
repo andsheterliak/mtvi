@@ -6,8 +6,8 @@ export const useScrollToTop = () => {
   const history = useHistory();
 
   useEffect(() => {
-    const unlisten = history.listen(() => {
-      scrollToTop();
+    const unlisten = history.listen((location, action) => {
+      if (action !== 'POP') scrollToTop();
     });
 
     return () => {
