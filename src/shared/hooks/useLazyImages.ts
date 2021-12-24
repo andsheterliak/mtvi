@@ -9,14 +9,17 @@ const intersectionHandler = (target: HTMLImageElement) => {
   const { src } = target.dataset;
 
   if (src) target.src = src;
+  if (target.complete) return showImage(target);
 
-  if (target.complete) {
+  const showImageHandler = () => {
     showImage(target);
-  } else {
-    target.addEventListener('load', () => {
-      showImage(target);
-    });
-  }
+  };
+
+  target.addEventListener('load', showImageHandler);
+
+  return () => {
+    target.removeEventListener('load', showImageHandler);
+  };
 };
 
 type Props = {
@@ -28,12 +31,16 @@ export const useLazyImages = ({ isLoading, triggers = [] }: Props) => {
   useEffect(() => {
     if (isLoading) return undefined;
 
+    const showImageHandlerDestroyers: (() => void)[] = [];
+
     const intObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
 
-          intersectionHandler(entry.target as HTMLImageElement);
+          const destroyShowImageHandler = intersectionHandler(entry.target as HTMLImageElement);
+
+          if (destroyShowImageHandler) showImageHandlerDestroyers.push(destroyShowImageHandler);
           intObserver.unobserve(entry.target);
         });
       },
@@ -46,6 +53,10 @@ export const useLazyImages = ({ isLoading, triggers = [] }: Props) => {
     });
 
     return () => {
+      showImageHandlerDestroyers.forEach((destroyShowImageHandler) => {
+        destroyShowImageHandler();
+      });
+
       intObserver.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
