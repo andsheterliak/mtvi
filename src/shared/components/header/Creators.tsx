@@ -20,7 +20,13 @@ export const Creators = ({ creators, routeName }: Props) => {
     const isComma = index < creatorsLength - 1;
 
     return (
-      <MUILink color="inherit" key={id} component={Link} to={`/${routeName}/${id}`}>
+      <MUILink
+        underline="always"
+        color="inherit"
+        key={id}
+        component={Link}
+        to={`/${routeName}/${id}`}
+      >
         {name}
         {isComma && ', '}
       </MUILink>
