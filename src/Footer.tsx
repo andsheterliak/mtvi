@@ -1,6 +1,5 @@
 import { Link, Paper, SvgIcon, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { GitHub } from '@material-ui/icons';
 import { MainContainer } from './shared/components';
 
 const useStyles = makeStyles({
@@ -13,6 +12,7 @@ const useStyles = makeStyles({
   },
 
   logo: {
+    marginRight: '2px',
     width: '120px',
     verticalAlign: '-20%',
   },
@@ -29,7 +29,7 @@ export const Footer = () => {
   return (
     <Paper square component="footer">
       <MainContainer className={classes.container}>
-        <Typography align="center" variant="body2" color="textSecondary" component="p">
+        <Typography align="center" variant="caption" color="textSecondary" component="p">
           <SvgIcon viewBox="0 0 273.42 35.52" titleAccess="TMDB logo" className={classes.logo}>
             <defs>
               <linearGradient
@@ -57,17 +57,19 @@ export const Footer = () => {
           - This product uses the TMDb API but is not endorsed or certified by TMDb.
         </Typography>
 
-        <Typography variant="body2" color="textSecondary" component="p">
-          © {new Date().getFullYear()} |{' '}
+        <Typography align="center" variant="caption" color="textSecondary" component="p">
+          © 2021 MTvI. All rights reserved. Created by{' '}
           <Link
+            underline="always"
             color="textSecondary"
             target="_blank"
             href="https://github.com/andsheterliak/mtvi"
             rel="noopener"
             aria-label="link to the github repository"
           >
-            <GitHub className={classes.creditIcon} fontSize="small" color="action" /> andsheterliak
+            andsheterliak
           </Link>
+          .
         </Typography>
       </MainContainer>
     </Paper>
