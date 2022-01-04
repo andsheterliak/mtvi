@@ -63,7 +63,7 @@ export const Footer = () => {
             underline="always"
             color="textSecondary"
             target="_blank"
-            href="https://github.com/andsheterliak/mtvi"
+            href="https://github.com/andsheterliak"
             rel="noopener"
             aria-label="link to the github repository"
           >
